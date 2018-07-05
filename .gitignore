@@ -1,0 +1,10 @@
+.qmake.stash
+Makefile
+*.o
+Makefile.Debug
+Makefile.Release
+debug/
+release/
+x64/
+.vs/
+*.user

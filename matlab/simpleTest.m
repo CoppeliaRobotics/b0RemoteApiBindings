@@ -1,0 +1,51 @@
+function simpleTest()
+    doNextStep=true;
+    
+    function simulationStepStarted_CB(data)
+        data=data{2};
+        simTime=data('simulationTime');
+        disp(strcat('Simulation step started. Simulation time: ',num2str(simTime)));
+    end
+    function simulationStepDone_CB(data)
+        data=data{2};
+        simTime=data('simulationTime');
+        disp(strcat('Simulation step done. Simulation time: ',num2str(simTime)));
+        doNextStep=true;
+    end
+    
+    function image_CB(data)
+        img=data{3};
+        disp('Received image.');
+        res=client.simxSetVisionSensorImage(passiveVisionSensorHandle{2},false,img,client.simxDefaultPublisher());
+    end
+    
+    disp('Program started');
+    try
+        client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApi');
+        client.simxAddStatusbarMessage('Hello world!',client.simxDefaultPublisher());
+        visionSensorHandle=client.simxGetObjectHandle('VisionSensor',client.simxServiceCall());
+        passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall());
+        client.simxSynchronous(true);
+        
+        client.simxGetVisionSensorImage(visionSensorHandle{2},false,client.simxDefaultSubscriber(@image_CB));
+        
+        client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(@simulationStepStarted_CB));
+        client.simxGetSimulationStepDone(client.simxDefaultSubscriber(@simulationStepDone_CB));
+        
+        client.simxStartSimulation(client.simxServiceCall());
+        tic;
+        while toc<5
+            if doNextStep
+                doNextStep=false;
+                client.simxSynchronousTrigger();
+            end
+            client.simxSpinOnce();
+        end
+        client.simxStopSimulation(client.simxDefaultPublisher());
+        client.delete();
+    catch me
+        client.delete();
+        rethrow(me);
+    end
+    disp('Program ended');
+end
