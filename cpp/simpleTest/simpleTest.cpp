@@ -1,3 +1,19 @@
+// Make sure to have V-REP running, with followig scene loaded:
+//
+// scenes/blueZeroBasedRemoteApiDemo.ttt
+//
+// Do not launch simulation, and make sure that the B0 resolver
+// is running. Then run "simpleTest"
+//
+// The client side (i.e. "simpleTest") depends on:
+//
+// b0 (shared library), which depends on:
+// boost_chrono (shared library)
+// boost_system (shared library)
+// boost_thread (shared library)
+// libzmq (shared library)
+
+ 
 #include "b0RemoteApi.h"
 
 bool doNextStep=true;

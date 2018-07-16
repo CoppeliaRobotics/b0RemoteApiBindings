@@ -50,6 +50,7 @@ class RemoteApiClient:
         
     def _handleReceivedMessage(self,msg):
         msg=msgpack.unpackb(msg)
+        msg[0]=msg[0].decode('ascii')
         if msg[0] in self._allSubscribers:
             cbMsg=msg[1]
             if len(cbMsg)==1:

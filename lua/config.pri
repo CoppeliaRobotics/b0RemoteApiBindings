@@ -28,6 +28,6 @@ B0_INCLUDEPATH = "d:/v_rep/programming/blueZero/include"    # (e.g. Windows)
 
 # B0 libraries to link:
 B0_LIBS = "d:/v_rep/programming/blueZero/build/Release/b0.lib"    # (e.g. Windows)
-
+    
 exists(../config.pri) { include(../config.pri) }
 

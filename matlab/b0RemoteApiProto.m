@@ -14,6 +14,7 @@ fcns.name{fcnNum}='b0_node_init'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum
 fcns.name{fcnNum}='b0_node_spin_once'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}=[]; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;
 fcns.name{fcnNum}='b0_node_spin'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}=[]; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;
 fcns.name{fcnNum}='b0_node_time_usec'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='long'; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;
+fcns.name{fcnNum}='b0_node_hardware_time_usec'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='long'; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;
 
 fcns.name{fcnNum}='b0_service_client_new_ex'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='voidPtr'; fcns.RHS{fcnNum}={'voidPtr','int8Ptr','int32','int32'};fcnNum=fcnNum+1;
 fcns.name{fcnNum}='b0_service_client_delete'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}=[]; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;

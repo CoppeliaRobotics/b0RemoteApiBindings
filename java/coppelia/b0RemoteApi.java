@@ -430,7 +430,7 @@ public class b0RemoteApi
 
     public long simxGetTimeInMs()
     {
-        return b0NodeTimeUsec(_node);
+        return b0NodeHardwareTimeUsec(_node);
     }
 
     public void simxSleep(int durationInMs) throws InterruptedException
@@ -524,6 +524,7 @@ public class b0RemoteApi
     private native void b0NodeDelete(long node);
     private native void b0NodeInit(long node);
     private native long b0NodeTimeUsec(long node);
+    private native long b0NodeHardwareTimeUsec(long node);
 
     private native long b0PublisherNewEx(long node,final String topicName,int managed,int notifyGraph);
     private native void b0PublisherDelete(long pub);

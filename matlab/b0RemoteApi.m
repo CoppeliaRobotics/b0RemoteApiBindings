@@ -1040,7 +1040,7 @@ classdef b0RemoteApi < handle
         
 
         function ret = simxGetTimeInMs(obj)
-            ret = calllib(obj.libName,'b0_node_time_usec',obj.node)/1000;
+            ret = calllib(obj.libName,'b0_node_hardware_time_usec',obj.node)/1000;
         end
         
         function simxSleep(obj,durationInMs)
