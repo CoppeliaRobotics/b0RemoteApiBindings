@@ -56,7 +56,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     print(client.simxBreakForceSensor(fs[1],client.simxServiceCall()))
     client.simxSetFloatSignal('floatSignal',123.456,client.simxServiceCall())
     client.simxSetIntegerSignal('integerSignal',59,client.simxServiceCall())
-    client.simxSetStringSignal('stringSignal','hallo Jeanine :)',client.simxServiceCall())
+    client.simxSetStringSignal('stringSignal','Hello World',client.simxServiceCall())
     print(client.simxGetFloatSignal('floatSignal',client.simxServiceCall()))
     print(client.simxGetIntegerSignal('integerSignal',client.simxServiceCall()))
     print(client.simxGetStringSignal('stringSignal',client.simxServiceCall()))

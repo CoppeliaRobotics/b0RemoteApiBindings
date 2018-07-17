@@ -8,3 +8,6 @@ release/
 x64/
 .vs/
 *.user
+lua51.dll
+b0.dll
+libzmq.dll
