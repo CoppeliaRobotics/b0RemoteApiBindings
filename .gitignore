@@ -9,5 +9,6 @@ x64/
 .vs/
 *.user
 lua51.dll
+lua.exe
 b0.dll
 libzmq.dll
