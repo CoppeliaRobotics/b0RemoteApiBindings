@@ -1,3 +1,8 @@
+// -------------------------------------------------------
+// Add your custom functions at the bottom of the file
+// and the server counterpart to lua/b0RemoteApiServer.lua
+// -------------------------------------------------------
+
 #include "b0RemoteApi.h"
 
 b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inactivityToleranceInSec,bool setupSubscribersAsynchronously)
@@ -325,6 +330,20 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
     return(NULL);
 }
 
+void b0RemoteApi::print(const std::vector<msgpack::object>* msg)
+{
+    if (msg->size()>0)
+    {
+        for (size_t i=0;i<msg->size();i++)
+        {
+            if (i>0)
+                std::cout << ", ";
+            std::cout << msg->at(i);
+        }
+        std::cout << std::endl;
+    }
+}
+
 bool b0RemoteApi::hasValue(const std::vector<msgpack::object>* msg)
 {
     return(msg->size()>0);
@@ -551,6 +570,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetObjectHandle(const char* objec
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetObjectHandle",packedArgs.str(),topic,errorString));
 }
+
 std::vector<msgpack::object>* b0RemoteApi::simxAddStatusbarMessage(const char* msg,msgTopic topic,std::string* errorString)
 {
     std::tuple<std::string> args(msg);
@@ -566,6 +586,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetObjectPosition(int objectHandl
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetObjectPosition",packedArgs.str(),topic,errorString));
 }
+
 std::vector<msgpack::object>* b0RemoteApi::simxStartSimulation(msgTopic topic,std::string* errorString)
 {
     std::tuple<int> args(0);
@@ -573,6 +594,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxStartSimulation(msgTopic topic,st
     msgpack::pack(packedArgs,args);
     return(_handleFunction("StartSimulation",packedArgs.str(),topic,errorString));
 }
+
 std::vector<msgpack::object>* b0RemoteApi::simxStopSimulation(msgTopic topic,std::string* errorString)
 {
     std::tuple<int> args(0);
@@ -597,3 +619,312 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetVisionSensorImage(int objectHa
     return(_handleFunction("SetVisionSensorImage",packedArgs.str(),topic,errorString));
 }
 
+std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleClose(int consoleHandle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(consoleHandle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AuxiliaryConsoleClose",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsolePrint(int consoleHandle,const char* text,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::string> args(consoleHandle,text);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AuxiliaryConsolePrint",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleOpen(const char* title,int maxLines,int mode,const int position[2],const int size[2],const float textColor[3],const float backgroundColor[3],msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string,int,int,std::vector<int>,std::vector<int>,std::vector<float>,std::vector<float> > args(
+                title,
+                maxLines,
+                mode,
+                std::vector<int>(position,position+2),
+                std::vector<int>(size,size+2),
+                std::vector<float>(textColor,textColor+3),
+                std::vector<float>(backgroundColor,backgroundColor+3));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AuxiliaryConsoleOpen",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleShow(int consoleHandle,bool showState,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,bool> args(consoleHandle,showState);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AuxiliaryConsoleShow",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_points(int size,const int color[3],const float coords[3],int pointCnt,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::vector<int>,std::vector<float> > args(
+                size,
+                std::vector<int>(color,color+3),
+                std::vector<float>(coords,coords+3*pointCnt));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AddDrawingObject_points",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_spheres(float size,const int color[3],const float coords[3],int sphereCnt,msgTopic topic,std::string* errorString)
+{
+    std::tuple<float,std::vector<int>,std::vector<float> > args(
+                size,
+                std::vector<int>(color,color+3),
+                std::vector<float>(coords,coords+3*sphereCnt));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AddDrawingObject_spheres",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_cubes(float size,const int color[3],const float coords[3],int cubeCnt,msgTopic topic,std::string* errorString)
+{
+    std::tuple<float,std::vector<int>,std::vector<float> > args(
+                size,
+                std::vector<int>(color,color+3),
+                std::vector<float>(coords,coords+3*cubeCnt));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AddDrawingObject_cubes",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_segments(int lineSize,const int color[3],const float* segments,int segmentCnt,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::vector<int>,std::vector<float> > args(
+                lineSize,
+                std::vector<int>(color,color+3),
+                std::vector<float>(segments,segments+6*segmentCnt));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AddDrawingObject_segments",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_triangles(const int color[3],const float* triangles,int triangleCnt,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::vector<int>,std::vector<float> > args(
+                std::vector<int>(color,color+3),
+                std::vector<float>(triangles,triangles+9*triangleCnt));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("AddDrawingObject_triangles",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxRemoveDrawingObject(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("RemoveDrawingObject",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(std::stringstream& packedData,msgTopic topic,std::string* errorString)
+{
+    return(_handleFunction("CallScriptFunction",packedData.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckCollision(int entity1,int entity2,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(entity1,entity2);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckCollision",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckCollision(int entity1,const char* entity2,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::string> args(entity1,entity2);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckCollision",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetCollisionHandle(const char* name,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(name);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetCollisionHandle",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxReadCollision(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ReadCollision",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckDistance(int entity1,int entity2,float threshold,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,float> args(entity1,entity2,threshold);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckDistance",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckDistance(int entity1,const char* entity2,float threshold,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::string,float> args(entity1,entity2,threshold);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckDistance",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetDistanceHandle(const char* name,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(name);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetDistanceHandle",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxReadDistance(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ReadDistance",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckProximitySensor(int sensor,int entity,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(sensor,entity);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckProximitySensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckProximitySensor(int sensor,const char* entity,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::string> args(sensor,entity);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckProximitySensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxReadProximitySensor(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ReadProximitySensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckVisionSensor(int sensor,int entity,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(sensor,entity);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckVisionSensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCheckVisionSensor(int sensor,const char* entity,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,std::string> args(sensor,entity);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CheckVisionSensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxReadVisionSensor(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ReadVisionSensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxReadForceSensor(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ReadForceSensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxBreakForceSensor(int handle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int> args(handle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("BreakForceSensor",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxClearFloatSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ClearFloatSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ClearIntegerSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxClearStringSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ClearStringSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetFloatSignal(const char* sig,float val,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string,float> args(sig,val);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetFloatSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetIntegerSignal(const char* sig,int val,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string,int> args(sig,val);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetIntegerSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetStringSignal(const char* sig,const char* val,int valSize,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string,std::string> args(sig,std::string(val,val+valSize));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetStringSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetFloatSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetFloatSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetIntegerSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetIntegerSignal",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetStringSignal(const char* sig,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string> args(sig);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetStringSignal",packedArgs.str(),topic,errorString));
+}
+
+// -------------------------------
+// Add your custom functions here:
+// -------------------------------

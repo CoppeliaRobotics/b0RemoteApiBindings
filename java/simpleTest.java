@@ -93,7 +93,7 @@ public class simpleTest
         }
         client.simxStopSimulation(client.simxDefaultPublisher());
         
-        client.close();
+        client.delete();
         System.out.println("Program ended");
     }
 }

@@ -52,7 +52,7 @@ void image_CB(std::vector<msgpack::object>* msg,const std::string* errorStr)
     if (msg!=NULL)
     {
         std::cout << "Received image." << std::endl;
-        cl->simxSetVisionSensorImage(sens2,false,cl->readByteArray(msg,2),cl->simxDefaultPublisher());
+        cl->simxSetVisionSensorImage(sens2,false,b0RemoteApi::readByteArray(msg,2),cl->simxDefaultPublisher());
     }
     else
         std::cout << "Error in remote function execution: " << *errorStr << std::endl;
@@ -66,9 +66,9 @@ int main(int argc,char* argv[])
     std::string errorStr;
     client.simxAddStatusbarMessage("Hello world!",client.simxDefaultPublisher(),&errorStr);
     std::vector<msgpack::object>* reply=client.simxGetObjectHandle("VisionSensor",client.simxServiceCall(),&errorStr);
-    sens1=client.readInt(reply,1);
+    sens1=b0RemoteApi::readInt(reply,1);
     reply=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall(),&errorStr);
-    sens2=client.readInt(reply,1);
+    sens2=b0RemoteApi::readInt(reply,1);
 
     client.simxSynchronous(true);
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted_CB));

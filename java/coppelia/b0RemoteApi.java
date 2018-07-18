@@ -1,3 +1,8 @@
+// -------------------------------------------------------
+// Add your custom functions at the bottom of the file
+// and the server counterpart to lua/b0RemoteApiServer.lua
+// -------------------------------------------------------
+
 package coppelia;
 
 import org.msgpack.core.MessagePack;
@@ -28,6 +33,20 @@ public class b0RemoteApi
     static{
         System.loadLibrary("b0");
     }
+    public static void print(final MessageUnpacker msg) throws IOException 
+    {
+        int cnt=0;
+        while (msg.hasNext())
+        {
+            if (cnt>0)
+                System.out.printf(", ");
+            System.out.print(msg.unpackValue());
+            cnt=cnt+1;
+        }
+        if (cnt>0)
+            System.out.printf("\n");
+    }
+    
     public static boolean hasValue(final MessageUnpacker msg) throws IOException 
     {
         return msg.hasNext();
@@ -261,7 +280,7 @@ public class b0RemoteApi
         System.out.println("");
     }
     
-    public void close() throws IOException
+    public void delete() throws IOException
     {
         _pongReceived=false;
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
@@ -430,7 +449,7 @@ public class b0RemoteApi
 
     public long simxGetTimeInMs()
     {
-        return b0NodeHardwareTimeUsec(_node);
+        return b0NodeHardwareTimeUsec(_node)/1000;
     }
 
     public void simxSleep(int durationInMs) throws InterruptedException
@@ -635,4 +654,308 @@ public class b0RemoteApi
         args.writePayload(img);
         return _handleFunction("SetVisionSensorImage",args,topic);
     }
+    
+    public MessageUnpacker simxAuxiliaryConsoleClose(int consoleHandle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(consoleHandle);
+        return _handleFunction("AuxiliaryConsoleClose",args,topic);
+    }
+
+    public MessageUnpacker simxAuxiliaryConsolePrint(int consoleHandle,final String text,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(consoleHandle).packString(text);
+        return _handleFunction("AuxiliaryConsolePrint",args,topic);
+    }
+
+    public MessageUnpacker simxAuxiliaryConsoleOpen(final String title,int maxLines,int mode,int[] position,int[] size,float[] textColor,float[] backgroundColor,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(7);
+        args.packString(title);
+        args.packInt(maxLines);
+        args.packInt(mode);
+        args.packArrayHeader(2).packInt(position[0]).packInt(position[1]);
+        args.packArrayHeader(2).packInt(size[0]).packInt(size[1]);
+        args.packArrayHeader(3).packFloat(textColor[0]).packFloat(textColor[1]).packFloat(textColor[2]);
+        args.packArrayHeader(3).packFloat(backgroundColor[0]).packFloat(backgroundColor[1]).packFloat(backgroundColor[2]);
+        return _handleFunction("AuxiliaryConsoleOpen",args,topic);
+    }
+
+    public MessageUnpacker simxAuxiliaryConsoleShow(int consoleHandle,boolean showState,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(consoleHandle).packBoolean(showState);
+        return _handleFunction("AuxiliaryConsoleShow",args,topic);
+    }
+
+    public MessageUnpacker simxAddDrawingObject_points(int size,int[] color,float[] coords,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(size);
+        args.packArrayHeader(3);
+        args.packInt(color[0]);
+        args.packInt(color[1]);
+        args.packInt(color[2]);
+        args.packArrayHeader(coords.length);
+        for (int i=0;i<coords.length;i=i+1)
+            args.packFloat(coords[i]);
+        return _handleFunction("AddDrawingObject_points",args,topic);
+    }
+
+    public MessageUnpacker simxAddDrawingObject_spheres(float size,int[] color,float[] coords,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packFloat(size);
+        args.packArrayHeader(3);
+        args.packInt(color[0]);
+        args.packInt(color[1]);
+        args.packInt(color[2]);
+        args.packArrayHeader(coords.length);
+        for (int i=0;i<coords.length;i=i+1)
+            args.packFloat(coords[i]);
+        return _handleFunction("AddDrawingObject_spheres",args,topic);
+    }
+
+    public MessageUnpacker simxAddDrawingObject_cubes(float size,int[] color,float[] coords,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packFloat(size);
+        args.packArrayHeader(3);
+        args.packInt(color[0]);
+        args.packInt(color[1]);
+        args.packInt(color[2]);
+        args.packArrayHeader(coords.length);
+        for (int i=0;i<coords.length;i=i+1)
+            args.packFloat(coords[i]);
+        return _handleFunction("AddDrawingObject_cubes",args,topic);
+    }
+
+    public MessageUnpacker simxAddDrawingObject_segments(int lineSize,int[] color,float[] coords,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(lineSize);
+        args.packArrayHeader(3);
+        args.packInt(color[0]);
+        args.packInt(color[1]);
+        args.packInt(color[2]);
+        args.packArrayHeader(coords.length);
+        for (int i=0;i<coords.length;i=i+1)
+            args.packFloat(coords[i]);
+        return _handleFunction("AddDrawingObject_segments",args,topic);
+    }
+
+    public MessageUnpacker simxAddDrawingObject_triangles(int[] color,float[] coords,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packArrayHeader(3);
+        args.packInt(color[0]);
+        args.packInt(color[1]);
+        args.packInt(color[2]);
+        args.packArrayHeader(coords.length);
+        for (int i=0;i<coords.length;i=i+1)
+            args.packFloat(coords[i]);
+        return _handleFunction("AddDrawingObject_triangles",args,topic);
+    }
+
+    public MessageUnpacker simxRemoveDrawingObject(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("RemoveDrawingObject",args,topic);
+    }
+
+    public MessageUnpacker simxCallScriptFunction(MessageBufferPacker args,final String topic) throws IOException
+    {
+        return _handleFunction("CallScriptFunction",args,topic);
+    }
+
+    public MessageUnpacker simxCheckCollision(int entity1,int entity2,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(entity1).packInt(entity2);
+        return _handleFunction("CheckCollision",args,topic);
+    }
+
+    public MessageUnpacker simxCheckCollision(int entity1,final String entity2,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(entity1).packString(entity2);
+        return _handleFunction("CheckCollision",args,topic);
+    }
+
+    public MessageUnpacker simxGetCollisionHandle(final String name,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(name);
+        return _handleFunction("GetCollisionHandle",args,topic);
+    }
+
+    public MessageUnpacker simxReadCollision(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("ReadCollision",args,topic);
+    }
+
+    public MessageUnpacker simxCheckDistance(int entity1,int entity2,float threshold,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3).packInt(entity1).packInt(entity2).packFloat(threshold);
+        return _handleFunction("CheckDistance",args,topic);
+    }
+
+    public MessageUnpacker simxCheckDistance(int entity1,final String entity2,float threshold,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3).packInt(entity1).packString(entity2).packFloat(threshold);
+        return _handleFunction("CheckDistance",args,topic);
+    }
+
+    public MessageUnpacker simxGetDistanceHandle(final String name,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(name);
+        return _handleFunction("GetDistanceHandle",args,topic);
+    }
+
+    public MessageUnpacker simxReadDistance(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("ReadDistance",args,topic);
+    }
+
+    public MessageUnpacker simxCheckProximitySensor(int sensor,int entity,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(sensor).packInt(entity);
+        return _handleFunction("CheckProximitySensor",args,topic);
+    }
+
+    public MessageUnpacker simxCheckProximitySensor(int sensor,final String entity,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(sensor).packString(entity);
+        return _handleFunction("CheckProximitySensor",args,topic);
+    }
+
+    public MessageUnpacker simxReadProximitySensor(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("ReadProximitySensor",args,topic);
+    }
+
+    public MessageUnpacker simxCheckVisionSensor(int sensor,int entity,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(sensor).packInt(entity);
+        return _handleFunction("CheckVisionSensor",args,topic);
+    }
+
+    public MessageUnpacker simxCheckVisionSensor(int sensor,final String entity,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(sensor).packString(entity);
+        return _handleFunction("CheckVisionSensor",args,topic);
+    }
+
+    public MessageUnpacker simxReadVisionSensor(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("ReadVisionSensor",args,topic);
+    }
+
+    public MessageUnpacker simxReadForceSensor(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("ReadForceSensor",args,topic);
+    }
+
+    public MessageUnpacker simxBreakForceSensor(int handle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packInt(handle);
+        return _handleFunction("BreakForceSensor",args,topic);
+    }
+
+    public MessageUnpacker simxClearFloatSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("ClearFloatSignal",args,topic);
+    }
+
+    public MessageUnpacker simxClearIntegerSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("ClearIntegerSignal",args,topic);
+    }
+
+    public MessageUnpacker simxClearStringSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("ClearStringSignal",args,topic);
+    }
+
+    public MessageUnpacker simxSetFloatSignal(final String sig,float val,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packString(sig).packFloat(val);
+        return _handleFunction("SetFloatSignal",args,topic);
+    }
+
+    public MessageUnpacker simxSetIntegerSignal(final String sig,int val,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packString(sig).packInt(val);
+        return _handleFunction("SetIntegerSignal",args,topic);
+    }
+
+    public MessageUnpacker simxSetStringSignal(final String sig,byte[] val,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(sig);
+        args.packBinaryHeader(val.length);
+        args.writePayload(val);
+        return _handleFunction("SetStringSignal",args,topic);
+    }
+
+    public MessageUnpacker simxGetFloatSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("GetFloatSignal",args,topic);
+    }
+
+    public MessageUnpacker simxGetIntegerSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("GetIntegerSignal",args,topic);
+    }
+
+    public MessageUnpacker simxGetStringSignal(final String sig,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1).packString(sig);
+        return _handleFunction("GetStringSignal",args,topic);
+    }
+    
+    // -------------------------------
+    // Add your custom functions here:
+    // -------------------------------
+    
 }

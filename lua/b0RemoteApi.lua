@@ -1,7 +1,130 @@
+-- -------------------------------------------------------
+-- Add your custom functions at the bottom of the file
+-- and the server counterpart to lua/b0RemoteApiServer.lua
+-- -------------------------------------------------------
+    
 require 'b0Lua'
 b0.messagePack=require('messagePack-lua/MessagePack')
---b0.messagePack.set_string('binary')
---b0.messagePack.set_string('string')
+
+_printToConsole=print
+function print(...)
+    _printToConsole(_getAsString(...))
+end
+
+function _getAsString(...)
+    local a={...}
+    local t=''
+    if #a==1 and type(a[1])=='string' then
+        t=string.format('%s', a[1])
+    else
+        for i=1,#a,1 do
+            if i~=1 then
+                t=t..','
+            end
+            if type(a[i])=='table' then
+                t=t.._tableToString(a[i],{},99)
+            else
+                t=t.._anyToString(a[i],{},99)
+            end
+        end
+    end
+    if #a==0 then
+        t='nil'
+    end
+    return(t)
+end
+
+function _tableToString(tt,visitedTables,maxLevel,indent)
+	indent = indent or 0
+    maxLevel=maxLevel-1
+	if type(tt) == 'table' then
+        if maxLevel<=0 then
+            return tostring(tt)
+        else
+            if  visitedTables[tt] then
+                return tostring(tt)..' (already visited)'
+            else
+                visitedTables[tt]=true
+                local sb = {}
+                if _isArray(tt) then
+                    table.insert(sb, '{')
+                    for i = 1, #tt do
+                        table.insert(sb, _anyToString(tt[i], visitedTables,maxLevel, indent))
+                        if i < #tt then table.insert(sb, ', ') end
+                    end
+                    table.insert(sb, '}')
+                else
+                    table.insert(sb, '{\n')
+                    -- Print the map content ordered according to type, then key:
+                    local a = {}
+                    for n in pairs(tt) do table.insert(a, n) end
+                    table.sort(a)
+                    local tp={'boolean','number','string','function','userdata','thread','table'}
+                    for j=1,#tp,1 do
+                        for i,n in ipairs(a) do
+                            if type(tt[n])==tp[j] then
+                                table.insert(sb, string.rep(' ', indent+4))
+                                table.insert(sb, tostring(n))
+                                table.insert(sb, '=')
+                                table.insert(sb, _anyToString(tt[n], visitedTables,maxLevel, indent+4))
+                                table.insert(sb, ',\n')
+                            end
+                        end                
+                    end
+                    table.insert(sb, string.rep(' ', indent))
+                    table.insert(sb, '}')
+                end
+                visitedTables[tt]=false -- siblings pointing onto a same table should still be explored!
+                return table.concat(sb)
+            end
+        end
+    else
+        return _anyToString(tt, visitedTables,maxLevel, indent)
+    end
+end
+
+function _anyToString(x, visitedTables,maxLevel,tblindent)
+    local tblindent = tblindent or 0
+    if 'nil' == type(x) then
+        return tostring(nil)
+    elseif 'table' == type(x) then
+        return _tableToString(x, visitedTables,maxLevel, tblindent)
+    elseif 'string' == type(x) then
+        return _getShortString(x)
+    else
+        return tostring(x)
+    end
+end
+
+function _getShortString(x)
+    if type(x)=='string' then
+        if string.find(x,"\0") then
+            return "[buffer string]"
+        else
+            local a,b=string.gsub(x,"[%a%d%p%s]", "@")
+            if b~=#x then
+                return "[string containing special chars]"
+            else
+                if #x>160 then
+                    return "[long string]"
+                else
+                    return string.format('%s', x)
+                end
+            end
+        end
+    end
+    return "[not a string]"
+end
+
+function _isArray(t)
+    local i = 0
+    for _ in pairs(t) do
+        i = i + 1
+        if t[i] == nil then return false end
+    end
+    return true
+end
+
 
 function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously)
     local self={}
@@ -33,17 +156,17 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     local _setupSubscribersAsynchronously=setupSubscribersAsynchronously
     local _pongReceived=false
 
-    function self._pingCallback(msg)
+    function _pingCallback(msg)
         _pongReceived=true
     end
         
-    function self.destroy()
+    function self.delete()
         _pongReceived=false
-        self._handleFunction('Ping',{0},self.simxDefaultSubscriber(self._pingCallback))
+        _handleFunction('Ping',{0},self.simxDefaultSubscriber(_pingCallback))
         while not _pongReceived do
             self.simxSpinOnce()
         end
-        self._handleFunction('DisconnectClient',{_clientId},_serviceCallTopic)
+        _handleFunction('DisconnectClient',{_clientId},_serviceCallTopic)
         for key,value in pairs(_allSubscribers) do 
             if value.handle~=_defaultSubscriber then
                 b0.subscriber_delete(value.handle)
@@ -52,10 +175,10 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         for key,value in pairs(_allDedicatedPublishers) do
             b0.publisher_delete(value)
         end
-        b0.node_delete(_node)
+--        b0.node_delete(_node)
     end
     
-    function self._handleFunction(funcName,reqArgs,topic)
+    function _handleFunction(funcName,reqArgs,topic)
         if topic==_serviceCallTopic then
             local packedData=b0.messagePack.pack({{funcName,_clientId,topic,0},reqArgs})
             local repl=b0.messagePack.unpack(b0.service_client_call(_serviceClient,packedData))
@@ -98,7 +221,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local pub=b0.publisher_new_ex(_node,topic,0,1)
         b0.publisher_init(pub)
         _allDedicatedPublishers[topic]=pub
-        self._handleFunction('createSubscriber',{topic,dropMessages},_serviceCallTopic)
+        _handleFunction('createSubscriber',{topic,dropMessages},_serviceCallTopic)
         return topic
     end
 
@@ -114,7 +237,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         if _setupSubscribersAsynchronously then
             channel=_defaultPublisherTopic
         end
-        self._handleFunction('setDefaultPublisherPubInterval',{topic,publishInterval},channel)
+        _handleFunction('setDefaultPublisherPubInterval',{topic,publishInterval},channel)
         return topic
     end
         
@@ -133,7 +256,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         if _setupSubscribersAsynchronously then
             channel=_defaultPublisherTopic
         end
-        self._handleFunction('createPublisher',{topic,publishInterval},channel)
+        _handleFunction('createPublisher',{topic,publishInterval},channel)
         return topic
     end
   
@@ -141,7 +264,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return _serviceCallTopic
     end
 
-    function self._handleReceivedMessage(msg)
+    function _handleReceivedMessage(msg)
         msg=b0.messagePack.unpack(msg)
         if _allSubscribers[msg[1]] then
             local cbMsg=msg[2]
@@ -158,11 +281,11 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
                 while b0.subscriber_poll(value.handle,0)>0 do
                     readData=b0.subscriber_read(value.handle)
                     if not value.dropMessages then
-                        self._handleReceivedMessage(readData)
+                        _handleReceivedMessage(readData)
                     end
                 end
                 if value.dropMessages and readData then
-                    self._handleReceivedMessage(readData)
+                    _handleReceivedMessage(readData)
                 end
             end
         end
@@ -177,20 +300,20 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     function self.simxSynchronous(enable)
         local reqArgs = {enable}
         local funcName = 'Synchronous'
-        self._handleFunction(funcName,reqArgs,_serviceCallTopic)
+        _handleFunction(funcName,reqArgs,_serviceCallTopic)
     end
         
     function self.simxSynchronousTrigger()
         local reqArgs = {0}
         local funcName = 'SynchronousTrigger'
-        self._handleFunction(funcName,reqArgs,_defaultPublisherTopic)
+        _handleFunction(funcName,reqArgs,_defaultPublisherTopic)
     end
         
     function self.simxGetSimulationStepDone(topic)
         if _allSubscribers[topic] then
             local reqArgs = {0}
             local funcName = 'GetSimulationStepDone'
-            self._handleFunction(funcName,reqArgs,topic)
+            _handleFunction(funcName,reqArgs,topic)
         else
             print('B0 Remote API error: invalid topic')
         end
@@ -200,7 +323,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         if _allSubscribers[topic] then
             local reqArgs = {0}
             local funcName = 'GetSimulationStepStarted'
-            self._handleFunction(funcName,reqArgs,topic)
+            _handleFunction(funcName,reqArgs,topic)
         else
             print('B0 Remote API error: invalid topic')
         end
@@ -221,219 +344,246 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     print('  Initializing...\n')
     b0.node_init(_node)
     
-    self._handleFunction('inactivityTolerance',{inactivityToleranceInSec},_serviceCallTopic)
+    _handleFunction('inactivityTolerance',{inactivityToleranceInSec},_serviceCallTopic)
     print('\n  Connected!\n')
     
-    -- ------------------------------
-    -- Add your custom function here:
-    -- ------------------------------
-        
     function self.simxGetObjectHandle(objectName,topic)
         local reqArgs = {objectName}
         local funcName = 'GetObjectHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
 
     function self.simxAddStatusbarMessage(txt,topic)
         local reqArgs = {txt}
         local funcName = 'AddStatusbarMessage'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
         
     function self.simxStartSimulation(topic)
         local reqArgs = {}
         local funcName = 'StartSimulation'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
         
     function self.simxStopSimulation(topic)
         local reqArgs = {}
         local funcName = 'StopSimulation'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
 
     function self.simxGetVisionSensorImage(objectHandle,greyscale,topic)
         local reqArgs = {objectHandle,greyscale}
         local funcName = 'GetVisionSensorImage'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
 
     function self.simxSetVisionSensorImage(objectHandle,greyscale,img,topic)
         local reqArgs = {objectHandle,greyscale,img}
         local funcName = 'SetVisionSensorImage'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
     end
 
---[==[        
-        
-        
-        
-    function self.simxAuxiliaryConsoleClose(self,consoleHandle,topic)
+    function self.simxAuxiliaryConsoleClose(consoleHandle,topic)
         local reqArgs = {consoleHandle}
         local funcName = 'AuxiliaryConsoleClose'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxAuxiliaryConsolePrint(self,consoleHandle,text,topic)
+    function self.simxAuxiliaryConsolePrint(consoleHandle,text,topic)
         local reqArgs = {consoleHandle,text}
         local funcName = 'AuxiliaryConsolePrint'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxAuxiliaryConsoleOpen(self,title,maxLines,mode,position,size,textColor,backgroundColor,topic)
+    function self.simxAuxiliaryConsoleOpen(title,maxLines,mode,position,size,textColor,backgroundColor,topic)
         local reqArgs = {title,maxLines,mode,position,size,textColor,backgroundColor}
         local funcName = 'AuxiliaryConsoleOpen'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxAuxiliaryConsoleShow(self,consoleHandle,showState,topic)
+    function self.simxAuxiliaryConsoleShow(consoleHandle,showState,topic)
         local reqArgs = {consoleHandle,showState}
         local funcName = 'AuxiliaryConsoleShow'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-
-    function self.simxGetObjectPosition(self,objectHandle,refObjectHandle,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+    
+    function self.simxGetObjectPosition(objectHandle,refObjectHandle,topic)
         local reqArgs = {objectHandle,refObjectHandle}
         local funcName = 'GetObjectPosition'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    function self.simxAddDrawingObject_points(self,size,color,coords,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+    
+    function self.simxAddDrawingObject_points(size,color,coords,topic)
         local reqArgs = {size,color,coords}
         local funcName = 'AddDrawingObject_points'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
 
-    function self.simxAddDrawingObject_spheres(self,size,color,coords,topic)
+    function self.simxAddDrawingObject_spheres(size,color,coords,topic)
         local reqArgs = {size,color,coords}
         local funcName = 'AddDrawingObject_spheres'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
 
-    function self.simxAddDrawingObject_cubes(self,size,color,coords,topic)
+    function self.simxAddDrawingObject_cubes(size,color,coords,topic)
         local reqArgs = {size,color,coords}
         local funcName = 'AddDrawingObject_cubes'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
 
-    function self.simxAddDrawingObject_lines(self,lineSize,color,segments,topic)
+    function self.simxAddDrawingObject_segments(lineSize,color,segments,topic)
         local reqArgs = {lineSize,color,segments}
-        local funcName = 'AddDrawingObject_lines'
-        return self._handleFunction(funcName,reqArgs,topic)
+        local funcName = 'AddDrawingObject_segments'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
 
-    function self.simxAddDrawingObject_triangles(self,color,triangles,topic)
+    function self.simxAddDrawingObject_triangles(color,triangles,topic)
         local reqArgs = {color,triangles}
         local funcName = 'AddDrawingObject_triangles'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
 
-    function self.simxRemoveDrawingObject(self,handle,topic)
+    function self.simxRemoveDrawingObject(handle,topic)
         local reqArgs = {handle}
         local funcName = 'RemoveDrawingObject'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    function self.simxCallScriptFunction(self,funcAtObjName,scriptType,arg1,arg2,arg3,arg4,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+    
+    function self.simxCallScriptFunction(funcAtObjName,scriptType,arg1,arg2,arg3,arg4,topic)
         local reqArgs = {funcAtObjName,scriptType,arg1,arg2,arg3,arg4}
         local funcName = 'CallScriptFunction'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxCheckCollision(self,entity1,entity2,topic)
+    function self.simxCheckCollision(entity1,entity2,topic)
         local reqArgs = {entity1,entity2}
         local funcName = 'CheckCollision'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxGetCollisionHandle(self,name,topic)
+    function self.simxGetCollisionHandle(name,topic)
         local reqArgs = {name}
         local funcName = 'GetCollisionHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxReadCollision(self,handle,topic)
+    function self.simxReadCollision(handle,topic)
         local reqArgs = {handle}
         local funcName = 'ReadCollision'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxCheckDistance(self,entity1,entity2,threshold,topic)
+    function self.simxCheckDistance(entity1,entity2,threshold,topic)
         local reqArgs = {entity1,entity2,threshold}
         local funcName = 'CheckDistance'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxGetDistanceHandle(self,name,topic)
+    function self.simxGetDistanceHandle(name,topic)
         local reqArgs = {name}
         local funcName = 'GetDistanceHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxReadDistance(self,handle,topic)
+    function self.simxReadDistance(handle,topic)
         local reqArgs = {handle}
         local funcName = 'ReadDistance'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxCheckProximitySensor(self,sensor,entity,topic)
+    function self.simxCheckProximitySensor(sensor,entity,topic)
         local reqArgs = {sensor,entity}
         local funcName = 'CheckProximitySensor'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxReadProximitySensor(self,handle,topic)
+    function self.simxReadProximitySensor(handle,topic)
         local reqArgs = {handle}
         local funcName = 'ReadProximitySensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    function self.simxCheckVisionSensor(self,sensor,entity,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+    
+    function self.simxCheckVisionSensor(sensor,entity,topic)
         local reqArgs = {sensor,entity}
         local funcName = 'CheckVisionSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxReadVisionSensor(self,handle,topic)
+    function self.simxReadVisionSensor(handle,topic)
         local reqArgs = {handle}
         local funcName = 'ReadVisionSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxReadForceSensor(self,handle,topic)
+    function self.simxReadForceSensor(handle,topic)
         local reqArgs = {handle}
         local funcName = 'ReadForceSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxBreakForceSensor(self,handle,topic)
+    function self.simxBreakForceSensor(handle,topic)
         local reqArgs = {handle}
         local funcName = 'BreakForceSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxClearFloatSignal(self,sig,topic)
+    function self.simxClearFloatSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'ClearFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxClearIntegerSignal(self,sig,topic)
+    function self.simxClearIntegerSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'ClearIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxClearStringSignal(self,sig,topic)
+    function self.simxClearStringSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'ClearStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxSetFloatSignal(self,sig,val,topic)
+    function self.simxSetFloatSignal(sig,val,topic)
         local reqArgs = {sig,val}
         local funcName = 'SetFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxSetIntegerSignal(self,sig,val,topic)
+    function self.simxSetIntegerSignal(sig,val,topic)
         local reqArgs = {sig,val}
         local funcName = 'SetIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxSetStringSignal(self,sig,val,topic)
+    function self.simxSetStringSignal(sig,val,topic)
         local reqArgs = {sig,val}
         local funcName = 'SetStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxGetFloatSignal(self,sig,topic)
+    function self.simxGetFloatSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'GetFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxGetIntegerSignal(self,sig,topic)
+    function self.simxGetIntegerSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'GetIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return _handleFunction(funcName,reqArgs,topic)
+    end
         
-    function self.simxGetStringSignal(self,sig,topic)
+    function self.simxGetStringSignal(sig,topic)
         local reqArgs = {sig}
         local funcName = 'GetStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
---]==]    
-    
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+
+    -- -------------------------------
+    -- Add your custom functions here:
+    -- -------------------------------
+
     return self
 end

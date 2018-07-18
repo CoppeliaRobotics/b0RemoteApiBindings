@@ -60,3 +60,4 @@ while client.simxGetTimeInMs()<startTime+5000 do
     client.simxSpinOnce()
 end
 client.simxStopSimulation(client.simxDefaultPublisher())
+client.delete()

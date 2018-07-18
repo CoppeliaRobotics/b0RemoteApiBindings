@@ -5,7 +5,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
 
     def callb(msg):
         print(msg)
-        
+   
     '''
     client.simxAddStatusbarMessage('Hello',client.simxDefaultPublisher())
     res=client.simxAuxiliaryConsoleOpen('theTitle',50,4,[10,400],[1024,100],[1,1,0],[0,0,0],client.simxServiceCall())
@@ -29,14 +29,14 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     res=client.simxAddDrawingObject_cubes(0.05,[255,0,0],[0,0,0,1,0,0,0,0,1],client.simxServiceCall())
     time.sleep(1)
     client.simxRemoveDrawingObject(res[1],client.simxServiceCall())
-    res=client.simxAddDrawingObject_lines(4,[0,255,0],[0,0,0,1,0,0, 1,0,0,0,0,1, 0,0,1,0,0,0],client.simxServiceCall())
+    res=client.simxAddDrawingObject_segments(4,[0,255,0],[0,0,0,1,0,0, 1,0,0,0,0,1, 0,0,1,0,0,0],client.simxServiceCall())
     time.sleep(1)
     client.simxRemoveDrawingObject(res[1],client.simxServiceCall())
     res=client.simxAddDrawingObject_triangles([255,128,0],[0,0,0, 1,0,0, 0,0,1],client.simxServiceCall())
     time.sleep(1)
     client.simxRemoveDrawingObject(res[1],client.simxServiceCall())
     '''
-    #res=client.simxCallScriptFunction('myFunction@DefaultCamera',client.sim_scripttype_customizationscript,"Marc und Jeanine und Finn",[255,0,255],None,None,client.simxServiceCall())
+    #res=client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',"Hello World :)",[255,0,255],None,None,client.simxServiceCall())
     s1=client.simxGetObjectHandle('shape1',client.simxServiceCall())
     s2=client.simxGetObjectHandle('shape2',client.simxServiceCall())
     prox=client.simxGetObjectHandle('prox',client.simxServiceCall())

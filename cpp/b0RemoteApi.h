@@ -1,3 +1,8 @@
+// -------------------------------------------------------
+// Add your custom functions at the bottom of the file
+// and the server counterpart to lua/b0RemoteApiServer.lua
+// -------------------------------------------------------
+
 #pragma once
 
 #include <string>
@@ -46,6 +51,7 @@ public:
     void simxGetSimulationStepDone(msgTopic topic);
     void simxGetSimulationStepStarted(msgTopic topic);
 
+    static void print(const std::vector<msgpack::object>* msg);
     static bool hasValue(const std::vector<msgpack::object>* msg);
     static const msgpack::object* readValue(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
     static bool readBool(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
@@ -58,15 +64,6 @@ public:
     static bool readFloatArray(std::vector<msgpack::object>* msg,std::vector<float>& array,int valuesToDiscard=0);
     static bool readDoubleArray(std::vector<msgpack::object>* msg,std::vector<double>& array,int valuesToDiscard=0);
     static bool readStringArray(std::vector<msgpack::object>* msg,std::vector<std::string>& array,int valuesToDiscard=0);
-
-
-    std::vector<msgpack::object>* simxGetObjectHandle(const char* objectName,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxAddStatusbarMessage(const char* msg,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxGetObjectPosition(int objectHandle,int relObjHandle,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxStartSimulation(msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxStopSimulation(msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxGetVisionSensorImage(int objectHandle,bool greyScale,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxSetVisionSensorImage(int objectHandle,bool greyScale,const std::string& img,msgTopic topic,std::string* errorString=NULL);
 
 protected:
     std::vector<msgpack::object>* _handleFunction(const char* funcName,const std::string& packedArgs,msgTopic topic,std::string* errorString);
@@ -91,4 +88,56 @@ protected:
     b0::Subscriber* _defaultSubscriber;
     std::map<msgTopic,SHandleAndCb> _allSubscribers;
     std::map<msgTopic,b0::Publisher*> _allDedicatedPublishers;
+
+public:
+    std::vector<msgpack::object>* simxGetObjectHandle(const char* objectName,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAddStatusbarMessage(const char* msg,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetObjectPosition(int objectHandle,int relObjHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxStartSimulation(msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxStopSimulation(msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetVisionSensorImage(int objectHandle,bool greyScale,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetVisionSensorImage(int objectHandle,bool greyScale,const std::string& img,msgTopic topic,std::string* errorString=NULL);
+
+    std::vector<msgpack::object>* simxAuxiliaryConsoleClose(int consoleHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAuxiliaryConsolePrint(int consoleHandle,const char* text,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAuxiliaryConsoleOpen(const char* title,int maxLines,int mode,const int position[2],const int size[2],const float textColor[3],const float backgroundColor[3],msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAuxiliaryConsoleShow(int consoleHandle,bool showState,msgTopic topic,std::string* errorString=NULL);
+
+    std::vector<msgpack::object>* simxAddDrawingObject_points(int size,const int color[3],const float coords[3],int pointCnt,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAddDrawingObject_spheres(float size,const int color[3],const float coords[3],int sphereCnt,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAddDrawingObject_cubes(float size,const int color[3],const float coords[3],int cubeCnt,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAddDrawingObject_segments(int lineSize,const int color[3],const float* segments,int segmentCnt,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxAddDrawingObject_triangles(const int color[3],const float* triangles,int triangleCnt,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxRemoveDrawingObject(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCallScriptFunction(std::stringstream& packedData,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckCollision(int entity1,int entity2,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckCollision(int entity1,const char* entity2,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetCollisionHandle(const char* name,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxReadCollision(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckDistance(int entity1,int entity2,float threshold,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckDistance(int entity1,const char* entity2,float threshold,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetDistanceHandle(const char* name,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxReadDistance(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckProximitySensor(int sensor,int entity,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckProximitySensor(int sensor,const char* entity,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxReadProximitySensor(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckVisionSensor(int sensor,int entity,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCheckVisionSensor(int sensor,const char* entity,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxReadVisionSensor(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxReadForceSensor(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxBreakForceSensor(int handle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxClearFloatSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxClearIntegerSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxClearStringSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetFloatSignal(const char* sig,float val,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetIntegerSignal(const char* sig,int val,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetStringSignal(const char* sig,const char* val,int valSize,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetFloatSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetIntegerSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetStringSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
+
+    // -------------------------------
+    // Add your custom functions here:
+    // -------------------------------
+    
 };

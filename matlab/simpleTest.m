@@ -32,6 +32,7 @@ function simpleTest()
     end
     
     function image_CB(data)
+        % disp(jsonencode(data)); % in order to explicitely display all data
         img=data{3};
         disp('Received image.');
         res=client.simxSetVisionSensorImage(passiveVisionSensorHandle{2},false,img,client.simxDefaultPublisher());
