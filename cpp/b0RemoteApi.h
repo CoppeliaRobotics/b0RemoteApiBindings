@@ -136,6 +136,16 @@ public:
     std::vector<msgpack::object>* simxGetIntegerSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetStringSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
 
+    std::vector<msgpack::object>* simxSetObjectPosition(int objectHandle,int refObjectHandle,const float pos[3],msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetObjectOrientation(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetObjectOrientation(int objectHandle,int refObjectHandle,const float euler[3],msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetObjectQuaternion(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetObjectQuaternion(int objectHandle,int refObjectHandle,const float quat[4],msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetObjectPose(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetObjectPose(int objectHandle,int refObjectHandle,const float pose[7],msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxGetObjectMatrix(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetObjectMatrix(int objectHandle,int refObjectHandle,const float matr[12],msgTopic topic,std::string* errorString=NULL);
+
     // -------------------------------
     // Add your custom functions here:
     // -------------------------------

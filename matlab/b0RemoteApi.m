@@ -531,6 +531,51 @@ classdef b0RemoteApi < handle
             ret = obj.handleFunction('GetStringSignal',args,topic);
         end
             
+        function ret = simxSetObjectPosition(obj,objectHandle,refObjectHandle,pos,topic)
+            args = {objectHandle,refObjectHandle,pos};
+            ret = obj.handleFunction('SetObjectPosition',args,topic);
+        end
+            
+        function ret = simxGetObjectOrientation(obj,objectHandle,refObjectHandle,topic)
+            args = {objectHandle,refObjectHandle};
+            ret = obj.handleFunction('GetObjectOrientation',args,topic);
+        end
+            
+        function ret = simxSetObjectOrientation(obj,objectHandle,refObjectHandle,euler,topic)
+            args = {objectHandle,refObjectHandle,euler};
+            ret = obj.handleFunction('SetObjectOrientation',args,topic);
+        end
+            
+        function ret = simxGetObjectQuaternion(obj,objectHandle,refObjectHandle,topic)
+            args = {objectHandle,refObjectHandle};
+            ret = obj.handleFunction('GetObjectQuaternion',args,topic);
+        end
+            
+        function ret = simxSetObjectQuaternion(obj,objectHandle,refObjectHandle,quat,topic)
+            args = {objectHandle,refObjectHandle,quat};
+            ret = obj.handleFunction('SetObjectQuaternion',args,topic);
+        end
+            
+        function ret = simxGetObjectPose(obj,objectHandle,refObjectHandle,topic)
+            args = {objectHandle,refObjectHandle};
+            ret = obj.handleFunction('GetObjectPose',args,topic);
+        end
+            
+        function ret = simxSetObjectPose(obj,objectHandle,refObjectHandle,pose,topic)
+            args = {objectHandle,refObjectHandle,pose};
+            ret = obj.handleFunction('SetObjectPose',args,topic);
+        end
+            
+        function ret = simxGetObjectMatrix(obj,objectHandle,refObjectHandle,topic)
+            args = {objectHandle,refObjectHandle};
+            ret = obj.handleFunction('GetObjectMatrix',args,topic);
+        end
+            
+        function ret = simxSetObjectMatrix(obj,objectHandle,refObjectHandle,matr,topic)
+            args = {objectHandle,refObjectHandle,matr};
+            ret = obj.handleFunction('SetObjectMatrix',args,topic);
+        end
+        
         % -------------------------------
         % Add your custom functions here:
         % -------------------------------

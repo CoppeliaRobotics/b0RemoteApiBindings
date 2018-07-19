@@ -6,6 +6,13 @@ function callb(msg)
     print(msg)
 end
 
+s1=client.simxGetObjectHandle('shape1',client.simxServiceCall())
+s2=client.simxGetObjectHandle('shape2',client.simxServiceCall())
+prox=client.simxGetObjectHandle('prox',client.simxServiceCall())
+vis=client.simxGetObjectHandle('vis',client.simxServiceCall())
+fs=client.simxGetObjectHandle('fs',client.simxServiceCall())
+coll=client.simxGetCollisionHandle('coll',client.simxServiceCall())
+dist=client.simxGetDistanceHandle('dist',client.simxServiceCall())
 
 --[[        
 client.simxAddStatusbarMessage('Hello',client.simxDefaultPublisher())
@@ -46,17 +53,10 @@ client.simxRemoveDrawingObject(res[2],client.simxServiceCall())
 
 --res=client.simxCallScriptFunction('myFunction@DefaultCamera',"sim.scripttype_customizationscript","Hello World :)",{255,0,255},nil,nil,client.simxServiceCall())
 --[[
-s1=client.simxGetObjectHandle('shape1',client.simxServiceCall())
-s2=client.simxGetObjectHandle('shape2',client.simxServiceCall())
-prox=client.simxGetObjectHandle('prox',client.simxServiceCall())
-vis=client.simxGetObjectHandle('vis',client.simxServiceCall())
-fs=client.simxGetObjectHandle('fs',client.simxServiceCall())
 print(client.simxCheckCollision(s1[2],s2[2],client.simxServiceCall()))
 print(client.simxCheckDistance(s1[2],s2[2],0,client.simxServiceCall()))
 print(client.simxCheckProximitySensor(prox[2],s2[2],client.simxServiceCall()))
 print(client.simxCheckVisionSensor(vis[2],s2[2],client.simxServiceCall()))
-coll=client.simxGetCollisionHandle('coll',client.simxServiceCall())
-dist=client.simxGetDistanceHandle('dist',client.simxServiceCall())
 print(client.simxReadCollision(coll[2],client.simxServiceCall()))
 print(client.simxReadDistance(dist[2],client.simxServiceCall()))
 print(client.simxReadProximitySensor(prox[2],client.simxServiceCall()))
@@ -87,5 +87,23 @@ while os.time()<startTime+5 do
     client.simxSpinOnce()
 end
 --]]
+
+print(client.simxSetObjectPosition(s1[2],-1,{0,0,0.2},client.simxServiceCall()))
+client.simxSleep(1000)
+print(client.simxSetObjectOrientation(s1[2],-1,{0,0,0.2},client.simxServiceCall()))
+print(client.simxGetObjectOrientation(s1[2],-1,client.simxServiceCall()))
+client.simxSleep(1000)
+print(client.simxSetObjectQuaternion(s1[2],-1,{0,0,0.2,1},client.simxServiceCall()))
+print(client.simxGetObjectQuaternion(s1[2],-1,client.simxServiceCall()))
+client.simxSleep(1000)
+print(client.simxSetObjectPose(s1[2],-1,{0.1,0.1,0,0,0,0,1},client.simxServiceCall()))
+print(client.simxGetObjectPose(s1[2],-1,client.simxServiceCall()))
+client.simxSleep(1000)
+matr=client.simxGetObjectMatrix(s1[2],-1,client.simxServiceCall())
+print(matr)
+matr[2][4]=0
+matr[2][8]=0
+print(client.simxSetObjectMatrix(s1[2],-1,matr[2],client.simxServiceCall()))
+
 
 client.delete()

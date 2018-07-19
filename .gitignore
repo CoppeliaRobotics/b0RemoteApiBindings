@@ -13,3 +13,4 @@ lua.exe
 b0.dll
 libzmq.dll
 *.class
+*.pyc

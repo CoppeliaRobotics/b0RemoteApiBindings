@@ -67,7 +67,7 @@ function testing()
     client.simxSleep(1000);
     client.simxStopSimulation(client.simxServiceCall());
     %}
-    %%{        
+    %{        
     client.simxSetFloatSignal('floatSignal',123.456,client.simxServiceCall());
     client.simxSetIntegerSignal('integerSignal',59,client.simxServiceCall());
     client.simxSetStringSignal('stringSignal','Hello World',client.simxServiceCall());
@@ -89,6 +89,23 @@ function testing()
         client.simxSpinOnce();
     end
     %}
+    
+    disp(jsonencode(client.simxSetObjectPosition(s1{2},-1,[0,0,0.2],client.simxServiceCall())));
+    client.simxSleep(1000);
+    disp(jsonencode(client.simxSetObjectOrientation(s1{2},-1,[0,0,0.2],client.simxServiceCall())));
+    disp(jsonencode(client.simxGetObjectOrientation(s1{2},-1,client.simxServiceCall())));
+    client.simxSleep(1000);
+    disp(jsonencode(client.simxSetObjectQuaternion(s1{2},-1,[0,0,0.2,1],client.simxServiceCall())));
+    disp(jsonencode(client.simxGetObjectQuaternion(s1{2},-1,client.simxServiceCall())));
+    client.simxSleep(1000);
+    disp(jsonencode(client.simxSetObjectPose(s1{2},-1,[0.1,0.1,0,0,0,0,1],client.simxServiceCall())));
+    disp(jsonencode(client.simxGetObjectPose(s1{2},-1,client.simxServiceCall())));
+    client.simxSleep(1000);
+    matr=client.simxGetObjectMatrix(s1{2},-1,client.simxServiceCall());
+    disp(jsonencode(matr));
+    matr{2}{4}=0;
+    matr{2}{8}=0;
+    disp(jsonencode(client.simxSetObjectMatrix(s1{2},-1,matr{2},client.simxServiceCall())));
 
     client.delete();    
     

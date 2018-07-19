@@ -581,6 +581,60 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return _handleFunction(funcName,reqArgs,topic)
     end
 
+    function self.simxSetObjectPosition(objectHandle,refObjectHandle,pos,topic)
+        local reqArgs = {objectHandle,refObjectHandle,pos}
+        local funcName = 'SetObjectPosition'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxGetObjectOrientation(objectHandle,refObjectHandle,topic)
+        local reqArgs = {objectHandle,refObjectHandle}
+        local funcName = 'GetObjectOrientation'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxSetObjectOrientation(objectHandle,refObjectHandle,euler,topic)
+        local reqArgs = {objectHandle,refObjectHandle,euler}
+        local funcName = 'SetObjectOrientation'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxGetObjectQuaternion(objectHandle,refObjectHandle,topic)
+        local reqArgs = {objectHandle,refObjectHandle}
+        local funcName = 'GetObjectQuaternion'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxSetObjectQuaternion(objectHandle,refObjectHandle,quat,topic)
+        local reqArgs = {objectHandle,refObjectHandle,quat}
+        local funcName = 'SetObjectQuaternion'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxGetObjectPose(objectHandle,refObjectHandle,topic)
+        local reqArgs = {objectHandle,refObjectHandle}
+        local funcName = 'GetObjectPose'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxSetObjectPose(objectHandle,refObjectHandle,pose,topic)
+        local reqArgs = {objectHandle,refObjectHandle,pose}
+        local funcName = 'SetObjectPose'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxGetObjectMatrix(objectHandle,refObjectHandle,topic)
+        local reqArgs = {objectHandle,refObjectHandle}
+        local funcName = 'GetObjectMatrix'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
+    function self.simxSetObjectMatrix(objectHandle,refObjectHandle,matr,topic)
+        local reqArgs = {objectHandle,refObjectHandle,matr}
+        local funcName = 'SetObjectMatrix'
+        return _handleFunction(funcName,reqArgs,topic)
+    end
+        
     -- -------------------------------
     -- Add your custom functions here:
     -- -------------------------------

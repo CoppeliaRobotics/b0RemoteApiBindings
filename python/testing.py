@@ -6,8 +6,16 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     def callb(msg):
         print(msg)
    
-    '''
     client.simxAddStatusbarMessage('Hello',client.simxDefaultPublisher())
+    s1=client.simxGetObjectHandle('shape1',client.simxServiceCall())
+    s2=client.simxGetObjectHandle('shape2',client.simxServiceCall())
+    prox=client.simxGetObjectHandle('prox',client.simxServiceCall())
+    vis=client.simxGetObjectHandle('vis',client.simxServiceCall())
+    fs=client.simxGetObjectHandle('fs',client.simxServiceCall())
+    coll=client.simxGetCollisionHandle('coll',client.simxServiceCall())
+    dist=client.simxGetDistanceHandle('dist',client.simxServiceCall())
+    
+    '''
     res=client.simxAuxiliaryConsoleOpen('theTitle',50,4,[10,400],[1024,100],[1,1,0],[0,0,0],client.simxServiceCall())
     client.simxAuxiliaryConsolePrint(res[1],'Hello World!!!\n',client.simxServiceCall())
     time.sleep(1)
@@ -36,18 +44,12 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     time.sleep(1)
     client.simxRemoveDrawingObject(res[1],client.simxServiceCall())
     '''
+    '''
     #res=client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',"Hello World :)",[255,0,255],None,None,client.simxServiceCall())
-    s1=client.simxGetObjectHandle('shape1',client.simxServiceCall())
-    s2=client.simxGetObjectHandle('shape2',client.simxServiceCall())
-    prox=client.simxGetObjectHandle('prox',client.simxServiceCall())
-    vis=client.simxGetObjectHandle('vis',client.simxServiceCall())
-    fs=client.simxGetObjectHandle('fs',client.simxServiceCall())
     print(client.simxCheckCollision(s1[1],s2[1],client.simxServiceCall()))
     print(client.simxCheckDistance(s1[1],s2[1],0,client.simxServiceCall()))
     print(client.simxCheckProximitySensor(prox[1],s2[1],client.simxServiceCall()))
     print(client.simxCheckVisionSensor(vis[1],s2[1],client.simxServiceCall()))
-    coll=client.simxGetCollisionHandle('coll',client.simxServiceCall())
-    dist=client.simxGetDistanceHandle('dist',client.simxServiceCall())
     print(client.simxReadCollision(coll[1],client.simxServiceCall()))
     print(client.simxReadDistance(dist[1],client.simxServiceCall()))
     print(client.simxReadProximitySensor(prox[1],client.simxServiceCall()))
@@ -73,4 +75,22 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     startTime=time.time()
     while time.time()<startTime+5: 
         client.simxSpinOnce()
+    '''
+    print(client.simxSetObjectPosition(s1[1],-1,[0,0,0.2],client.simxServiceCall()))
+    time.sleep(1)
+    print(client.simxSetObjectOrientation(s1[1],-1,[0,0,0.2],client.simxServiceCall()))
+    print(client.simxGetObjectOrientation(s1[1],-1,client.simxServiceCall()))
+    time.sleep(1)
+    print(client.simxSetObjectQuaternion(s1[1],-1,[0,0,0.2,1],client.simxServiceCall()))
+    print(client.simxGetObjectQuaternion(s1[1],-1,client.simxServiceCall()))
+    time.sleep(1)
+    print(client.simxSetObjectPose(s1[1],-1,[0.1,0.1,0,0,0,0,1],client.simxServiceCall()))
+    print(client.simxGetObjectPose(s1[1],-1,client.simxServiceCall()))
+    time.sleep(1)
+    matr=client.simxGetObjectMatrix(s1[1],-1,client.simxServiceCall())
+    print(matr)
+    matr[1][3]=0
+    matr[1][7]=0
+    print(client.simxSetObjectMatrix(s1[1],-1,matr[1],client.simxServiceCall()))
+    
     

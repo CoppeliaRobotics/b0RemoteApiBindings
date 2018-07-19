@@ -378,6 +378,51 @@ class RemoteApiClient:
         funcName = 'GetStringSignal'
         return self._handleFunction(funcName,reqArgs,topic)
 
+    def simxSetObjectPosition(self,objectHandle,refObjectHandle,pos,topic):
+        reqArgs = [objectHandle,refObjectHandle,pos]
+        funcName = 'SetObjectPosition'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxGetObjectOrientation(self,objectHandle,refObjectHandle,topic):
+        reqArgs = [objectHandle,refObjectHandle]
+        funcName = 'GetObjectOrientation'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxSetObjectOrientation(self,objectHandle,refObjectHandle,euler,topic):
+        reqArgs = [objectHandle,refObjectHandle,euler]
+        funcName = 'SetObjectOrientation'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxGetObjectQuaternion(self,objectHandle,refObjectHandle,topic):
+        reqArgs = [objectHandle,refObjectHandle]
+        funcName = 'GetObjectQuaternion'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxSetObjectQuaternion(self,objectHandle,refObjectHandle,quat,topic):
+        reqArgs = [objectHandle,refObjectHandle,quat]
+        funcName = 'SetObjectQuaternion'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxGetObjectPose(self,objectHandle,refObjectHandle,topic):
+        reqArgs = [objectHandle,refObjectHandle]
+        funcName = 'GetObjectPose'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxSetObjectPose(self,objectHandle,refObjectHandle,pose,topic):
+        reqArgs = [objectHandle,refObjectHandle,pose]
+        funcName = 'SetObjectPose'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxGetObjectMatrix(self,objectHandle,refObjectHandle,topic):
+        reqArgs = [objectHandle,refObjectHandle]
+        funcName = 'GetObjectMatrix'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxSetObjectMatrix(self,objectHandle,refObjectHandle,matr,topic):
+        reqArgs = [objectHandle,refObjectHandle,matr]
+        funcName = 'SetObjectMatrix'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
     # -------------------------------
     # Add your custom functions here:
     # -------------------------------

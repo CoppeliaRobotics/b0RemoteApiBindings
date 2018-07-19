@@ -128,6 +128,28 @@ int main(int argc,char* argv[])
     while (client.simxGetTimeInMs()<startTime+5000)
         client.simxSpinOnce();
 //                */
+    float pos[3]={0.0,0.0,0.2f};
+    b0RemoteApi::print(client.simxSetObjectPosition(s1,-1,pos,client.simxServiceCall()));
+    client.simxSleep(1000);
+    b0RemoteApi::print(client.simxSetObjectOrientation(s1,-1,pos,client.simxServiceCall()));
+    b0RemoteApi::print(client.simxGetObjectOrientation(s1,-1,client.simxServiceCall()));
+    client.simxSleep(1000);
+    float quat[4]={0.0,0.0,0.2f,1.0f};
+    b0RemoteApi::print(client.simxSetObjectQuaternion(s1,-1,quat,client.simxServiceCall()));
+    b0RemoteApi::print(client.simxGetObjectQuaternion(s1,-1,client.simxServiceCall()));
+    client.simxSleep(1000);
+    float pose[7]={0.1f,0.1f,0.0f,0.0f,0.0f,0.0f,1.0f};
+    b0RemoteApi::print(client.simxSetObjectPose(s1,-1,pose,client.simxServiceCall()));
+    b0RemoteApi::print(client.simxGetObjectPose(s1,-1,client.simxServiceCall()));
+    client.simxSleep(1000);
+    std::vector<msgpack::object>* matr=client.simxGetObjectMatrix(s1,-1,client.simxServiceCall());
+    b0RemoteApi::print(matr);
+    std::vector<float> m;
+    b0RemoteApi::readFloatArray(matr,m,1);
+    m[3]=0.0;
+    m[7]=0.0;
+    b0RemoteApi::print(client.simxSetObjectMatrix(s1,-1,&m[0],client.simxServiceCall()));
+
     std::cout << "Ended!" << std::endl;
     return(0);
 }

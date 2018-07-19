@@ -954,6 +954,87 @@ public class b0RemoteApi
         return _handleFunction("GetStringSignal",args,topic);
     }
     
+    public MessageUnpacker simxSetObjectPosition(int objectHandle,int refObjectHandle,float[] pos,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(refObjectHandle);
+        args.packArrayHeader(3).packFloat(pos[0]).packFloat(pos[1]).packFloat(pos[2]);
+        return _handleFunction("SetObjectPosition",args,topic);
+    }
+
+    public MessageUnpacker simxGetObjectOrientation(int objectHandle,int refObjectHandle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(objectHandle).packInt(refObjectHandle);
+        return _handleFunction("GetObjectOrientation",args,topic);
+    }
+
+    public MessageUnpacker simxSetObjectOrientation(int objectHandle,int refObjectHandle,float[] euler,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(refObjectHandle);
+        args.packArrayHeader(3).packFloat(euler[0]).packFloat(euler[1]).packFloat(euler[2]);
+        return _handleFunction("SetObjectOrientation",args,topic);
+    }
+
+    public MessageUnpacker simxGetObjectQuaternion(int objectHandle,int refObjectHandle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(objectHandle).packInt(refObjectHandle);
+        return _handleFunction("GetObjectQuaternion",args,topic);
+    }
+
+    public MessageUnpacker simxSetObjectQuaternion(int objectHandle,int refObjectHandle,float[] quat,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(refObjectHandle);
+        args.packArrayHeader(4).packFloat(quat[0]).packFloat(quat[1]).packFloat(quat[2]).packFloat(quat[3]);
+        return _handleFunction("SetObjectQuaternion",args,topic);
+    }
+
+    public MessageUnpacker simxGetObjectPose(int objectHandle,int refObjectHandle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(objectHandle).packInt(refObjectHandle);
+        return _handleFunction("GetObjectPose",args,topic);
+    }
+
+    public MessageUnpacker simxSetObjectPose(int objectHandle,int refObjectHandle,float[] pose,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(refObjectHandle);
+        args.packArrayHeader(7).packFloat(pose[0]).packFloat(pose[1]).packFloat(pose[2]).packFloat(pose[3]).packFloat(pose[4]).packFloat(pose[5]).packFloat(pose[6]);
+        return _handleFunction("SetObjectPose",args,topic);
+    }
+
+    public MessageUnpacker simxGetObjectMatrix(int objectHandle,int refObjectHandle,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2).packInt(objectHandle).packInt(refObjectHandle);
+        return _handleFunction("GetObjectMatrix",args,topic);
+    }
+
+    public MessageUnpacker simxSetObjectMatrix(int objectHandle,int refObjectHandle,float[] matr,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(refObjectHandle);
+        args.packArrayHeader(12);
+        args.packFloat(matr[0]).packFloat(matr[1]).packFloat(matr[2]).packFloat(matr[3]);
+        args.packFloat(matr[4]).packFloat(matr[5]).packFloat(matr[6]).packFloat(matr[7]);
+        args.packFloat(matr[8]).packFloat(matr[9]).packFloat(matr[10]).packFloat(matr[11]);
+        return _handleFunction("SetObjectMatrix",args,topic);
+    }
+    
     // -------------------------------
     // Add your custom functions here:
     // -------------------------------

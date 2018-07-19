@@ -98,7 +98,7 @@ public class testing
         client.simxSleep(1000);
         client.simxStopSimulation(client.simxServiceCall());
                 //*/
-                //*
+                /*
         client.simxSetFloatSignal("floatSignal",123.456f,client.simxServiceCall());
         client.simxSetIntegerSignal("integerSignal",59,client.simxServiceCall());
         client.simxSetStringSignal("stringSignal",("Hello World").getBytes(),client.simxServiceCall());
@@ -118,6 +118,28 @@ public class testing
         long startTime=client.simxGetTimeInMs();
         while (client.simxGetTimeInMs()<startTime+5000)
             client.simxSpinOnce();
+        //*/
+        
+        float[] pos={0.0f,0.0f,0.2f};
+        b0RemoteApi.print(client.simxSetObjectPosition(s1,-1,pos,client.simxServiceCall()));
+        client.simxSleep(1000);
+        b0RemoteApi.print(client.simxSetObjectOrientation(s1,-1,pos,client.simxServiceCall()));
+        b0RemoteApi.print(client.simxGetObjectOrientation(s1,-1,client.simxServiceCall()));
+        client.simxSleep(1000);
+        float[] quat={0.0f,0.0f,0.2f,1.0f};
+        b0RemoteApi.print(client.simxSetObjectQuaternion(s1,-1,quat,client.simxServiceCall()));
+        b0RemoteApi.print(client.simxGetObjectQuaternion(s1,-1,client.simxServiceCall()));
+        client.simxSleep(1000);
+        float[] pose={0.1f,0.1f,0.0f,0.0f,0.0f,0.0f,1.0f};
+        b0RemoteApi.print(client.simxSetObjectPose(s1,-1,pose,client.simxServiceCall()));
+        b0RemoteApi.print(client.simxGetObjectPose(s1,-1,client.simxServiceCall()));
+        client.simxSleep(1000);
+        MessageUnpacker matr=client.simxGetObjectMatrix(s1,-1,client.simxServiceCall());
+        float[] m=b0RemoteApi.readFloatArray(matr,1);
+        m[3]=0.0f;
+        m[7]=0.0f;
+        b0RemoteApi.print(client.simxSetObjectMatrix(s1,-1,m,client.simxServiceCall()));
+        
         
         client.delete();
         System.out.println("Program ended");

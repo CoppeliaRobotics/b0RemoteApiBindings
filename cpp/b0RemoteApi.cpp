@@ -925,6 +925,78 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetStringSignal(const char* sig,m
     return(_handleFunction("GetStringSignal",packedArgs.str(),topic,errorString));
 }
 
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectPosition(int objectHandle,int refObjectHandle,const float pos[3],msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(pos,pos+3));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectPosition",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectOrientation(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(objectHandle,refObjectHandle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectOrientation",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectOrientation(int objectHandle,int refObjectHandle,const float euler[3],msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(euler,euler+3));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectOrientation",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectQuaternion(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(objectHandle,refObjectHandle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectQuaternion",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectQuaternion(int objectHandle,int refObjectHandle,const float quat[4],msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(quat,quat+4));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectQuaternion",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectPose(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(objectHandle,refObjectHandle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectPose",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectPose(int objectHandle,int refObjectHandle,const float pose[7],msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(pose,pose+7));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectPose",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectMatrix(int objectHandle,int refObjectHandle,msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int> args(objectHandle,refObjectHandle);
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectMatrix",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectMatrix(int objectHandle,int refObjectHandle,const float matr[12],msgTopic topic,std::string* errorString)
+{
+    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(matr,matr+12));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectMatrix",packedArgs.str(),topic,errorString));
+}
+
 // -------------------------------
 // Add your custom functions here:
 // -------------------------------
