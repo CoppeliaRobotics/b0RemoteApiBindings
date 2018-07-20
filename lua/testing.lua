@@ -51,7 +51,6 @@ client.simxSleep(1000)
 client.simxRemoveDrawingObject(res[2],client.simxServiceCall())
 --]]
 
---res=client.simxCallScriptFunction('myFunction@DefaultCamera',"sim.scripttype_customizationscript","Hello World :)",{255,0,255},nil,nil,client.simxServiceCall())
 --[[
 print(client.simxCheckCollision(s1[2],s2[2],client.simxServiceCall()))
 print(client.simxCheckDistance(s1[2],s2[2],0,client.simxServiceCall()))
@@ -87,7 +86,7 @@ while os.time()<startTime+5 do
     client.simxSpinOnce()
 end
 --]]
-
+--[[
 print(client.simxSetObjectPosition(s1[2],-1,{0,0,0.2},client.simxServiceCall()))
 client.simxSleep(1000)
 print(client.simxSetObjectOrientation(s1[2],-1,{0,0,0.2},client.simxServiceCall()))
@@ -104,6 +103,11 @@ print(matr)
 matr[2][4]=0
 matr[2][8]=0
 print(client.simxSetObjectMatrix(s1[2],-1,matr[2],client.simxServiceCall()))
+--]]
+print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',{"Hello World :)",{255,0,255},nil,57.59},client.simxServiceCall()))
+print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript','Hello World :)',client.simxServiceCall()))
+print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',59,client.simxServiceCall()))
+print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',nil,client.simxServiceCall()))
 
 
 client.delete()

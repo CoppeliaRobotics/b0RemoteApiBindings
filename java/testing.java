@@ -72,17 +72,6 @@ public class testing
         client.simxSleep(1000);
         client.simxRemoveDrawingObject(b0RemoteApi.readInt(res,1),client.simxServiceCall());
     //*/
-        /*
-        MessageBufferPacker data=MessagePack.newDefaultBufferPacker();
-        data.packArrayHeader(5);
-        data.packString("myFunction@DefaultCamera");
-        data.packString("sim.scripttype_customizationscript");
-        data.packString("Hello World :)");
-        data.packArrayHeader(3).packFloat(colPurple[0]).packFloat(colPurple[1]).packFloat(colPurple[2]);
-        data.packFloat(42.123f);
-        MessageUnpacker res=client.simxCallScriptFunction(data,client.simxServiceCall());
-        b0RemoteApi.print(res);
-    //*/
     /*
         client.simxStartSimulation(client.simxServiceCall());
         b0RemoteApi.print(client.simxCheckCollision(s1,s2,client.simxServiceCall()));
@@ -119,7 +108,7 @@ public class testing
         while (client.simxGetTimeInMs()<startTime+5000)
             client.simxSpinOnce();
         //*/
-        
+       /* 
         float[] pos={0.0f,0.0f,0.2f};
         b0RemoteApi.print(client.simxSetObjectPosition(s1,-1,pos,client.simxServiceCall()));
         client.simxSleep(1000);
@@ -139,7 +128,29 @@ public class testing
         m[3]=0.0f;
         m[7]=0.0f;
         b0RemoteApi.print(client.simxSetObjectMatrix(s1,-1,m,client.simxServiceCall()));
-        
+*/        
+
+
+        //*
+        MessageBufferPacker data=MessagePack.newDefaultBufferPacker();
+        data.packArrayHeader(4);
+        data.packString("Hello World :)");
+        data.packArrayHeader(3).packFloat(colPurple[0]).packFloat(colPurple[1]).packFloat(colPurple[2]);
+        data.packNil();
+        data.packFloat(42.123f);
+        b0RemoteApi.print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",data.toByteArray(),client.simxServiceCall()));
+        data=MessagePack.newDefaultBufferPacker();
+        data.packString("Hello World :)");
+        b0RemoteApi.print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",data.toByteArray(),client.simxServiceCall()));
+        data=MessagePack.newDefaultBufferPacker();
+        data.packFloat(59.57f);
+        b0RemoteApi.print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",data.toByteArray(),client.simxServiceCall()));
+        data=MessagePack.newDefaultBufferPacker();
+        data.packNil();
+        b0RemoteApi.print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",data.toByteArray(),client.simxServiceCall()));
+    //*/
+
+
         
         client.delete();
         System.out.println("Program ended");

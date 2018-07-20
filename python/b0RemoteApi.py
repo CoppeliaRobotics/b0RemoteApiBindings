@@ -120,6 +120,7 @@ class RemoteApiClient:
         topic=self._channelName+'Pub'+str(self._nextDedicatedSubscriberHandle)+self._clientId
         self._nextDedicatedSubscriberHandle=self._nextDedicatedSubscriberHandle+1
         sub=b0.Subscriber(self._node,topic,None,0,1)
+        #sub.set_conflate(1);
         sub.init()
         self._allSubscribers[topic]={}
         self._allSubscribers[topic]['handle']=sub
@@ -268,8 +269,9 @@ class RemoteApiClient:
         funcName = 'RemoveDrawingObject'
         return self._handleFunction(funcName,reqArgs,topic)
         
-    def simxCallScriptFunction(self,funcAtObjName,scriptType,arg1,arg2,arg3,arg4,topic):
-        reqArgs = [funcAtObjName,scriptType,arg1,arg2,arg3,arg4]
+    def simxCallScriptFunction(self,funcAtObjName,scriptType,arg,topic):
+        packedArg=msgpack.packb(arg)
+        reqArgs = [funcAtObjName,scriptType,packedArg]
         funcName = 'CallScriptFunction'
         return self._handleFunction(funcName,reqArgs,topic)
         

@@ -80,18 +80,6 @@ int main(int argc,char* argv[])
     client.simxSleep(1000);
     client.simxRemoveDrawingObject(b0RemoteApi::readInt(res,1),client.simxServiceCall());
 //*/
-    /*
-    std::tuple<std::string,std::string,std::string,std::vector<int>,float> args(
-                "myFunction@DefaultCamera",
-                "sim.scripttype_customizationscript",
-                "Hello World :)",
-                std::vector<int>(colPurple,colPurple+3),
-                42.123f);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    res=client.simxCallScriptFunction(packedArgs,client.simxServiceCall());
-    b0RemoteApi::print(res);
-//*/
 /*
     client.simxStartSimulation(client.simxServiceCall());
     b0RemoteApi::print(client.simxCheckCollision(s1,s2,client.simxServiceCall()));
@@ -128,6 +116,7 @@ int main(int argc,char* argv[])
     while (client.simxGetTimeInMs()<startTime+5000)
         client.simxSpinOnce();
 //                */
+    /*
     float pos[3]={0.0,0.0,0.2f};
     b0RemoteApi::print(client.simxSetObjectPosition(s1,-1,pos,client.simxServiceCall()));
     client.simxSleep(1000);
@@ -149,6 +138,24 @@ int main(int argc,char* argv[])
     m[3]=0.0;
     m[7]=0.0;
     b0RemoteApi::print(client.simxSetObjectMatrix(s1,-1,&m[0],client.simxServiceCall()));
+*/
+
+    //*
+    std::tuple<std::string,std::vector<int>,float> args1(
+                "Hello World :)",
+                std::vector<int>(colPurple,colPurple+3),
+                42.123f);
+    std::stringstream packedArgs1;
+    msgpack::pack(packedArgs1,args1);
+    b0RemoteApi::print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",packedArgs1.str().c_str(),packedArgs1.str().size(),client.simxServiceCall()));
+    std::tuple<std::string> args2("Hello World :)");
+    std::stringstream packedArgs2;
+    msgpack::pack(packedArgs2,args2);
+    b0RemoteApi::print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",packedArgs2.str().c_str(),packedArgs2.str().size(),client.simxServiceCall()));
+    std::string msgPackNil;
+    msgPackNil+=char(-64); // nil
+    b0RemoteApi::print(client.simxCallScriptFunction("myFunction@DefaultCamera","sim.scripttype_customizationscript",msgPackNil.c_str(),msgPackNil.size(),client.simxServiceCall()));
+//*/
 
     std::cout << "Ended!" << std::endl;
     return(0);

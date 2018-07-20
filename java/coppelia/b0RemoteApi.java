@@ -518,6 +518,7 @@ public class b0RemoteApi
         String topic=_channelName+"Pub"+_nextDedicatedSubscriberHandle+_clientId;
         _nextDedicatedSubscriberHandle=_nextDedicatedSubscriberHandle+1;
         long sub=b0SubscriberNewEx(_node,topic,0,1);
+        //b0SubscriberSetConflate(sub,1);
         b0SubscriberInit(sub);
         SHandleAndCb dat=new SHandleAndCb();
         dat.handle=sub;
@@ -555,6 +556,7 @@ public class b0RemoteApi
     private native void b0SubscriberInit(long sub);
     private native int b0SubscriberPoll(long sub,long timeout);
     private native byte[] b0SubscriberRead(long sub);
+    private native void b0SubscriberSetConflate(long sub,int conflate);
     
     private native long b0ServiceClientNewEx(long node,final String serviceName,int managed,int notifyGraph);
     private native void b0ServiceClientDelete(long cli);
@@ -771,8 +773,25 @@ public class b0RemoteApi
         return _handleFunction("RemoveDrawingObject",args,topic);
     }
 
-    public MessageUnpacker simxCallScriptFunction(MessageBufferPacker args,final String topic) throws IOException
+    public MessageUnpacker simxCallScriptFunction(final String funcAtObjName,int scriptType,byte[] packedArg,final String topic) throws IOException
     {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packString(funcAtObjName);
+        args.packInt(scriptType);
+        args.packBinaryHeader(packedArg.length);
+        args.writePayload(packedArg);
+        return _handleFunction("CallScriptFunction",args,topic);
+    }
+    
+    public MessageUnpacker simxCallScriptFunction(final String funcAtObjName,final String scriptType,byte[] packedArg,final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packString(funcAtObjName);
+        args.packString(scriptType);
+        args.packBinaryHeader(packedArg.length);
+        args.writePayload(packedArg);
         return _handleFunction("CallScriptFunction",args,topic);
     }
 

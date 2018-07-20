@@ -204,7 +204,7 @@ msgTopic b0RemoteApi::simxCreateSubscriber(CB_FUNC cb,int publishInterval,bool d
 {
     msgTopic topic=_channelName+"Pub"+std::to_string(_nextDedicatedSubscriberHandle++)+_clientId;
     b0::Subscriber* sub=new b0::Subscriber(_node,topic,NULL,false,true);
-    //    sub->setConflate(true);
+    //sub->setConflate(true);
     sub->init();
     SHandleAndCb dat;
     dat.handle=sub;
@@ -611,9 +611,9 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetVisionSensorImage(int objectHa
     return(_handleFunction("GetVisionSensorImage",packedArgs.str(),topic,errorString));
 }
 
-std::vector<msgpack::object>* b0RemoteApi::simxSetVisionSensorImage(int objectHandle,bool greyScale,const std::string& img,msgTopic topic,std::string* errorString)
+std::vector<msgpack::object>* b0RemoteApi::simxSetVisionSensorImage(int objectHandle,bool greyScale,const char* img,size_t imgSize,msgTopic topic,std::string* errorString)
 {
-    std::tuple<int,bool,std::string> args(objectHandle,greyScale,img);
+    std::tuple<int,bool,std::string> args(objectHandle,greyScale,std::string(img,img+imgSize));
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
     return(_handleFunction("SetVisionSensorImage",packedArgs.str(),topic,errorString));
@@ -720,9 +720,20 @@ std::vector<msgpack::object>* b0RemoteApi::simxRemoveDrawingObject(int handle,ms
     return(_handleFunction("RemoveDrawingObject",packedArgs.str(),topic,errorString));
 }
 
-std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(std::stringstream& packedData,msgTopic topic,std::string* errorString)
+std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,msgTopic topic,std::string* errorString)
 {
-    return(_handleFunction("CallScriptFunction",packedData.str(),topic,errorString));
+    std::tuple<std::string,int,std::string> args(funcAtObjName,scriptType,std::string(packedData,packedData+packedDataSize));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CallScriptFunction",packedArgs.str(),topic,errorString));
+}
+
+std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,msgTopic topic,std::string* errorString)
+{
+    std::tuple<std::string,std::string,std::string> args(funcAtObjName,scriptType,std::string(packedData,packedData+packedDataSize));
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("CallScriptFunction",packedArgs.str(),topic,errorString));
 }
 
 std::vector<msgpack::object>* b0RemoteApi::simxCheckCollision(int entity1,int entity2,msgTopic topic,std::string* errorString)
@@ -893,7 +904,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetIntegerSignal(const char* sig,
     return(_handleFunction("SetIntegerSignal",packedArgs.str(),topic,errorString));
 }
 
-std::vector<msgpack::object>* b0RemoteApi::simxSetStringSignal(const char* sig,const char* val,int valSize,msgTopic topic,std::string* errorString)
+std::vector<msgpack::object>* b0RemoteApi::simxSetStringSignal(const char* sig,const char* val,size_t valSize,msgTopic topic,std::string* errorString)
 {
     std::tuple<std::string,std::string> args(sig,std::string(val,val+valSize));
     std::stringstream packedArgs;

@@ -247,6 +247,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local topic=_channelName..'Pub'..tostring(_nextDedicatedSubscriberHandle).._clientId
         _nextDedicatedSubscriberHandle=_nextDedicatedSubscriberHandle+1
         local subb=b0.subscriber_new_ex(_node,topic,0,1)
+        --b0.subscriber_set_conflate(subb,1)
         b0.subscriber_init(subb)
         _allSubscribers[topic]={}
         _allSubscribers[topic].handle=subb
@@ -449,8 +450,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return _handleFunction(funcName,reqArgs,topic)
     end
     
-    function self.simxCallScriptFunction(funcAtObjName,scriptType,arg1,arg2,arg3,arg4,topic)
-        local reqArgs = {funcAtObjName,scriptType,arg1,arg2,arg3,arg4}
+    function self.simxCallScriptFunction(funcAtObjName,scriptType,arg,topic)
+        local packedArg=b0.messagePack.pack(arg)
+        local reqArgs = {funcAtObjName,scriptType,packedArg}
         local funcName = 'CallScriptFunction'
         return _handleFunction(funcName,reqArgs,topic)
     end

@@ -76,6 +76,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     while time.time()<startTime+5: 
         client.simxSpinOnce()
     '''
+    '''
     print(client.simxSetObjectPosition(s1[1],-1,[0,0,0.2],client.simxServiceCall()))
     time.sleep(1)
     print(client.simxSetObjectOrientation(s1[1],-1,[0,0,0.2],client.simxServiceCall()))
@@ -92,5 +93,9 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     matr[1][3]=0
     matr[1][7]=0
     print(client.simxSetObjectMatrix(s1[1],-1,matr[1],client.simxServiceCall()))
-    
+'''    
+    print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',["Hello World :)",[255,0,255],None,None],client.simxServiceCall()))
+    print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript','Hello World :)',client.simxServiceCall()))
+    print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',59,client.simxServiceCall()))
+    print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',None,client.simxServiceCall()))
     

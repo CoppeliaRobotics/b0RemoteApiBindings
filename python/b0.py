@@ -65,6 +65,7 @@ _("b0_subscriber_get_topic_name", str, ct.c_void_p)
 _("b0_subscriber_log", None, ct.c_void_p, ct.c_int, str)
 _("b0_subscriber_poll", ct.c_int, ct.c_void_p, ct.c_long)
 _("b0_subscriber_read", ct.c_void_p, ct.c_void_p, ct.POINTER(ct.c_size_t))
+_("b0_subscriber_set_conflate", None, ct.c_void_p,ct.c_int)
 _("b0_service_client_new_ex", ct.c_void_p, ct.c_void_p, str, ct.c_int, ct.c_int)
 _("b0_service_client_new", ct.c_void_p, ct.c_void_p, str)
 _("b0_service_client_delete", None, ct.c_void_p)
@@ -177,6 +178,9 @@ class Subscriber:
 
     def log(self, level, message):
         b0_subscriber_log(self._sub, level, message)
+        
+    def set_conflate(self, conflate):
+        b0_subscriber_set_conflate(self._sub,conflate)
 
     def poll(self,timeout):
         return b0_subscriber_poll(self._sub,timeout)

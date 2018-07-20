@@ -30,5 +30,6 @@ fcns.name{fcnNum}='b0_subscriber_delete'; fcns.calltype{fcnNum}='cdecl'; fcns.LH
 fcns.name{fcnNum}='b0_subscriber_init'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}=[]; fcns.RHS{fcnNum}={'voidPtr'};fcnNum=fcnNum+1;
 fcns.name{fcnNum}='b0_subscriber_poll'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'voidPtr','long'};fcnNum=fcnNum+1;
 fcns.name{fcnNum}='b0_subscriber_read'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='uint8Ptr'; fcns.RHS{fcnNum}={'voidPtr','uint64Ptr'};fcnNum=fcnNum+1;
+fcns.name{fcnNum}='b0_subscriber_set_conflate'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}=[];fcns.RHS{fcnNum}={'voidPtr'};fcns.LHS{fcnNum}='int32';fcnNum=fcnNum+1;
 
 methodinfo=fcns;

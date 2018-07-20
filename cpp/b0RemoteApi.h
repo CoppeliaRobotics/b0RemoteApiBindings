@@ -96,7 +96,7 @@ public:
     std::vector<msgpack::object>* simxStartSimulation(msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxStopSimulation(msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetVisionSensorImage(int objectHandle,bool greyScale,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxSetVisionSensorImage(int objectHandle,bool greyScale,const std::string& img,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetVisionSensorImage(int objectHandle,bool greyScale,const char* img,size_t imgSize,msgTopic topic,std::string* errorString=NULL);
 
     std::vector<msgpack::object>* simxAuxiliaryConsoleClose(int consoleHandle,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxAuxiliaryConsolePrint(int consoleHandle,const char* text,msgTopic topic,std::string* errorString=NULL);
@@ -109,7 +109,8 @@ public:
     std::vector<msgpack::object>* simxAddDrawingObject_segments(int lineSize,const int color[3],const float* segments,int segmentCnt,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxAddDrawingObject_triangles(const int color[3],const float* triangles,int triangleCnt,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxRemoveDrawingObject(int handle,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxCallScriptFunction(std::stringstream& packedData,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxCheckCollision(int entity1,int entity2,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxCheckCollision(int entity1,const char* entity2,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetCollisionHandle(const char* name,msgTopic topic,std::string* errorString=NULL);
@@ -131,7 +132,7 @@ public:
     std::vector<msgpack::object>* simxClearStringSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxSetFloatSignal(const char* sig,float val,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxSetIntegerSignal(const char* sig,int val,msgTopic topic,std::string* errorString=NULL);
-    std::vector<msgpack::object>* simxSetStringSignal(const char* sig,const char* val,int valSize,msgTopic topic,std::string* errorString=NULL);
+    std::vector<msgpack::object>* simxSetStringSignal(const char* sig,const char* val,size_t valSize,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetFloatSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetIntegerSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);
     std::vector<msgpack::object>* simxGetStringSignal(const char* sig,msgTopic topic,std::string* errorString=NULL);

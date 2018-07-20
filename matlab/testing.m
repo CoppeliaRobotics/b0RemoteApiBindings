@@ -50,8 +50,6 @@ function testing()
 
     %{        
     client.simxStartSimulation(client.simxServiceCall());
-    res=client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript','Hello World :)',{255,0,255},[],[],client.simxServiceCall());
-    disp(jsonencode(res));
     disp(jsonencode(client.simxCheckCollision(s1{2},s2{2},client.simxServiceCall())));
     disp(jsonencode(client.simxCheckDistance(s1{2},s2{2},0,client.simxServiceCall())));
     disp(jsonencode(client.simxCheckProximitySensor(prox{2},s2{2},client.simxServiceCall())));
@@ -89,7 +87,7 @@ function testing()
         client.simxSpinOnce();
     end
     %}
-    
+   %{ 
     disp(jsonencode(client.simxSetObjectPosition(s1{2},-1,[0,0,0.2],client.simxServiceCall())));
     client.simxSleep(1000);
     disp(jsonencode(client.simxSetObjectOrientation(s1{2},-1,[0,0,0.2],client.simxServiceCall())));
@@ -106,6 +104,13 @@ function testing()
     matr{2}{4}=0;
     matr{2}{8}=0;
     disp(jsonencode(client.simxSetObjectMatrix(s1{2},-1,matr{2},client.simxServiceCall())));
+%}
+
+
+    disp(jsonencode(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',{'Hello World :)',{255,0,255},[],57.59},client.simxServiceCall())));
+    disp(jsonencode(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript','Hello World :)',client.simxServiceCall())));
+    disp(jsonencode(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',59,client.simxServiceCall())));
+    disp(jsonencode(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',{[]},client.simxServiceCall())));
 
     client.delete();    
     

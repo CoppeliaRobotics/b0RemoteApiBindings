@@ -176,6 +176,7 @@ classdef b0RemoteApi < handle
             obj.nextDedicatedSubscriberHandle=obj.nextDedicatedSubscriberHandle+1;
             tmp = libpointer('int8Ptr',[uint8(topic) 0]);
             sub = calllib(obj.libName,'b0_subscriber_new_ex',obj.node,tmp,[],0,1); % We will poll the socket
+            %calllib(obj.libName,'b0_subscriber_set_conflate',sub,1);
             calllib(obj.libName,'b0_subscriber_init',sub);
             theMap=containers.Map;
             theMap('handle')=sub;
@@ -421,8 +422,9 @@ classdef b0RemoteApi < handle
             ret = obj.handleFunction('RemoveDrawingObject',args,topic);
         end
             
-        function ret = simxCallScriptFunction(obj,funcAtObjName,scriptType,arg1,arg2,arg3,arg4,topic)
-            args = {funcAtObjName,scriptType,arg1,arg2,arg3,arg4};
+        function ret = simxCallScriptFunction(obj,funcAtObjName,scriptType,arg,topic)
+            packedData = dumpmsgpack(arg);
+            args = {funcAtObjName,scriptType,packedData};
             ret = obj.handleFunction('CallScriptFunction',args,topic);
         end
             

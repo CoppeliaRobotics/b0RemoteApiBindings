@@ -295,6 +295,20 @@ int B0_SUBSCRIBER_READ_CALLBACK(lua_State* L)
     return(retValCnt);
 }
 
+#define B0_SUBSCRIBER_SET_CONFLATE_COMMAND "b0.subscriber_set_conflate"
+int B0_SUBSCRIBER_SET_CONFLATE_CALLBACK(lua_State* L)
+{
+    int argCnt=lua_gettop(L);
+    int retValCnt=0;
+    if ( (argCnt>=2)&&lua_islightuserdata(L,1)&&lua_isnumber(L,2) )
+    {
+        b0_subscriber* ptr=(b0_subscriber*)lua_touserdata(L,1);
+        int conflate=(int)lua_tointeger(L,2);
+        b0_subscriber_set_conflate(ptr,conflate);
+    }
+    return(retValCnt);
+}
+
 void lua_registerN(lua_State* L,char const* funcName,lua_CFunction functionCallback)
 {
     std::string name(funcName);
@@ -348,6 +362,7 @@ extern "C" int luaopen_b0Lua(lua_State *L)
     lua_registerN(L,B0_SUBSCRIBER_INIT_COMMAND,B0_SUBSCRIBER_INIT_CALLBACK);
     lua_registerN(L,B0_SUBSCRIBER_POLL_COMMAND,B0_SUBSCRIBER_POLL_CALLBACK);
     lua_registerN(L,B0_SUBSCRIBER_READ_COMMAND,B0_SUBSCRIBER_READ_CALLBACK);
+    lua_registerN(L,B0_SUBSCRIBER_SET_CONFLATE_COMMAND,B0_SUBSCRIBER_SET_CONFLATE_CALLBACK);
 
     return 1;
 }
