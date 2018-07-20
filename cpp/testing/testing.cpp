@@ -18,12 +18,9 @@
 
 b0RemoteApi* cl=NULL;
 
-void callb(std::vector<msgpack::object>* msg,const std::string* errorStr)
+void callb(std::vector<msgpack::object>* msg)
 {
-    if (msg!=NULL)
-        b0RemoteApi::print(msg);
-    else
-        std::cout << "Error in remote function execution: " << *errorStr << std::endl;
+    b0RemoteApi::print(msg);
 }
 
 int main(int argc,char* argv[])

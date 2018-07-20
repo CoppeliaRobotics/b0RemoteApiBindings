@@ -94,8 +94,15 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     matr[1][7]=0
     print(client.simxSetObjectMatrix(s1[1],-1,matr[1],client.simxServiceCall()))
 '''    
+    '''
     print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',["Hello World :)",[255,0,255],None,None],client.simxServiceCall()))
     print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript','Hello World :)',client.simxServiceCall()))
     print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',59,client.simxServiceCall()))
     print(client.simxCallScriptFunction('myFunction@DefaultCamera','sim.scripttype_customizationscript',None,client.simxServiceCall()))
-    
+    '''
+    time.sleep(1)
+    copies=client.simxCopyPasteObjects([s1[1],s2[1]],0,client.simxServiceCall())
+    print(copies)
+    time.sleep(1)
+    client.simxRemoveObjects(copies[1],0,client.simxServiceCall())
+    client.simxCloseScene(client.simxServiceCall())

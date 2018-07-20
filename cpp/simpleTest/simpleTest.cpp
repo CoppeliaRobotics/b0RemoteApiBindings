@@ -20,42 +20,32 @@ bool doNextStep=true;
 int sens1,sens2;
 b0RemoteApi* cl=NULL;
 
-void simulationStepStarted_CB(std::vector<msgpack::object>* msg,const std::string* errorStr)
+void simulationStepStarted_CB(std::vector<msgpack::object>* msg)
 {
-    if (msg!=NULL)
-    {
-        float simTime=0.0;
-        std::map<std::string,msgpack::object> data=msg->at(1).as<std::map<std::string,msgpack::object>>();
-        std::map<std::string,msgpack::object>::iterator it=data.find("simulationTime");
-        if (it!=data.end())
-            simTime=it->second.as<float>();
-        std::cout << "Simulation step started. Simulation time: " << simTime << std::endl;
-    }
+    float simTime=0.0;
+    std::map<std::string,msgpack::object> data=msg->at(1).as<std::map<std::string,msgpack::object>>();
+    std::map<std::string,msgpack::object>::iterator it=data.find("simulationTime");
+    if (it!=data.end())
+        simTime=it->second.as<float>();
+    std::cout << "Simulation step started. Simulation time: " << simTime << std::endl;
 }
 
-void simulationStepDone_CB(std::vector<msgpack::object>* msg,const std::string* errorStr)
+void simulationStepDone_CB(std::vector<msgpack::object>* msg)
 {
-    if (msg!=NULL)
-    {
-        float simTime=0.0;
-        std::map<std::string,msgpack::object> data=msg->at(1).as<std::map<std::string,msgpack::object>>();
-        std::map<std::string,msgpack::object>::iterator it=data.find("simulationTime");
-        if (it!=data.end())
-            simTime=it->second.as<float>();
-        std::cout << "Simulation step done. Simulation time: " << simTime << std::endl;
-    }
+    float simTime=0.0;
+    std::map<std::string,msgpack::object> data=msg->at(1).as<std::map<std::string,msgpack::object>>();
+    std::map<std::string,msgpack::object>::iterator it=data.find("simulationTime");
+    if (it!=data.end())
+        simTime=it->second.as<float>();
+    std::cout << "Simulation step done. Simulation time: " << simTime << std::endl;
     doNextStep=true;
 }
 
-void image_CB(std::vector<msgpack::object>* msg,const std::string* errorStr)
+void image_CB(std::vector<msgpack::object>* msg)
 {
-    if (msg!=NULL)
-    {
-        std::cout << "Received image." << std::endl;
-        cl->simxSetVisionSensorImage(sens2,false,b0RemoteApi::readByteArray(msg,2),cl->simxDefaultPublisher());
-    }
-    else
-        std::cout << "Error in remote function execution: " << *errorStr << std::endl;
+    std::cout << "Received image." << std::endl;
+    std::string img(b0RemoteApi::readByteArray(msg,2));
+    cl->simxSetVisionSensorImage(sens2,false,img.c_str(),img.size(),cl->simxDefaultPublisher());
 }
 
 int main(int argc,char* argv[])
@@ -63,11 +53,10 @@ int main(int argc,char* argv[])
     b0RemoteApi client("b0RemoteApi_c++Client","b0RemoteApi");
     cl=&client;
 
-    std::string errorStr;
-    client.simxAddStatusbarMessage("Hello world!",client.simxDefaultPublisher(),&errorStr);
-    std::vector<msgpack::object>* reply=client.simxGetObjectHandle("VisionSensor",client.simxServiceCall(),&errorStr);
+    client.simxAddStatusbarMessage("Hello world!",client.simxDefaultPublisher());
+    std::vector<msgpack::object>* reply=client.simxGetObjectHandle("VisionSensor",client.simxServiceCall());
     sens1=b0RemoteApi::readInt(reply,1);
-    reply=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall(),&errorStr);
+    reply=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall());
     sens2=b0RemoteApi::readInt(reply,1);
 
     client.simxSynchronous(true);

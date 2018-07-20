@@ -425,6 +425,21 @@ class RemoteApiClient:
         funcName = 'SetObjectMatrix'
         return self._handleFunction(funcName,reqArgs,topic)
         
+    def simxCopyPasteObjects(self,objectHandles,option,topic):
+        reqArgs = [objectHandles,option]
+        funcName = 'CopyPasteObjects'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxRemoveObjects(self,objectHandles,option,topic):
+        reqArgs = [objectHandles,option]
+        funcName = 'RemoveObjects'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxCloseScene(self,topic):
+        reqArgs = [0]
+        funcName = 'CloseScene'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
     # -------------------------------
     # Add your custom functions here:
     # -------------------------------
