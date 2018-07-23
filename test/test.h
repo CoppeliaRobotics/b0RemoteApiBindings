@@ -4,11 +4,11 @@
     #define EXPORT __declspec(dllimport)
 #endif
 
-class EXPORT CTest
+class CTest
 {
 public:
-    CTest();
-    virtual ~CTest();
+    EXPORT CTest();
+    EXPORT virtual ~CTest();
 
-    void printSomething(const char* text);
+    EXPORT void printSomething(const char* text);
 };
