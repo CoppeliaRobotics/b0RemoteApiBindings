@@ -9,15 +9,15 @@ double
 uint  --> Translates in c into: size_t
 string  --> Translates in c into: const char*
 byte[]  --> Translates in c into: const char* value,size_t valueL
-byte[3]  --> Translates in c into: const char value[3]
+byte[x]  --> Translates in c into: const char value[x]
 int[]  --> Translates in c into: const int* value,size_t valueL
-int[3]  --> etc.
+int[x]  --> etc.
 float[]
-float[3]
+float[x]
 double[]
-double[3]
+double[x]
 uint[]
-uint[3]
+uint[x]
 intOrEval  --> means: this function has 2 versions (at least in C and Java):
             version 1: int val (e.g. sim.handle_all)
             version 2: const char* val (e.g. "sim.handle_all+sim.handle_parent") --> this string is evaluated on the V-REP side. Convenient, since all the V-REP constants do not need to be part of the client binding
