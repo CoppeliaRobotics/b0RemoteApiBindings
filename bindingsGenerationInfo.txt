@@ -1,0 +1,59 @@
+B0 based remote API XML doc, used to generate the documentation and client side bindings in C++, Java, Matlab, Python and Lua
+
+Generic types for all languages (used as input):
+
+bool
+int
+float
+double
+uint  --> Translates in c into: size_t
+string  --> Translates in c into: const char*
+byte[]  --> Translates in c into: const char* value,size_t valueL
+byte[3]  --> Translates in c into: const char value[3]
+int[]  --> Translates in c into: const int* value,size_t valueL
+int[3]  --> etc.
+float[]
+float[3]
+double[]
+double[3]
+uint[]
+uint[3]
+intOrEval  --> means: this function has 2 versions (at least in C and Java):
+            version 1: int val (e.g. sim.handle_all)
+            version 2: const char* val (e.g. "sim.handle_all+sim.handle_parent") --> this string is evaluated on the V-REP side. Convenient, since all the V-REP constants do not need to be part of the client binding
+
+Output is a list of several values:
+    Python: list of values
+    Lua: table of values
+    Matlab: array of values
+    C++: std::vector<msgpack::object>*
+    Java: MessageUnpacker
+
+            
+<command name="simxSetObjectPosition">
+    <description>Sets the position (x, y and z-coordinates) of an object. See also #simxGetObjectPosition, and the V-REP side counterpart <a hred="regularApi/simSetObjectPosition.htm">sim.setObjectPosition</a>.</description>
+    <params>
+        <param name="objectHandle" type="int">
+            <description>The handle of the object</description>
+        </param>
+        <param name="refObjectHandle" type="intOrEval">
+            <description>indicates relative to which reference frame the position is specified. Specify -1 to set the absolute position, string "sim.handle_parent" to set the position relative to the object's parent, or an object handle relative to whose reference frame the position is specified</description>
+        </param>
+        <param name="pos" type="float[3]">
+            <description>coordinates of the object (x, y and z)</description>
+        </param>
+        <param name="topic" type="string">
+            <description>The transport channel for the message. Valid values are #simxServiceCall(), #simxDefaultPublisher(), #simxDefaultSubscriber(...), #simxCreatePublisher() or #simxCreateSubscriber().</description>
+        </param>
+    </params>
+    <return>
+        <param name="ret" type="??">
+            <description>Non-nil only if topic is #simxServiceCall():\n\nValue at position 1 (bool): The remote function execution success\nValue at position 2 (int): -1 if operation was not successful</description>
+        </param>
+    </return>
+</command>
+
+
+
+            
+            
