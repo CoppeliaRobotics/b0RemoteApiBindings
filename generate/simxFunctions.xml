@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet type="text/xsl"?>
+
+<plugin name="b0RemoteApi" short-name="simx" author="marc@coppeliarobotics.com">
+    <description>API functions for the BlueZero-based remote API.</description>
+
+    <command name="simxServiceCall">
+        <description>Returns the topic for service calls</description>
+        <params>
+        </params>
+        <return>
+            <param name="topic" type="string">
+                <description>The service call topic</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxDefaultPublisher]]"/>
+            <item name="[L[#simxDefaultSubscriber]]"/>
+            <item name="[L[#simxCreatePublisher]]"/>
+            <item name="[L[#simxCreateSubscriber]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxDefaultPublisher">
+        <description>Returns the topic for the default publisher</description>
+        <params>
+        </params>
+        <return>
+            <param name="topic" type="string">
+                <description>The default publisher topic</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxServiceCall]]"/>
+            <item name="[L[#simxDefaultSubscriber]]"/>
+            <item name="[L[#simxCreatePublisher]]"/>
+            <item name="[L[#simxCreateSubscriber]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxDefaultSubscriber">
+        <description>Returns the topic for the default subscriber</description>
+        <params>
+            <param name="callBackFunc" type="callback">
+                <description>The callback function for the subscriber</description>
+            </param>
+            <param name="publishInterval" type="int" default="1">
+                <description>The rate (in terms of simulation loops) at which the server (i.e. V-REP) should publish the message</description>
+            </param>
+        </params>
+        <return>
+            <param name="topic" type="string">
+                <description>The default subscriber topic</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxServiceCall]]"/>
+            <item name="[L[#simxDefaultPublisher]]"/>
+            <item name="[L[#simxCreatePublisher]]"/>
+            <item name="[L[#simxCreateSubscriber]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCreatePublisher">
+        <description>Creates a custom publisher topic, and returns it</description>
+        <params>
+            <param name="dropMessages" type="bool" default="false">
+                <description>Whether some messages will be dropped if a queue is forming. In that case, the freshest messages will be retained</description>
+            </param>
+        </params>
+        <return>
+            <param name="topic" type="string">
+                <description>The topic of the created publisher</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxServiceCall]]"/>
+            <item name="[L[#simxDefaultPublisher]]"/>
+            <item name="[L[#simxDefaultSubscriber]]"/>
+            <item name="[L[#simxCreateSubscriber]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCreateSubscriber">
+        <description>Creates a custom subscriber topic, and returns it</description>
+        <params>
+            <param name="callBackFunc" type="callback">
+                <description>The callback function for the subscriber</description>
+            </param>
+            <param name="publishInterval" type="int" default="1">
+                <description>The rate (in terms of simulation loops) at which the server (i.e. V-REP) should publish the message</description>
+            </param>
+            <param name="dropMessages" type="bool" default="false">
+                <description>Whether some messages will be dropped if a queue is forming. In that case, the freshest message will be retained</description>
+            </param>
+        </params>
+        <return>
+            <param name="topic" type="string">
+                <description>The default subscriber topic</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxServiceCall]]"/>
+            <item name="[L[#simxDefaultPublisher]]"/>
+            <item name="[L[#simxDefaultSubscriber]]"/>
+            <item name="[L[#simxCreatePublisher]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetTimeInMs">
+        <description>Returns the system time in milliseconds</description>
+        <return>
+            <param name="time" type="long">
+                <description>The time in milliseconds</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxSleep]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSleep">
+        <description>Waits for a certain duration</description>
+        <params>
+            <param name="durationInMs" type="int">
+                <description>The sleep time in milliseconds</description>
+            </param>
+        </params>
+        <check-also>
+            <item name="[L[#simxGetTimeInMs]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSpin">
+        <description>Handles all callbacks for subscribers that have messages waiting, in a loop (i.e. does not return)</description>
+        <check-also>
+            <item name="[L[#simxSpinOnce]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxSpinOnce">
+        <description>Calls all callbacks for subscribers that have messages waiting, then returns</description>
+        <check-also>
+            <item name="[L[#simxSpin]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSynchronous">
+        <description>Enables/disables the V-REP synchronous mode during simulation. In synchonous mode, each simulation step will require an external trigger signal in order to be run</description>
+        <params>
+            <param name="enable" type="bool">
+                <description>The enable state of the synchonous mode</description>
+            </param>
+        </params>
+        <check-also>
+            <item name="[L[#simxSynchronousTrigger]]"/>
+            <item name="[L[#simxGetSimulationStepDone]]"/>
+            <item name="[L[#simxGetSimulationStepStarted]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSynchronousTrigger">
+        <description>Triggers next simulation step, if the V-REP synchronous mode was previously enabled</description>
+        <check-also>
+            <item name="[L[#simxSynchronous]]"/>
+            <item name="[L[#simxGetSimulationStepDone]]"/>
+            <item name="[L[#simxGetSimulationStepStarted]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetSimulationStepDone">
+        <description>Checks whether the current simulation step finished executing</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call. Recommended is [L[#simxDefaultSubscriber]]</description>
+            </param>
+        </params>
+        <check-also>
+            <item name="[L[#simxGetSimulationStepStarted]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetSimulationStepStarted">
+        <description>Checks whether the current simulation step finished executing</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call. Recommended is [L[#simxDefaultSubscriber]]</description>
+            </param>
+        </params>
+        <check-also>
+            <item name="[L[#simxGetSimulationStepDone]]"/>
+        </check-also>
+    </command>
+    
+    
+</plugin>

@@ -14,3 +14,9 @@ b0.dll
 libzmq.dll
 *.class
 *.pyc
+b0RemoteApi-cpp.html
+b0RemoteApi-java.html
+b0RemoteApi-lua.html
+b0RemoteApi-matlab.html
+b0RemoteApi-python.html
+b0RemoteApi-functionList.html

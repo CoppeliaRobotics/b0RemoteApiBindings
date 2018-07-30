@@ -1,3 +1,6 @@
+#py from parse import parse
+#py import model
+#py plugin = parse(pycpp.params['xml_file'])
 // -------------------------------------------------------
 // Add your custom functions at the bottom of the file
 // and the server counterpart to lua/b0RemoteApiServer.lua
@@ -541,163 +544,6 @@ void b0RemoteApi::simxGetSimulationStepStarted(const char* topic)
         std::cout << "B0 Remote API error: invalid topic" << std::endl;
 }
 
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectHandle(const char* objectName,const char* topic)
-{
-    std::tuple<std::string> args(objectName);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectHandle",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddStatusbarMessage(const char* msg,const char* topic)
-{
-    std::tuple<std::string> args(msg);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddStatusbarMessage",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectPosition(int objectHandle,int relObjHandle,const char* topic)
-{
-    std::tuple<int,int> args(objectHandle,relObjHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectPosition",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxStartSimulation(const char* topic)
-{
-    std::tuple<int> args(0);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("StartSimulation",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxStopSimulation(const char* topic)
-{
-    std::tuple<int> args(0);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("StopSimulation",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetVisionSensorImage(int objectHandle,bool greyScale,const char* topic)
-{
-    std::tuple<int,bool> args(objectHandle,greyScale);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetVisionSensorImage",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetVisionSensorImage(int objectHandle,bool greyScale,const char* img,size_t imgSize,const char* topic)
-{
-    std::tuple<int,bool,std::string> args(objectHandle,greyScale,std::string(img,img+imgSize));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetVisionSensorImage",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleClose(int consoleHandle,const char* topic)
-{
-    std::tuple<int> args(consoleHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AuxiliaryConsoleClose",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsolePrint(int consoleHandle,const char* text,const char* topic)
-{
-    std::tuple<int,std::string> args(consoleHandle,text);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AuxiliaryConsolePrint",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleOpen(const char* title,int maxLines,int mode,const int position[2],const int size[2],const float textColor[3],const float backgroundColor[3],const char* topic)
-{
-    std::tuple<std::string,int,int,std::vector<int>,std::vector<int>,std::vector<float>,std::vector<float> > args(
-                title,
-                maxLines,
-                mode,
-                std::vector<int>(position,position+2),
-                std::vector<int>(size,size+2),
-                std::vector<float>(textColor,textColor+3),
-                std::vector<float>(backgroundColor,backgroundColor+3));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AuxiliaryConsoleOpen",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAuxiliaryConsoleShow(int consoleHandle,bool showState,const char* topic)
-{
-    std::tuple<int,bool> args(consoleHandle,showState);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AuxiliaryConsoleShow",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_points(int size,const int color[3],const float coords[3],int pointCnt,const char* topic)
-{
-    std::tuple<int,std::vector<int>,std::vector<float> > args(
-                size,
-                std::vector<int>(color,color+3),
-                std::vector<float>(coords,coords+3*pointCnt));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddDrawingObject_points",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_spheres(float size,const int color[3],const float coords[3],int sphereCnt,const char* topic)
-{
-    std::tuple<float,std::vector<int>,std::vector<float> > args(
-                size,
-                std::vector<int>(color,color+3),
-                std::vector<float>(coords,coords+3*sphereCnt));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddDrawingObject_spheres",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_cubes(float size,const int color[3],const float coords[3],int cubeCnt,const char* topic)
-{
-    std::tuple<float,std::vector<int>,std::vector<float> > args(
-                size,
-                std::vector<int>(color,color+3),
-                std::vector<float>(coords,coords+3*cubeCnt));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddDrawingObject_cubes",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_segments(int lineSize,const int color[3],const float* segments,int segmentCnt,const char* topic)
-{
-    std::tuple<int,std::vector<int>,std::vector<float> > args(
-                lineSize,
-                std::vector<int>(color,color+3),
-                std::vector<float>(segments,segments+6*segmentCnt));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddDrawingObject_segments",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxAddDrawingObject_triangles(const int color[3],const float* triangles,int triangleCnt,const char* topic)
-{
-    std::tuple<std::vector<int>,std::vector<float> > args(
-                std::vector<int>(color,color+3),
-                std::vector<float>(triangles,triangles+9*triangleCnt));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("AddDrawingObject_triangles",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxRemoveDrawingObject(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("RemoveDrawingObject",packedArgs.str(),topic));
-}
-
 std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,const char* topic)
 {
     std::tuple<std::string,int,std::string> args(funcAtObjName,scriptType,std::string(packedData,packedData+packedDataSize));
@@ -714,277 +560,136 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
     return(_handleFunction("CallScriptFunction",packedArgs.str(),topic));
 }
 
-std::vector<msgpack::object>* b0RemoteApi::simxCheckCollision(int entity1,int entity2,const char* topic)
-{
-    std::tuple<int,int> args(entity1,entity2);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckCollision",packedArgs.str(),topic));
-}
 
-std::vector<msgpack::object>* b0RemoteApi::simxCheckCollision(int entity1,const char* entity2,const char* topic)
-{
-    std::tuple<int,std::string> args(entity1,entity2);
+#py for cmd in plugin.commands:
+#py if cmd.generic and cmd.generateCode:
+#py for p in cmd.params:
+#py if p.ctype()=='int_eval':
+#py loopCnt=2
+#py endif
+#py endfor
+#py for k in range(loopCnt):
+std::vector<msgpack::object>* `cmd.name`(
+#py theStringToWrite=''
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py if p.ctype()=='int_eval':
+#py if k==0:
+#py theStringToWrite+='    int '+p.name
+#py else:
+#py theStringToWrite+='    const char* '+p.name
+#py endif
+#py elif p.htype()=='byte[]':
+#py theStringToWrite+='    const char* '+p.name+'_data,size_t '+p.name+'_size'
+#py elif p.htype()=='int[]':
+#py theStringToWrite+='    const int* '+p.name+'_data,size_t '+p.name+'_size'
+#py elif 'int[' in p.htype():
+#py theStringToWrite+='    const int* '+p.name
+#py elif p.htype()=='float[]':
+#py theStringToWrite+='    const float* '+p.name+'_data,size_t '+p.name+'_size'
+#py elif 'float[' in p.htype():
+#py theStringToWrite+='    const float* '+p.name
+#py elif p.htype()=='double[]':
+#py theStringToWrite+='    const double* '+p.name+'_data,size_t '+p.name+'_size'
+#py elif 'double[' in p.htype():
+#py theStringToWrite+='    const double* '+p.name
+#py else:
+#py theStringToWrite+='    '+p.htype()+' '+p.name
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py theStringToWrite+=',\n'
+#py endif
+#py endfor
+#py theStringToWrite+=')\n{\n    std::tuple<'
+`theStringToWrite`
+#py theStringToWrite=''
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py if p.ctype()=='string':
+#py theStringToWrite+='        std::string'
+#py elif p.ctype()=='int_eval':
+#py if k==0:
+#py theStringToWrite+='        int'
+#py else:
+#py theStringToWrite+='        std::string'
+#py endif
+#py elif p.htype()=='byte[]':
+#py theStringToWrite+='        std::string'
+#py elif 'int[' in p.htype():
+#py theStringToWrite+='        std::vector<int>'
+#py elif 'float[' in p.htype():
+#py theStringToWrite+='        std::vector<float>'
+#py elif 'double[' in p.htype():
+#py theStringToWrite+='        std::vector<double>'
+#py else:
+#py theStringToWrite+='        '+p.htype()
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py theStringToWrite+=','
+#py theStringToWrite+='\n'
+#py endif
+#py endfor
+`theStringToWrite`
+    > args(
+#py theStringToWrite=''
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py if p.ctype()=='string':
+#py theStringToWrite+='        std::string('+p.name+')'
+#py elif p.ctype()=='int_eval':
+#py if k==0:
+#py theStringToWrite+='        '+p.name
+#py else:
+#py theStringToWrite+='        std::string('+p.name+')'
+#py endif
+#py elif p.htype()=='byte[]':
+#py theStringToWrite+='        std::string('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py elif p.htype()=='int[]':
+#py theStringToWrite+='        std::vector<int>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py elif p.htype()=='int[2]':
+#py theStringToWrite+='        std::vector<int>('+p.name+','+p.name+'+2)'
+#py elif p.htype()=='float[]':
+#py theStringToWrite+='        std::vector<float>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py elif p.htype()=='float[2]':
+#py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+2)'
+#py elif p.htype()=='float[3]':
+#py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+3)'
+#py elif p.htype()=='float[7]':
+#py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+7)'
+#py elif p.htype()=='float[12]':
+#py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+12)'
+#py elif p.htype()=='double[]':
+#py theStringToWrite+='        std::vector<double>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py elif p.htype()=='double[2]':
+#py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+2)'
+#py elif p.htype()=='double[3]':
+#py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+3)'
+#py elif p.htype()=='double[7]':
+#py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+7)'
+#py elif p.htype()=='double[12]':
+#py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+12)'
+#py else:
+#py theStringToWrite+='        '+p.name
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py theStringToWrite+=',\n'
+#py endif
+#py endfor
+`theStringToWrite`
+    );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckCollision",packedArgs.str(),topic));
+    return(_handleFunction("`cmd.name[4:]`",packedArgs.str(),topic));
 }
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetCollisionHandle(const char* name,const char* topic)
-{
-    std::tuple<std::string> args(name);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetCollisionHandle",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxReadCollision(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ReadCollision",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckDistance(int entity1,int entity2,float threshold,const char* topic)
-{
-    std::tuple<int,int,float> args(entity1,entity2,threshold);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckDistance",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckDistance(int entity1,const char* entity2,float threshold,const char* topic)
-{
-    std::tuple<int,std::string,float> args(entity1,entity2,threshold);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckDistance",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetDistanceHandle(const char* name,const char* topic)
-{
-    std::tuple<std::string> args(name);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetDistanceHandle",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxReadDistance(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ReadDistance",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckProximitySensor(int sensor,int entity,const char* topic)
-{
-    std::tuple<int,int> args(sensor,entity);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckProximitySensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckProximitySensor(int sensor,const char* entity,const char* topic)
-{
-    std::tuple<int,std::string> args(sensor,entity);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckProximitySensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxReadProximitySensor(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ReadProximitySensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckVisionSensor(int sensor,int entity,const char* topic)
-{
-    std::tuple<int,int> args(sensor,entity);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckVisionSensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxCheckVisionSensor(int sensor,const char* entity,const char* topic)
-{
-    std::tuple<int,std::string> args(sensor,entity);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("CheckVisionSensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxReadVisionSensor(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ReadVisionSensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxReadForceSensor(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ReadForceSensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxBreakForceSensor(int handle,const char* topic)
-{
-    std::tuple<int> args(handle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("BreakForceSensor",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxClearFloatSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ClearFloatSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ClearIntegerSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxClearStringSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("ClearStringSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetFloatSignal(const char* sig,float val,const char* topic)
-{
-    std::tuple<std::string,float> args(sig,val);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetFloatSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetIntegerSignal(const char* sig,int val,const char* topic)
-{
-    std::tuple<std::string,int> args(sig,val);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetIntegerSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetStringSignal(const char* sig,const char* val,size_t valSize,const char* topic)
-{
-    std::tuple<std::string,std::string> args(sig,std::string(val,val+valSize));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetStringSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetFloatSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetFloatSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetIntegerSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetIntegerSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetStringSignal(const char* sig,const char* topic)
-{
-    std::tuple<std::string> args(sig);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetStringSignal",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetObjectPosition(int objectHandle,int refObjectHandle,const float pos[3],const char* topic)
-{
-    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(pos,pos+3));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetObjectPosition",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectOrientation(int objectHandle,int refObjectHandle,const char* topic)
-{
-    std::tuple<int,int> args(objectHandle,refObjectHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectOrientation",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetObjectOrientation(int objectHandle,int refObjectHandle,const float euler[3],const char* topic)
-{
-    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(euler,euler+3));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetObjectOrientation",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectQuaternion(int objectHandle,int refObjectHandle,const char* topic)
-{
-    std::tuple<int,int> args(objectHandle,refObjectHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectQuaternion",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetObjectQuaternion(int objectHandle,int refObjectHandle,const float quat[4],const char* topic)
-{
-    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(quat,quat+4));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetObjectQuaternion",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectPose(int objectHandle,int refObjectHandle,const char* topic)
-{
-    std::tuple<int,int> args(objectHandle,refObjectHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectPose",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetObjectPose(int objectHandle,int refObjectHandle,const float pose[7],const char* topic)
-{
-    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(pose,pose+7));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetObjectPose",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectMatrix(int objectHandle,int refObjectHandle,const char* topic)
-{
-    std::tuple<int,int> args(objectHandle,refObjectHandle);
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectMatrix",packedArgs.str(),topic));
-}
-
-std::vector<msgpack::object>* b0RemoteApi::simxSetObjectMatrix(int objectHandle,int refObjectHandle,const float matr[12],const char* topic)
-{
-    std::tuple<int,int,std::vector<float> > args(objectHandle,refObjectHandle,std::vector<float>(matr,matr+12));
-    std::stringstream packedArgs;
-    msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetObjectMatrix",packedArgs.str(),topic));
-}
+#py endfor
+#py endif
+#py endfor
 
 // -------------------------------
 // Add your custom functions here:

@@ -40,7 +40,7 @@ public:
     const char* simxCreatePublisher(bool dropMessages=false);
     const char* simxCreateSubscriber(CB_FUNC cb,int publishInterval=1,bool dropMessages=false);
 
-    unsigned int simxGetTimeInMs();
+    long simxGetTimeInMs();
     void simxSleep(int durationInMs);
     void simxSpin();
     void simxSpinOnce();
