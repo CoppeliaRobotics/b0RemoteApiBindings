@@ -476,7 +476,29 @@ class Pcallback(Param):
         if os.getenv('remoteApiDocLang')=='python':
             return 'callback'
         return 'callback'
+        
+class Ppacked_unpacked(Param):
+    def __init__(self, node):
+        super(Ppacked_unpacked, self).__init__(node)
 
+    def htype(self):
+        if os.getenv('remoteApiDocLang')=='java':
+            return 'final byte[]'
+        if os.getenv('remoteApiDocLang')=='lua':
+            return 'anyType'
+        if os.getenv('remoteApiDocLang')=='matlab':
+            return 'anyType'
+        if os.getenv('remoteApiDocLang')=='python':
+            return 'anyType'
+        return 'packed_unpacked'
+        
+        
+class Pany(Param):
+    def __init__(self, node):
+        super(Pany, self).__init__(node)
+
+    def htype(self):
+        return '?'
 
 
 
@@ -519,5 +541,7 @@ Param.register_type('float[12]', Pfloata12)
 Param.register_type('double[12]', Pdoublea12)
 Param.register_type('map', ParamAny)
 Param.register_type('callback', Pcallback)
+Param.register_type('?', Pany)
+Param.register_type('packed_unpacked', Ppacked_unpacked)
 
 

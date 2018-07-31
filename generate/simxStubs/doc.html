@@ -5,9 +5,16 @@
 #py import re
 #py plugin = parse(pycpp.params['xml_file'])
 #py def generateLinks(arg):
-#py     arg=re.sub('\[L\[#([^,]+)\]\]',r'<a href="#\1">\1</a>',arg)
-#py     arg=re.sub('\[L\[([^,]+)\]\]',r'<a href="\1">\1</a>',arg)
-#py     arg=re.sub('\[L\[([^,]+),([^,]+)\]\]',r'<a href="\1">\2</a>',arg)
+#py     arg=re.sub('\[L\[#([^,\[\]]+)\]\]',r'<a href="#\1">\1</a>',arg)
+#py     arg=re.sub('\[L\[([^,\[\]]+)\]\]',r'<a href="\1">\1</a>',arg)
+#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg)
+#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg)
+#py     arg=re.sub('\['+lang+'\[([^\[\]]+)\]\]',r'\1',arg)
+#py     arg=re.sub('\[cpp\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[java\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[lua\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[matlab\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[python\[([^\[\]]+)\]\]',r'',arg)
 #py     return arg
 #py #-----------------------------------------------------------------------------------------------
 #py #-----------------------------------------------------------------------------------------------
@@ -74,6 +81,8 @@
 #py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_size'
 #py elif p.ctype()=='int[]':
 #py cmdHtmlStr+='const int* '+p.name+'_data,size_t '+p.name+'_size'
+#py elif p.ctype()=='packed_unpacked':
+#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_size'
 #py elif p.ctype()=='int[2]':
 #py cmdHtmlStr+='const int '+p.name+'[2]'
 #py elif p.ctype()=='float[]':
@@ -263,7 +272,7 @@
 #py if cmd.generic:
 #py cmdHtmlStr+='A MessageUnpacker. For convenience, you can use the <a href="#helperFunctions">helper functions</a> to read its values. The MessageUnpacker contains:</div>'
 #py for p in cmd.returns:
-#py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.htype()+'): '+generateLinks(p.description)+'</div>\n'
+#py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.ctype()+'): '+generateLinks(p.description)+'</div>\n'
 #py endfor
 #py else:
 #py if len(cmd.returns)>0:

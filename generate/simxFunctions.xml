@@ -192,5 +192,35 @@
         </check-also>
     </command>
     
-    
+    <command name="simxCallScriptFunction" type="generic">
+        <description>Calls a script function inside of V-REP (i.e. server side)</description>
+        <params>
+            <param name="funcAtObjName" type="string">
+                <description>a string representing the function name and script name, e.g. myFunctionName@theScriptName. When the script is not associated with an object, then just specify the function name</description>
+            </param>
+            <param name="scriptType" type="int_eval">
+                <description>The [L[apiConstants.htm#scriptTypes,type of the script]] (specified as number or string). E.g. 'sim.scripttype_mainscript' is a valid string argument that will be evaluated on the server side</description>
+            </param>
+            <param name="funcArgs" type="packed_unpacked">
+                <description>[cpp[The function arguments, packed in a messagePack message]][java[The function arguments, packed in a messagePack message]][lua[The function argument(s). Group several arguments inside of a table]][matlab[The function argument(s). Group several arguments inside of an array]][python[The function argument(s). Group several arguments inside of a list]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="?">
+                <description>The first return value of the called function</description>
+            </param>
+            <param name="item3" type="?">
+                <description>The second return value of the called function</description>
+            </param>
+            <param name="item4" type="?">
+                <description>etc.</description>
+            </param>
+        </return>
+    </command>
 </plugin>

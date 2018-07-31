@@ -7,6 +7,7 @@ class Command(object):
         self.plugin = plugin
         self.name = node.attrib['name']
         self.generic = ('type' in node.attrib.keys()) and (node.attrib['type']=='generic')
+        self.generateCode = ('generateCode' in node.attrib.keys()) and (node.attrib['generateCode']=='true')
 
         descnode = node.find('description')
         self.description = '' if descnode is None else '' if descnode.text is None else descnode.text
