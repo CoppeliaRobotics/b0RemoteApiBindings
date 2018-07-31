@@ -5,10 +5,9 @@
 #py import re
 #py plugin = parse(pycpp.params['xml_file'])
 #py def generateLinks(arg):
-#py     arg=re.sub('\[L\[#([^,\[\]]+)\]\]',r'<a href="#\1">\1</a>',arg)
-#py     arg=re.sub('\[L\[([^,\[\]]+)\]\]',r'<a href="\1">\1</a>',arg)
-#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg)
-#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg)
+#py     arg=re.sub('\[L\[#([^,\[\]]+)\]\]',r'<a href="#\1">\1</a>',arg) #e.g. [L[#simxGetObjectPosition]] --> <a href="#simxSetObjectPosition">simxSetObjectPosition</a>
+#py     arg=re.sub('\[L\[([^,\[\]]+)\]\]',r'<a href="\1">\1</a>',arg) #e.g. [L[simxGetObjectPosition.html]] --> <a href="simxSetObjectPosition.html">simxSetObjectPosition.html</a>
+#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg) #e.g. [L[#simxGetObjectPosition,Click me]] --> <a href="#simxSetObjectPosition">Click me</a>
 #py     arg=re.sub('\['+lang+'\[([^\[\]]+)\]\]',r'\1',arg)
 #py     arg=re.sub('\[cpp\[([^\[\]]+)\]\]',r'',arg)
 #py     arg=re.sub('\[java\[([^\[\]]+)\]\]',r'',arg)
@@ -304,8 +303,6 @@
 #py #-----------------------------------------------------------------------------------------------
 #py cmdHtmlStr+='</td>\n'
 #py cmdHtmlStr+='</tr>\n'
-
-
 #py #-----------------------------------------------------------------------------------------------
 #py if len(cmd.checkAlso)>0:
 #py cmdHtmlStr+='<tr class="apiTableTr">\n'
@@ -448,6 +445,8 @@ static String[] <strong>b0RemoteApi::readStringArray</strong>(final MessageUnpac
 #py endif
 #py #-----------------------------------------------------------------------------------------------
 #py #-----------------------------------------------------------------------------------------------
-
+#py # following 2 lines so that jumping to the helper functions brings them to the top, otherwise confusing:
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </td></tr></table></div></body>
 </html>

@@ -196,7 +196,7 @@
         <description>Calls a script function inside of V-REP (i.e. server side)</description>
         <params>
             <param name="funcAtObjName" type="string">
-                <description>a string representing the function name and script name, e.g. myFunctionName@theScriptName. When the script is not associated with an object, then just specify the function name</description>
+                <description>A string representing the function name and script name, e.g. myFunctionName@theScriptName. When the script is not associated with an object, then just specify the function name</description>
             </param>
             <param name="scriptType" type="int_eval">
                 <description>The [L[apiConstants.htm#scriptTypes,type of the script]] (specified as number or string). E.g. 'sim.scripttype_mainscript' is a valid string argument that will be evaluated on the server side</description>
@@ -222,5 +222,756 @@
                 <description>etc.</description>
             </param>
         </return>
+        <check-also>
+            <item name="[L[regularApi/simCallScriptFunction,sim.callScriptFunction]] (regular API)"/>
+        </check-also>
     </command>
+    
+    <command name="simxGetObjectHandle" type="generic" generateCode="true">
+        <description>Retrieves the handle of an object</description>
+        <params>
+            <param name="objectName" type="string">
+                <description>Name of object. If the name is appended by a "@alt" suffix, then the object handle based on the object's alternative name will be retrieved. If the name is appended by a "@silentError" suffix, then no error will be output if the object does not exist</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the object or -1 if object does not exist</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectHandle,sim.getObjectHandle]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    <command name="simxAddStatusbarMessage" type="generic" generateCode="true">
+        <description>Adds a message to the status bar</description>
+        <params>
+            <param name="msg" type="string">
+                <description>The message to display</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simAddStatusbarMessage,sim.addStatusbarMessage]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectPosition" type="generic" generateCode="true">
+        <description>Retrieves the position of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame we want the position. Specify -1 to retrieve the absolute position, 'sim.handle_parent' to retrieve the position relative to the object's parent, or an object handle relative to whose reference frame you want the position</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[3]">
+                <description>The (X,Y,Z) position of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectPosition,sim.getObjectPosition]] (regular API)"/>
+            <item name="[L[#simxSetObjectPosition]]"/>
+            <item name="[L[#simxGetObjectOrientation]]"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxGetObjectPose]]"/>
+            <item name="[L[#simxGetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectOrientation" type="generic" generateCode="true">
+        <description>Retrieves the Euler angles orientation of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, 'sim.handle_parent' to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[3]">
+                <description>The (alpha,beta,gamma) Euler angles of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectOrientation,sim.getObjectOrientation]] (regular API)"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxGetObjectPosition]]"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxGetObjectPose]]"/>
+            <item name="[L[#simxGetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectQuaternion" type="generic" generateCode="true">
+        <description>Retrieves the quaternion orientation of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, 'sim.handle_parent' to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[4]">
+                <description>The (Qx,Qy,Qz,Qw) quaternion of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectQuaternion,sim.getObjectQuaternion]] (regular API)"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxGetObjectPosition]]"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxGetObjectPose]]"/>
+            <item name="[L[#simxGetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectPose" type="generic" generateCode="true">
+        <description>Retrieves the position and quaternion of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame we want the pose. Specify -1 to retrieve the absolute pose, 'sim.handle_parent' to retrieve the pose relative to the object's parent, or an object handle relative to whose reference frame you want the pose</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[7]">
+                <description>The (X,Y,Z,Qx,Qy,Qz,Qw) pose of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxSetObjectPose]]"/>
+            <item name="[L[#simxGetObjectPosition]]"/>
+            <item name="[L[#simxGetObjectOrientation]]"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxGetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectMatrix" type="generic" generateCode="true">
+        <description>Retrieves the transformation matrix of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame we want the matrix. Specify -1 to retrieve the absolute matrix, 'sim.handle_parent' to retrieve the matrix relative to the object's parent, or an object handle relative to whose reference frame you want the matrix</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[12]">
+                <description>The (Xx,Yx,Zx,Px,Xy,Yy,Zy,Py,Xz,Yz,Zz,Pz) transformation matrix of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectMatrix,sim.getObjectMatrix]] (regular API)"/>
+            <item name="[L[#simxSetObjectMatrix]]"/>
+            <item name="[L[#simxGetObjectPosition]]"/>
+            <item name="[L[#simxGetObjectOrientation]]"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxGetObjectPose]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectPosition" type="generic" generateCode="true">
+        <description>Sets the position of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame the position is specified. Specify -1 to set the absolute position, 'sim.handle_parent' to set the position relative to the object's parent, or an object handle relative to whose reference frame the position is specified</description>
+            </param>
+            <param name="position" type="float[3]">
+                <description>The desired (X,Y,Z) position</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectPosition,sim.setObjectPosition]] (regular API)"/>
+            <item name="[L[#simxGetObjectPosition]]"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxSetObjectQuaternion]]"/>
+            <item name="[L[#simxSetObjectPose]]"/>
+            <item name="[L[#simxSetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectOrientation" type="generic" generateCode="true">
+        <description>Sets the orientation (in Euler angles) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, 'sim.handle_parent' to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified</description>
+            </param>
+            <param name="euler" type="float[3]">
+                <description>The desired (alpha,beta,gamma) Euler-angle orientation</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectOrientation,sim.setObjectOrientation]] (regular API)"/>
+            <item name="[L[#simxGetObjectOrientation]]"/>
+            <item name="[L[#simxSetObjectPosition]]"/>
+            <item name="[L[#simxSetObjectQuaternion]]"/>
+            <item name="[L[#simxSetObjectPose]]"/>
+            <item name="[L[#simxSetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectQuaternion" type="generic" generateCode="true">
+        <description>Sets the quaternion orientation of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, 'sim.handle_parent' to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified</description>
+            </param>
+            <param name="quat" type="float[4]">
+                <description>The desired (Qx,Qy,Qz,Qw) quaternion orientation</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectQuaternion,sim.setObjectQuaternion]] (regular API)"/>
+            <item name="[L[#simxGetObjectQuaternion]]"/>
+            <item name="[L[#simxSetObjectPosition]]"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxSetObjectPose]]"/>
+            <item name="[L[#simxSetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectPose" type="generic" generateCode="true">
+        <description>Sets the pose (position + quaternion) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame the pose is specified. Specify -1 to set the absolute pose, 'sim.handle_parent' to set the pose relative to the object's parent, or an object handle relative to whose reference frame the pose is specified</description>
+            </param>
+            <param name="pose" type="float[7]">
+                <description>The desired (X,Y,Z,Qx,Qy,Qz,Qw) pose</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxGetObjectPose]]"/>
+            <item name="[L[#simxSetObjectPosition]]"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxSetObjectQuaternion]]"/>
+            <item name="[L[#simxSetObjectMatrix]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectMatrix" type="generic" generateCode="true">
+        <description>Sets the transformation matrix of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="relObjHandle" type="int_eval">
+                <description>Indicates relative to which reference frame the matrix is specified. Specify -1 to set the absolute matrix, 'sim.handle_parent' to set the matrix relative to the object's parent, or an object handle relative to whose reference frame the matrix is specified</description>
+            </param>
+            <param name="matr" type="float[12]">
+                <description>The desired (Xx,Yx,Zx,Px,Xy,Yy,Zy,Py,Xz,Yz,Zz,Pz) transformation matrix</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectMatrix,sim.setObjectMatrix]] (regular API)"/>
+            <item name="[L[#simxGetObjectMatrix]]"/>
+            <item name="[L[#simxSetObjectPosition]]"/>
+            <item name="[L[#simxSetObjectOrientation]]"/>
+            <item name="[L[#simxSetObjectQuaternion]]"/>
+            <item name="[L[#simxSetObjectPose]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxClearFloatSignal" type="generic" generateCode="true">
+        <description>Clears a float [L[meansOfCommunication.htm#signals,signal]] (removes it)</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simClearFloatSignal,sim.clearFloatSignal]] (regular API)"/>
+            <item name="[L[#simxSetFloatSignal]]"/>
+            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxClearStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxClearIntegerSignal" type="generic" generateCode="true">
+        <description>Clears an int [L[meansOfCommunication.htm#signals,signal]] (removes it)</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simClearIntegerSignal,sim.clearIntegerSignal]] (regular API)"/>
+            <item name="[L[#simxSetIntegerSignal]]"/>
+            <item name="[L[#simxClearFloatSignal]]"/>
+            <item name="[L[#simxClearStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxClearStringSignal" type="generic" generateCode="true">
+        <description>Clears a string [L[meansOfCommunication.htm#signals,signal]] (removes it)</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simClearStringSignal,sim.clearStringSignal]] (regular API)"/>
+            <item name="[L[#simxSetStringSignal]]"/>
+            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxClearFloatSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetFloatSignal" type="generic" generateCode="true">
+        <description>Sets a float [L[meansOfCommunication.htm#signals,signal]]</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="sigValue" type="float">
+                <description>The value of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetFloatSignal,sim.setFloatSignal]] (regular API)"/>
+            <item name="[L[#simxGetFloatSignal]]"/>
+            <item name="[L[#simxClearFloatSignal]]"/>
+            <item name="[L[#simxSetIntegerSignal]]"/>
+            <item name="[L[#simxSetStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetIntegerSignal" type="generic" generateCode="true">
+        <description>Sets an int [L[meansOfCommunication.htm#signals,signal]]</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="sigValue" type="int">
+                <description>The value of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetIntegerSignal,sim.setIntegerSignal]] (regular API)"/>
+            <item name="[L[#simxGetIntegerSignal]]"/>
+            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxSetFloatSignal]]"/>
+            <item name="[L[#simxSetStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetStringSignal" type="generic" generateCode="true">
+        <description>Sets a string [L[meansOfCommunication.htm#signals,signal]]. Such a signal represents a byte buffer</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="sigValue" type="byte[]">
+                <description>The value of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetStringSignal,sim.setStringSignal]] (regular API)"/>
+            <item name="[L[#simxGetStringSignal]]"/>
+            <item name="[L[#simxClearStringSignal]]"/>
+            <item name="[L[#simxSetIntegerSignal]]"/>
+            <item name="[L[#simxSetFloatSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetFloatSignal" type="generic" generateCode="true">
+        <description>Retrieves a float [L[meansOfCommunication.htm#signals,signal]]</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float">
+                <description>The value of the signal, or nil if the signal does not exist</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetFloatSignal,sim.getFloatSignal]] (regular API)"/>
+            <item name="[L[#simxSetFloatSignal]]"/>
+            <item name="[L[#simxClearFloatSignal]]"/>
+            <item name="[L[#simxGetIntegerSignal]]"/>
+            <item name="[L[#simxGetStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetIntegerSignal" type="generic" generateCode="true">
+        <description>Retrieves an int [L[meansOfCommunication.htm#signals,signal]]</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The value of the signal, or nil if the signal does not exist</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetIntegerSignal,sim.getIntegerSignal]] (regular API)"/>
+            <item name="[L[#simxSetIntegerSignal]]"/>
+            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxGetFloatSignal]]"/>
+            <item name="[L[#simxGetStringSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetStringSignal" type="generic" generateCode="true">
+        <description>Retrieves a string [L[meansOfCommunication.htm#signals,signal]]. Such a signal represents a byte buffer</description>
+        <params>
+            <param name="sigName" type="string">
+                <description>The name of the signal</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="byte[]">
+                <description>The value of the signal, or nil if the signal does not exist</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetStringSignal,sim.getStringSignal]] (regular API)"/>
+            <item name="[L[#simxSetStringSignal]]"/>
+            <item name="[L[#simxClearStringSignal]]"/>
+            <item name="[L[#simxGetIntegerSignal]]"/>
+            <item name="[L[#simxGetFloatSignal]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxAuxiliaryConsoleClose" type="generic" generateCode="true">
+        <description>Closes an auxiliary console window</description>
+        <params>
+            <param name="consoleHandle" type="int">
+                <description>The handle of the console window</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the console doesn't exist (anymore), 1 if the console window was closed</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simAuxiliaryConsoleClose,sim.auxiliaryConsoleClose]] (regular API)"/>
+            <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxAuxiliaryConsolePrint" type="generic" generateCode="true">
+        <description>Prints to an auxiliary console window</description>
+        <params>
+            <param name="consoleHandle" type="int">
+                <description>The handle of the console window</description>
+            </param>
+            <param name="text" type="string">
+                <description>The text to append, or the empty string to clear the console window</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the console doesn't exist (anymore), 1 if the operation was successful</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simAuxiliaryConsolePrint,sim.auxiliaryConsolePrint]] (regular API)"/>
+            <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxAuxiliaryConsoleShow" type="generic" generateCode="true">
+        <description>Shows or hides an auxiliary console window</description>
+        <params>
+            <param name="consoleHandle" type="int">
+                <description>The handle of the console window</description>
+            </param>
+            <param name="showState" type="bool">
+                <description>The show state of the console window</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the console doesn't exist (anymore), 1 if the console window's show state was changed</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simAuxiliaryConsoleShow,sim.auxiliaryConsoleShow]] (regular API)"/>
+            <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxAuxiliaryConsoleOpen" type="generic" generateCode="true">
+        <description>Opens an auxiliary console window for text display</description>
+        <params>
+            <param name="title" type="string">
+                <description>The title of the console window</description>
+            </param>
+            <param name="maxLines" type="int">
+                <description>The number of text lines that can be displayed and buffered</description>
+            </param>
+            <param name="mode" type="int">
+                <description>bit-coded value. Bit0 set indicates that the console window will automatically close at simulation end, bit1 set indicates that lines will be wrapped, bit2 set indicates that the user can close the console window, bit3 set indicates that the console will automatically be hidden during simulation pause, bit4 set indicates that the console will not automatically hide when the user switches to another scene</description>
+            </param>
+            <param name="position" type="int[2]">
+                <description>The initial position of the console window (x and y value)</description>
+            </param>
+            <param name="size" type="int[2]">
+                <description>The initial size of the console window (x and y value)</description>
+            </param>
+            <param name="textColor" type="int[3]">
+                <description>The color of the text (rgb values, 0-255)</description>
+            </param>
+            <param name="backgroundColor" type="int[3]">
+                <description>The background color of the window (rgb values, 0-255)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created console window</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simAuxiliaryConsoleOpen,sim.auxiliaryConsoleOpen]] (regular API)"/>
+            <item name="[L[#simxAuxiliaryConsolePrint]]"/>
+            <item name="[L[#simxAuxiliaryConsoleShow]]"/>
+            <item name="[L[#simxAuxiliaryConsoleClose]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxStartSimulation" type="generic" generateCode="true">
+        <description>Requests a start of a simulation (or a resume of a paused simulation)</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the operation could not be performed. >0 in case of success</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simStartSimulation,sim.startSimulation]] (regular API)"/>
+            <item name="[L[#simxStopSimulation]]"/>
+            <item name="[L[#simxSynchronousTrigger]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxStopSimulation" type="generic" generateCode="true">
+        <description>Requests a stop of the running simulation</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the operation could not be performed. >0 in case of success</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simStopSimulation,sim.stopSimulation]] (regular API)"/>
+            <item name="[L[#simxStartSimulation]]"/>
+        </check-also>
+    </command>
+
 </plugin>

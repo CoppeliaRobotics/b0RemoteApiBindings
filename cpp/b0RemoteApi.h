@@ -93,6 +93,7 @@ public:
     std::vector<msgpack::object>* simxGetObjectHandle(const char* objectName,const char* topic);
     std::vector<msgpack::object>* simxAddStatusbarMessage(const char* msg,const char* topic);
     std::vector<msgpack::object>* simxGetObjectPosition(int objectHandle,int relObjHandle,const char* topic);
+
     std::vector<msgpack::object>* simxStartSimulation(const char* topic);
     std::vector<msgpack::object>* simxStopSimulation(const char* topic);
     std::vector<msgpack::object>* simxGetVisionSensorImage(int objectHandle,bool greyScale,const char* topic);
@@ -109,6 +110,7 @@ public:
     std::vector<msgpack::object>* simxAddDrawingObject_segments(int lineSize,const int color[3],const float* segments,int segmentCnt,const char* topic);
     std::vector<msgpack::object>* simxAddDrawingObject_triangles(const int color[3],const float* triangles,int triangleCnt,const char* topic);
     std::vector<msgpack::object>* simxRemoveDrawingObject(int handle,const char* topic);
+
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,const char* topic);
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,const char* topic);
     std::vector<msgpack::object>* simxCheckCollision(int entity1,int entity2,const char* topic);
@@ -127,6 +129,7 @@ public:
     std::vector<msgpack::object>* simxReadVisionSensor(int handle,const char* topic);
     std::vector<msgpack::object>* simxReadForceSensor(int handle,const char* topic);
     std::vector<msgpack::object>* simxBreakForceSensor(int handle,const char* topic);
+
     std::vector<msgpack::object>* simxClearFloatSignal(const char* sig,const char* topic);
     std::vector<msgpack::object>* simxClearIntegerSignal(const char* sig,const char* topic);
     std::vector<msgpack::object>* simxClearStringSignal(const char* sig,const char* topic);

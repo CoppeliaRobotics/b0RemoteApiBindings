@@ -564,6 +564,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
 #py for p in cmd.params:
+#py loopCnt=1
 #py if p.ctype()=='int_eval':
 #py loopCnt=2
 #py endif
@@ -605,7 +606,10 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+=')\n{\n    std::tuple<'
 `theStringToWrite`
 #py theStringToWrite=''
-#py itemCnt=len(cmd.params)
+#py if len(cmd.params)==1:
+#py theStringToWrite+='        int'
+#py else:
+#py itemCnt=len(cmd.params)-1
 #py itemIndex=-1
 #py for p in cmd.params:
 #py itemIndex=itemIndex+1
@@ -631,12 +635,18 @@ std::vector<msgpack::object>* `cmd.name`(
 #py if (itemCnt>1) and itemIndex<itemCnt-1:
 #py theStringToWrite+=','
 #py theStringToWrite+='\n'
+#py else:
+#py break
 #py endif
 #py endfor
+#py endif
 `theStringToWrite`
     > args(
 #py theStringToWrite=''
-#py itemCnt=len(cmd.params)
+#py if len(cmd.params)==1:
+#py theStringToWrite+='        0'
+#py else:
+#py itemCnt=len(cmd.params)-1
 #py itemIndex=-1
 #py for p in cmd.params:
 #py itemIndex=itemIndex+1
@@ -654,6 +664,8 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+='        std::vector<int>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
 #py elif p.htype()=='int[2]':
 #py theStringToWrite+='        std::vector<int>('+p.name+','+p.name+'+2)'
+#py elif p.htype()=='int[3]':
+#py theStringToWrite+='        std::vector<int>('+p.name+','+p.name+'+3)'
 #py elif p.htype()=='float[]':
 #py theStringToWrite+='        std::vector<float>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
 #py elif p.htype()=='float[2]':
@@ -679,8 +691,11 @@ std::vector<msgpack::object>* `cmd.name`(
 #py endif
 #py if (itemCnt>1) and itemIndex<itemCnt-1:
 #py theStringToWrite+=',\n'
+#py else:
+#py break
 #py endif
 #py endfor
+#py endif
 `theStringToWrite`
     );
     std::stringstream packedArgs;

@@ -310,6 +310,21 @@ class Pinta2(Param):
             return 'list'
         return 'int[2]'
 
+class Pinta3(Param):
+    def __init__(self, node):
+        super(Pinta3, self).__init__(node)
+
+    def htype(self):
+        if os.getenv('remoteApiDocLang')=='java':
+            return 'final int[]'
+        if os.getenv('remoteApiDocLang')=='lua':
+            return 'table'
+        if os.getenv('remoteApiDocLang')=='matlab':
+            return 'array'
+        if os.getenv('remoteApiDocLang')=='python':
+            return 'list'
+        return 'int[3]'
+
 class Pfloata(Param):
     def __init__(self, node):
         super(Pfloata, self).__init__(node)
@@ -354,6 +369,21 @@ class Pfloata3(Param):
         if os.getenv('remoteApiDocLang')=='python':
             return 'list'
         return 'float[3]'
+        
+class Pfloata4(Param):
+    def __init__(self, node):
+        super(Pfloata4, self).__init__(node)
+
+    def htype(self):
+        if os.getenv('remoteApiDocLang')=='java':
+            return 'final float[]'
+        if os.getenv('remoteApiDocLang')=='lua':
+            return 'table'
+        if os.getenv('remoteApiDocLang')=='matlab':
+            return 'array'
+        if os.getenv('remoteApiDocLang')=='python':
+            return 'list'
+        return 'float[4]'
         
 class Pfloata7(Param):
     def __init__(self, node):
@@ -429,6 +459,21 @@ class Pdoublea3(Param):
         if os.getenv('remoteApiDocLang')=='python':
             return 'list'
         return 'double[3]'
+        
+class Pdoublea4(Param):
+    def __init__(self, node):
+        super(Pdoublea4, self).__init__(node)
+
+    def htype(self):
+        if os.getenv('remoteApiDocLang')=='java':
+            return 'final double[]'
+        if os.getenv('remoteApiDocLang')=='lua':
+            return 'table'
+        if os.getenv('remoteApiDocLang')=='matlab':
+            return 'array'
+        if os.getenv('remoteApiDocLang')=='python':
+            return 'list'
+        return 'double[4]'
         
 class Pdoublea7(Param):
     def __init__(self, node):
@@ -533,8 +578,11 @@ Param.register_type('double[]', Pdoublea)
 Param.register_type('int[2]', Pinta2)
 Param.register_type('float[2]', Pfloata2)
 Param.register_type('double[2]', Pdoublea2)
+Param.register_type('int[3]', Pinta3)
 Param.register_type('float[3]', Pfloata3)
 Param.register_type('double[3]', Pdoublea3)
+Param.register_type('float[4]', Pfloata4)
+Param.register_type('double[4]', Pdoublea4)
 Param.register_type('float[7]', Pfloata7)
 Param.register_type('double[7]', Pdoublea7)
 Param.register_type('float[12]', Pfloata12)

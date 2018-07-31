@@ -359,6 +359,10 @@ classdef b0RemoteApi < handle
 #py endif
 #py endfor
 `theStringToWrite`)
+#py if len(cmd.params)==1:
+#py theStringToWrite='            args = {0'
+#py else:
+#py itemCnt=len(cmd.params)-1
 #py itemIndex=-1
 #py theStringToWrite='            args = {'
 #py for p in cmd.params:
@@ -366,8 +370,11 @@ classdef b0RemoteApi < handle
 #py theStringToWrite+=p.name
 #py if (itemCnt>1) and itemIndex<itemCnt-1:
 #py theStringToWrite+=','
+#py else:
+#py break
 #py endif
 #py endfor
+#py endif
 #py theStringToWrite+='};'
 `theStringToWrite`
             ret = obj.handleFunction("`cmd.name[4:]`",args,topic);

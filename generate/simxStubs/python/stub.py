@@ -206,6 +206,10 @@ class RemoteApiClient:
 #py endif
 #py endfor
 `theStringToWrite`):
+#py if len(cmd.params)==1:
+#py theStringToWrite='        reqArgs = [0'
+#py else:
+#py itemCnt=len(cmd.params)-1
 #py itemIndex=-1
 #py theStringToWrite='        reqArgs = ['
 #py for p in cmd.params:
@@ -213,8 +217,11 @@ class RemoteApiClient:
 #py theStringToWrite+=p.name
 #py if (itemCnt>1) and itemIndex<itemCnt-1:
 #py theStringToWrite+=','
+#py else:
+#py break
 #py endif
 #py endfor
+#py endif
 #py theStringToWrite+=']'
 `theStringToWrite`
         return self._handleFunction('`cmd.name[4:]`',reqArgs,topic)

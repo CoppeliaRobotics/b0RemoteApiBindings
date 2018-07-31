@@ -636,6 +636,7 @@ public class b0RemoteApi
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
 #py for p in cmd.params:
+#py loopCnt=1
 #py if p.ctype()=='int_eval':
 #py loopCnt=2
 #py endif
@@ -662,7 +663,10 @@ public class b0RemoteApi
 `theStringToWrite`) throws IO Exception
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
-#py itemCnt=len(cmd.params)
+#py if len(cmd.params)==1:
+#py theStringToWrite='        args.packArrayHeader(1).packInt(0);\n'
+#py else:
+#py itemCnt=len(cmd.params)-1
 #py theStringToWrite='        args.packArrayHeader('+str(itemCnt)+')\n'
 #py itemIndex=-1
 #py for p in cmd.params:
@@ -719,8 +723,11 @@ public class b0RemoteApi
 #py endif
 #py if (itemCnt>1) and itemIndex<itemCnt-1:
 #py theStringToWrite+='\n'
+#py else:
+#py break
 #py endif
 #py endfor
+#py endif
 `theStringToWrite`
         return _handleFunction("`cmd.name[4:]`",args,topic);
     }
