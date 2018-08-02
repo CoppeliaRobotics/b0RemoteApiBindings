@@ -118,17 +118,17 @@ public:
 #py theStringToWrite+='        const char* '+p.name
 #py endif
 #py elif p.htype()=='byte[]':
-#py theStringToWrite+='        const char* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='        const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
 #py elif p.htype()=='int[]':
-#py theStringToWrite+='        const int* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='        const int* '+p.name+'_data,size_t '+p.name+'_intCnt'
 #py elif 'int[' in p.htype():
 #py theStringToWrite+='        const int* '+p.name
 #py elif p.htype()=='float[]':
-#py theStringToWrite+='        const float* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='        const float* '+p.name+'_data,size_t '+p.name+'_floatCnt'
 #py elif 'float[' in p.htype():
 #py theStringToWrite+='        const float* '+p.name
 #py elif p.htype()=='double[]':
-#py theStringToWrite+='        const double* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='        const double* '+p.name+'_data,size_t '+p.name+'_doubleCnt'
 #py elif 'double[' in p.htype():
 #py theStringToWrite+='        const double* '+p.name
 #py else:

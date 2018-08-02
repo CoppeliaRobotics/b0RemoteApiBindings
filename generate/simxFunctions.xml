@@ -223,7 +223,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simCallScriptFunction,sim.callScriptFunction]] (regular API)"/>
+            <item name="[L[regularApi/simCallScriptFunction.htm,sim.callScriptFunction]] (regular API)"/>
         </check-also>
     </command>
     
@@ -246,7 +246,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectHandle,sim.getObjectHandle]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectHandle.htm,sim.getObjectHandle]] (regular API)"/>
         </check-also>
     </command>
     
@@ -266,7 +266,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAddStatusbarMessage,sim.addStatusbarMessage]] (regular API)"/>
+            <item name="[L[regularApi/simAddStatusbarMessage.htm,sim.addStatusbarMessage]] (regular API)"/>
         </check-also>
     </command>
     
@@ -292,7 +292,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectPosition,sim.getObjectPosition]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectPosition.htm,sim.getObjectPosition]] (regular API)"/>
             <item name="[L[#simxSetObjectPosition]]"/>
             <item name="[L[#simxGetObjectOrientation]]"/>
             <item name="[L[#simxGetObjectQuaternion]]"/>
@@ -323,7 +323,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectOrientation,sim.getObjectOrientation]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectOrientation.htm,sim.getObjectOrientation]] (regular API)"/>
             <item name="[L[#simxSetObjectOrientation]]"/>
             <item name="[L[#simxGetObjectPosition]]"/>
             <item name="[L[#simxGetObjectQuaternion]]"/>
@@ -354,7 +354,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectQuaternion,sim.getObjectQuaternion]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectQuaternion.htm,sim.getObjectQuaternion]] (regular API)"/>
             <item name="[L[#simxSetObjectOrientation]]"/>
             <item name="[L[#simxGetObjectPosition]]"/>
             <item name="[L[#simxGetObjectQuaternion]]"/>
@@ -415,7 +415,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectMatrix,sim.getObjectMatrix]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectMatrix.htm,sim.getObjectMatrix]] (regular API)"/>
             <item name="[L[#simxSetObjectMatrix]]"/>
             <item name="[L[#simxGetObjectPosition]]"/>
             <item name="[L[#simxGetObjectOrientation]]"/>
@@ -425,7 +425,7 @@
     </command>
     
     <command name="simxSetObjectPosition" type="generic" generateCode="true">
-        <description>Sets the position of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the position of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -446,7 +446,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectPosition,sim.setObjectPosition]] (regular API)"/>
+            <item name="[L[regularApi/simSetObjectPosition.htm,sim.setObjectPosition]] (regular API)"/>
             <item name="[L[#simxGetObjectPosition]]"/>
             <item name="[L[#simxSetObjectOrientation]]"/>
             <item name="[L[#simxSetObjectQuaternion]]"/>
@@ -456,7 +456,7 @@
     </command>
     
     <command name="simxSetObjectOrientation" type="generic" generateCode="true">
-        <description>Sets the orientation (in Euler angles) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the orientation (in Euler angles) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -477,7 +477,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectOrientation,sim.setObjectOrientation]] (regular API)"/>
+            <item name="[L[regularApi/simSetObjectOrientation.htm,sim.setObjectOrientation]] (regular API)"/>
             <item name="[L[#simxGetObjectOrientation]]"/>
             <item name="[L[#simxSetObjectPosition]]"/>
             <item name="[L[#simxSetObjectQuaternion]]"/>
@@ -487,7 +487,7 @@
     </command>
     
     <command name="simxSetObjectQuaternion" type="generic" generateCode="true">
-        <description>Sets the quaternion orientation of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the quaternion orientation of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -508,7 +508,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectQuaternion,sim.setObjectQuaternion]] (regular API)"/>
+            <item name="[L[regularApi/simSetObjectQuaternion.htm,sim.setObjectQuaternion]] (regular API)"/>
             <item name="[L[#simxGetObjectQuaternion]]"/>
             <item name="[L[#simxSetObjectPosition]]"/>
             <item name="[L[#simxSetObjectOrientation]]"/>
@@ -518,7 +518,7 @@
     </command>
     
     <command name="simxSetObjectPose" type="generic" generateCode="true">
-        <description>Sets the pose (position + quaternion) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the pose (position + quaternion) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -548,7 +548,7 @@
     </command>
     
     <command name="simxSetObjectMatrix" type="generic" generateCode="true">
-        <description>Sets the transformation matrix of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the transformation matrix of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -569,7 +569,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectMatrix,sim.setObjectMatrix]] (regular API)"/>
+            <item name="[L[regularApi/simSetObjectMatrix.htm,sim.setObjectMatrix]] (regular API)"/>
             <item name="[L[#simxGetObjectMatrix]]"/>
             <item name="[L[#simxSetObjectPosition]]"/>
             <item name="[L[#simxSetObjectOrientation]]"/>
@@ -594,7 +594,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simClearFloatSignal,sim.clearFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simClearFloatSignal.htm,sim.clearFloatSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxClearIntegerSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
@@ -617,7 +617,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simClearIntegerSignal,sim.clearIntegerSignal]] (regular API)"/>
+            <item name="[L[regularApi/simClearIntegerSignal.htm,sim.clearIntegerSignal]] (regular API)"/>
             <item name="[L[#simxSetIntegerSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
@@ -640,7 +640,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simClearStringSignal,sim.clearStringSignal]] (regular API)"/>
+            <item name="[L[regularApi/simClearStringSignal.htm,sim.clearStringSignal]] (regular API)"/>
             <item name="[L[#simxSetStringSignal]]"/>
             <item name="[L[#simxClearIntegerSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
@@ -666,7 +666,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetFloatSignal,sim.setFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simSetFloatSignal.htm,sim.setFloatSignal]] (regular API)"/>
             <item name="[L[#simxGetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxSetIntegerSignal]]"/>
@@ -693,7 +693,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetIntegerSignal,sim.setIntegerSignal]] (regular API)"/>
+            <item name="[L[regularApi/simSetIntegerSignal.htm,sim.setIntegerSignal]] (regular API)"/>
             <item name="[L[#simxGetIntegerSignal]]"/>
             <item name="[L[#simxClearIntegerSignal]]"/>
             <item name="[L[#simxSetFloatSignal]]"/>
@@ -720,7 +720,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetStringSignal,sim.setStringSignal]] (regular API)"/>
+            <item name="[L[regularApi/simSetStringSignal.htm,sim.setStringSignal]] (regular API)"/>
             <item name="[L[#simxGetStringSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
             <item name="[L[#simxSetIntegerSignal]]"/>
@@ -747,7 +747,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetFloatSignal,sim.getFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simGetFloatSignal.htm,sim.getFloatSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxGetIntegerSignal]]"/>
@@ -774,7 +774,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetIntegerSignal,sim.getIntegerSignal]] (regular API)"/>
+            <item name="[L[regularApi/simGetIntegerSignal.htm,sim.getIntegerSignal]] (regular API)"/>
             <item name="[L[#simxSetIntegerSignal]]"/>
             <item name="[L[#simxClearIntegerSignal]]"/>
             <item name="[L[#simxGetFloatSignal]]"/>
@@ -801,7 +801,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetStringSignal,sim.getStringSignal]] (regular API)"/>
+            <item name="[L[regularApi/simGetStringSignal.htm,sim.getStringSignal]] (regular API)"/>
             <item name="[L[#simxSetStringSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
             <item name="[L[#simxGetIntegerSignal]]"/>
@@ -828,7 +828,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAuxiliaryConsoleClose,sim.auxiliaryConsoleClose]] (regular API)"/>
+            <item name="[L[regularApi/simAuxiliaryConsoleClose.htm,sim.auxiliaryConsoleClose]] (regular API)"/>
             <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
         </check-also>
     </command>
@@ -855,7 +855,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAuxiliaryConsolePrint,sim.auxiliaryConsolePrint]] (regular API)"/>
+            <item name="[L[regularApi/simAuxiliaryConsolePrint.htm,sim.auxiliaryConsolePrint]] (regular API)"/>
             <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
         </check-also>
     </command>
@@ -882,7 +882,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAuxiliaryConsoleShow,sim.auxiliaryConsoleShow]] (regular API)"/>
+            <item name="[L[regularApi/simAuxiliaryConsoleShow.htm,sim.auxiliaryConsoleShow]] (regular API)"/>
             <item name="[L[#simxAuxiliaryConsoleOpen]]"/>
         </check-also>
     </command>
@@ -924,7 +924,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAuxiliaryConsoleOpen,sim.auxiliaryConsoleOpen]] (regular API)"/>
+            <item name="[L[regularApi/simAuxiliaryConsoleOpen.htm,sim.auxiliaryConsoleOpen]] (regular API)"/>
             <item name="[L[#simxAuxiliaryConsolePrint]]"/>
             <item name="[L[#simxAuxiliaryConsoleShow]]"/>
             <item name="[L[#simxAuxiliaryConsoleClose]]"/>
@@ -947,7 +947,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simStartSimulation,sim.startSimulation]] (regular API)"/>
+            <item name="[L[regularApi/simStartSimulation.htm,sim.startSimulation]] (regular API)"/>
             <item name="[L[#simxStopSimulation]]"/>
             <item name="[L[#simxSynchronousTrigger]]"/>
         </check-also>
@@ -969,9 +969,750 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simStopSimulation,sim.stopSimulation]] (regular API)"/>
+            <item name="[L[regularApi/simStopSimulation.htm,sim.stopSimulation]] (regular API)"/>
             <item name="[L[#simxStartSimulation]]"/>
         </check-also>
     </command>
 
+    <command name="simxGetVisionSensorImage" type="generic" generateCode="true">
+        <description>Retrieves the image of a vision sensor</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the vision sensor</description>
+            </param>
+            <param name="greyScale" type="bool">
+                <description>Whether the image should be grey scale or color</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[2]">
+                <description>The resolution of the image</description>
+            </param>
+            <param name="item3" type="byte[]">
+                <description>The image. In a grey scale image, each pixel is represented by one byte, with a color image, each pixel is represented by a RGB-byte-triplet</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetVisionSensorCharImage.htm,sim.getVisionSensorCharImage]] (regular API)"/>
+            <item name="[L[#simxSetVisionSensorImage]]"/>
+            <item name="[L[#simxGetVisionSensorDepthBuffer]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxSetVisionSensorImage" type="generic" generateCode="true">
+        <description>Applies an image of a vision sensor</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the vision sensor</description>
+            </param>
+            <param name="greyScale" type="bool">
+                <description>Whether the provided image is grey scale or color</description>
+            </param>
+            <param name="img" type="byte[]">
+                <description>The image that must be provided in the same resolution as the vision sensor. In a grey scale image, each pixel is represented by one byte, with a color image, each pixel is represented by a RGB-byte-triplet</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetVisionSensorCharImage.htm,sim.setVisionSensorCharImage]] (regular API)"/>
+            <item name="[L[#simxGetVisionSensorImage]]"/>
+            <item name="[L[#simxSetVisionSensorDepthBuffer]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxGetVisionSensorDepthBuffer" type="generic" generateCode="true">
+        <description>Retrieves the depth buffer of a vision sensor</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the vision sensor</description>
+            </param>
+            <param name="toMeters" type="bool">
+                <description>Whether depth values are expressed in terms of relative distance to the sensor's clipping planes or whether depth values are expressed in terms of distance in meters</description>
+            </param>
+            <param name="asByteArray" type="bool">
+                <description>If true, then a byte array will be returned, instead of a float array, which is much faster (large float arrays might be very slow to handle with message pack, in several languages). In that case, the user is in charge of correctly decoding the byte array containing 4-byte floats, including little/big Endian conversions, etc.</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[2]">
+                <description>The resolution of the depth buffer</description>
+            </param>
+            <param name="item3" type="float[]">
+                <description>The depth buffer. Values are in the range of 0-1 (0=on the near clipping plane, 1=on the far clipping plane). If [B[toMeters]] was specified, then values represent the distance from the sensor's origin, in meters</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetVisionSensorDepthBuffer.htm,sim.getVisionSensorDepthBuffer]] (regular API)"/>
+            <item name="[L[#simxGetVisionSensorImage]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxAddDrawingObject_points" type="generic" generateCode="true">
+        <description>Displays points in the scene</description>
+        <params>
+            <param name="size" type="int">
+                <description>The pixel size of the points</description>
+            </param>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the points (0-255)</description>
+            </param>
+            <param name="coords" type="float[]">
+                <description>The coordinates for the points to display (3 per point)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created drawing object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+            <item name="[L[#simxAddDrawingObject_cubes]]"/>
+            <item name="[L[#simxAddDrawingObject_segments]]"/>
+            <item name="[L[#simxAddDrawingObject_triangles]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxAddDrawingObject_spheres" type="generic" generateCode="true">
+        <description>Displays spheres in the scene</description>
+        <params>
+            <param name="size" type="float">
+                <description>The size of the spheres</description>
+            </param>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the spheres (0-255)</description>
+            </param>
+            <param name="coords" type="float[]">
+                <description>The coordinates for the spheres to display (3 per sphere)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created drawing object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxAddDrawingObject_points]]"/>
+            <item name="[L[#simxAddDrawingObject_cubes]]"/>
+            <item name="[L[#simxAddDrawingObject_segments]]"/>
+            <item name="[L[#simxAddDrawingObject_triangles]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxAddDrawingObject_cubes" type="generic" generateCode="true">
+        <description>Displays cubes in the scene</description>
+        <params>
+            <param name="size" type="float">
+                <description>The size of the cubes</description>
+            </param>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the cubes (0-255)</description>
+            </param>
+            <param name="coords" type="float[]">
+                <description>The coordinates for the cubes to display (3 per cube)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created drawing object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxAddDrawingObject_points]]"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+            <item name="[L[#simxAddDrawingObject_segments]]"/>
+            <item name="[L[#simxAddDrawingObject_triangles]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxAddDrawingObject_segments" type="generic" generateCode="true">
+        <description>Displays line segments in the scene</description>
+        <params>
+            <param name="lineSize" type="int">
+                <description>The size of the segments, in pixels</description>
+            </param>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the cubes (0-255)</description>
+            </param>
+            <param name="segments" type="float[]">
+                <description>The coordinates for the segments to display (6 per segment)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created drawing object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxAddDrawingObject_points]]"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+            <item name="[L[#simxAddDrawingObject_cubes]]"/>
+            <item name="[L[#simxAddDrawingObject_triangles]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxAddDrawingObject_triangles" type="generic" generateCode="true">
+        <description>Displays triangles in the scene</description>
+        <params>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the triangles (0-255)</description>
+            </param>
+            <param name="triangles" type="float[]">
+                <description>The coordinates for the triangles to display (9 per triangle)</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created drawing object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxAddDrawingObject_points]]"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+            <item name="[L[#simxAddDrawingObject_cubes]]"/>
+            <item name="[L[#simxAddDrawingObject_segments]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxRemoveDrawingObject" type="generic" generateCode="true">
+        <description>Removes a drawing object from the scene</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The drawing object handle to remove</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simRemoveDrawingObject.htm,sim.removeDrawingObject]] (regular API)"/>
+            <item name="[L[#simxAddDrawingObject_points]]"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+            <item name="[L[#simxAddDrawingObject_cubes]]"/>
+            <item name="[L[#simxAddDrawingObject_segments]]"/>
+            <item name="[L[#simxAddDrawingObject_triangles]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetCollisionHandle" type="generic" generateCode="true">
+        <description>Retrieves the handle of a [L[collisionDetection.htm,collision object]]</description>
+        <params>
+            <param name="nameOfObject" type="string">
+                <description>The name of the collision object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the collision object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetCollisionHandle.htm,sim.getCollisionHandle]] (regular API)"/>
+            <item name="[L[#simxReadCollision]]"/>
+            <item name="[L[#simxCheckCollision]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetDistanceHandle" type="generic" generateCode="true">
+        <description>Retrieves the handle of a [L[distanceCalculation.htm,distance calculation object]]</description>
+        <params>
+            <param name="nameOfObject" type="string">
+                <description>The name of the distance calculation object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the distance calculation object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetDistanceHandle.htm,sim.getDistanceHandle]] (regular API)"/>
+            <item name="[L[#simxReadDistance]]"/>
+            <item name="[L[#simxCheckDistance]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxReadCollision" type="generic" generateCode="true">
+        <description>Reads the collision state of a [L[collisionDetection.htm,collision object]]</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the collision object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="bool">
+                <description>The collision state of the object</description>
+            </param>
+            <param name="item3" type="int[2]">
+                <description>handles of the colliding objects</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simReadCollision.htm,sim.readCollision]] (regular API)"/>
+            <item name="[L[#simxGetCollisionHandle]]"/>
+            <item name="[L[#simxCheckCollision]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxReadDistance" type="generic" generateCode="true">
+        <description>Reads the distance state of a [L[distanceCalculation.htm,distance calculation object]]</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the distance calculation object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if distance was not yet computed, 1 otherwise</description>
+            </param>
+            <param name="item3" type="float">
+                <description>The smallest distance</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simReadDistance.htm,sim.readDistance]] (regular API)"/>
+            <item name="[L[#simxGetDistanceHandle]]"/>
+            <item name="[L[#simxCheckDistance]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCheckCollision" type="generic" generateCode="true">
+        <description>Checks whether two [L[collidableObjects.htm,collidable]] [L[entities.htm,entities]] are colliding</description>
+        <params>
+            <param name="entity1" type="int">
+                <description>The handle of the first entity</description>
+            </param>
+            <param name="entity2" type="int_eval">
+                <description>The handle of the second entity. Can also be the 'sim.handle_all' string, to check entity1 against all other collidable objects</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="bool">
+                <description>The collision state of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCheckCollision.htm,sim.checkCollision]] (regular API)"/>
+            <item name="[L[#simxReadCollision]]"/>
+        </check-also>
+    </command>
+    
+    
+    <command name="simxCheckDistance" type="generic" generateCode="true">
+        <description>Computes the minimum distance between two [L[measurableObjects.htm,measurable]] [L[entities.htm,entities]]</description>
+        <params>
+            <param name="entity1" type="int">
+                <description>The handle of the first entity</description>
+            </param>
+            <param name="entity2" type="int_eval">
+                <description>The handle of the second entity. Can also be the 'sim.handle_all' string, to check entity1 against all other measurable objects</description>
+            </param>
+            <param name="threshold" type="float">
+                <description>If distance is bigger than the threshold, the distance is not calculated. If threshold is 0 or negative, then no threshold is used</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 is distance is larger than the threshold, 1 otherwise</description>
+            </param>
+            <param name="item3" type="float">
+                <description>The minimum distance</description>
+            </param>
+            <param name="item4" type="float[3]">
+                <description>The first point of the minimum distance segment</description>
+            </param>
+            <param name="item5" type="float[3]">
+                <description>The second point of the minimum distance segment</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCheckDistance.htm,sim.checkDistance]] (regular API)"/>
+            <item name="[L[#simxReadDistance]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxReadProximitySensor" type="generic" generateCode="true">
+        <description>Reads the calculation result of a proximity sensor</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the proximity sensor</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>detection state (0 or 1)</description>
+            </param>
+            <param name="item3" type="float">
+                <description>The distance to the detected point</description>
+            </param>
+            <param name="item4" type="float[3]">
+                <description>The detected point relative to the sensor frame</description>
+            </param>
+            <param name="item5" type="int">
+                <description>The detected object handle</description>
+            </param>
+            <param name="item6" type="float[3]">
+                <description>The normal vector of the detected surface, relative to the sensor frame</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simReadProximitySensor.htm,sim.readProximitySensor]] (regular API)"/>
+            <item name="[L[#simxCheckProximitySensor]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCheckProximitySensor" type="generic" generateCode="true">
+        <description>Computes the detection state of a proximity sensor, for a specific [L[detectableObjects.htm,detectable]] [L[entities.htm,entity]]</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the proximity sensor</description>
+            </param>
+            <param name="entity" type="int_eval">
+                <description>The handle of the entity to detect. Can also be the 'sim.handle_all' string, to check all detectable entities</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>detection state (0 or 1)</description>
+            </param>
+            <param name="item3" type="float">
+                <description>The distance to the detected point</description>
+            </param>
+            <param name="item4" type="float[3]">
+                <description>The detected point relative to the sensor frame</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCheckProximitySensor.htm,sim.checkProximitySensor]] (regular API)"/>
+            <item name="[L[#simxReadProximitySensor]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxReadForceSensor" type="generic" generateCode="true">
+        <description>Reads the force and torque applied to a force sensor (filtered values are read), and its current state ('unbroken' or 'broken')</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the force sensor</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The sensor state (bit coded: bit0 set=force/torque data is valid, bit1 set=force sensor is broken)</description>
+            </param>
+            <param name="item3" type="float[3]">
+                <description>The applied force</description>
+            </param>
+            <param name="item4" type="float[3]">
+                <description>The applied torque</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simReadForceSensor.htm,sim.readForceSensor]] (regular API)"/>
+            <item name="[L[#simxBreakForceSensor]]"/>
+        </check-also>
+    </command>
+    
+    
+    <command name="simxBreakForceSensor" type="generic" generateCode="true">
+        <description>Allows breaking a force sensor during simulation. A broken force sensor will lose its positional and orientational constraints</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the force sensor</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simBreakForceSensor.htm,sim.breakForceSensor]] (regular API)"/>
+            <item name="[L[#simxReadForceSensor]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxReadVisionSensor" type="generic" generateCode="true">
+        <description>Reads the state of a vision sensor</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the vision sensor</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>detection state (0 or 1)</description>
+            </param>
+            <param name="item3" type="float[]">
+                <description>The default auxiliary value packet. See [L[regularApi/simReadVisionSensor.htm,here] for details</description>
+            </param>
+            <param name="item4" type="float[]">
+                <description>Additional auxiliary value packet (e.g. from a filter component)</description>
+            </param>
+            <param name="item5" type="float[]">
+                <description>Etc.</description>
+            </param>
+       </return>
+        <check-also>
+            <item name="[L[regularApi/simReadVisionSensor.htm,sim.readVisionSensor]] (regular API)"/>
+            <item name="[L[#simxCheckVisionSensor]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCheckVisionSensor" type="generic" generateCode="true">
+        <description>Computes the detection state of a vision sensor, for a specific [L[renderableObjects.htm,renderable]] [L[entities.htm,entity]]</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the vision sensor</description>
+            </param>
+            <param name="entity" type="int_eval">
+                <description>The handle of the entity to detect. Can also be the 'sim.handle_all' string, to check all renderable entities</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>detection state (0 or 1)</description>
+            </param>
+            <param name="item3" type="float">
+                <description>The distance to the detected point</description>
+            </param>
+            <param name="item4" type="float[3]">
+                <description>The detected point relative to the sensor frame</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCheckVisionSensor.htm,sim.checkVisionSensor]] (regular API)"/>
+            <item name="[L[#simxReadVisionSensor]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCopyPasteObjects" type="generic" generateCode="true">
+        <description>Duplicates objects</description>
+        <params>
+            <param name="objectHandles" type="int[]">
+                <description>The handles of the objects to copy and paste</description>
+            </param>
+            <param name="options" type="int">
+                <description>Bit-coded. If bit0 is set (i.e. 1), then whole models will be copied</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[]">
+                <description>handles of the duplicates</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCopyPasteObjects.htm,sim.copyPasteObjects]] (regular API)"/>
+            <item name="[L[#simxRemoveObjects]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxRemoveObjects" type="generic" generateCode="true">
+        <description>Removes objects or models</description>
+        <params>
+            <param name="objectHandles" type="int[]">
+                <description>The handles of the objects/models to remove</description>
+            </param>
+            <param name="options" type="int">
+                <description>Bit-coded. If bit0 is set (i.e. 1), then whole models will be removed. If bit1 is set (i.e. 2), then all objects and models will be removed</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The number of removed objects</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simRemoveObject.htm,sim.removeObject]] (regular API)"/>
+            <item name="[L[regularApi/simRemoveModel.htm,sim.removeModel]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCloseScene" type="generic" generateCode="true">
+        <description>Closes current scene, and switches to another open scene</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCloseScene.htm,sim.closeScene]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    def simxCopyPasteObjects(self,objectHandles,option,topic):
+        reqArgs = [objectHandles,option]
+        funcName = 'CopyPasteObjects'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxRemoveObjects(self,objectHandles,option,topic):
+        reqArgs = [objectHandles,option]
+        funcName = 'RemoveObjects'
+        return self._handleFunction(funcName,reqArgs,topic)
+        
+    def simxCloseScene(self,topic):
+        reqArgs = [0]
+        funcName = 'CloseScene'
+        return self._handleFunction(funcName,reqArgs,topic)
+    
+    
+    
+    
+    
 </plugin>

@@ -583,17 +583,17 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+='    const char* '+p.name
 #py endif
 #py elif p.htype()=='byte[]':
-#py theStringToWrite+='    const char* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='    const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
 #py elif p.htype()=='int[]':
-#py theStringToWrite+='    const int* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='    const int* '+p.name+'_data,size_t '+p.name+'_intCnt'
 #py elif 'int[' in p.htype():
 #py theStringToWrite+='    const int* '+p.name
 #py elif p.htype()=='float[]':
-#py theStringToWrite+='    const float* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='    const float* '+p.name+'_data,size_t '+p.name+'_floatCnt'
 #py elif 'float[' in p.htype():
 #py theStringToWrite+='    const float* '+p.name
 #py elif p.htype()=='double[]':
-#py theStringToWrite+='    const double* '+p.name+'_data,size_t '+p.name+'_size'
+#py theStringToWrite+='    const double* '+p.name+'_data,size_t '+p.name+'_doubleCnt'
 #py elif 'double[' in p.htype():
 #py theStringToWrite+='    const double* '+p.name
 #py else:
@@ -659,15 +659,15 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+='        std::string('+p.name+')'
 #py endif
 #py elif p.htype()=='byte[]':
-#py theStringToWrite+='        std::string('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py theStringToWrite+='        std::string('+p.name+'_data,'+p.name+'_data+'+p.name+'_charCnt)'
 #py elif p.htype()=='int[]':
-#py theStringToWrite+='        std::vector<int>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py theStringToWrite+='        std::vector<int>('+p.name+'_data,'+p.name+'_data+'+p.name+'_intCnt)'
 #py elif p.htype()=='int[2]':
 #py theStringToWrite+='        std::vector<int>('+p.name+','+p.name+'+2)'
 #py elif p.htype()=='int[3]':
 #py theStringToWrite+='        std::vector<int>('+p.name+','+p.name+'+3)'
 #py elif p.htype()=='float[]':
-#py theStringToWrite+='        std::vector<float>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py theStringToWrite+='        std::vector<float>('+p.name+'_data,'+p.name+'_data+'+p.name+'_floatCnt)'
 #py elif p.htype()=='float[2]':
 #py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+2)'
 #py elif p.htype()=='float[3]':
@@ -677,7 +677,7 @@ std::vector<msgpack::object>* `cmd.name`(
 #py elif p.htype()=='float[12]':
 #py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+12)'
 #py elif p.htype()=='double[]':
-#py theStringToWrite+='        std::vector<double>('+p.name+'_data,'+p.name+'_data+'+p.name+'_size)'
+#py theStringToWrite+='        std::vector<double>('+p.name+'_data,'+p.name+'_data+'+p.name+'_doubleCnt)'
 #py elif p.htype()=='double[2]':
 #py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+2)'
 #py elif p.htype()=='double[3]':

@@ -8,6 +8,8 @@
 #py     arg=re.sub('\[L\[#([^,\[\]]+)\]\]',r'<a href="#\1">\1</a>',arg) #e.g. [L[#simxGetObjectPosition]] --> <a href="#simxSetObjectPosition">simxSetObjectPosition</a>
 #py     arg=re.sub('\[L\[([^,\[\]]+)\]\]',r'<a href="\1">\1</a>',arg) #e.g. [L[simxGetObjectPosition.html]] --> <a href="simxSetObjectPosition.html">simxSetObjectPosition.html</a>
 #py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg) #e.g. [L[#simxGetObjectPosition,Click me]] --> <a href="#simxSetObjectPosition">Click me</a>
+#py     arg=re.sub('\[B\[([^\[\]]+)\]\]',r'<b>\1</b>',arg) #e.g. [B[text in bold]]
+#py     arg=re.sub('\[I\[([^\[\]]+)\]\]',r'<i>\1</i>',arg) #e.g. [I[text in italic]]
 #py     arg=re.sub('\['+lang+'\[([^\[\]]+)\]\]',r'\1',arg)
 #py     arg=re.sub('\[cpp\[([^\[\]]+)\]\]',r'',arg)
 #py     arg=re.sub('\[java\[([^\[\]]+)\]\]',r'',arg)
@@ -77,15 +79,15 @@
 #py cmdHtmlStr+=' = "'+p.default+'"'
 #py endif
 #py elif p.ctype()=='byte[]':
-#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_size'
+#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
 #py elif p.ctype()=='int[]':
-#py cmdHtmlStr+='const int* '+p.name+'_data,size_t '+p.name+'_size'
+#py cmdHtmlStr+='const int* '+p.name+'_data,size_t '+p.name+'_intCnt'
 #py elif p.ctype()=='packed_unpacked':
-#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_size'
+#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
 #py elif p.ctype()=='int[2]':
 #py cmdHtmlStr+='const int '+p.name+'[2]'
 #py elif p.ctype()=='float[]':
-#py cmdHtmlStr+='const float* '+p.name+'_data,size_t '+p.name+'_size'
+#py cmdHtmlStr+='const float* '+p.name+'_data,size_t '+p.name+'_floatCnt'
 #py elif p.ctype()=='float[2]':
 #py cmdHtmlStr+='const float '+p.name+'[2]'
 #py elif p.ctype()=='float[3]':
@@ -95,7 +97,7 @@
 #py elif p.ctype()=='float[12]':
 #py cmdHtmlStr+='const float '+p.name+'[12]'
 #py elif p.ctype()=='double[]':
-#py cmdHtmlStr+='const double* '+p.name+'_data,size_t '+p.name+'_size'
+#py cmdHtmlStr+='const double* '+p.name+'_data,size_t '+p.name+'_doubleCnt'
 #py elif p.ctype()=='double[2]':
 #py cmdHtmlStr+='const double '+p.name+'[2]'
 #py elif p.ctype()=='double[3]':

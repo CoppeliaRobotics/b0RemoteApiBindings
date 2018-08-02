@@ -113,22 +113,27 @@ public:
 
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,const char* topic);
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,const char* topic);
-    std::vector<msgpack::object>* simxCheckCollision(int entity1,int entity2,const char* topic);
-    std::vector<msgpack::object>* simxCheckCollision(int entity1,const char* entity2,const char* topic);
+
     std::vector<msgpack::object>* simxGetCollisionHandle(const char* name,const char* topic);
     std::vector<msgpack::object>* simxReadCollision(int handle,const char* topic);
-    std::vector<msgpack::object>* simxCheckDistance(int entity1,int entity2,float threshold,const char* topic);
-    std::vector<msgpack::object>* simxCheckDistance(int entity1,const char* entity2,float threshold,const char* topic);
     std::vector<msgpack::object>* simxGetDistanceHandle(const char* name,const char* topic);
     std::vector<msgpack::object>* simxReadDistance(int handle,const char* topic);
+
+    std::vector<msgpack::object>* simxCheckCollision(int entity1,int entity2,const char* topic);
+    std::vector<msgpack::object>* simxCheckCollision(int entity1,const char* entity2,const char* topic);
+    std::vector<msgpack::object>* simxCheckDistance(int entity1,int entity2,float threshold,const char* topic);
+    std::vector<msgpack::object>* simxCheckDistance(int entity1,const char* entity2,float threshold,const char* topic);
+
+    std::vector<msgpack::object>* simxReadProximitySensor(int handle,const char* topic);
     std::vector<msgpack::object>* simxCheckProximitySensor(int sensor,int entity,const char* topic);
     std::vector<msgpack::object>* simxCheckProximitySensor(int sensor,const char* entity,const char* topic);
-    std::vector<msgpack::object>* simxReadProximitySensor(int handle,const char* topic);
+
+    std::vector<msgpack::object>* simxReadForceSensor(int handle,const char* topic);
+    std::vector<msgpack::object>* simxBreakForceSensor(int handle,const char* topic);
+
     std::vector<msgpack::object>* simxCheckVisionSensor(int sensor,int entity,const char* topic);
     std::vector<msgpack::object>* simxCheckVisionSensor(int sensor,const char* entity,const char* topic);
     std::vector<msgpack::object>* simxReadVisionSensor(int handle,const char* topic);
-    std::vector<msgpack::object>* simxReadForceSensor(int handle,const char* topic);
-    std::vector<msgpack::object>* simxBreakForceSensor(int handle,const char* topic);
 
     std::vector<msgpack::object>* simxClearFloatSignal(const char* sig,const char* topic);
     std::vector<msgpack::object>* simxClearIntegerSignal(const char* sig,const char* topic);
