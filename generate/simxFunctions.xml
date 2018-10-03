@@ -2248,4 +2248,88 @@
         </check-also>
     </command>
     
+    <command name="simxGetObjectChild" type="generic" generateCode="true">
+        <description>Retrieves the handle of an object's child object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="index" type="int">
+                <description>The zero-based index of the child's position. To retrieve all children of an object, call the function by increasing the index until the return value is -1</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the child, or -1 if there is no child at the given index position</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectChild.htm,sim.simGetObjectChild]] (regular API)"/>
+            <item name="[L[#simxGetObjectParent]]"/>
+            <item name="[L[#simxGetObjectsInTree]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectParent" type="generic" generateCode="true">
+        <description>Retrieves the handle of an object's parent object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the parent, or -1 if the object has no parent</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectParent.htm,sim.simGetObjectParent]] (regular API)"/>
+            <item name="[L[#simxGetObjectChild]]"/>
+            <item name="[L[#simxGetObjectsInTree]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectsInTree" type="generic" generateCode="true">
+        <description>Retrieves object handles in a given hierarchy tree</description>
+        <params>
+            <param name="treeBaseHandle" type="int_eval">
+                <description>The handle of the object that describes the hierarchy tree, or the string 'sim.handle_scene' for all objects in the scene</description>
+            </param>
+            <param name="objectType" type="string">
+                <description>The object type to retrieve, or 'sim.handle_all' for any type of object in the tree</description>
+            </param>
+            <param name="options" type="int">
+                <description>Bit-coded. bit0 set (1): exclude the tree base from the returned array, bit1 set (2): include in the returned array only the object's first children. If [B[treeBaseHandle]] is 'sim.handle_scene', then only parentless objects will be included</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[]">
+                <description>The object handles</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectsInTree.htm,sim.simGetObjectsInTree]] (regular API)"/>
+            <item name="[L[#simxGetObjectChild]]"/>
+            <item name="[L[#simxGetObjectParent]]"/>
+        </check-also>
+    </command>
+    
 </plugin>
