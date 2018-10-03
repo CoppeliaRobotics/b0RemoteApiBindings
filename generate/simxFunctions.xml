@@ -199,7 +199,7 @@
                 <description>A string representing the function name and script name, e.g. myFunctionName@theScriptName. When the script is not associated with an object, then just specify the function name</description>
             </param>
             <param name="scriptType" type="int_eval">
-                <description>The [L[apiConstants.htm#scriptTypes,type of the script]] (specified as number or string). E.g. 'sim.scripttype_mainscript' is a valid string argument that will be evaluated on the server side</description>
+                <description>The [L[apiConstants.htm#scriptTypes,type of the script]] (specified as number or string). E.g. [I["sim.scripttype_mainscript"]] is a valid string argument that will be evaluated on the server side. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="funcArgs" type="packed_unpacked">
                 <description>[cpp[The function arguments, packed in a messagePack message]][java[The function arguments, packed in a messagePack message]][lua[The function argument(s). Group several arguments inside of a table]][matlab[The function argument(s). Group several arguments inside of an array]][python[The function argument(s). Group several arguments inside of a list]]</description>
@@ -231,7 +231,7 @@
         <description>Retrieves the handle of an object</description>
         <params>
             <param name="objectName" type="string">
-                <description>Name of object. If the name is appended by a "@alt" suffix, then the object handle based on the object's alternative name will be retrieved. If the name is appended by a "@silentError" suffix, then no error will be output if the object does not exist</description>
+                <description>Name of object. If the name is appended by a [I["@alt"]] suffix, then the object handle based on the object's alternative name will be retrieved. If the name is appended by a [I["@silentError"]] suffix, then no error will be output if the object does not exist</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -247,6 +247,7 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simGetObjectHandle.htm,sim.getObjectHandle]] (regular API)"/>
+            <item name="[L[#simxGetObjects]]"/>
         </check-also>
     </command>
     
@@ -277,7 +278,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame we want the position. Specify -1 to retrieve the absolute position, 'sim.handle_parent' to retrieve the position relative to the object's parent, or an object handle relative to whose reference frame you want the position</description>
+                <description>Indicates relative to which reference frame we want the position. Specify -1 to retrieve the absolute position, [I["sim.handle_parent"]] to retrieve the position relative to the object's parent, or an object handle relative to whose reference frame you want the position. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -308,7 +309,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, 'sim.handle_parent' to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation</description>
+                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, [I["sim.handle_parent"]] to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -339,7 +340,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, 'sim.handle_parent' to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation</description>
+                <description>Indicates relative to which reference frame we want the orientation. Specify -1 to retrieve the absolute orientation, [I["sim.handle_parent"]] to retrieve the orientation relative to the object's parent, or an object handle relative to whose reference frame you want the orientation. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -370,7 +371,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame we want the pose. Specify -1 to retrieve the absolute pose, 'sim.handle_parent' to retrieve the pose relative to the object's parent, or an object handle relative to whose reference frame you want the pose</description>
+                <description>Indicates relative to which reference frame we want the pose. Specify -1 to retrieve the absolute pose, [I["sim.handle_parent"]] to retrieve the pose relative to the object's parent, or an object handle relative to whose reference frame you want the pose. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -400,7 +401,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame we want the matrix. Specify -1 to retrieve the absolute matrix, 'sim.handle_parent' to retrieve the matrix relative to the object's parent, or an object handle relative to whose reference frame you want the matrix</description>
+                <description>Indicates relative to which reference frame we want the matrix. Specify -1 to retrieve the absolute matrix, [I["sim.handle_parent"]] to retrieve the matrix relative to the object's parent, or an object handle relative to whose reference frame you want the matrix. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -431,7 +432,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame the position is specified. Specify -1 to set the absolute position, 'sim.handle_parent' to set the position relative to the object's parent, or an object handle relative to whose reference frame the position is specified</description>
+                <description>Indicates relative to which reference frame the position is specified. Specify -1 to set the absolute position, [I["sim.handle_parent"]] to set the position relative to the object's parent, or an object handle relative to whose reference frame the position is specified. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="position" type="float[3]">
                 <description>The desired (X,Y,Z) position</description>
@@ -462,7 +463,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, 'sim.handle_parent' to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified</description>
+                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, [I["sim.handle_parent"]] to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="euler" type="float[3]">
                 <description>The desired (alpha,beta,gamma) Euler-angle orientation</description>
@@ -493,7 +494,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, 'sim.handle_parent' to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified</description>
+                <description>Indicates relative to which reference frame the orientation is specified. Specify -1 to set the absolute orientation, [I["sim.handle_parent"]] to set the orientation relative to the object's parent, or an object handle relative to whose reference frame the orientation is specified. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="quat" type="float[4]">
                 <description>The desired (Qx,Qy,Qz,Qw) quaternion orientation</description>
@@ -524,7 +525,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame the pose is specified. Specify -1 to set the absolute pose, 'sim.handle_parent' to set the pose relative to the object's parent, or an object handle relative to whose reference frame the pose is specified</description>
+                <description>Indicates relative to which reference frame the pose is specified. Specify -1 to set the absolute pose, [I["sim.handle_parent"]] to set the pose relative to the object's parent, or an object handle relative to whose reference frame the pose is specified. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="pose" type="float[7]">
                 <description>The desired (X,Y,Z,Qx,Qy,Qz,Qw) pose</description>
@@ -554,7 +555,7 @@
                 <description>The handle of the object</description>
             </param>
             <param name="relObjHandle" type="int_eval">
-                <description>Indicates relative to which reference frame the matrix is specified. Specify -1 to set the absolute matrix, 'sim.handle_parent' to set the matrix relative to the object's parent, or an object handle relative to whose reference frame the matrix is specified</description>
+                <description>Indicates relative to which reference frame the matrix is specified. Specify -1 to set the absolute matrix, [I["sim.handle_parent"]] to set the matrix relative to the object's parent, or an object handle relative to whose reference frame the matrix is specified. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="matr" type="float[12]">
                 <description>The desired (Xx,Yx,Zx,Px,Xy,Yy,Zy,Py,Xz,Yz,Zz,Pz) transformation matrix</description>
@@ -1366,7 +1367,7 @@
                 <description>The handle of the first entity</description>
             </param>
             <param name="entity2" type="int_eval">
-                <description>The handle of the second entity. Can also be the 'sim.handle_all' string, to check entity1 against all other collidable objects</description>
+                <description>The handle of the second entity. Can also be the [I["sim.handle_all"]] string, to check entity1 against all other collidable objects. See also [L[#simxEvaluateToInt]]</description>
             </param>
         </params>
         <return>
@@ -1391,7 +1392,7 @@
                 <description>The handle of the first entity</description>
             </param>
             <param name="entity2" type="int_eval">
-                <description>The handle of the second entity. Can also be the 'sim.handle_all' string, to check entity1 against all other measurable objects</description>
+                <description>The handle of the second entity. Can also be the [I["sim.handle_all"]] string, to check entity1 against all other measurable objects. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="threshold" type="float">
                 <description>If distance is bigger than the threshold, the distance is not calculated. If threshold is 0 or negative, then no threshold is used</description>
@@ -1463,7 +1464,7 @@
                 <description>The handle of the proximity sensor</description>
             </param>
             <param name="entity" type="int_eval">
-                <description>The handle of the entity to detect. Can also be the 'sim.handle_all' string, to check all detectable entities</description>
+                <description>The handle of the entity to detect. Can also be the [I["sim.handle_all"]] string, to check all detectable entities. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1581,7 +1582,7 @@
                 <description>The handle of the vision sensor</description>
             </param>
             <param name="entity" type="int_eval">
-                <description>The handle of the entity to detect. Can also be the 'sim.handle_all' string, to check all renderable entities</description>
+                <description>The handle of the entity to detect. Can also be the [I["sim.handle_all"]] string, to check all renderable entities. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1682,7 +1683,7 @@
         <description>Sets a [L[apiConstants.htm#stringParameters,string parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.stringparam_scene_name'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.stringparam_scene_name"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="paramVal" type="string">
                 <description>The value of the parameter</description>
@@ -1702,6 +1703,7 @@
             <item name="[L[#simxSetBoolParameter]]"/>
             <item name="[L[#simxSetIntParameter]]"/>
             <item name="[L[#simxSetFloatParameter]]"/>
+            <item name="[L[#simxSetArrayParameter]]"/>
         </check-also>
     </command>
     
@@ -1709,7 +1711,7 @@
         <description>Sets a [L[apiConstants.htm#floatingParameters,float parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.floatparam_simulation_time_step'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.floatparam_simulation_time_step"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="paramVal" type="float">
                 <description>The value of the parameter</description>
@@ -1728,6 +1730,35 @@
             <item name="[L[#simxGetFloatParameter]]"/>
             <item name="[L[#simxSetBoolParameter]]"/>
             <item name="[L[#simxSetIntParameter]]"/>
+            <item name="[L[#simxSetArrayParameter]]"/>
+            <item name="[L[#simxSetStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetArrayParameter" type="generic" generateCode="true">
+        <description>Sets a [L[apiConstants.htm#arrayParameters,float parameter]]</description>
+        <params>
+            <param name="paramId" type="int_eval">
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.arrayparam_gravity"]]. See also [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="paramVal" type="float[3]">
+                <description>The value of the parameter</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetArrayParameter.htm,sim.setArrayParameter]] (regular API)"/>
+            <item name="[L[#simxGetArrayParameter]]"/>
+            <item name="[L[#simxSetBoolParameter]]"/>
+            <item name="[L[#simxSetIntParameter]]"/>
+            <item name="[L[#simxSetFloatParameter]]"/>
             <item name="[L[#simxSetStringParameter]]"/>
         </check-also>
     </command>
@@ -1736,7 +1767,7 @@
         <description>Sets an [L[apiConstants.htm#integerParameters,integer parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.intparam_program_version'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.intparam_program_version"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="paramVal" type="int">
                 <description>The value of the parameter</description>
@@ -1755,6 +1786,7 @@
             <item name="[L[#simxGetIntParameter]]"/>
             <item name="[L[#simxSetBoolParameter]]"/>
             <item name="[L[#simxSetFloatParameter]]"/>
+            <item name="[L[#simxSetArrayParameter]]"/>
             <item name="[L[#simxSetStringParameter]]"/>
         </check-also>
     </command>
@@ -1763,7 +1795,7 @@
         <description>Sets a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.boolparam_proximity_sensor_handling_enabled'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_proximity_sensor_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="paramVal" type="bool">
                 <description>The value of the parameter</description>
@@ -1782,6 +1814,7 @@
             <item name="[L[#simxGetBoolParameter]]"/>
             <item name="[L[#simxSetIntParameter]]"/>
             <item name="[L[#simxSetFloatParameter]]"/>
+            <item name="[L[#simxSetArrayParameter]]"/>
             <item name="[L[#simxSetStringParameter]]"/>
         </check-also>
     </command>
@@ -1790,7 +1823,7 @@
         <description>Retrieves a [L[apiConstants.htm#stringParameters,string parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.stringparam_scene_name'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.stringparam_scene_name"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1810,6 +1843,7 @@
             <item name="[L[#simxGetBoolParameter]]"/>
             <item name="[L[#simxGetIntParameter]]"/>
             <item name="[L[#simxGetFloatParameter]]"/>
+            <item name="[L[#simxGetArrayParameter]]"/>
         </check-also>
     </command>
     
@@ -1817,7 +1851,7 @@
         <description>Retrieves a [L[apiConstants.htm#floatingParameters,float parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.floatparam_simulation_time_step'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.floatparam_simulation_time_step"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1836,6 +1870,35 @@
             <item name="[L[#simxSetFloatParameter]]"/>
             <item name="[L[#simxGetBoolParameter]]"/>
             <item name="[L[#simxGetIntParameter]]"/>
+            <item name="[L[#simxGetArrayParameter]]"/>
+            <item name="[L[#simxGetStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetArrayParameter" type="generic" generateCode="true">
+        <description>Retrieves a [L[apiConstants.htm#arrayParameters,array parameter]]</description>
+        <params>
+            <param name="paramId" type="int_eval">
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.arrayparam_gravity"]]. See also [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[3]">
+                <description>The value of the parameter</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetArrayParameter.htm,sim.getArrayParameter]] (regular API)"/>
+            <item name="[L[#simxSetArrayParameter]]"/>
+            <item name="[L[#simxGetBoolParameter]]"/>
+            <item name="[L[#simxGetIntParameter]]"/>
+            <item name="[L[#simxGetFloatParameter]]"/>
             <item name="[L[#simxGetStringParameter]]"/>
         </check-also>
     </command>
@@ -1844,7 +1907,7 @@
         <description>Retrieves an [L[apiConstants.htm#integerParameters,integer parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.intparam_program_version'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.intparam_program_version"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1863,6 +1926,7 @@
             <item name="[L[#simxSetIntParameter]]"/>
             <item name="[L[#simxGetBoolParameter]]"/>
             <item name="[L[#simxGetFloatParameter]]"/>
+            <item name="[L[#simxGetArrayParameter]]"/>
             <item name="[L[#simxGetStringParameter]]"/>
         </check-also>
     </command>
@@ -1871,7 +1935,7 @@
         <description>Retrieves a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. 'sim.boolparam_proximity_sensor_handling_enabled'</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_proximity_sensor_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1890,6 +1954,7 @@
             <item name="[L[#simxSetBoolParameter]]"/>
             <item name="[L[#simxGetIntParameter]]"/>
             <item name="[L[#simxGetFloatParameter]]"/>
+            <item name="[L[#simxGetArrayParameter]]"/>
             <item name="[L[#simxGetStringParameter]]"/>
         </check-also>
     </command>
@@ -1904,7 +1969,7 @@
                 <description>The information text</description>
             </param>
             <param name="dialogType" type="int_eval">
-                <description>The [L[apiConstants.htm#genericDialogStyles,generic dialog style]]. Can also be a string value, e.g. 'sim.dlgstyle_message'</description>
+                <description>The [L[apiConstants.htm#genericDialogStyles,generic dialog style]]. Can also be a string value, e.g. [I["sim.dlgstyle_message"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="inputText" type="string">
                 <description>The initial text in the edit box if the dialog is an input dialog</description>
@@ -2305,7 +2370,7 @@
         <description>Retrieves object handles in a given hierarchy tree</description>
         <params>
             <param name="treeBaseHandle" type="int_eval">
-                <description>The handle of the object that describes the hierarchy tree, or the string 'sim.handle_scene' for all objects in the scene</description>
+                <description>The handle of the object that describes the hierarchy tree, or the string [I["sim.handle_scene"]] for all objects in the scene. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="objectType" type="string">
                 <description>The object type to retrieve, or 'sim.handle_all' for any type of object in the tree</description>
@@ -2329,6 +2394,372 @@
             <item name="[L[regularApi/simGetObjectsInTree.htm,sim.simGetObjectsInTree]] (regular API)"/>
             <item name="[L[#simxGetObjectChild]]"/>
             <item name="[L[#simxGetObjectParent]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectName" type="generic" generateCode="true">
+        <description>Retrieves the name or alternative name of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="altName" type="bool">
+                <description>Value indicating whether the regular or alternative name should be retrieved</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="string">
+                <description>The name or alternative name of the object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectName.htm,sim.getObjectName]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectFloatParameter" type="generic" generateCode="true">
+        <description>Retrieves a floating point parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to retrieve, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float">
+                <description>The retrieved parameter</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectFloatParameter.htm,sim.getObjectFloatParameter]] (regular API)"/>
+            <item name="[L[#simxSetObjectFloatParameter]]"/>
+            <item name="[L[#simxGetObjectIntParameter]]"/>
+            <item name="[L[#simxGetObjectStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectIntParameter" type="generic" generateCode="true">
+        <description>Retrieves an integer parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to retrieve, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The retrieved parameter</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectInt32Parameter.htm,sim.getObjectInt32Parameter]] (regular API)"/>
+            <item name="[L[#simxSetObjectIntParameter]]"/>
+            <item name="[L[#simxGetObjectFloatParameter]]"/>
+            <item name="[L[#simxGetObjectStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjectStringParameter" type="generic" generateCode="true">
+        <description>Retrieves a string parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to retrieve, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="string">
+                <description>The retrieved parameter</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectStringParameter.htm,sim.getObjectStringParameter]] (regular API)"/>
+            <item name="[L[#simxSetObjectStringParameter]]"/>
+            <item name="[L[#simxGetObjectIntParameter]]"/>
+            <item name="[L[#simxGetObjectFloatParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectFloatParameter" type="generic" generateCode="true">
+        <description>Sets a floating point parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to set, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="parameter" type="float">
+                <description>The desired value of the parameter</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 in case of an error, 0 if the parameter could not be set</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectFloatParameter.htm,sim.setObjectFloatParameter]] (regular API)"/>
+            <item name="[L[#simxGetObjectFloatParameter]]"/>
+            <item name="[L[#simxSetObjectIntParameter]]"/>
+            <item name="[L[#simxSetObjectStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectIntParameter" type="generic" generateCode="true">
+        <description>Sets an integer parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to set, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="parameter" type="int">
+                <description>The desired value of the parameter</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 in case of an error, 0 if the parameter could not be set</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectInt32Parameter.htm,sim.setObjectInt32Parameter]] (regular API)"/>
+            <item name="[L[#simxGetObjectIntParameter]]"/>
+            <item name="[L[#simxSetObjectFloatParameter]]"/>
+            <item name="[L[#simxSetObjectStringParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectStringParameter" type="generic" generateCode="true">
+        <description>Sets a string parameter of an object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>Handle of the object</description>
+            </param>
+            <param name="parameterID" type="int_eval">
+                <description>The identifier of the parameter to set, specified as number or string. See also the [L[objectParameterIDs.htm,list of possible object parameter identifiers]] and [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="parameter" type="string">
+                <description>The desired value of the parameter</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 in case of an error, 0 if the parameter could not be set</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectStringParameter.htm,sim.setObjectStringParameter]] (regular API)"/>
+            <item name="[L[#simxGetObjectStringParameter]]"/>
+            <item name="[L[#simxSetObjectIntParameter]]"/>
+            <item name="[L[#simxSetObjectFloatParameter]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetSimulationTime" type="generic" generateCode="true">
+        <description>Retrieves the current simulation time</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float">
+                <description>The simulation time in seconds</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetSimulationTime.htm,sim.getSimulationTime]] (regular API)"/>
+            <item name="[L[#simxGetSimulationState]]"/>
+            <item name="[L[#simxGetServerTimeInMs]]"/>
+            <item name="[L[#simxGetSimulationTimeStep]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetSimulationTimeStep" type="generic" generateCode="true">
+        <description>Retrieves the current simulation time step</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float">
+                <description>The simulation time step in seconds</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetSimulationTimeStep.htm,sim.getSimulationTimeStep]] (regular API)"/>
+            <item name="[L[#simxGetSimulationTime]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetServerTimeInMs" type="generic" generateCode="true">
+        <description>Retrieves the current server time, in milliseconds</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The server time. On Windows is equivalent to the [I[TimeGetTime()]] function, on Linux it is equivalent to the [I[gettimeofday()]] function.</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetSystemTimeInMs.htm,sim.getSystemTimeInMs]] (regular API)"/>
+            <item name="[L[#simxGetSimulationTime]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetSimulationState" type="generic" generateCode="true">
+        <description>Retrieves the state of the simulation</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The simulation state: 0=stopped, 8=paused, 16=running</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetSimulationState.htm,sim.getSimulationState]] (regular API)"/>
+            <item name="[L[#simxGetSimulationTime]]"/>
+            <item name="[L[#simxGetServerTimeInMs]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxEvaluateToInt" type="generic" generateCode="true">
+        <description>Evaluates a Lua expression to an integer, on the server side, e.g. [I[sim.object_proximitysensor_type]] would evaluate to [I[5]], [I[25+42]] would evaluate to [I[67]]</description>
+        <params>
+            <param name="str" type="string">
+                <description>The Lua expression to evaluate</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>the integer value of the evaluated Lua expression</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxEvaluateToStr]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxEvaluateToStr" type="generic" generateCode="true">
+        <description>Evaluates a Lua expression to a string, on the server side, e.g. [I[string.gsub("Hello World", "World", "Paul") ]] would evaluate to [I[Hello Paul]]</description>
+        <params>
+            <param name="str" type="string">
+                <description>The Lua expression to evaluate</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="string">
+                <description>the string value of the evaluated Lua expression</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[#simxEvaluateToInt]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetObjects" type="generic" generateCode="true">
+        <description>Retrieves object handles from the scene</description>
+        <params>
+            <param name="objectType" type="int_eval">
+                <description>The [L[apiConstants.htm#sceneObjectTypes,object type]], or [I["sim.handle_all"]] to retrieve all object handles in the scene. See also [L[#simxEvaluateToInt]]</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[]">
+                <description>The object handles</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjects.htm,sim.getObjects]] (regular API)"/>
+            <item name="[L[#simxGetObjectHandle]]"/>
         </check-also>
     </command>
     
