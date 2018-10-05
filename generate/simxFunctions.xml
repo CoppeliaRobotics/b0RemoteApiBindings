@@ -950,6 +950,7 @@
         <check-also>
             <item name="[L[regularApi/simStartSimulation.htm,sim.startSimulation]] (regular API)"/>
             <item name="[L[#simxStopSimulation]]"/>
+            <item name="[L[#simxPauseSimulation]]"/>
             <item name="[L[#simxSynchronousTrigger]]"/>
         </check-also>
     </command>
@@ -972,6 +973,29 @@
         <check-also>
             <item name="[L[regularApi/simStopSimulation.htm,sim.stopSimulation]] (regular API)"/>
             <item name="[L[#simxStartSimulation]]"/>
+            <item name="[L[#simxPauseSimulation]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxPauseSimulation" type="generic" generateCode="true">
+        <description>Requests a pause of the running simulation</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>0 if the operation could not be performed. >0 in case of success</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simPauseSimulation.htm,sim.pauseSimulation]] (regular API)"/>
+            <item name="[L[#simxStartSimulation]]"/>
+            <item name="[L[#simxStopSimulation]]"/>
         </check-also>
     </command>
 
@@ -1074,7 +1098,7 @@
                 <description>The pixel size of the points</description>
             </param>
             <param name="color" type="int[3]">
-                <description>The RGB color of the points (0-255)</description>
+                <description>The RGB color of the points (0-255). Specify negative values for emissive color</description>
             </param>
             <param name="coords" type="float[]">
                 <description>The coordinates for the points to display (3 per point)</description>
@@ -1107,7 +1131,7 @@
                 <description>The size of the spheres</description>
             </param>
             <param name="color" type="int[3]">
-                <description>The RGB color of the spheres (0-255)</description>
+                <description>The RGB color of the spheres (0-255). Specify negative values for emissive color</description>
             </param>
             <param name="coords" type="float[]">
                 <description>The coordinates for the spheres to display (3 per sphere)</description>
@@ -1126,6 +1150,7 @@
         </return>
         <check-also>
             <item name="[L[#simxRemoveDrawingObject]]"/>
+            <item name="[L[#simxCreateDummy]]"/>
             <item name="[L[#simxAddDrawingObject_points]]"/>
             <item name="[L[#simxAddDrawingObject_cubes]]"/>
             <item name="[L[#simxAddDrawingObject_segments]]"/>
@@ -1140,7 +1165,7 @@
                 <description>The size of the cubes</description>
             </param>
             <param name="color" type="int[3]">
-                <description>The RGB color of the cubes (0-255)</description>
+                <description>The RGB color of the cubes (0-255). Specify negative values for emissive color</description>
             </param>
             <param name="coords" type="float[]">
                 <description>The coordinates for the cubes to display (3 per cube)</description>
@@ -1173,7 +1198,7 @@
                 <description>The size of the segments, in pixels</description>
             </param>
             <param name="color" type="int[3]">
-                <description>The RGB color of the cubes (0-255)</description>
+                <description>The RGB color of the cubes (0-255). Specify negative values for emissive color</description>
             </param>
             <param name="segments" type="float[]">
                 <description>The coordinates for the segments to display (6 per segment)</description>
@@ -1203,7 +1228,7 @@
         <description>Displays triangles in the scene</description>
         <params>
             <param name="color" type="int[3]">
-                <description>The RGB color of the triangles (0-255)</description>
+                <description>The RGB color of the triangles (0-255). Specify negative values for emissive color</description>
             </param>
             <param name="triangles" type="float[]">
                 <description>The coordinates for the triangles to display (9 per triangle)</description>
@@ -2361,8 +2386,42 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simGetObjectParent.htm,sim.simGetObjectParent]] (regular API)"/>
+            <item name="[L[#simxSetObjectParent]]"/>
             <item name="[L[#simxGetObjectChild]]"/>
             <item name="[L[#simxGetObjectsInTree]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetObjectParent" type="generic" generateCode="true">
+        <description>Gives an object a new parent object</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="parentHandle" type="int">
+                <description>handle of the object that will become parent, or -1 if the object should become parentless</description>
+            </param>
+            <param name="assembly" type="bool">
+                <description>true if the two objects can be assembled via a predefined assembly transformation (refer to the assembling option in the object common properties). In that case, [B[parentHandle]] can't be -1, and [B[keepInPlace]] should be set to false</description>
+            </param>
+            <param name="keepInPlace" type="bool">
+                <description>indicates whether the object's absolute position and orientation should remain same</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 if the operation was not successful</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetObjectParent.htm,sim.simSetObjectParent]] (regular API)"/>
+            <item name="[L[#simxGetObjectParent]]"/>
         </check-also>
     </command>
     
@@ -2760,6 +2819,180 @@
         <check-also>
             <item name="[L[regularApi/simGetObjects.htm,sim.getObjects]] (regular API)"/>
             <item name="[L[#simxGetObjectHandle]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxCreateDummy" type="generic" generateCode="true">
+        <description>Creates a [L[dummies.htm,dummy object]] in the scene</description>
+        <params>
+            <param name="size" type="float">
+                <description>The size of the dummy</description>
+            </param>
+            <param name="color" type="int[3]">
+                <description>The RGB color of the dummy (0-255). Specify negative values for emissive color</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the created dummy</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simCreateDummy.htm,sim.createDummy]] (regular API)"/>
+            <item name="[L[#simxAddDrawingObject_spheres]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxGetObjectSelection" type="generic" generateCode="true">
+        <description>Retrieves all selected object handles</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int[]">
+                <description>The handles of the selected objects</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectSelection.htm,sim.getObjectSelection]] (regular API)"/>
+            <item name="[L[#simxSetObjectSelection]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxSetObjectSelection" type="generic" generateCode="true">
+        <description>Sets the object selection state</description>
+        <params>
+            <param name="selection" type="int[]">
+                <description>The handles of the objects to be selected</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 if operation was not successful</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simRemoveObjectFromSelection.htm,sim.removeObjectFromSelection]] (regular API)"/>
+            <item name="[L[regularApi/simAddObjectToSelection.htm,sim.addObjectToSelection]] (regular API)"/>
+            <item name="[L[#simxGetObjectSelection]]"/>
+        </check-also>
+    </command>
+
+    <command name="simxGetObjectVelocity" type="generic" generateCode="true">
+        <description>Reads the linear and angular velocity of an object. The velocity is a measured velocity (i.e. from one simulation step to the next)</description>
+        <params>
+            <param name="handle" type="int">
+                <description>The handle of the object</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float[3]">
+                <description>The linear velocity</description>
+            </param>
+            <param name="item3" type="float[3]">
+                <description>The angular velocity vector, i.e. its direction represents the rotation axis, its length the rotation velocity</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetObjectVelocity.htm,sim.getObjectVelocity]] (regular API)"/>
+        </check-also>
+    </command>
+    
+    <command name="simxLoadModelFromFile" type="generic" generateCode="true">
+        <description>Loads a model from file</description>
+        <params>
+            <param name="filename" type="string">
+                <description>The location of the model file. The filename extension is required</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the model base object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simLoadModel.htm,sim.loadModel]] (regular API)"/>
+            <item name="[L[#simxLoadModelFromBuffer]]"/>
+            <item name="[L[#simxLoadScene]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxLoadModelFromBuffer" type="generic" generateCode="true">
+        <description>Loads a model from a buffer</description>
+        <params>
+            <param name="buffer" type="byte[]">
+                <description>The buffer representing the model to load</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>The handle of the model base object</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simLoadModel.htm,sim.loadModel]] (regular API)"/>
+            <item name="[L[#simxLoadModelFromFile]]"/>
+            <item name="[L[#simxLoadScene]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxLoadScene" type="generic" generateCode="true">
+        <description>Loads a scene from file</description>
+        <params>
+            <param name="filename" type="string">
+                <description>The location of the scene file. The filename extension is required</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="int">
+                <description>-1 if operation was not successful</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simLoadScene.htm,sim.loadScene]] (regular API)"/>
+            <item name="[L[#simxLoadModelFromFile]]"/>
+            <item name="[L[#simxLoadModelFromBuffer]]"/>
         </check-also>
     </command>
     

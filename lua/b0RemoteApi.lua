@@ -347,296 +347,419 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     
     _handleFunction('inactivityTolerance',{inactivityToleranceInSec},_serviceCallTopic)
     print('\n  Connected!\n')
-    
-    function self.simxGetObjectHandle(objectName,topic)
-        local reqArgs = {objectName}
-        local funcName = 'GetObjectHandle'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
 
-    function self.simxAddStatusbarMessage(txt,topic)
-        local reqArgs = {txt}
-        local funcName = 'AddStatusbarMessage'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxStartSimulation(topic)
-        local reqArgs = {}
-        local funcName = 'StartSimulation'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxStopSimulation(topic)
-        local reqArgs = {}
-        local funcName = 'StopSimulation'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxGetVisionSensorImage(objectHandle,greyscale,topic)
-        local reqArgs = {objectHandle,greyscale}
-        local funcName = 'GetVisionSensorImage'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxSetVisionSensorImage(objectHandle,greyscale,img,topic)
-        local reqArgs = {objectHandle,greyscale,img}
-        local funcName = 'SetVisionSensorImage'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxAuxiliaryConsoleClose(consoleHandle,topic)
-        local reqArgs = {consoleHandle}
-        local funcName = 'AuxiliaryConsoleClose'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxAuxiliaryConsolePrint(consoleHandle,text,topic)
-        local reqArgs = {consoleHandle,text}
-        local funcName = 'AuxiliaryConsolePrint'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxAuxiliaryConsoleOpen(title,maxLines,mode,position,size,textColor,backgroundColor,topic)
-        local reqArgs = {title,maxLines,mode,position,size,textColor,backgroundColor}
-        local funcName = 'AuxiliaryConsoleOpen'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxAuxiliaryConsoleShow(consoleHandle,showState,topic)
-        local reqArgs = {consoleHandle,showState}
-        local funcName = 'AuxiliaryConsoleShow'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-    
-    function self.simxGetObjectPosition(objectHandle,refObjectHandle,topic)
-        local reqArgs = {objectHandle,refObjectHandle}
-        local funcName = 'GetObjectPosition'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-    
-    function self.simxAddDrawingObject_points(size,color,coords,topic)
-        local reqArgs = {size,color,coords}
-        local funcName = 'AddDrawingObject_points'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxAddDrawingObject_spheres(size,color,coords,topic)
-        local reqArgs = {size,color,coords}
-        local funcName = 'AddDrawingObject_spheres'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxAddDrawingObject_cubes(size,color,coords,topic)
-        local reqArgs = {size,color,coords}
-        local funcName = 'AddDrawingObject_cubes'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxAddDrawingObject_segments(lineSize,color,segments,topic)
-        local reqArgs = {lineSize,color,segments}
-        local funcName = 'AddDrawingObject_segments'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxAddDrawingObject_triangles(color,triangles,topic)
-        local reqArgs = {color,triangles}
-        local funcName = 'AddDrawingObject_triangles'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-
-    function self.simxRemoveDrawingObject(handle,topic)
-        local reqArgs = {handle}
-        local funcName = 'RemoveDrawingObject'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-    
     function self.simxCallScriptFunction(funcAtObjName,scriptType,arg,topic)
         local packedArg=b0.messagePack.pack(arg)
         local reqArgs = {funcAtObjName,scriptType,packedArg}
         local funcName = 'CallScriptFunction'
         return _handleFunction(funcName,reqArgs,topic)
     end
-        
-    function self.simxCheckCollision(entity1,entity2,topic)
-        local reqArgs = {entity1,entity2}
-        local funcName = 'CheckCollision'
-        return _handleFunction(funcName,reqArgs,topic)
+    
+    function self.simxGetObjectHandle(objectName,topic)
+        local reqArgs = {objectName}
+        return _handleFunction("GetObjectHandle",reqArgs,topic)
     end
-        
-    function self.simxGetCollisionHandle(name,topic)
-        local reqArgs = {name}
-        local funcName = 'GetCollisionHandle'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxAddStatusbarMessage(msg,topic)
+        local reqArgs = {msg}
+        return _handleFunction("AddStatusbarMessage",reqArgs,topic)
     end
-        
+    function self.simxGetObjectPosition(objectHandle,relObjHandle,topic)
+        local reqArgs = {objectHandle,relObjHandle}
+        return _handleFunction("GetObjectPosition",reqArgs,topic)
+    end
+    function self.simxGetObjectOrientation(objectHandle,relObjHandle,topic)
+        local reqArgs = {objectHandle,relObjHandle}
+        return _handleFunction("GetObjectOrientation",reqArgs,topic)
+    end
+    function self.simxGetObjectQuaternion(objectHandle,relObjHandle,topic)
+        local reqArgs = {objectHandle,relObjHandle}
+        return _handleFunction("GetObjectQuaternion",reqArgs,topic)
+    end
+    function self.simxGetObjectPose(objectHandle,relObjHandle,topic)
+        local reqArgs = {objectHandle,relObjHandle}
+        return _handleFunction("GetObjectPose",reqArgs,topic)
+    end
+    function self.simxGetObjectMatrix(objectHandle,relObjHandle,topic)
+        local reqArgs = {objectHandle,relObjHandle}
+        return _handleFunction("GetObjectMatrix",reqArgs,topic)
+    end
+    function self.simxSetObjectPosition(objectHandle,relObjHandle,position,topic)
+        local reqArgs = {objectHandle,relObjHandle,position}
+        return _handleFunction("SetObjectPosition",reqArgs,topic)
+    end
+    function self.simxSetObjectOrientation(objectHandle,relObjHandle,euler,topic)
+        local reqArgs = {objectHandle,relObjHandle,euler}
+        return _handleFunction("SetObjectOrientation",reqArgs,topic)
+    end
+    function self.simxSetObjectQuaternion(objectHandle,relObjHandle,quat,topic)
+        local reqArgs = {objectHandle,relObjHandle,quat}
+        return _handleFunction("SetObjectQuaternion",reqArgs,topic)
+    end
+    function self.simxSetObjectPose(objectHandle,relObjHandle,pose,topic)
+        local reqArgs = {objectHandle,relObjHandle,pose}
+        return _handleFunction("SetObjectPose",reqArgs,topic)
+    end
+    function self.simxSetObjectMatrix(objectHandle,relObjHandle,matr,topic)
+        local reqArgs = {objectHandle,relObjHandle,matr}
+        return _handleFunction("SetObjectMatrix",reqArgs,topic)
+    end
+    function self.simxClearFloatSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("ClearFloatSignal",reqArgs,topic)
+    end
+    function self.simxClearIntegerSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("ClearIntegerSignal",reqArgs,topic)
+    end
+    function self.simxClearStringSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("ClearStringSignal",reqArgs,topic)
+    end
+    function self.simxSetFloatSignal(sigName,sigValue,topic)
+        local reqArgs = {sigName,sigValue}
+        return _handleFunction("SetFloatSignal",reqArgs,topic)
+    end
+    function self.simxSetIntegerSignal(sigName,sigValue,topic)
+        local reqArgs = {sigName,sigValue}
+        return _handleFunction("SetIntegerSignal",reqArgs,topic)
+    end
+    function self.simxSetStringSignal(sigName,sigValue,topic)
+        local reqArgs = {sigName,sigValue}
+        return _handleFunction("SetStringSignal",reqArgs,topic)
+    end
+    function self.simxGetFloatSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("GetFloatSignal",reqArgs,topic)
+    end
+    function self.simxGetIntegerSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("GetIntegerSignal",reqArgs,topic)
+    end
+    function self.simxGetStringSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("GetStringSignal",reqArgs,topic)
+    end
+    function self.simxAuxiliaryConsoleClose(consoleHandle,topic)
+        local reqArgs = {consoleHandle}
+        return _handleFunction("AuxiliaryConsoleClose",reqArgs,topic)
+    end
+    function self.simxAuxiliaryConsolePrint(consoleHandle,text,topic)
+        local reqArgs = {consoleHandle,text}
+        return _handleFunction("AuxiliaryConsolePrint",reqArgs,topic)
+    end
+    function self.simxAuxiliaryConsoleShow(consoleHandle,showState,topic)
+        local reqArgs = {consoleHandle,showState}
+        return _handleFunction("AuxiliaryConsoleShow",reqArgs,topic)
+    end
+    function self.simxAuxiliaryConsoleOpen(title,maxLines,mode,position,size,textColor,backgroundColor,topic)
+        local reqArgs = {title,maxLines,mode,position,size,textColor,backgroundColor}
+        return _handleFunction("AuxiliaryConsoleOpen",reqArgs,topic)
+    end
+    function self.simxStartSimulation(topic)
+        local reqArgs = {0}
+        return _handleFunction("StartSimulation",reqArgs,topic)
+    end
+    function self.simxStopSimulation(topic)
+        local reqArgs = {0}
+        return _handleFunction("StopSimulation",reqArgs,topic)
+    end
+    function self.simxPauseSimulation(topic)
+        local reqArgs = {0}
+        return _handleFunction("PauseSimulation",reqArgs,topic)
+    end
+    function self.simxGetVisionSensorImage(objectHandle,greyScale,topic)
+        local reqArgs = {objectHandle,greyScale}
+        return _handleFunction("GetVisionSensorImage",reqArgs,topic)
+    end
+    function self.simxSetVisionSensorImage(objectHandle,greyScale,img,topic)
+        local reqArgs = {objectHandle,greyScale,img}
+        return _handleFunction("SetVisionSensorImage",reqArgs,topic)
+    end
+    function self.simxGetVisionSensorDepthBuffer(objectHandle,toMeters,asByteArray,topic)
+        local reqArgs = {objectHandle,toMeters,asByteArray}
+        return _handleFunction("GetVisionSensorDepthBuffer",reqArgs,topic)
+    end
+    function self.simxAddDrawingObject_points(size,color,coords,topic)
+        local reqArgs = {size,color,coords}
+        return _handleFunction("AddDrawingObject_points",reqArgs,topic)
+    end
+    function self.simxAddDrawingObject_spheres(size,color,coords,topic)
+        local reqArgs = {size,color,coords}
+        return _handleFunction("AddDrawingObject_spheres",reqArgs,topic)
+    end
+    function self.simxAddDrawingObject_cubes(size,color,coords,topic)
+        local reqArgs = {size,color,coords}
+        return _handleFunction("AddDrawingObject_cubes",reqArgs,topic)
+    end
+    function self.simxAddDrawingObject_segments(lineSize,color,segments,topic)
+        local reqArgs = {lineSize,color,segments}
+        return _handleFunction("AddDrawingObject_segments",reqArgs,topic)
+    end
+    function self.simxAddDrawingObject_triangles(color,triangles,topic)
+        local reqArgs = {color,triangles}
+        return _handleFunction("AddDrawingObject_triangles",reqArgs,topic)
+    end
+    function self.simxRemoveDrawingObject(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("RemoveDrawingObject",reqArgs,topic)
+    end
+    function self.simxGetCollisionHandle(nameOfObject,topic)
+        local reqArgs = {nameOfObject}
+        return _handleFunction("GetCollisionHandle",reqArgs,topic)
+    end
+    function self.simxGetDistanceHandle(nameOfObject,topic)
+        local reqArgs = {nameOfObject}
+        return _handleFunction("GetDistanceHandle",reqArgs,topic)
+    end
     function self.simxReadCollision(handle,topic)
         local reqArgs = {handle}
-        local funcName = 'ReadCollision'
-        return _handleFunction(funcName,reqArgs,topic)
+        return _handleFunction("ReadCollision",reqArgs,topic)
     end
-        
-    function self.simxCheckDistance(entity1,entity2,threshold,topic)
-        local reqArgs = {entity1,entity2,threshold}
-        local funcName = 'CheckDistance'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxGetDistanceHandle(name,topic)
-        local reqArgs = {name}
-        local funcName = 'GetDistanceHandle'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
     function self.simxReadDistance(handle,topic)
         local reqArgs = {handle}
-        local funcName = 'ReadDistance'
-        return _handleFunction(funcName,reqArgs,topic)
+        return _handleFunction("ReadDistance",reqArgs,topic)
     end
-        
-    function self.simxCheckProximitySensor(sensor,entity,topic)
-        local reqArgs = {sensor,entity}
-        local funcName = 'CheckProximitySensor'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxCheckCollision(entity1,entity2)
+        local reqArgs = {entity1}
+        return _handleFunction("CheckCollision",reqArgs,topic)
     end
-        
+    function self.simxCheckDistance(entity1,entity2,threshold)
+        local reqArgs = {entity1,entity2}
+        return _handleFunction("CheckDistance",reqArgs,topic)
+    end
     function self.simxReadProximitySensor(handle,topic)
         local reqArgs = {handle}
-        local funcName = 'ReadProximitySensor'
-        return _handleFunction(funcName,reqArgs,topic)
+        return _handleFunction("ReadProximitySensor",reqArgs,topic)
     end
-    
-    function self.simxCheckVisionSensor(sensor,entity,topic)
-        local reqArgs = {sensor,entity}
-        local funcName = 'CheckVisionSensor'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxCheckProximitySensor(handle,entity,topic)
+        local reqArgs = {handle,entity}
+        return _handleFunction("CheckProximitySensor",reqArgs,topic)
     end
-        
-    function self.simxReadVisionSensor(handle,topic)
-        local reqArgs = {handle}
-        local funcName = 'ReadVisionSensor'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
     function self.simxReadForceSensor(handle,topic)
         local reqArgs = {handle}
-        local funcName = 'ReadForceSensor'
-        return _handleFunction(funcName,reqArgs,topic)
+        return _handleFunction("ReadForceSensor",reqArgs,topic)
     end
-        
     function self.simxBreakForceSensor(handle,topic)
         local reqArgs = {handle}
-        local funcName = 'BreakForceSensor'
-        return _handleFunction(funcName,reqArgs,topic)
+        return _handleFunction("BreakForceSensor",reqArgs,topic)
     end
-        
-    function self.simxClearFloatSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'ClearFloatSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxReadVisionSensor(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("ReadVisionSensor",reqArgs,topic)
     end
-        
-    function self.simxClearIntegerSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'ClearIntegerSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxCheckVisionSensor(handle,entity,topic)
+        local reqArgs = {handle,entity}
+        return _handleFunction("CheckVisionSensor",reqArgs,topic)
     end
-        
-    function self.simxClearStringSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'ClearStringSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxCopyPasteObjects(objectHandles,options,topic)
+        local reqArgs = {objectHandles,options}
+        return _handleFunction("CopyPasteObjects",reqArgs,topic)
     end
-        
-    function self.simxSetFloatSignal(sig,val,topic)
-        local reqArgs = {sig,val}
-        local funcName = 'SetFloatSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxRemoveObjects(objectHandles,options,topic)
+        local reqArgs = {objectHandles,options}
+        return _handleFunction("RemoveObjects",reqArgs,topic)
     end
-        
-    function self.simxSetIntegerSignal(sig,val,topic)
-        local reqArgs = {sig,val}
-        local funcName = 'SetIntegerSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxCloseScene(topic)
+        local reqArgs = {0}
+        return _handleFunction("CloseScene",reqArgs,topic)
     end
-        
-    function self.simxSetStringSignal(sig,val,topic)
-        local reqArgs = {sig,val}
-        local funcName = 'SetStringSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxSetStringParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetStringParameter",reqArgs,topic)
     end
-        
-    function self.simxGetFloatSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'GetFloatSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxSetFloatParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetFloatParameter",reqArgs,topic)
     end
-        
-    function self.simxGetIntegerSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'GetIntegerSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxSetArrayParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetArrayParameter",reqArgs,topic)
     end
-        
-    function self.simxGetStringSignal(sig,topic)
-        local reqArgs = {sig}
-        local funcName = 'GetStringSignal'
-        return _handleFunction(funcName,reqArgs,topic)
+    function self.simxSetIntParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetIntParameter",reqArgs,topic)
+    end
+    function self.simxSetBoolParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetBoolParameter",reqArgs,topic)
+    end
+    function self.simxGetStringParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetStringParameter",reqArgs,topic)
+    end
+    function self.simxGetFloatParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetFloatParameter",reqArgs,topic)
+    end
+    function self.simxGetArrayParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetArrayParameter",reqArgs,topic)
+    end
+    function self.simxGetIntParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetIntParameter",reqArgs,topic)
+    end
+    function self.simxGetBoolParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetBoolParameter",reqArgs,topic)
+    end
+    function self.simxDisplayDialog(titleText,mainText,dialogType,inputText,topic)
+        local reqArgs = {titleText,mainText,dialogType,inputText}
+        return _handleFunction("DisplayDialog",reqArgs,topic)
+    end
+    function self.simxGetDialogResult(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("GetDialogResult",reqArgs,topic)
+    end
+    function self.simxGetDialogInput(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("GetDialogInput",reqArgs,topic)
+    end
+    function self.simxEndDialog(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("EndDialog",reqArgs,topic)
+    end
+    function self.simxExecuteScriptString(code,topic)
+        local reqArgs = {code}
+        return _handleFunction("ExecuteScriptString",reqArgs,topic)
+    end
+    function self.simxGetCollectionHandle(collectionName,topic)
+        local reqArgs = {collectionName}
+        return _handleFunction("GetCollectionHandle",reqArgs,topic)
+    end
+    function self.simxGetJointForce(jointHandle,topic)
+        local reqArgs = {jointHandle}
+        return _handleFunction("GetJointForce",reqArgs,topic)
+    end
+    function self.simxSetJointForce(jointHandle,forceOrTorque,topic)
+        local reqArgs = {jointHandle,forceOrTorque}
+        return _handleFunction("SetJointForce",reqArgs,topic)
+    end
+    function self.simxGetJointPosition(jointHandle,topic)
+        local reqArgs = {jointHandle}
+        return _handleFunction("GetJointPosition",reqArgs,topic)
+    end
+    function self.simxSetJointPosition(jointHandle,position,topic)
+        local reqArgs = {jointHandle,position}
+        return _handleFunction("SetJointPosition",reqArgs,topic)
+    end
+    function self.simxGetJointTargetPosition(jointHandle,topic)
+        local reqArgs = {jointHandle}
+        return _handleFunction("GetJointTargetPosition",reqArgs,topic)
+    end
+    function self.simxSetJointTargetPosition(jointHandle,targetPos,topic)
+        local reqArgs = {jointHandle,targetPos}
+        return _handleFunction("SetJointTargetPosition",reqArgs,topic)
+    end
+    function self.simxGetJointTargetVelocity(jointHandle,topic)
+        local reqArgs = {jointHandle}
+        return _handleFunction("GetJointTargetVelocity",reqArgs,topic)
+    end
+    function self.simxSetJointTargetVelocity(jointHandle,targetPos,topic)
+        local reqArgs = {jointHandle,targetPos}
+        return _handleFunction("SetJointTargetVelocity",reqArgs,topic)
+    end
+    function self.simxGetObjectChild(objectHandle,index,topic)
+        local reqArgs = {objectHandle,index}
+        return _handleFunction("GetObjectChild",reqArgs,topic)
+    end
+    function self.simxGetObjectParent(objectHandle,topic)
+        local reqArgs = {objectHandle}
+        return _handleFunction("GetObjectParent",reqArgs,topic)
+    end
+    function self.simxSetObjectParent(objectHandle,parentHandle,assembly,keepInPlace,topic)
+        local reqArgs = {objectHandle,parentHandle,assembly,keepInPlace}
+        return _handleFunction("SetObjectParent",reqArgs,topic)
+    end
+    function self.simxGetObjectsInTree(treeBaseHandle,objectType,options,topic)
+        local reqArgs = {treeBaseHandle,objectType,options}
+        return _handleFunction("GetObjectsInTree",reqArgs,topic)
+    end
+    function self.simxGetObjectName(objectHandle,altName,topic)
+        local reqArgs = {objectHandle,altName}
+        return _handleFunction("GetObjectName",reqArgs,topic)
+    end
+    function self.simxGetObjectFloatParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectFloatParameter",reqArgs,topic)
+    end
+    function self.simxGetObjectIntParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectIntParameter",reqArgs,topic)
+    end
+    function self.simxGetObjectStringParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectStringParameter",reqArgs,topic)
+    end
+    function self.simxSetObjectFloatParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectFloatParameter",reqArgs,topic)
+    end
+    function self.simxSetObjectIntParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectIntParameter",reqArgs,topic)
+    end
+    function self.simxSetObjectStringParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectStringParameter",reqArgs,topic)
+    end
+    function self.simxGetSimulationTime(topic)
+        local reqArgs = {0}
+        return _handleFunction("GetSimulationTime",reqArgs,topic)
+    end
+    function self.simxGetSimulationTimeStep(topic)
+        local reqArgs = {0}
+        return _handleFunction("GetSimulationTimeStep",reqArgs,topic)
+    end
+    function self.simxGetServerTimeInMs(topic)
+        local reqArgs = {0}
+        return _handleFunction("GetServerTimeInMs",reqArgs,topic)
+    end
+    function self.simxGetSimulationState(topic)
+        local reqArgs = {0}
+        return _handleFunction("GetSimulationState",reqArgs,topic)
+    end
+    function self.simxEvaluateToInt(str,topic)
+        local reqArgs = {str}
+        return _handleFunction("EvaluateToInt",reqArgs,topic)
+    end
+    function self.simxEvaluateToStr(str,topic)
+        local reqArgs = {str}
+        return _handleFunction("EvaluateToStr",reqArgs,topic)
+    end
+    function self.simxGetObjects(objectType,topic)
+        local reqArgs = {objectType}
+        return _handleFunction("GetObjects",reqArgs,topic)
+    end
+    function self.simxCreateDummy(size,color,topic)
+        local reqArgs = {size,color}
+        return _handleFunction("CreateDummy",reqArgs,topic)
+    end
+    function self.simxGetObjectSelection(topic)
+        local reqArgs = {0}
+        return _handleFunction("GetObjectSelection",reqArgs,topic)
+    end
+    function self.simxSetObjectSelection(selection,topic)
+        local reqArgs = {selection}
+        return _handleFunction("SetObjectSelection",reqArgs,topic)
+    end
+    function self.simxGetObjectVelocity(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("GetObjectVelocity",reqArgs,topic)
+    end
+    function self.simxLoadModelFromFile(filename,topic)
+        local reqArgs = {filename}
+        return _handleFunction("LoadModelFromFile",reqArgs,topic)
+    end
+    function self.simxLoadModelFromBuffer(buffer,topic)
+        local reqArgs = {buffer}
+        return _handleFunction("LoadModelFromBuffer",reqArgs,topic)
+    end
+    function self.simxLoadScene(filename,topic)
+        local reqArgs = {filename}
+        return _handleFunction("LoadScene",reqArgs,topic)
     end
 
-    function self.simxSetObjectPosition(objectHandle,refObjectHandle,pos,topic)
-        local reqArgs = {objectHandle,refObjectHandle,pos}
-        local funcName = 'SetObjectPosition'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxGetObjectOrientation(objectHandle,refObjectHandle,topic)
-        local reqArgs = {objectHandle,refObjectHandle}
-        local funcName = 'GetObjectOrientation'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxSetObjectOrientation(objectHandle,refObjectHandle,euler,topic)
-        local reqArgs = {objectHandle,refObjectHandle,euler}
-        local funcName = 'SetObjectOrientation'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxGetObjectQuaternion(objectHandle,refObjectHandle,topic)
-        local reqArgs = {objectHandle,refObjectHandle}
-        local funcName = 'GetObjectQuaternion'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxSetObjectQuaternion(objectHandle,refObjectHandle,quat,topic)
-        local reqArgs = {objectHandle,refObjectHandle,quat}
-        local funcName = 'SetObjectQuaternion'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxGetObjectPose(objectHandle,refObjectHandle,topic)
-        local reqArgs = {objectHandle,refObjectHandle}
-        local funcName = 'GetObjectPose'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxSetObjectPose(objectHandle,refObjectHandle,pose,topic)
-        local reqArgs = {objectHandle,refObjectHandle,pose}
-        local funcName = 'SetObjectPose'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxGetObjectMatrix(objectHandle,refObjectHandle,topic)
-        local reqArgs = {objectHandle,refObjectHandle}
-        local funcName = 'GetObjectMatrix'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
-    function self.simxSetObjectMatrix(objectHandle,refObjectHandle,matr,topic)
-        local reqArgs = {objectHandle,refObjectHandle,matr}
-        local funcName = 'SetObjectMatrix'
-        return _handleFunction(funcName,reqArgs,topic)
-    end
-        
     -- -------------------------------
     -- Add your custom functions here:
     -- -------------------------------

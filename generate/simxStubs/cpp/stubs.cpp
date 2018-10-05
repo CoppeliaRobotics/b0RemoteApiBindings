@@ -563,8 +563,8 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
 
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
-#py for p in cmd.params:
 #py loopCnt=1
+#py for p in cmd.params:
 #py if p.ctype()=='int_eval':
 #py loopCnt=2
 #py endif

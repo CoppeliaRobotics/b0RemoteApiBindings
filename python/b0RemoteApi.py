@@ -184,263 +184,319 @@ class RemoteApiClient:
         else:
             print('B0 Remote API error: invalid topic')
     
-    def simxAuxiliaryConsoleClose(self,consoleHandle,topic):
-        reqArgs = [consoleHandle]
-        funcName = 'AuxiliaryConsoleClose'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxAuxiliaryConsolePrint(self,consoleHandle,text,topic):
-        reqArgs = [consoleHandle,text]
-        funcName = 'AuxiliaryConsolePrint'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxAuxiliaryConsoleOpen(self,title,maxLines,mode,position,size,textColor,backgroundColor,topic):
-        reqArgs = [title,maxLines,mode,position,size,textColor,backgroundColor]
-        funcName = 'AuxiliaryConsoleOpen'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxAuxiliaryConsoleShow(self,consoleHandle,showState,topic):
-        reqArgs = [consoleHandle,showState]
-        funcName = 'AuxiliaryConsoleShow'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetObjectHandle(self,objectName,topic):
-        reqArgs = [objectName]
-        funcName = 'GetObjectHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddStatusbarMessage(self,txt,topic):
-        reqArgs = [txt]
-        funcName = 'AddStatusbarMessage'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxGetObjectPosition(self,objectHandle,refObjectHandle,topic):
-        reqArgs = [objectHandle,refObjectHandle]
-        funcName = 'GetObjectPosition'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxStartSimulation(self,topic):
-        reqArgs = []
-        funcName = 'StartSimulation'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxStopSimulation(self,topic):
-        reqArgs = []
-        funcName = 'StopSimulation'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxGetVisionSensorImage(self,objectHandle,greyscale,topic):
-        reqArgs = [objectHandle,greyscale]
-        funcName = 'GetVisionSensorImage'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxSetVisionSensorImage(self,objectHandle,greyscale,img,topic):
-        reqArgs = [objectHandle,greyscale,img]
-        funcName = 'SetVisionSensorImage'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddDrawingObject_points(self,size,color,coords,topic):
-        reqArgs = [size,color,coords]
-        funcName = 'AddDrawingObject_points'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddDrawingObject_spheres(self,size,color,coords,topic):
-        reqArgs = [size,color,coords]
-        funcName = 'AddDrawingObject_spheres'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddDrawingObject_cubes(self,size,color,coords,topic):
-        reqArgs = [size,color,coords]
-        funcName = 'AddDrawingObject_cubes'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddDrawingObject_segments(self,lineSize,color,segments,topic):
-        reqArgs = [lineSize,color,segments]
-        funcName = 'AddDrawingObject_segments'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxAddDrawingObject_triangles(self,color,triangles,topic):
-        reqArgs = [color,triangles]
-        funcName = 'AddDrawingObject_triangles'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxRemoveDrawingObject(self,handle,topic):
-        reqArgs = [handle]
-        funcName = 'RemoveDrawingObject'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
     def simxCallScriptFunction(self,funcAtObjName,scriptType,arg,topic):
         packedArg=msgpack.packb(arg)
         reqArgs = [funcAtObjName,scriptType,packedArg]
         funcName = 'CallScriptFunction'
         return self._handleFunction(funcName,reqArgs,topic)
         
-    def simxCheckCollision(self,entity1,entity2,topic):
-        reqArgs = [entity1,entity2]
-        funcName = 'CheckCollision'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetCollisionHandle(self,name,topic):
-        reqArgs = [name]
-        funcName = 'GetCollisionHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+    def simxGetObjectHandle(self,objectName,topic):
+        reqArgs = [objectName]
+        return self._handleFunction('GetObjectHandle',reqArgs,topic)
+    def simxAddStatusbarMessage(self,msg,topic):
+        reqArgs = [msg]
+        return self._handleFunction('AddStatusbarMessage',reqArgs,topic)
+    def simxGetObjectPosition(self,objectHandle,relObjHandle,topic):
+        reqArgs = [objectHandle,relObjHandle]
+        return self._handleFunction('GetObjectPosition',reqArgs,topic)
+    def simxGetObjectOrientation(self,objectHandle,relObjHandle,topic):
+        reqArgs = [objectHandle,relObjHandle]
+        return self._handleFunction('GetObjectOrientation',reqArgs,topic)
+    def simxGetObjectQuaternion(self,objectHandle,relObjHandle,topic):
+        reqArgs = [objectHandle,relObjHandle]
+        return self._handleFunction('GetObjectQuaternion',reqArgs,topic)
+    def simxGetObjectPose(self,objectHandle,relObjHandle,topic):
+        reqArgs = [objectHandle,relObjHandle]
+        return self._handleFunction('GetObjectPose',reqArgs,topic)
+    def simxGetObjectMatrix(self,objectHandle,relObjHandle,topic):
+        reqArgs = [objectHandle,relObjHandle]
+        return self._handleFunction('GetObjectMatrix',reqArgs,topic)
+    def simxSetObjectPosition(self,objectHandle,relObjHandle,position,topic):
+        reqArgs = [objectHandle,relObjHandle,position]
+        return self._handleFunction('SetObjectPosition',reqArgs,topic)
+    def simxSetObjectOrientation(self,objectHandle,relObjHandle,euler,topic):
+        reqArgs = [objectHandle,relObjHandle,euler]
+        return self._handleFunction('SetObjectOrientation',reqArgs,topic)
+    def simxSetObjectQuaternion(self,objectHandle,relObjHandle,quat,topic):
+        reqArgs = [objectHandle,relObjHandle,quat]
+        return self._handleFunction('SetObjectQuaternion',reqArgs,topic)
+    def simxSetObjectPose(self,objectHandle,relObjHandle,pose,topic):
+        reqArgs = [objectHandle,relObjHandle,pose]
+        return self._handleFunction('SetObjectPose',reqArgs,topic)
+    def simxSetObjectMatrix(self,objectHandle,relObjHandle,matr,topic):
+        reqArgs = [objectHandle,relObjHandle,matr]
+        return self._handleFunction('SetObjectMatrix',reqArgs,topic)
+    def simxClearFloatSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('ClearFloatSignal',reqArgs,topic)
+    def simxClearIntegerSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('ClearIntegerSignal',reqArgs,topic)
+    def simxClearStringSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('ClearStringSignal',reqArgs,topic)
+    def simxSetFloatSignal(self,sigName,sigValue,topic):
+        reqArgs = [sigName,sigValue]
+        return self._handleFunction('SetFloatSignal',reqArgs,topic)
+    def simxSetIntegerSignal(self,sigName,sigValue,topic):
+        reqArgs = [sigName,sigValue]
+        return self._handleFunction('SetIntegerSignal',reqArgs,topic)
+    def simxSetStringSignal(self,sigName,sigValue,topic):
+        reqArgs = [sigName,sigValue]
+        return self._handleFunction('SetStringSignal',reqArgs,topic)
+    def simxGetFloatSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('GetFloatSignal',reqArgs,topic)
+    def simxGetIntegerSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('GetIntegerSignal',reqArgs,topic)
+    def simxGetStringSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('GetStringSignal',reqArgs,topic)
+    def simxAuxiliaryConsoleClose(self,consoleHandle,topic):
+        reqArgs = [consoleHandle]
+        return self._handleFunction('AuxiliaryConsoleClose',reqArgs,topic)
+    def simxAuxiliaryConsolePrint(self,consoleHandle,text,topic):
+        reqArgs = [consoleHandle,text]
+        return self._handleFunction('AuxiliaryConsolePrint',reqArgs,topic)
+    def simxAuxiliaryConsoleShow(self,consoleHandle,showState,topic):
+        reqArgs = [consoleHandle,showState]
+        return self._handleFunction('AuxiliaryConsoleShow',reqArgs,topic)
+    def simxAuxiliaryConsoleOpen(self,title,maxLines,mode,position,size,textColor,backgroundColor,topic):
+        reqArgs = [title,maxLines,mode,position,size,textColor,backgroundColor]
+        return self._handleFunction('AuxiliaryConsoleOpen',reqArgs,topic)
+    def simxStartSimulation(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('StartSimulation',reqArgs,topic)
+    def simxStopSimulation(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('StopSimulation',reqArgs,topic)
+    def simxPauseSimulation(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('PauseSimulation',reqArgs,topic)
+    def simxGetVisionSensorImage(self,objectHandle,greyScale,topic):
+        reqArgs = [objectHandle,greyScale]
+        return self._handleFunction('GetVisionSensorImage',reqArgs,topic)
+    def simxSetVisionSensorImage(self,objectHandle,greyScale,img,topic):
+        reqArgs = [objectHandle,greyScale,img]
+        return self._handleFunction('SetVisionSensorImage',reqArgs,topic)
+    def simxGetVisionSensorDepthBuffer(self,objectHandle,toMeters,asByteArray,topic):
+        reqArgs = [objectHandle,toMeters,asByteArray]
+        return self._handleFunction('GetVisionSensorDepthBuffer',reqArgs,topic)
+    def simxAddDrawingObject_points(self,size,color,coords,topic):
+        reqArgs = [size,color,coords]
+        return self._handleFunction('AddDrawingObject_points',reqArgs,topic)
+    def simxAddDrawingObject_spheres(self,size,color,coords,topic):
+        reqArgs = [size,color,coords]
+        return self._handleFunction('AddDrawingObject_spheres',reqArgs,topic)
+    def simxAddDrawingObject_cubes(self,size,color,coords,topic):
+        reqArgs = [size,color,coords]
+        return self._handleFunction('AddDrawingObject_cubes',reqArgs,topic)
+    def simxAddDrawingObject_segments(self,lineSize,color,segments,topic):
+        reqArgs = [lineSize,color,segments]
+        return self._handleFunction('AddDrawingObject_segments',reqArgs,topic)
+    def simxAddDrawingObject_triangles(self,color,triangles,topic):
+        reqArgs = [color,triangles]
+        return self._handleFunction('AddDrawingObject_triangles',reqArgs,topic)
+    def simxRemoveDrawingObject(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('RemoveDrawingObject',reqArgs,topic)
+    def simxGetCollisionHandle(self,nameOfObject,topic):
+        reqArgs = [nameOfObject]
+        return self._handleFunction('GetCollisionHandle',reqArgs,topic)
+    def simxGetDistanceHandle(self,nameOfObject,topic):
+        reqArgs = [nameOfObject]
+        return self._handleFunction('GetDistanceHandle',reqArgs,topic)
     def simxReadCollision(self,handle,topic):
         reqArgs = [handle]
-        funcName = 'ReadCollision'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxCheckDistance(self,entity1,entity2,threshold,topic):
-        reqArgs = [entity1,entity2,threshold]
-        funcName = 'CheckDistance'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetDistanceHandle(self,name,topic):
-        reqArgs = [name]
-        funcName = 'GetDistanceHandle'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+        return self._handleFunction('ReadCollision',reqArgs,topic)
     def simxReadDistance(self,handle,topic):
         reqArgs = [handle]
-        funcName = 'ReadDistance'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxCheckProximitySensor(self,sensor,entity,topic):
-        reqArgs = [sensor,entity]
-        funcName = 'CheckProximitySensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+        return self._handleFunction('ReadDistance',reqArgs,topic)
+    def simxCheckCollision(self,entity1,entity2):
+        reqArgs = [entity1]
+        return self._handleFunction('CheckCollision',reqArgs,topic)
+    def simxCheckDistance(self,entity1,entity2,threshold):
+        reqArgs = [entity1,entity2]
+        return self._handleFunction('CheckDistance',reqArgs,topic)
     def simxReadProximitySensor(self,handle,topic):
         reqArgs = [handle]
-        funcName = 'ReadProximitySensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxCheckVisionSensor(self,sensor,entity,topic):
-        reqArgs = [sensor,entity]
-        funcName = 'CheckVisionSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxReadVisionSensor(self,handle,topic):
-        reqArgs = [handle]
-        funcName = 'ReadVisionSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+        return self._handleFunction('ReadProximitySensor',reqArgs,topic)
+    def simxCheckProximitySensor(self,handle,entity,topic):
+        reqArgs = [handle,entity]
+        return self._handleFunction('CheckProximitySensor',reqArgs,topic)
     def simxReadForceSensor(self,handle,topic):
         reqArgs = [handle]
-        funcName = 'ReadForceSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+        return self._handleFunction('ReadForceSensor',reqArgs,topic)
     def simxBreakForceSensor(self,handle,topic):
         reqArgs = [handle]
-        funcName = 'BreakForceSensor'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxClearFloatSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'ClearFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxClearIntegerSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'ClearIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxClearStringSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'ClearStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetFloatSignal(self,sig,val,topic):
-        reqArgs = [sig,val]
-        funcName = 'SetFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetIntegerSignal(self,sig,val,topic):
-        reqArgs = [sig,val]
-        funcName = 'SetIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetStringSignal(self,sig,val,topic):
-        reqArgs = [sig,val]
-        funcName = 'SetStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetFloatSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'GetFloatSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetIntegerSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'GetIntegerSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetStringSignal(self,sig,topic):
-        reqArgs = [sig]
-        funcName = 'GetStringSignal'
-        return self._handleFunction(funcName,reqArgs,topic)
-
-    def simxSetObjectPosition(self,objectHandle,refObjectHandle,pos,topic):
-        reqArgs = [objectHandle,refObjectHandle,pos]
-        funcName = 'SetObjectPosition'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetObjectOrientation(self,objectHandle,refObjectHandle,topic):
-        reqArgs = [objectHandle,refObjectHandle]
-        funcName = 'GetObjectOrientation'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetObjectOrientation(self,objectHandle,refObjectHandle,euler,topic):
-        reqArgs = [objectHandle,refObjectHandle,euler]
-        funcName = 'SetObjectOrientation'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetObjectQuaternion(self,objectHandle,refObjectHandle,topic):
-        reqArgs = [objectHandle,refObjectHandle]
-        funcName = 'GetObjectQuaternion'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetObjectQuaternion(self,objectHandle,refObjectHandle,quat,topic):
-        reqArgs = [objectHandle,refObjectHandle,quat]
-        funcName = 'SetObjectQuaternion'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetObjectPose(self,objectHandle,refObjectHandle,topic):
-        reqArgs = [objectHandle,refObjectHandle]
-        funcName = 'GetObjectPose'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetObjectPose(self,objectHandle,refObjectHandle,pose,topic):
-        reqArgs = [objectHandle,refObjectHandle,pose]
-        funcName = 'SetObjectPose'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxGetObjectMatrix(self,objectHandle,refObjectHandle,topic):
-        reqArgs = [objectHandle,refObjectHandle]
-        funcName = 'GetObjectMatrix'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxSetObjectMatrix(self,objectHandle,refObjectHandle,matr,topic):
-        reqArgs = [objectHandle,refObjectHandle,matr]
-        funcName = 'SetObjectMatrix'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxCopyPasteObjects(self,objectHandles,option,topic):
-        reqArgs = [objectHandles,option]
-        funcName = 'CopyPasteObjects'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
-    def simxRemoveObjects(self,objectHandles,option,topic):
-        reqArgs = [objectHandles,option]
-        funcName = 'RemoveObjects'
-        return self._handleFunction(funcName,reqArgs,topic)
-        
+        return self._handleFunction('BreakForceSensor',reqArgs,topic)
+    def simxReadVisionSensor(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('ReadVisionSensor',reqArgs,topic)
+    def simxCheckVisionSensor(self,handle,entity,topic):
+        reqArgs = [handle,entity]
+        return self._handleFunction('CheckVisionSensor',reqArgs,topic)
+    def simxCopyPasteObjects(self,objectHandles,options,topic):
+        reqArgs = [objectHandles,options]
+        return self._handleFunction('CopyPasteObjects',reqArgs,topic)
+    def simxRemoveObjects(self,objectHandles,options,topic):
+        reqArgs = [objectHandles,options]
+        return self._handleFunction('RemoveObjects',reqArgs,topic)
     def simxCloseScene(self,topic):
         reqArgs = [0]
-        funcName = 'CloseScene'
-        return self._handleFunction(funcName,reqArgs,topic)
+        return self._handleFunction('CloseScene',reqArgs,topic)
+    def simxSetStringParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetStringParameter',reqArgs,topic)
+    def simxSetFloatParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetFloatParameter',reqArgs,topic)
+    def simxSetArrayParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetArrayParameter',reqArgs,topic)
+    def simxSetIntParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetIntParameter',reqArgs,topic)
+    def simxSetBoolParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetBoolParameter',reqArgs,topic)
+    def simxGetStringParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetStringParameter',reqArgs,topic)
+    def simxGetFloatParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetFloatParameter',reqArgs,topic)
+    def simxGetArrayParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetArrayParameter',reqArgs,topic)
+    def simxGetIntParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetIntParameter',reqArgs,topic)
+    def simxGetBoolParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetBoolParameter',reqArgs,topic)
+    def simxDisplayDialog(self,titleText,mainText,dialogType,inputText,topic):
+        reqArgs = [titleText,mainText,dialogType,inputText]
+        return self._handleFunction('DisplayDialog',reqArgs,topic)
+    def simxGetDialogResult(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('GetDialogResult',reqArgs,topic)
+    def simxGetDialogInput(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('GetDialogInput',reqArgs,topic)
+    def simxEndDialog(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('EndDialog',reqArgs,topic)
+    def simxExecuteScriptString(self,code,topic):
+        reqArgs = [code]
+        return self._handleFunction('ExecuteScriptString',reqArgs,topic)
+    def simxGetCollectionHandle(self,collectionName,topic):
+        reqArgs = [collectionName]
+        return self._handleFunction('GetCollectionHandle',reqArgs,topic)
+    def simxGetJointForce(self,jointHandle,topic):
+        reqArgs = [jointHandle]
+        return self._handleFunction('GetJointForce',reqArgs,topic)
+    def simxSetJointForce(self,jointHandle,forceOrTorque,topic):
+        reqArgs = [jointHandle,forceOrTorque]
+        return self._handleFunction('SetJointForce',reqArgs,topic)
+    def simxGetJointPosition(self,jointHandle,topic):
+        reqArgs = [jointHandle]
+        return self._handleFunction('GetJointPosition',reqArgs,topic)
+    def simxSetJointPosition(self,jointHandle,position,topic):
+        reqArgs = [jointHandle,position]
+        return self._handleFunction('SetJointPosition',reqArgs,topic)
+    def simxGetJointTargetPosition(self,jointHandle,topic):
+        reqArgs = [jointHandle]
+        return self._handleFunction('GetJointTargetPosition',reqArgs,topic)
+    def simxSetJointTargetPosition(self,jointHandle,targetPos,topic):
+        reqArgs = [jointHandle,targetPos]
+        return self._handleFunction('SetJointTargetPosition',reqArgs,topic)
+    def simxGetJointTargetVelocity(self,jointHandle,topic):
+        reqArgs = [jointHandle]
+        return self._handleFunction('GetJointTargetVelocity',reqArgs,topic)
+    def simxSetJointTargetVelocity(self,jointHandle,targetPos,topic):
+        reqArgs = [jointHandle,targetPos]
+        return self._handleFunction('SetJointTargetVelocity',reqArgs,topic)
+    def simxGetObjectChild(self,objectHandle,index,topic):
+        reqArgs = [objectHandle,index]
+        return self._handleFunction('GetObjectChild',reqArgs,topic)
+    def simxGetObjectParent(self,objectHandle,topic):
+        reqArgs = [objectHandle]
+        return self._handleFunction('GetObjectParent',reqArgs,topic)
+    def simxSetObjectParent(self,objectHandle,parentHandle,assembly,keepInPlace,topic):
+        reqArgs = [objectHandle,parentHandle,assembly,keepInPlace]
+        return self._handleFunction('SetObjectParent',reqArgs,topic)
+    def simxGetObjectsInTree(self,treeBaseHandle,objectType,options,topic):
+        reqArgs = [treeBaseHandle,objectType,options]
+        return self._handleFunction('GetObjectsInTree',reqArgs,topic)
+    def simxGetObjectName(self,objectHandle,altName,topic):
+        reqArgs = [objectHandle,altName]
+        return self._handleFunction('GetObjectName',reqArgs,topic)
+    def simxGetObjectFloatParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectFloatParameter',reqArgs,topic)
+    def simxGetObjectIntParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectIntParameter',reqArgs,topic)
+    def simxGetObjectStringParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectStringParameter',reqArgs,topic)
+    def simxSetObjectFloatParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectFloatParameter',reqArgs,topic)
+    def simxSetObjectIntParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectIntParameter',reqArgs,topic)
+    def simxSetObjectStringParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectStringParameter',reqArgs,topic)
+    def simxGetSimulationTime(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('GetSimulationTime',reqArgs,topic)
+    def simxGetSimulationTimeStep(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('GetSimulationTimeStep',reqArgs,topic)
+    def simxGetServerTimeInMs(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('GetServerTimeInMs',reqArgs,topic)
+    def simxGetSimulationState(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('GetSimulationState',reqArgs,topic)
+    def simxEvaluateToInt(self,str,topic):
+        reqArgs = [str]
+        return self._handleFunction('EvaluateToInt',reqArgs,topic)
+    def simxEvaluateToStr(self,str,topic):
+        reqArgs = [str]
+        return self._handleFunction('EvaluateToStr',reqArgs,topic)
+    def simxGetObjects(self,objectType,topic):
+        reqArgs = [objectType]
+        return self._handleFunction('GetObjects',reqArgs,topic)
+    def simxCreateDummy(self,size,color,topic):
+        reqArgs = [size,color]
+        return self._handleFunction('CreateDummy',reqArgs,topic)
+    def simxGetObjectSelection(self,topic):
+        reqArgs = [0]
+        return self._handleFunction('GetObjectSelection',reqArgs,topic)
+    def simxSetObjectSelection(self,selection,topic):
+        reqArgs = [selection]
+        return self._handleFunction('SetObjectSelection',reqArgs,topic)
+    def simxGetObjectVelocity(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('GetObjectVelocity',reqArgs,topic)
+    def simxLoadModelFromFile(self,filename,topic):
+        reqArgs = [filename]
+        return self._handleFunction('LoadModelFromFile',reqArgs,topic)
+    def simxLoadModelFromBuffer(self,buffer,topic):
+        reqArgs = [buffer]
+        return self._handleFunction('LoadModelFromBuffer',reqArgs,topic)
+    def simxLoadScene(self,filename,topic):
+        reqArgs = [filename]
+        return self._handleFunction('LoadScene',reqArgs,topic)
+
+        % -------------------------------
+        % Add your custom functions here:
+        % -------------------------------
         
-    # -------------------------------
-    # Add your custom functions here:
-    # -------------------------------
-        
+    end
+end
