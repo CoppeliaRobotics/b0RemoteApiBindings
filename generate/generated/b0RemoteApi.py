@@ -313,11 +313,11 @@ class RemoteApiClient:
     def simxReadDistance(self,handle,topic):
         reqArgs = [handle]
         return self._handleFunction('ReadDistance',reqArgs,topic)
-    def simxCheckCollision(self,entity1,entity2):
-        reqArgs = [entity1]
-        return self._handleFunction('CheckCollision',reqArgs,topic)
-    def simxCheckDistance(self,entity1,entity2,threshold):
+    def simxCheckCollision(self,entity1,entity2,topic):
         reqArgs = [entity1,entity2]
+        return self._handleFunction('CheckCollision',reqArgs,topic)
+    def simxCheckDistance(self,entity1,entity2,threshold,topic):
+        reqArgs = [entity1,entity2,threshold]
         return self._handleFunction('CheckDistance',reqArgs,topic)
     def simxReadProximitySensor(self,handle,topic):
         reqArgs = [handle]

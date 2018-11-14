@@ -507,12 +507,12 @@ classdef b0RemoteApi < handle
             args = {handle};
             ret = obj.handleFunction('ReadDistance',args,topic);
         end
-        function ret = simxCheckCollision(obj,entity1,entity2)
-            args = {entity1};
+        function ret = simxCheckCollision(obj,entity1,entity2,topic)
+            args = {entity1,entity2};
             ret = obj.handleFunction('CheckCollision',args,topic);
         end
-        function ret = simxCheckDistance(obj,entity1,entity2,threshold)
-            args = {entity1,entity2};
+        function ret = simxCheckDistance(obj,entity1,entity2,threshold,topic)
+            args = {entity1,entity2,threshold};
             ret = obj.handleFunction('CheckDistance',args,topic);
         end
         function ret = simxReadProximitySensor(obj,handle,topic)

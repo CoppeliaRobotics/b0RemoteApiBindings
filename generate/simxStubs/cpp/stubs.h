@@ -146,8 +146,10 @@ public:
 
 
 
-    // -------------------------------
-    // Add your custom functions here:
-    // -------------------------------
+    // -----------------------------------------------------------
+    // Add your custom functions here, or even better,
+    // add them to b0RemoteApiBindings/generate/simxFunctions.xml,
+    // and generate this file again.
+    // -----------------------------------------------------------
     
 };

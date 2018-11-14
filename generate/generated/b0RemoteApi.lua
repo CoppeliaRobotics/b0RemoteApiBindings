@@ -519,12 +519,12 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {handle}
         return _handleFunction("ReadDistance",reqArgs,topic)
     end
-    function self.simxCheckCollision(entity1,entity2)
-        local reqArgs = {entity1}
+    function self.simxCheckCollision(entity1,entity2,topic)
+        local reqArgs = {entity1,entity2}
         return _handleFunction("CheckCollision",reqArgs,topic)
     end
-    function self.simxCheckDistance(entity1,entity2,threshold)
-        local reqArgs = {entity1,entity2}
+    function self.simxCheckDistance(entity1,entity2,threshold,topic)
+        local reqArgs = {entity1,entity2,threshold}
         return _handleFunction("CheckDistance",reqArgs,topic)
     end
     function self.simxReadProximitySensor(handle,topic)

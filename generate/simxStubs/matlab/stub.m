@@ -377,14 +377,16 @@ classdef b0RemoteApi < handle
 #py endif
 #py theStringToWrite+='};'
 `theStringToWrite`
-            ret = obj.handleFunction("`cmd.name[4:]`",args,topic);
+            ret = obj.handleFunction('`cmd.name[4:]`',args,topic);
         end
 #py endif
 #py endfor
 
-        % -------------------------------
-        % Add your custom functions here:
-        % -------------------------------
+        % -----------------------------------------------------------
+        % Add your custom functions here, or even better,
+        % add them to b0RemoteApiBindings/generate/simxFunctions.xml,
+        % and generate this file again.
+        % -----------------------------------------------------------
         
     end
 end

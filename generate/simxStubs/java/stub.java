@@ -653,6 +653,8 @@ public class b0RemoteApi
 #py else:
 #py theStringToWrite+='        final String '+p.name
 #py endif
+#py elif p.ctype()=='bool':
+#py theStringToWrite+='        boolean '+p.name
 #py else:
 #py theStringToWrite+='        '+p.htype()+' '+p.name
 #py endif
@@ -660,14 +662,14 @@ public class b0RemoteApi
 #py theStringToWrite+=',\n'
 #py endif
 #py endfor
-`theStringToWrite`) throws IO Exception
+`theStringToWrite`) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
 #py if len(cmd.params)==1:
 #py theStringToWrite='        args.packArrayHeader(1).packInt(0);\n'
 #py else:
 #py itemCnt=len(cmd.params)-1
-#py theStringToWrite='        args.packArrayHeader('+str(itemCnt)+')\n'
+#py theStringToWrite='        args.packArrayHeader('+str(itemCnt)+');\n'
 #py itemIndex=-1
 #py for p in cmd.params:
 #py itemIndex=itemIndex+1
@@ -735,8 +737,10 @@ public class b0RemoteApi
 #py endif
 #py endfor
 
-    // -------------------------------
-    // Add your custom functions here:
-    // -------------------------------
+    // -----------------------------------------------------------
+    // Add your custom functions here, or even better,
+    // add them to b0RemoteApiBindings/generate/simxFunctions.xml,
+    // and generate this file again.
+    // -----------------------------------------------------------
     
 }

@@ -570,7 +570,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
 #py endif
 #py endfor
 #py for k in range(loopCnt):
-std::vector<msgpack::object>* `cmd.name`(
+std::vector<msgpack::object>* b0RemoteApi::`cmd.name`(
 #py theStringToWrite=''
 #py itemCnt=len(cmd.params)
 #py itemIndex=-1
@@ -651,12 +651,12 @@ std::vector<msgpack::object>* `cmd.name`(
 #py for p in cmd.params:
 #py itemIndex=itemIndex+1
 #py if p.ctype()=='string':
-#py theStringToWrite+='        std::string('+p.name+')'
+#py theStringToWrite+='        '+p.name
 #py elif p.ctype()=='int_eval':
 #py if k==0:
 #py theStringToWrite+='        '+p.name
 #py else:
-#py theStringToWrite+='        std::string('+p.name+')'
+#py theStringToWrite+='        '+p.name
 #py endif
 #py elif p.htype()=='byte[]':
 #py theStringToWrite+='        std::string('+p.name+'_data,'+p.name+'_data+'+p.name+'_charCnt)'
@@ -672,6 +672,8 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+2)'
 #py elif p.htype()=='float[3]':
 #py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+3)'
+#py elif p.htype()=='float[4]':
+#py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+4)'
 #py elif p.htype()=='float[7]':
 #py theStringToWrite+='        std::vector<float>('+p.name+','+p.name+'+7)'
 #py elif p.htype()=='float[12]':
@@ -682,6 +684,8 @@ std::vector<msgpack::object>* `cmd.name`(
 #py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+2)'
 #py elif p.htype()=='double[3]':
 #py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+3)'
+#py elif p.htype()=='double[4]':
+#py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+4)'
 #py elif p.htype()=='double[7]':
 #py theStringToWrite+='        std::vector<double>('+p.name+','+p.name+'+7)'
 #py elif p.htype()=='double[12]':
@@ -706,6 +710,8 @@ std::vector<msgpack::object>* `cmd.name`(
 #py endif
 #py endfor
 
-// -------------------------------
-// Add your custom functions here:
-// -------------------------------
+// -----------------------------------------------------------
+// Add your custom functions here, or even better,
+// add them to b0RemoteApiBindings/generate/simxFunctions.xml,
+// and generate this file again.
+// -----------------------------------------------------------

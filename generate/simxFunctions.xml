@@ -1394,6 +1394,9 @@
             <param name="entity2" type="int_eval">
                 <description>The handle of the second entity. Can also be the [I["sim.handle_all"]] string, to check entity1 against all other collidable objects. See also [L[#simxEvaluateToInt]]</description>
             </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
         </params>
         <return>
             <param name="item1" type="bool">
@@ -1421,6 +1424,9 @@
             </param>
             <param name="threshold" type="float">
                 <description>If distance is bigger than the threshold, the distance is not calculated. If threshold is 0 or negative, then no threshold is used</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
             </param>
         </params>
         <return>

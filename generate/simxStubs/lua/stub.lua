@@ -394,9 +394,11 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
 #py endif
 #py endfor
 
-    -- -------------------------------
-    -- Add your custom functions here:
-    -- -------------------------------
-
+    -- -----------------------------------------------------------
+    -- Add your custom functions here, or even better,
+    -- add them to b0RemoteApiBindings/generate/simxFunctions.xml,
+    -- and generate this file again.
+    -- -----------------------------------------------------------
+    
     return self
 end
