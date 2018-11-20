@@ -946,7 +946,7 @@ public class b0RemoteApi
         args.packFloat(sigValue);
         return _handleFunction("SetFloatSignal",args,topic);
     }
-    public MessageUnpacker simxSetIntegerSignal(
+    public MessageUnpacker simxSetIntSignal(
         final String sigName,
         int sigValue,
         final String topic) throws IOException
@@ -955,7 +955,7 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(sigName);
         args.packInt(sigValue);
-        return _handleFunction("SetIntegerSignal",args,topic);
+        return _handleFunction("SetIntSignal",args,topic);
     }
     public MessageUnpacker simxSetStringSignal(
         final String sigName,
@@ -978,14 +978,14 @@ public class b0RemoteApi
         args.packString(sigName);
         return _handleFunction("GetFloatSignal",args,topic);
     }
-    public MessageUnpacker simxGetIntegerSignal(
+    public MessageUnpacker simxGetIntSignal(
         final String sigName,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(sigName);
-        return _handleFunction("GetIntegerSignal",args,topic);
+        return _handleFunction("GetIntSignal",args,topic);
     }
     public MessageUnpacker simxGetStringSignal(
         final String sigName,

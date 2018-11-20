@@ -85,18 +85,18 @@ if args.gen_simx_stubs or args.gen_simx_all:
         
 if args.gen_simx_docs or args.gen_simx_all:
     os.environ['remoteApiDocLang'] = 'cpp'
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.html'), '-o', output('b0RemoteApi-cpp.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.htm'), '-o', output('b0RemoteApi-cpp.htm'), '-P', self_dir)
 
     os.environ['remoteApiDocLang'] = 'java'
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.html'), '-o', output('b0RemoteApi-java.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.htm'), '-o', output('b0RemoteApi-java.htm'), '-P', self_dir)
 
     os.environ['remoteApiDocLang'] = 'lua'
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.html'), '-o', output('b0RemoteApi-lua.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.htm'), '-o', output('b0RemoteApi-lua.htm'), '-P', self_dir)
 
     os.environ['remoteApiDocLang'] = 'matlab'
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.html'), '-o', output('b0RemoteApi-matlab.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.htm'), '-o', output('b0RemoteApi-matlab.htm'), '-P', self_dir)
 
     os.environ['remoteApiDocLang'] = 'python'
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.html'), '-o', output('b0RemoteApi-python.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc.htm'), '-o', output('b0RemoteApi-python.htm'), '-P', self_dir)
         
-    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc-list.html'), '-o', output('b0RemoteApi-functionList.html'), '-P', self_dir)
+    runtool('pycpp', '-p', 'xml_file=' + args.xml_file, '-i', rel('simxStubs/doc-list.htm'), '-o', output('b0RemoteApi-functionList.htm'), '-P', self_dir)

@@ -419,9 +419,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName,sigValue}
         return _handleFunction("SetFloatSignal",reqArgs,topic)
     end
-    function self.simxSetIntegerSignal(sigName,sigValue,topic)
+    function self.simxSetIntSignal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
-        return _handleFunction("SetIntegerSignal",reqArgs,topic)
+        return _handleFunction("SetIntSignal",reqArgs,topic)
     end
     function self.simxSetStringSignal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
@@ -431,9 +431,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("GetFloatSignal",reqArgs,topic)
     end
-    function self.simxGetIntegerSignal(sigName,topic)
+    function self.simxGetIntSignal(sigName,topic)
         local reqArgs = {sigName}
-        return _handleFunction("GetIntegerSignal",reqArgs,topic)
+        return _handleFunction("GetIntSignal",reqArgs,topic)
     end
     function self.simxGetStringSignal(sigName,topic)
         local reqArgs = {sigName}

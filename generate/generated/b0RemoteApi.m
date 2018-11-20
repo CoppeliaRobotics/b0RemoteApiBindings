@@ -407,9 +407,9 @@ classdef b0RemoteApi < handle
             args = {sigName,sigValue};
             ret = obj.handleFunction('SetFloatSignal',args,topic);
         end
-        function ret = simxSetIntegerSignal(obj,sigName,sigValue,topic)
+        function ret = simxSetIntSignal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
-            ret = obj.handleFunction('SetIntegerSignal',args,topic);
+            ret = obj.handleFunction('SetIntSignal',args,topic);
         end
         function ret = simxSetStringSignal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
@@ -419,9 +419,9 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('GetFloatSignal',args,topic);
         end
-        function ret = simxGetIntegerSignal(obj,sigName,topic)
+        function ret = simxGetIntSignal(obj,sigName,topic)
             args = {sigName};
-            ret = obj.handleFunction('GetIntegerSignal',args,topic);
+            ret = obj.handleFunction('GetIntSignal',args,topic);
         end
         function ret = simxGetStringSignal(obj,sigName,topic)
             args = {sigName};

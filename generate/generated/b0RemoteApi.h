@@ -202,7 +202,7 @@ public:
         const char* sigName,
         float sigValue,
         const char* topic);
-    std::vector<msgpack::object>* simxSetIntegerSignal(
+    std::vector<msgpack::object>* simxSetIntSignal(
         const char* sigName,
         int sigValue,
         const char* topic);
@@ -213,7 +213,7 @@ public:
     std::vector<msgpack::object>* simxGetFloatSignal(
         const char* sigName,
         const char* topic);
-    std::vector<msgpack::object>* simxGetIntegerSignal(
+    std::vector<msgpack::object>* simxGetIntSignal(
         const char* sigName,
         const char* topic);
     std::vector<msgpack::object>* simxGetStringSignal(

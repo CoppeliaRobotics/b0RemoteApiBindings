@@ -238,18 +238,18 @@ class RemoteApiClient:
     def simxSetFloatSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetFloatSignal',reqArgs,topic)
-    def simxSetIntegerSignal(self,sigName,sigValue,topic):
+    def simxSetIntSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
-        return self._handleFunction('SetIntegerSignal',reqArgs,topic)
+        return self._handleFunction('SetIntSignal',reqArgs,topic)
     def simxSetStringSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetStringSignal',reqArgs,topic)
     def simxGetFloatSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetFloatSignal',reqArgs,topic)
-    def simxGetIntegerSignal(self,sigName,topic):
+    def simxGetIntSignal(self,sigName,topic):
         reqArgs = [sigName]
-        return self._handleFunction('GetIntegerSignal',reqArgs,topic)
+        return self._handleFunction('GetIntSignal',reqArgs,topic)
     def simxGetStringSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetStringSignal',reqArgs,topic)
