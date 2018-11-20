@@ -398,6 +398,8 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     -- Add your custom functions here, or even better,
     -- add them to b0RemoteApiBindings/generate/simxFunctions.xml,
     -- and generate this file again.
+    -- Then add the server part of your custom functions at the
+    -- beginning of file lua/b0RemoteApiServer.lua
     -- -----------------------------------------------------------
     
     return self
