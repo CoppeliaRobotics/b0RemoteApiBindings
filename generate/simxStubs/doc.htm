@@ -271,7 +271,7 @@
 #py #-----------------------------------------------------------------------------------------------
 #py elif lang=='java':
 #py if cmd.generic:
-#py cmdHtmlStr+='A MessageUnpacker. For convenience, you can use the <a href="#helperFunctions">helper functions</a> to read its values. The MessageUnpacker contains:</div>'
+#py cmdHtmlStr+='<div>A MessageUnpacker. For convenience, you can use the <a href="#helperFunctions">helper functions</a> to read its values. The MessageUnpacker contains:</div>'
 #py for p in cmd.returns:
 #py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.ctype()+'): '+generateLinks(p.description)+'</div>\n'
 #py endfor
@@ -285,11 +285,11 @@
 #py else:
 #py if cmd.generic:
 #py if lang=='lua':
-#py cmdHtmlStr+='A table that contains:</div>'
+#py cmdHtmlStr+='<div>A table that contains:</div>'
 #py elif lang=='matlab':
-#py cmdHtmlStr+='An array that contains:</div>'
+#py cmdHtmlStr+='<div>An array that contains:</div>'
 #py else:
-#py cmdHtmlStr+='A list that contains:</div>'
+#py cmdHtmlStr+='<div>A list that contains:</div>'
 #py endif
 #py for p in cmd.returns:
 #py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.htype()+'): '+generateLinks(p.description)+'</div>\n'
