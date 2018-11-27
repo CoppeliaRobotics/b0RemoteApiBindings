@@ -30,7 +30,7 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
     }
     _serviceClient=new b0::ServiceClient(_node,_serviceCallTopic);
     _defaultPublisher=new b0::Publisher(_node,_defaultPublisherTopic);
-    _defaultSubscriber=new b0::Subscriber(_node,_defaultSubscriberTopic,NULL); // we will poll the socket
+    _defaultSubscriber=new b0::Subscriber(_node,_defaultSubscriberTopic,0); // we will poll the socket
     std::cout << "\n  Running B0 Remote API client with channel name [" << channelName << "]" << std::endl;
     std::cout << "  make sure that: 1) the B0 resolver is running" << std::endl;
     std::cout << "                  2) V-REP is running the B0 Remote API server with the same channel name" << std::endl;
@@ -201,7 +201,7 @@ const char* b0RemoteApi::simxCreateSubscriber(CB_FUNC cb,int publishInterval,boo
 {
     std::string topic=_channelName+"Pub"+std::to_string(_nextDedicatedSubscriberHandle++)+_clientId;
     _allTopics.push_back(topic);
-    b0::Subscriber* sub=new b0::Subscriber(_node,topic,NULL,false,true);
+    b0::Subscriber* sub=new b0::Subscriber(_node,topic,0,false,true);
     //sub->setConflate(true);
     sub->init();
     SHandleAndCb dat;
@@ -248,7 +248,7 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
                 _tmpMsgPackObjects.push_back(msgpack::object());
             return(&_tmpMsgPackObjects);
         }
-        return(NULL);
+        return(nullptr);
     }
     else if (topic==_defaultPublisherTopic)
     {
@@ -260,7 +260,7 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
         packedMsg+=packedHeader.str();
         packedMsg+=packedArgs;
         _defaultPublisher->publish(packedMsg);
-        return(NULL);
+        return(nullptr);
     }
     else
     {
@@ -289,7 +289,7 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
                 std::string rep;
                 _serviceClient->call(packedMsg,rep);
             }
-            return(NULL);
+            return(nullptr);
         }
         else
         {
@@ -304,11 +304,11 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
                 packedMsg+=packedHeader.str();
                 packedMsg+=packedArgs;
                 it->second->publish(packedMsg);
-                return(NULL);
+                return(nullptr);
             }
         }
     }
-    return(NULL);
+    return(nullptr);
 }
 
 void b0RemoteApi::print(const std::vector<msgpack::object>* msg)
@@ -330,105 +330,105 @@ bool b0RemoteApi::hasValue(const std::vector<msgpack::object>* msg)
     return(msg->size()>0);
 }
 
-const msgpack::object* b0RemoteApi::readValue(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+bool b0RemoteApi::readBool(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    while ( (valuesToDiscard>0)&&(msg->size()>0) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&(val->type==msgpack::type::BOOLEAN) )
     {
-        msg->erase(msg->begin());
-        valuesToDiscard--;
-    }
-    if ( (valuesToDiscard==0)&&(msg->size()>0) )
-    {
-        const msgpack::object* ret=&msg->at(0);
-        msg->erase(msg->begin());
-        if (success!=NULL)
-            success[0]=true;
-        return(ret);
-    }
-    if (success!=NULL)
-        success[0]=false;
-    return(NULL);
-}
-
-bool b0RemoteApi::readBool(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
-{
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&(val->type==msgpack::type::BOOLEAN) )
-    {
-        if (success!=NULL)
+        if (success!=nullptr)
             success[0]=true;
         return(val->as<bool>());
     }
-    if (success!=NULL)
+    if (success!=nullptr)
         success[0]=false;
     return(false);
 }
 
-int b0RemoteApi::readInt(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+int b0RemoteApi::readInt(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&( (val->type==msgpack::type::POSITIVE_INTEGER)||(val->type==msgpack::type::NEGATIVE_INTEGER)||(val->type==msgpack::type::FLOAT) ) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&( (val->type==msgpack::type::POSITIVE_INTEGER)||(val->type==msgpack::type::NEGATIVE_INTEGER)||(val->type==msgpack::type::FLOAT) ) )
     {
-        if (success!=NULL)
+        if (success!=nullptr)
             success[0]=true;
+        if (val->type==msgpack::type::FLOAT)
+        {
+            double v=val->as<double>();
+            if (v<0.0)
+                return((int)(v-0.5));
+            return((int)(v+0.5));
+        }
         return(val->as<int>());
     }
-    if (success!=NULL)
+    if (success!=nullptr)
         success[0]=false;
-    return(false);
+    return(0);
 }
 
-float b0RemoteApi::readFloat(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+float b0RemoteApi::readFloat(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    return((float)readDouble(msg,valuesToDiscard,success));
+    return((float)readDouble(msg,pos,success));
 }
 
-double b0RemoteApi::readDouble(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+double b0RemoteApi::readDouble(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&( (val->type==msgpack::type::POSITIVE_INTEGER)||(val->type==msgpack::type::NEGATIVE_INTEGER)||(val->type==msgpack::type::FLOAT) ) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&( (val->type==msgpack::type::POSITIVE_INTEGER)||(val->type==msgpack::type::NEGATIVE_INTEGER)||(val->type==msgpack::type::FLOAT) ) )
     {
-        if (success!=NULL)
+        if (success!=nullptr)
             success[0]=true;
-        return(val->as<double>());
+        if (val->type==msgpack::type::FLOAT)
+            return(val->as<double>());
+        return((double)val->as<int>());
     }
-    if (success!=NULL)
+    if (success!=nullptr)
         success[0]=false;
-    return(false);
+    return(0.0);
 }
 
-std::string b0RemoteApi::readString(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+std::string b0RemoteApi::readString(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    return(readByteArray(msg,valuesToDiscard,success));
+    return(readByteArray(msg,pos,success));
 }
 
-std::string b0RemoteApi::readByteArray(std::vector<msgpack::object>* msg,int valuesToDiscard/*=0*/,bool* success/*=NULL*/)
+std::string b0RemoteApi::readByteArray(std::vector<msgpack::object>* msg,int pos,bool* success)
 {
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&( (val->type==msgpack::type::STR)||(val->type==msgpack::type::BIN) ) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&( (val->type==msgpack::type::STR)||(val->type==msgpack::type::BIN) ) )
     {
-        if (success!=NULL)
+        if (success!=nullptr)
             success[0]=true;
         return(val->as<std::string>());
     }
-    if (success!=NULL)
+    if (success!=nullptr)
         success[0]=false;
-    return(false);
+    return("");
 }
 
-bool b0RemoteApi::readIntArray(std::vector<msgpack::object>* msg,std::vector<int>& array,int valuesToDiscard/*=0*/)
+bool b0RemoteApi::readIntArray(std::vector<msgpack::object>* msg,std::vector<int>& array,int pos)
 {
     bool retVal=false;
     array.clear();
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&(val->type==msgpack::type::ARRAY) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&(val->type==msgpack::type::ARRAY) )
     {
         std::vector<msgpack::object> vals;
         val->convert(vals);
         for (size_t i=0;i<vals.size();i++)
         {
             if ( (vals[i].type==msgpack::type::POSITIVE_INTEGER)||(vals[i].type==msgpack::type::NEGATIVE_INTEGER)||(vals[i].type==msgpack::type::FLOAT) )
-                array.push_back(vals[i].as<int>());
+            {
+                if (vals[i].type==msgpack::type::FLOAT)
+                {
+                    double v=vals[i].as<double>();
+                    if (v<0.0)
+                        array.push_back((int)(v-0.5));
+                    else
+                        array.push_back((int)(v+0.5));
+                }
+                else
+                    array.push_back(vals[i].as<int>());
+            }
             else
                 array.push_back(0);
         }
@@ -437,19 +437,24 @@ bool b0RemoteApi::readIntArray(std::vector<msgpack::object>* msg,std::vector<int
     return(retVal);
 }
 
-bool b0RemoteApi::readFloatArray(std::vector<msgpack::object>* msg,std::vector<float>& array,int valuesToDiscard/*=0*/)
+bool b0RemoteApi::readFloatArray(std::vector<msgpack::object>* msg,std::vector<float>& array,int pos)
 {
     bool retVal=false;
     array.clear();
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&(val->type==msgpack::type::ARRAY) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&(val->type==msgpack::type::ARRAY) )
     {
         std::vector<msgpack::object> vals;
         val->convert(vals);
         for (size_t i=0;i<vals.size();i++)
         {
             if ( (vals[i].type==msgpack::type::POSITIVE_INTEGER)||(vals[i].type==msgpack::type::NEGATIVE_INTEGER)||(vals[i].type==msgpack::type::FLOAT) )
-                array.push_back(vals[i].as<float>());
+            {
+                if (vals[i].type==msgpack::type::FLOAT)
+                    array.push_back(vals[i].as<float>());
+                else
+                    array.push_back((float)vals[i].as<int>());
+            }
             else
                 array.push_back(0.0f);
         }
@@ -458,19 +463,24 @@ bool b0RemoteApi::readFloatArray(std::vector<msgpack::object>* msg,std::vector<f
     return(retVal);
 }
 
-bool b0RemoteApi::readDoubleArray(std::vector<msgpack::object>* msg,std::vector<double>& array,int valuesToDiscard/*=0*/)
+bool b0RemoteApi::readDoubleArray(std::vector<msgpack::object>* msg,std::vector<double>& array,int pos)
 {
     bool retVal=false;
     array.clear();
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&(val->type==msgpack::type::ARRAY) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&(val->type==msgpack::type::ARRAY) )
     {
         std::vector<msgpack::object> vals;
         val->convert(vals);
         for (size_t i=0;i<vals.size();i++)
         {
             if ( (vals[i].type==msgpack::type::POSITIVE_INTEGER)||(vals[i].type==msgpack::type::NEGATIVE_INTEGER)||(vals[i].type==msgpack::type::FLOAT) )
-                array.push_back(vals[i].as<double>());
+            {
+                if (vals[i].type==msgpack::type::FLOAT)
+                    array.push_back(vals[i].as<double>());
+                else
+                    array.push_back((double)vals[i].as<int>());
+            }
             else
                 array.push_back(0.0);
         }
@@ -479,12 +489,12 @@ bool b0RemoteApi::readDoubleArray(std::vector<msgpack::object>* msg,std::vector<
     return(retVal);
 }
 
-bool b0RemoteApi::readStringArray(std::vector<msgpack::object>* msg,std::vector<std::string>& array,int valuesToDiscard/*=0*/)
+bool b0RemoteApi::readStringArray(std::vector<msgpack::object>* msg,std::vector<std::string>& array,int pos)
 {
     bool retVal=false;
     array.clear();
-    const msgpack::object* val=readValue(msg,valuesToDiscard);
-    if ( (val!=NULL)&&(val->type==msgpack::type::ARRAY) )
+    const msgpack::object* val=&msg->at(pos);
+    if ( (val!=nullptr)&&(val->type==msgpack::type::ARRAY) )
     {
         std::vector<msgpack::object> vals;
         val->convert(vals);

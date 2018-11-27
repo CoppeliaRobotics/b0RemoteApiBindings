@@ -47,17 +47,17 @@ public:
 
     static void print(const std::vector<msgpack::object>* msg);
     static bool hasValue(const std::vector<msgpack::object>* msg);
-    static const msgpack::object* readValue(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static bool readBool(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static int readInt(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static float readFloat(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static double readDouble(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static std::string readString(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static std::string readByteArray(std::vector<msgpack::object>* msg,int valuesToDiscard=0,bool* success=NULL);
-    static bool readIntArray(std::vector<msgpack::object>* msg,std::vector<int>& array,int valuesToDiscard=0);
-    static bool readFloatArray(std::vector<msgpack::object>* msg,std::vector<float>& array,int valuesToDiscard=0);
-    static bool readDoubleArray(std::vector<msgpack::object>* msg,std::vector<double>& array,int valuesToDiscard=0);
-    static bool readStringArray(std::vector<msgpack::object>* msg,std::vector<std::string>& array,int valuesToDiscard=0);
+
+    static bool readBool(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static int readInt(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static float readFloat(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static double readDouble(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static std::string readString(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static std::string readByteArray(std::vector<msgpack::object>* msg,int pos,bool* success=nullptr);
+    static bool readIntArray(std::vector<msgpack::object>* msg,std::vector<int>& array,int pos);
+    static bool readFloatArray(std::vector<msgpack::object>* msg,std::vector<float>& array,int pos);
+    static bool readDoubleArray(std::vector<msgpack::object>* msg,std::vector<double>& array,int pos);
+    static bool readStringArray(std::vector<msgpack::object>* msg,std::vector<std::string>& array,int pos);
 
 protected:
     std::vector<msgpack::object>* _handleFunction(const char* funcName,const std::string& packedArgs,const char* topic);
@@ -202,7 +202,7 @@ public:
         const char* sigName,
         float sigValue,
         const char* topic);
-    std::vector<msgpack::object>* simxSetIntegerSignal(
+    std::vector<msgpack::object>* simxSetIntSignal(
         const char* sigName,
         int sigValue,
         const char* topic);
@@ -213,7 +213,7 @@ public:
     std::vector<msgpack::object>* simxGetFloatSignal(
         const char* sigName,
         const char* topic);
-    std::vector<msgpack::object>* simxGetIntegerSignal(
+    std::vector<msgpack::object>* simxGetIntSignal(
         const char* sigName,
         const char* topic);
     std::vector<msgpack::object>* simxGetStringSignal(
@@ -605,9 +605,11 @@ public:
 
 
     // -----------------------------------------------------------
-    // Add your custom functions here, or even better,
+    // Add your custom functions here (and in the cpp file), or even better,
     // add them to b0RemoteApiBindings/generate/simxFunctions.xml,
     // and generate this file again.
+    // Then add the server part of your custom functions at the
+    // beginning of file lua/b0RemoteApiServer.lua
     // -----------------------------------------------------------
     
 };

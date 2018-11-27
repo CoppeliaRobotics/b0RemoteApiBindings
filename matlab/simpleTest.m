@@ -1,6 +1,6 @@
 % Make sure to have V-REP running, with followig scene loaded:
 %
-% scenes/blueZeroBasedRemoteApiDemo.ttt
+% scenes/B0-basedRemoteApiDemo.ttt
 %
 % Do not launch simulation, and make sure that the B0 resolver
 % is running. Then run "simpleTest"
