@@ -90,6 +90,12 @@ classdef b0RemoteApi < handle
                     loadlibrary(obj.libName,@b0RemoteApiProto);
                 end
             end
+            initialized=calllib(obj.libName,'b0_is_initialized');
+            if ~initialized
+                arg1=libpointer('int32Ptr',int32(1));
+                arg2=libpointer('stringPtrPtr',{'b0Matlab'});
+                calllib(obj.libName,'b0_init',arg1,arg2);
+            end
             obj.node = calllib(obj.libName,'b0_node_new',libpointer('int8Ptr',[uint8(obj.nodeName) 0]));
             chars = ['a':'z' 'A':'Z' '0':'9'];
             n = randi(numel(chars),[1 10]);
@@ -98,6 +104,7 @@ classdef b0RemoteApi < handle
 
             tmp = libpointer('int8Ptr',[uint8(obj.serviceCallTopic) 0]);
             obj.serviceClient = calllib(obj.libName,'b0_service_client_new_ex',obj.node,tmp,1,1);
+            calllib(obj.libName,'b0_service_client_set_option',obj.serviceClient,3,1000); % read timeout to 1000ms
 
             tmp = libpointer('int8Ptr',[uint8(obj.defaultPublisherTopic) 0]);
             obj.defaultPublisher = calllib(obj.libName,'b0_publisher_new_ex',obj.node,tmp,1,1);
@@ -176,7 +183,11 @@ classdef b0RemoteApi < handle
             obj.nextDedicatedSubscriberHandle=obj.nextDedicatedSubscriberHandle+1;
             tmp = libpointer('int8Ptr',[uint8(topic) 0]);
             sub = calllib(obj.libName,'b0_subscriber_new_ex',obj.node,tmp,[],0,1); % We will poll the socket
-            %calllib(obj.libName,'b0_subscriber_set_conflate',sub,1);
+            if dropMessages
+                calllib(obj.libName,'b0_subscriber_set_option',sub,6,1); % enable conflate
+            else
+                calllib(obj.libName,'b0_subscriber_set_option',sub,6,0); % disable conflate
+            end
             calllib(obj.libName,'b0_subscriber_init',sub);
             theMap=containers.Map;
             theMap('handle')=sub;

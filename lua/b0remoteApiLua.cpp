@@ -1,10 +1,21 @@
 #include <string>
 
 extern "C" {
-    #include <b0/c.h>
+    #include <c.h>
     #include "lua.h"
     #include "lualib.h"
     #include "lauxlib.h"
+}
+
+#define B0_INIT_COMMAND "b0.init"
+int B0_INIT_CALLBACK(lua_State* L)
+{
+    int argCnt=lua_gettop(L);
+    int retValCnt=0;
+    int arg1=1;
+    const char* arg2="b0Lua";
+    b0_init(&arg1,(char**)&arg2);
+    return(retValCnt);
 }
 
 #define B0_NODE_NEW_COMMAND "b0.node_new"
@@ -146,6 +157,23 @@ int B0_SERVICE_CLIENT_CALL_CALLBACK(lua_State* L)
             b0_buffer_delete(dataOut);
             retValCnt=1;
         }
+    }
+    return(retValCnt);
+}
+
+#define B0_SERVICE_CLIENT_SET_OPTION_COMMAND "b0.service_client_set_option"
+int B0_SERVICE_CLIENT_SET_OPTION_CALLBACK(lua_State* L)
+{
+    int argCnt=lua_gettop(L);
+    int retValCnt=0;
+    if ( (argCnt>=3)&&lua_islightuserdata(L,1)&&lua_isnumber(L,2)&&lua_isnumber(L,3) )
+    {
+        b0_service_client* ptr=(b0_service_client*)lua_touserdata(L,1);
+        int option=(int)lua_tointeger(L,2);
+        int optionVal=(int)lua_tointeger(L,3);
+        int res=b0_service_client_set_option(ptr,option,optionVal);
+        lua_pushinteger(L,res);
+        retValCnt=1;
     }
     return(retValCnt);
 }
@@ -295,16 +323,19 @@ int B0_SUBSCRIBER_READ_CALLBACK(lua_State* L)
     return(retValCnt);
 }
 
-#define B0_SUBSCRIBER_SET_CONFLATE_COMMAND "b0.subscriber_set_conflate"
-int B0_SUBSCRIBER_SET_CONFLATE_CALLBACK(lua_State* L)
+#define B0_SUBSCRIBER_SET_OPTION_COMMAND "b0.subscriber_set_option"
+int B0_SUBSCRIBER_SET_OPTION_CALLBACK(lua_State* L)
 {
     int argCnt=lua_gettop(L);
     int retValCnt=0;
-    if ( (argCnt>=2)&&lua_islightuserdata(L,1)&&lua_isnumber(L,2) )
+    if ( (argCnt>=3)&&lua_islightuserdata(L,1)&&lua_isnumber(L,2)&&lua_isnumber(L,3) )
     {
         b0_subscriber* ptr=(b0_subscriber*)lua_touserdata(L,1);
-        int conflate=(int)lua_tointeger(L,2);
-        b0_subscriber_set_conflate(ptr,conflate);
+        int option=(int)lua_tointeger(L,2);
+        int optionVal=(int)lua_tointeger(L,3);
+        int res=b0_subscriber_set_option(ptr,option,optionVal);
+        lua_pushinteger(L,res);
+        retValCnt=1;
     }
     return(retValCnt);
 }
@@ -341,6 +372,10 @@ extern "C" int luaopen_b0Lua(lua_State *L)
 {
     luaL_dostring(L,"b0={}");
 
+    luaL_dostring(L,"b0.SOCK_OPT_READTIMEOUT=3");
+    luaL_dostring(L,"b0.SOCK_OPT_CONFLATE=6");
+
+    lua_registerN(L,B0_INIT_COMMAND,B0_INIT_CALLBACK);
     lua_registerN(L,B0_NODE_NEW_COMMAND,B0_NODE_NEW_CALLBACK);
     lua_registerN(L,B0_NODE_DELETE_COMMAND,B0_NODE_DELETE_CALLBACK);
     lua_registerN(L,B0_NODE_INIT_COMMAND,B0_NODE_INIT_CALLBACK);
@@ -351,6 +386,7 @@ extern "C" int luaopen_b0Lua(lua_State *L)
     lua_registerN(L,B0_SERVICE_CLIENT_NEW_EX_COMMAND,B0_SERVICE_CLIENT_NEW_EX_CALLBACK);
     lua_registerN(L,B0_SERVICE_CLIENT_DELETE_COMMAND,B0_SERVICE_CLIENT_DELETE_CALLBACK);
     lua_registerN(L,B0_SERVICE_CLIENT_CALL_COMMAND,B0_SERVICE_CLIENT_CALL_CALLBACK);
+    lua_registerN(L,B0_SERVICE_CLIENT_SET_OPTION_COMMAND,B0_SERVICE_CLIENT_SET_OPTION_CALLBACK);
 
     lua_registerN(L,B0_PUBLISHER_NEW_EX_COMMAND,B0_PUBLISHER_NEW_EX_CALLBACK);
     lua_registerN(L,B0_PUBLISHER_DELETE_COMMAND,B0_PUBLISHER_DELETE_CALLBACK);
@@ -362,7 +398,7 @@ extern "C" int luaopen_b0Lua(lua_State *L)
     lua_registerN(L,B0_SUBSCRIBER_INIT_COMMAND,B0_SUBSCRIBER_INIT_CALLBACK);
     lua_registerN(L,B0_SUBSCRIBER_POLL_COMMAND,B0_SUBSCRIBER_POLL_CALLBACK);
     lua_registerN(L,B0_SUBSCRIBER_READ_COMMAND,B0_SUBSCRIBER_READ_CALLBACK);
-    lua_registerN(L,B0_SUBSCRIBER_SET_CONFLATE_COMMAND,B0_SUBSCRIBER_SET_CONFLATE_CALLBACK);
+    lua_registerN(L,B0_SUBSCRIBER_SET_OPTION_COMMAND,B0_SUBSCRIBER_SET_OPTION_CALLBACK);
 
     return 1;
 }

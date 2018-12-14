@@ -30,6 +30,7 @@ def _(n, ret, *args):
     # wrapped CFUNCTYPE: (performs string encoding/decoding)
     globals()[n] = lambda *args2: _dec(globals()['_' + n](*[_enc(arg, t) for t, arg in zip(args, args2)]), ret)
 
+_("b0_init", ct.c_void_p, ct.POINTER(ct.c_int), ct.POINTER(ct.c_char_p))
 _("b0_buffer_new", ct.c_void_p, ct.c_size_t)
 _("b0_buffer_delete", None, ct.c_void_p)
 _("b0_node_new", ct.c_void_p, str)
@@ -65,7 +66,7 @@ _("b0_subscriber_get_topic_name", str, ct.c_void_p)
 _("b0_subscriber_log", None, ct.c_void_p, ct.c_int, str)
 _("b0_subscriber_poll", ct.c_int, ct.c_void_p, ct.c_long)
 _("b0_subscriber_read", ct.c_void_p, ct.c_void_p, ct.POINTER(ct.c_size_t))
-#_("b0_subscriber_set_conflate", None, ct.c_void_p,ct.c_int)
+_("b0_subscriber_set_option", ct.c_int, ct.c_void_p, ct.c_int, ct.c_int)
 _("b0_service_client_new_ex", ct.c_void_p, ct.c_void_p, str, ct.c_int, ct.c_int)
 _("b0_service_client_new", ct.c_void_p, ct.c_void_p, str)
 _("b0_service_client_delete", None, ct.c_void_p)
@@ -74,6 +75,7 @@ _("b0_service_client_cleanup", None, ct.c_void_p)
 _("b0_service_client_spin_once", None, ct.c_void_p)
 _("b0_service_client_get_service_name", str, ct.c_void_p)
 _("b0_service_client_call", ct.c_void_p, ct.c_void_p, ct.c_void_p, ct.c_size_t, ct.POINTER(ct.c_size_t))
+_("b0_service_client_set_option", ct.c_int, ct.c_void_p, ct.c_int, ct.c_int)
 _("b0_service_client_log", None, ct.c_void_p, ct.c_int, str)
 _("b0_service_server_new_ex", ct.c_void_p, ct.c_void_p, str, ct.c_void_p, ct.c_int, ct.c_int)
 _("b0_service_server_new", ct.c_void_p, ct.c_void_p, str, ct.c_void_p)
@@ -84,6 +86,13 @@ _("b0_service_server_spin_once", None, ct.c_void_p)
 _("b0_service_server_get_service_name", str, ct.c_void_p)
 _("b0_service_server_log", None, ct.c_void_p, ct.c_int, str)
 
+def init():
+    argc = ct.c_int(1)
+    argc_p = ct.byref(argc)
+    argv = ct.c_char_p('b0python')
+    argv_p =ct.byref(argv)
+    b0_init(argc_p, argv_p)
+    
 class Node:
     def __init__(self, name='node'):
         self._node = b0_node_new(name)
@@ -192,6 +201,10 @@ class Subscriber:
         rep_bytes = bytearray(outarr.contents)
         return rep_bytes
         
+    def set_option(self,option,optionVal):
+        rep = b0_subscriber_set_option(self._sub,option,optionVal)
+        return rep
+        
 class ServiceClient:
     def __init__(self, node, topic_name, managed=1, notify_graph=1):
         self._cli = b0_service_client_new_ex(node._node, topic_name, managed, notify_graph)
@@ -219,6 +232,10 @@ class ServiceClient:
         outarr = ct.cast(outbuf, ct.POINTER(ct.c_ubyte * outsz.value))
         rep_bytes = bytearray(outarr.contents)
         return rep_bytes
+        
+    def set_option(self,option,optionVal):
+        rep = b0_service_client_set_option(self._cli,option,optionVal)
+        return rep
 
     def log(self, level, message):
         b0_service_client_log(self._cli, level, message)

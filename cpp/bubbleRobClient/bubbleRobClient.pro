@@ -9,11 +9,15 @@ TEMPLATE = app
 DEFINES -= UNICODE
 CONFIG   += console
 CONFIG   -= app_bundle
+
 INCLUDEPATH += $$BOOST_INCLUDEPATH
 INCLUDEPATH += $$B0_INCLUDEPATH
+INCLUDEPATH += $$B0_INCLUDEPATH/../build/include
 INCLUDEPATH += ..
 INCLUDEPATH += ../msgpack-c/include
-LIBS += $$B0_LIBS
+LIBS += $$B0_LIB_STATIC
+LIBS += $$ZMQ_LIB
+LIBS += $$ZLIB_LIB
 LIBS += -L$$BOOST_LIB_PATH
 
 *-msvc* {
@@ -47,6 +51,12 @@ win32 {
 }
 
 win32 {
+    LIBS += "boost_system-vc140-mt.lib"
+    LIBS += "boost_thread-vc140-mt.lib"
+    LIBS += "boost_regex-vc140-mt.lib"
+    LIBS += "boost_date_time-vc140-mt.lib"
+    LIBS += "boost_filesystem-vc140-mt.lib"
+    LIBS += "boost_program_options-vc140-mt.lib"
 }
 
 macx {

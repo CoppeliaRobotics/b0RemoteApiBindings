@@ -248,6 +248,7 @@ public class b0RemoteApi
         _nextDefaultSubscriberHandle=2;
         _nextDedicatedPublisherHandle=500;
         _nextDedicatedSubscriberHandle=1000;
+        b0Init();
         _node=b0NodeNew(nodeName);
         Random rand = new Random(System.currentTimeMillis());
         String alp=new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
@@ -258,6 +259,7 @@ public class b0RemoteApi
             _clientId=_clientId.concat(String.valueOf(c));
         }
         _serviceClient=b0ServiceClientNewEx(_node,_serviceCallTopic,1,1);
+        b0ServiceClientSetOption(_serviceClient,B0_SOCK_OPT_READTIMEOUT,1000);
         _defaultPublisher=b0PublisherNewEx(_node,_defaultPublisherTopic,1,1);
         _defaultSubscriber=b0SubscriberNewEx(_node,_defaultSubscriberTopic,1,1);
         System.out.println("");
@@ -518,7 +520,10 @@ public class b0RemoteApi
         String topic=_channelName+"Pub"+_nextDedicatedSubscriberHandle+_clientId;
         _nextDedicatedSubscriberHandle=_nextDedicatedSubscriberHandle+1;
         long sub=b0SubscriberNewEx(_node,topic,0,1);
-        //b0SubscriberSetConflate(sub,1);
+        if (dropMessages)
+            b0SubscriberSetOption(sub,B0_SOCK_OPT_CONFLATE,1);
+        else
+            b0SubscriberSetOption(sub,B0_SOCK_OPT_CONFLATE,0);
         b0SubscriberInit(sub);
         SHandleAndCb dat=new SHandleAndCb();
         dat.handle=sub;
@@ -539,7 +544,10 @@ public class b0RemoteApi
         return _serviceCallTopic;
     }
     
-
+    private static final int B0_SOCK_OPT_READTIMEOUT = 3;
+    private static final int B0_SOCK_OPT_CONFLATE = 6;
+    
+    private native int b0Init();
     private native long b0NodeNew(final String name);
     private native void b0NodeDelete(long node);
     private native void b0NodeInit(long node);
@@ -556,11 +564,12 @@ public class b0RemoteApi
     private native void b0SubscriberInit(long sub);
     private native int b0SubscriberPoll(long sub,long timeout);
     private native byte[] b0SubscriberRead(long sub);
-    private native void b0SubscriberSetConflate(long sub,int conflate);
+    private native void b0SubscriberSetOption(long sub,long option,long value);
     
     private native long b0ServiceClientNewEx(long node,final String serviceName,int managed,int notifyGraph);
     private native void b0ServiceClientDelete(long cli);
     private native byte[] b0ServiceClientCall(long cli,byte[] data);
+    private native void b0ServiceClientSetOption(long cli,long option,long value);
     
     String _serviceCallTopic;
     String _defaultPublisherTopic;

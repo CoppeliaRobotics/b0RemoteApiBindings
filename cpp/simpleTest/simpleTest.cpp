@@ -62,7 +62,8 @@ int main(int argc,char* argv[])
     client.simxSynchronous(true);
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted_CB));
     client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simulationStepDone_CB));
-    client.simxGetVisionSensorImage(sens1,false,client.simxDefaultSubscriber(image_CB,1));
+    client.simxGetVisionSensorImage(sens1,false,client.simxDefaultSubscriber(image_CB));
+//    client.simxGetVisionSensorImage(sens1,false,client.simxCreateSubscriber(image_CB,1,true));
     client.simxStartSimulation(client.simxDefaultPublisher());
 
     unsigned int st=client.simxGetTimeInMs();

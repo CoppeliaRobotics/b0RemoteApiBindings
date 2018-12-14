@@ -77,6 +77,7 @@ public class simpleTest
         client.simxSynchronous(true);
         
         client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxDefaultSubscriber(simpleTest::imageCallback));
+//        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxCreateSubscriber(simpleTest::imageCallback,1,true));
         client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simpleTest::simulationStepStarted));
         client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simpleTest::simulationStepDone));
         client.simxStartSimulation(client.simxDefaultPublisher());

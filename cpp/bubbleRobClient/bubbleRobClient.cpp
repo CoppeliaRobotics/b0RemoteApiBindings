@@ -16,12 +16,13 @@ void simulationStepStarted_CB(std::vector<msgpack::object>* msg)
     std::map<std::string,msgpack::object>::iterator it=data.find("simulationTime");
     if (it!=data.end())
         simTime=it->second.as<float>();
-    lastTimeReceived=cl->simxGetTimeInMs();
 }
 
 void proxSensor_CB(std::vector<msgpack::object>* msg)
 {
     sensorTrigger=b0RemoteApi::readInt(msg,1);
+    lastTimeReceived=cl->simxGetTimeInMs();
+    printf(".");
 }
 
 int main(int argc,char* argv[])
@@ -50,7 +51,7 @@ int main(int argc,char* argv[])
     cl=&client;
 
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted_CB));
-    client.simxReadProximitySensor(sensorHandle,client.simxDefaultSubscriber(proxSensor_CB));
+    client.simxReadProximitySensor(sensorHandle,client.simxDefaultSubscriber(proxSensor_CB,0));
 
     float driveBackStartTime=-99.0f;
     float motorSpeeds[2];
@@ -75,6 +76,7 @@ int main(int argc,char* argv[])
         client.simxSpinOnce();
         client.simxSleep(50);
     }
+    std::cout << "Ended!" << std::endl;
     return(0);
 }
 

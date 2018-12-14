@@ -141,6 +141,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     local _nextDefaultSubscriberHandle=2
     local _nextDedicatedPublisherHandle=500
     local _nextDedicatedSubscriberHandle=1000
+    b0.init()
     local _node=b0.node_new(nodeName)
     math.randomseed(b0.node_hardware_time_usec(_node))
     local _clientId=''
@@ -149,6 +150,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         _clientId=_clientId..string.sub('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',r,r)
     end
     local _serviceClient=b0.service_client_new_ex(_node,_serviceCallTopic,1,1)
+    b0.service_client_set_option(_serviceClient,b0.SOCK_OPT_READTIMEOUT,1000)
     local _defaultPublisher=b0.publisher_new_ex(_node,_defaultPublisherTopic,1,1)
     local _defaultSubscriber=b0.subscriber_new_ex(_node,_defaultSubscriberTopic,1,1) -- we will poll the socket
     local _allSubscribers={}
@@ -247,7 +249,11 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local topic=_channelName..'Pub'..tostring(_nextDedicatedSubscriberHandle).._clientId
         _nextDedicatedSubscriberHandle=_nextDedicatedSubscriberHandle+1
         local subb=b0.subscriber_new_ex(_node,topic,0,1)
-        --b0.subscriber_set_conflate(subb,1)
+        if dropMessages then
+            b0.subscriber_set_option(subb,b0.SOCK_OPT_CONFLATE,1)
+        else
+            b0.subscriber_set_option(subb,b0.SOCK_OPT_CONFLATE,0)
+        end
         b0.subscriber_init(subb)
         _allSubscribers[topic]={}
         _allSubscribers[topic].handle=subb

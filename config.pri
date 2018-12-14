@@ -1,8 +1,13 @@
 # location of boost headers
-BOOST_INCLUDEPATH = "c:/local/boost_1_62_0"
+#BOOST_INCLUDEPATH = "c:/local/boost_1_62_0"
 #BOOST_INCLUDEPATH = "/usr/local/include"
 #BOOST_INCLUDEPATH = "/usr/include"
 #BOOST_INCLUDEPATH = "c:/msys64/mingw64/include"
+BOOST_INCLUDEPATH = "d:/v_rep/programming/vcpkg/installed/x64-windows/include"    # (e.g. Windows)
+
+# Boost libraries to link:
+#BOOST_LIB_PATH = "c:/local/boost_1_62_0/lib64-msvc-14.0"
+BOOST_LIB_PATH = "D:/v_rep/programming/vcpkg/installed/x64-windows/lib"
 
 # location of lua headers
 LUA_INCLUDEPATH = "d:/lua-5.1.5/src"
@@ -27,7 +32,14 @@ JDK_INCLUDEPATH = "$${JDK_DIR}/include" "$${JDK_DIR}/include/win32"
 B0_INCLUDEPATH = "d:/v_rep/programming/blueZero/include"    # (e.g. Windows)
 
 # B0 libraries to link:
-B0_LIBS = "d:/v_rep/programming/blueZero/build/Release/b0.lib"    # (e.g. Windows)
+    B0_LIB = "d:/v_rep/programming/blueZero/build/Release/b0.lib"    # (e.g. Windows)
+    B0_LIB_STATIC = "d:/v_rep/programming/blueZero/build/Release/b0-static.lib"    # (e.g. Windows)
+
+#ZMQ:
+    ZMQ_LIB = "D:\v_rep\programming\vcpkg\installed\x64-windows\lib\libzmq-mt-4_3_1.lib"    
+    
+# ZLIB:    
+    ZLIB_LIB = "D:\v_rep\programming\vcpkg\installed\x64-windows\lib\zlib.lib"
 
 exists(../config.pri) { include(../config.pri) }
 

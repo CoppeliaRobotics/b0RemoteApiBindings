@@ -4,6 +4,7 @@
 // -------------------------------------------------------
 
 #include "b0RemoteApi.h"
+#include <b0/socket.h>
 
 b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inactivityToleranceInSec,bool setupSubscribersAsynchronously)
 {
@@ -17,6 +18,7 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
     _nextDefaultSubscriberHandle=2;
     _nextDedicatedPublisherHandle=500;
     _nextDedicatedSubscriberHandle=1000;
+    b0::init();
     _node=new b0::Node(nodeName);
     srand((unsigned int)_node->hardwareTimeUSec());
     const char* alp="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -26,14 +28,10 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
         _clientId+=alp[p];
     }
     _serviceClient=new b0::ServiceClient(_node,_serviceCallTopic);
+    _serviceClient->setReadTimeout(1000);
     _defaultPublisher=new b0::Publisher(_node,_defaultPublisherTopic);
-    _defaultSubscriber=new b0::Subscriber(_node,_defaultSubscriberTopic,0); // we will poll the socket
-    std::cout << "\n  Running B0 Remote API client with channel name [" << channelName << "]" << std::endl;
-    std::cout << "  make sure that: 1) the B0 resolver is running" << std::endl;
-    std::cout << "                  2) V-REP is running the B0 Remote API server with the same channel name" << std::endl;
-    std::cout << "  Initializing...\n" << std::endl;
+    _defaultSubscriber=new b0::Subscriber(_node,_defaultSubscriberTopic); // we will poll the socket
     _node->init();
-
     std::tuple<int> args(inactivityToleranceInSec);
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
@@ -165,7 +163,7 @@ const char* b0RemoteApi::simxCreatePublisher(bool dropMessages)
     std::string topic=_channelName+"Sub"+std::to_string(_nextDedicatedPublisherHandle++)+_clientId;
     _allTopics.push_back(topic);
     b0::Publisher* pub=new b0::Publisher(_node,topic,false,true);
-    //    pub->setConflate(true);
+    //pub->setConflate(dropMessages);
     pub->init();
     _allDedicatedPublishers[topic]=pub;
     std::tuple<std::string,bool> args(topic,dropMessages);
@@ -198,8 +196,8 @@ const char* b0RemoteApi::simxCreateSubscriber(CB_FUNC cb,int publishInterval,boo
 {
     std::string topic=_channelName+"Pub"+std::to_string(_nextDedicatedSubscriberHandle++)+_clientId;
     _allTopics.push_back(topic);
-    b0::Subscriber* sub=new b0::Subscriber(_node,topic,0,false,true);
-    //sub->setConflate(true);
+    b0::Subscriber* sub=new b0::Subscriber(_node,topic,false,true);
+    sub->setConflate(dropMessages);
     sub->init();
     SHandleAndCb dat;
     dat.handle=sub;

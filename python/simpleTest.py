@@ -41,9 +41,9 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
     passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall())
     client.simxSynchronous(True)
     
-#    dedicatedSub=client.simxCreateSubscriber(imageCallback)
-#    client.simxGetVisionSensorImage(visionSensorHandle[1],False,dedicatedSub)
-    client.simxGetVisionSensorImage(visionSensorHandle[1],False,client.simxDefaultSubscriber(imageCallback))
+    dedicatedSub=client.simxCreateSubscriber(imageCallback,1,True)
+    client.simxGetVisionSensorImage(visionSensorHandle[1],False,dedicatedSub)
+#    client.simxGetVisionSensorImage(visionSensorHandle[1],False,client.simxDefaultSubscriber(imageCallback))
 
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted));
     client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simulationStepDone));

@@ -21,9 +21,11 @@ class RemoteApiClient:
         self._nextDefaultSubscriberHandle=2
         self._nextDedicatedPublisherHandle=500
         self._nextDedicatedSubscriberHandle=1000
+        b0.init()
         self._node=b0.Node(nodeName)
         self._clientId=''.join(random.choice(string.ascii_uppercase+string.ascii_lowercase+string.digits) for _ in range(10))
         self._serviceClient=b0.ServiceClient(self._node,self._serviceCallTopic)
+        self._serviceClient.set_option(3,1000) #read timeout of 1000ms
         self._defaultPublisher=b0.Publisher(self._node,self._defaultPublisherTopic)
         self._defaultSubscriber=b0.Subscriber(self._node,self._defaultSubscriberTopic,None) # we will poll the socket
         print('\n  Running B0 Remote API client with channel name ['+channelName+']')
@@ -123,7 +125,10 @@ class RemoteApiClient:
         topic=self._channelName+'Pub'+str(self._nextDedicatedSubscriberHandle)+self._clientId
         self._nextDedicatedSubscriberHandle=self._nextDedicatedSubscriberHandle+1
         sub=b0.Subscriber(self._node,topic,None,0,1)
-        #sub.set_conflate(1);
+        if dropMessages:
+            sub.set_option(6,1) #conflate option enabled
+        else:
+            sub.set_option(6,0) #conflate option disabled
         sub.init()
         self._allSubscribers[topic]={}
         self._allSubscribers[topic]['handle']=sub

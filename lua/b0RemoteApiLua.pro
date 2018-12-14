@@ -8,13 +8,19 @@ TEMPLATE = lib
 
 DEFINES -= UNICODE
 DEFINES += QT_COMPIL
+CONFIG += shared
+
 INCLUDEPATH += $$BOOST_INCLUDEPATH
 INCLUDEPATH += $$B0_INCLUDEPATH
+INCLUDEPATH += $$B0_INCLUDEPATH/b0/bindings
+INCLUDEPATH += $$B0_INCLUDEPATH/../build/include
 INCLUDEPATH += ../../include
 INCLUDEPATH += $$LUA_INCLUDEPATH
 LIBS += $$LUA_LIBS
-LIBS += $$B0_LIBS
-CONFIG += shared
+LIBS += $$B0_LIB
+LIBS += $$ZMQ_LIB
+LIBS += $$ZLIB_LIB
+LIBS += -L$$BOOST_LIB_PATH
 
 *-msvc* {
     QMAKE_CXXFLAGS += -O2
@@ -44,6 +50,12 @@ win32 {
     LIBS += -lwinmm
     LIBS += -lWs2_32
     LIBS += -lKernel32
+    LIBS += "boost_system-vc140-mt.lib"
+    LIBS += "boost_thread-vc140-mt.lib"
+    LIBS += "boost_regex-vc140-mt.lib"
+    LIBS += "boost_date_time-vc140-mt.lib"
+    LIBS += "boost_filesystem-vc140-mt.lib"
+    LIBS += "boost_program_options-vc140-mt.lib"
 }
 
 macx {
