@@ -549,6 +549,7 @@ public class b0RemoteApi
     
 
     private static final int B0_SOCK_OPT_READTIMEOUT = 3;
+    private static final int B0_SOCK_OPT_CONFLATE = 6;
     
     private native int b0Init();
     
@@ -568,7 +569,7 @@ public class b0RemoteApi
     private native void b0SubscriberInit(long sub);
     private native int b0SubscriberPoll(long sub,long timeout);
     private native byte[] b0SubscriberRead(long sub);
-    private native void b0SubscriberSetConflate(long sub,int conflate);
+    private native void b0SubscriberSetOption(long sub,long option,long value);
     
     private native long b0ServiceClientNewEx(long node,final String serviceName,int managed,int notifyGraph);
     private native void b0ServiceClientDelete(long cli);

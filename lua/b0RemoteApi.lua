@@ -425,9 +425,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName,sigValue}
         return _handleFunction("SetFloatSignal",reqArgs,topic)
     end
-    function self.simxSetIntegerSignal(sigName,sigValue,topic)
+    function self.simxSetIntSignal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
-        return _handleFunction("SetIntegerSignal",reqArgs,topic)
+        return _handleFunction("SetIntSignal",reqArgs,topic)
     end
     function self.simxSetStringSignal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
@@ -437,9 +437,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("GetFloatSignal",reqArgs,topic)
     end
-    function self.simxGetIntegerSignal(sigName,topic)
+    function self.simxGetIntSignal(sigName,topic)
         local reqArgs = {sigName}
-        return _handleFunction("GetIntegerSignal",reqArgs,topic)
+        return _handleFunction("GetIntSignal",reqArgs,topic)
     end
     function self.simxGetStringSignal(sigName,topic)
         local reqArgs = {sigName}
@@ -525,12 +525,12 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {handle}
         return _handleFunction("ReadDistance",reqArgs,topic)
     end
-    function self.simxCheckCollision(entity1,entity2)
-        local reqArgs = {entity1}
+    function self.simxCheckCollision(entity1,entity2,topic)
+        local reqArgs = {entity1,entity2}
         return _handleFunction("CheckCollision",reqArgs,topic)
     end
-    function self.simxCheckDistance(entity1,entity2,threshold)
-        local reqArgs = {entity1,entity2}
+    function self.simxCheckDistance(entity1,entity2,threshold,topic)
+        local reqArgs = {entity1,entity2,threshold}
         return _handleFunction("CheckDistance",reqArgs,topic)
     end
     function self.simxReadProximitySensor(handle,topic)
@@ -770,6 +770,8 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     -- Add your custom functions here, or even better,
     -- add them to b0RemoteApiBindings/generate/simxFunctions.xml,
     -- and generate this file again.
+    -- Then add the server part of your custom functions at the
+    -- beginning of file lua/b0RemoteApiServer.lua
     -- -----------------------------------------------------------
     
     return self

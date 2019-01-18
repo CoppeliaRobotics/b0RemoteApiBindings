@@ -544,10 +544,12 @@ public class b0RemoteApi
         return _serviceCallTopic;
     }
     
+
     private static final int B0_SOCK_OPT_READTIMEOUT = 3;
     private static final int B0_SOCK_OPT_CONFLATE = 6;
     
     private native int b0Init();
+    
     private native long b0NodeNew(final String name);
     private native void b0NodeDelete(long node);
     private native void b0NodeInit(long node);
@@ -955,7 +957,7 @@ public class b0RemoteApi
         args.packFloat(sigValue);
         return _handleFunction("SetFloatSignal",args,topic);
     }
-    public MessageUnpacker simxSetIntegerSignal(
+    public MessageUnpacker simxSetIntSignal(
         final String sigName,
         int sigValue,
         final String topic) throws IOException
@@ -964,7 +966,7 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(sigName);
         args.packInt(sigValue);
-        return _handleFunction("SetIntegerSignal",args,topic);
+        return _handleFunction("SetIntSignal",args,topic);
     }
     public MessageUnpacker simxSetStringSignal(
         final String sigName,
@@ -987,14 +989,14 @@ public class b0RemoteApi
         args.packString(sigName);
         return _handleFunction("GetFloatSignal",args,topic);
     }
-    public MessageUnpacker simxGetIntegerSignal(
+    public MessageUnpacker simxGetIntSignal(
         final String sigName,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(sigName);
-        return _handleFunction("GetIntegerSignal",args,topic);
+        return _handleFunction("GetIntSignal",args,topic);
     }
     public MessageUnpacker simxGetStringSignal(
         final String sigName,
@@ -2134,6 +2136,7 @@ public class b0RemoteApi
     // Add your custom functions here, or even better,
     // add them to b0RemoteApiBindings/generate/simxFunctions.xml,
     // and generate this file again.
+    // Then add the server part of your custom functions at the
+    // beginning of file lua/b0RemoteApiServer.lua
     // -----------------------------------------------------------
-    
 }

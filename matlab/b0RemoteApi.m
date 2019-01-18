@@ -104,7 +104,7 @@ classdef b0RemoteApi < handle
 
             tmp = libpointer('int8Ptr',[uint8(obj.serviceCallTopic) 0]);
             obj.serviceClient = calllib(obj.libName,'b0_service_client_new_ex',obj.node,tmp,1,1);
-            calllib(obj.libName,'b0_service_client_set_option',obj.serviceClient,3,1000); % read timeout to 1000ms
+            calllib(obj.libName,'b0_service_client_set_option',obj.serviceClient,3,1000);
 
             tmp = libpointer('int8Ptr',[uint8(obj.defaultPublisherTopic) 0]);
             obj.defaultPublisher = calllib(obj.libName,'b0_publisher_new_ex',obj.node,tmp,1,1);
@@ -418,9 +418,9 @@ classdef b0RemoteApi < handle
             args = {sigName,sigValue};
             ret = obj.handleFunction('SetFloatSignal',args,topic);
         end
-        function ret = simxSetIntegerSignal(obj,sigName,sigValue,topic)
+        function ret = simxSetIntSignal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
-            ret = obj.handleFunction('SetIntegerSignal',args,topic);
+            ret = obj.handleFunction('SetIntSignal',args,topic);
         end
         function ret = simxSetStringSignal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
@@ -430,9 +430,9 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('GetFloatSignal',args,topic);
         end
-        function ret = simxGetIntegerSignal(obj,sigName,topic)
+        function ret = simxGetIntSignal(obj,sigName,topic)
             args = {sigName};
-            ret = obj.handleFunction('GetIntegerSignal',args,topic);
+            ret = obj.handleFunction('GetIntSignal',args,topic);
         end
         function ret = simxGetStringSignal(obj,sigName,topic)
             args = {sigName};
@@ -518,12 +518,12 @@ classdef b0RemoteApi < handle
             args = {handle};
             ret = obj.handleFunction('ReadDistance',args,topic);
         end
-        function ret = simxCheckCollision(obj,entity1,entity2)
-            args = {entity1};
+        function ret = simxCheckCollision(obj,entity1,entity2,topic)
+            args = {entity1,entity2};
             ret = obj.handleFunction('CheckCollision',args,topic);
         end
-        function ret = simxCheckDistance(obj,entity1,entity2,threshold)
-            args = {entity1,entity2};
+        function ret = simxCheckDistance(obj,entity1,entity2,threshold,topic)
+            args = {entity1,entity2,threshold};
             ret = obj.handleFunction('CheckDistance',args,topic);
         end
         function ret = simxReadProximitySensor(obj,handle,topic)
@@ -763,6 +763,8 @@ classdef b0RemoteApi < handle
         % Add your custom functions here, or even better,
         % add them to b0RemoteApiBindings/generate/simxFunctions.xml,
         % and generate this file again.
+        % Then add the server part of your custom functions at the
+        % beginning of file lua/b0RemoteApiServer.lua
         % -----------------------------------------------------------
         
     end

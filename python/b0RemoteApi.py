@@ -243,18 +243,18 @@ class RemoteApiClient:
     def simxSetFloatSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetFloatSignal',reqArgs,topic)
-    def simxSetIntegerSignal(self,sigName,sigValue,topic):
+    def simxSetIntSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
-        return self._handleFunction('SetIntegerSignal',reqArgs,topic)
+        return self._handleFunction('SetIntSignal',reqArgs,topic)
     def simxSetStringSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetStringSignal',reqArgs,topic)
     def simxGetFloatSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetFloatSignal',reqArgs,topic)
-    def simxGetIntegerSignal(self,sigName,topic):
+    def simxGetIntSignal(self,sigName,topic):
         reqArgs = [sigName]
-        return self._handleFunction('GetIntegerSignal',reqArgs,topic)
+        return self._handleFunction('GetIntSignal',reqArgs,topic)
     def simxGetStringSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetStringSignal',reqArgs,topic)
@@ -318,11 +318,11 @@ class RemoteApiClient:
     def simxReadDistance(self,handle,topic):
         reqArgs = [handle]
         return self._handleFunction('ReadDistance',reqArgs,topic)
-    def simxCheckCollision(self,entity1,entity2):
-        reqArgs = [entity1]
-        return self._handleFunction('CheckCollision',reqArgs,topic)
-    def simxCheckDistance(self,entity1,entity2,threshold):
+    def simxCheckCollision(self,entity1,entity2,topic):
         reqArgs = [entity1,entity2]
+        return self._handleFunction('CheckCollision',reqArgs,topic)
+    def simxCheckDistance(self,entity1,entity2,threshold,topic):
+        reqArgs = [entity1,entity2,threshold]
         return self._handleFunction('CheckDistance',reqArgs,topic)
     def simxReadProximitySensor(self,handle,topic):
         reqArgs = [handle]
@@ -503,4 +503,6 @@ class RemoteApiClient:
     # Add your custom functions here, or even better,
     # add them to b0RemoteApiBindings/generate/simxFunctions.xml,
     # and generate this file again.
+    # Then add the server part of your custom functions at the
+    # beginning of file lua/b0RemoteApiServer.lua
     # -----------------------------------------------------------
