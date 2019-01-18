@@ -12,6 +12,9 @@ lua51.dll
 lua.exe
 b0.dll
 libzmq.dll
+libzmq-mt-4_3_1.dll
+zlib1.dll
+boost_*.dll
 *.class
 *.pyc
 b0RemoteApi-cpp.html
