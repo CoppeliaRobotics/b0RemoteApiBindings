@@ -16,10 +16,6 @@ INCLUDEPATH += $$B0_INCLUDEPATH/../build/include
 INCLUDEPATH += $$B0_INCLUDEPATH/b0/bindings
 INCLUDEPATH += ..
 INCLUDEPATH += ../msgpack-c/include
-LIBS += $$B0_LIB_STATIC
-LIBS += $$ZMQ_LIB
-LIBS += $$ZLIB_LIB
-LIBS += -L$$BOOST_LIB_PATH
 
 *-msvc* {
     QMAKE_CXXFLAGS += -O2
@@ -46,19 +42,25 @@ LIBS += -L$$BOOST_LIB_PATH
 }
 
 win32 {
+    LIBS += $$B0_LIB_STATIC
+    LIBS += $$ZMQ_LIB
+    LIBS += $$ZLIB_LIB
     LIBS += "boost_system-vc140-mt.lib"
     LIBS += "boost_thread-vc140-mt.lib"
     LIBS += "boost_regex-vc140-mt.lib"
     LIBS += "boost_date_time-vc140-mt.lib"
     LIBS += "boost_filesystem-vc140-mt.lib"
     LIBS += "boost_program_options-vc140-mt.lib"
+    LIBS += -L$$BOOST_LIB_PATH
 }
 
 macx {
+    LIBS += $$B0_LIB
     LIBS += -lboost_system
 }
 
 unix:!macx {
+    LIBS += $$B0_LIB
     LIBS += -lboost_system
 }
 
