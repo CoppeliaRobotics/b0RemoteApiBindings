@@ -89,7 +89,7 @@ _("b0_service_server_log", None, ct.c_void_p, ct.c_int, str)
 def init():
     argc = ct.c_int(1)
     argc_p = ct.byref(argc)
-    argv = ct.c_char_p('b0python')
+    argv = ct.c_char_p(b'b0python')
     argv_p =ct.byref(argv)
     b0_init(argc_p, argv_p)
     
