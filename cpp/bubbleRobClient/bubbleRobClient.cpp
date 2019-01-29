@@ -7,7 +7,7 @@
 
 static float simTime=0.0f;
 static int sensorTrigger=0;
-static int lastTimeReceived=0;
+static long lastTimeReceived=0;
 static b0RemoteApi* cl=nullptr;
 
 void simulationStepStarted_CB(std::vector<msgpack::object>* msg)
