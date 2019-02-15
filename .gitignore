@@ -23,3 +23,5 @@ b0RemoteApi-matlab.html
 b0RemoteApi-python.html
 b0RemoteApi-functionList.html
 build-*
+.DS_Store
+bubbleRobClient_b0RemoteApi
