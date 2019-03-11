@@ -17,24 +17,27 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
     _nextDefaultSubscriberHandle=2;
     _nextDedicatedPublisherHandle=500;
     _nextDedicatedSubscriberHandle=1000;
-    b0::init();
-    _node=new b0::Node(nodeName);
-    srand((unsigned int)_node->hardwareTimeUSec());
+
+    int arg1=1;
+    const char* arg2="b0C";
+    b0_init(&arg1,(char**)&arg2);
+    _node=b0_node_new(nodeName);
+    srand((unsigned int)b0_node_hardware_time_usec(_node));
     const char* alp="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     for (size_t i=0;i<10;i++)
     {
         size_t p=size_t(61.9f*(float(rand())/RAND_MAX));
         _clientId+=alp[p];
     }
-    _serviceClient=new b0::ServiceClient(_node,_serviceCallTopic);
-    _serviceClient->setReadTimeout(1000);
-    _defaultPublisher=new b0::Publisher(_node,_defaultPublisherTopic);
-    _defaultSubscriber=new b0::Subscriber(_node,_defaultSubscriberTopic); // we will poll the socket
+    _serviceClient=b0_service_client_new(_node,_serviceCallTopic.c_str());
+    b0_service_client_set_option(_serviceClient,B0_SOCK_OPT_READTIMEOUT,1000);
+    _defaultPublisher=b0_publisher_new(_node,_defaultPublisherTopic.c_str());
+    _defaultSubscriber=b0_subscriber_new(_node,_defaultSubscriberTopic.c_str(),nullptr); // we will poll the socket
     std::cout << "\n  Running B0 Remote API client with channel name [" << channelName << "]" << std::endl;
     std::cout << "  make sure that: 1) the B0 resolver is running" << std::endl;
     std::cout << "                  2) V-REP is running the B0 Remote API server with the same channel name" << std::endl;
     std::cout << "  Initializing...\n" << std::endl;
-    _node->init();
+    b0_node_init(_node);
 
     std::tuple<int> args(inactivityToleranceInSec);
     std::stringstream packedArgs;
@@ -65,22 +68,23 @@ b0RemoteApi::~b0RemoteApi()
     {
         if (it->second.handle!=_defaultSubscriber)
         {
-            it->second.handle->cleanup();
-            delete it->second.handle;
+            b0_subscriber_cleanup(it->second.handle);
+            b0_subscriber_delete(it->second.handle);
         }
     }
 
-    for (std::map<std::string,b0::Publisher*>::iterator it=_allDedicatedPublishers.begin();it!=_allDedicatedPublishers.end();it++)
+    for (std::map<std::string,b0_publisher*>::iterator it=_allDedicatedPublishers.begin();it!=_allDedicatedPublishers.end();it++)
     {
-        it->second->cleanup();
-        delete it->second;
+        b0_publisher_cleanup(it->second);
+        b0_publisher_delete(it->second);
     }
     _tmpMsgPackObjects.clear();
-    _node->cleanup();
-    delete _defaultSubscriber;
-    delete _defaultPublisher;
-    delete _serviceClient;
-    delete _node;
+    b0_node_cleanup(_node);
+
+    b0_subscriber_delete(_defaultSubscriber);
+    b0_publisher_delete(_defaultPublisher);
+    b0_service_client_delete(_serviceClient);
+    b0_node_delete(_node);
 }
 
 void b0RemoteApi::_pingCallback(std::vector<msgpack::object>* msg)
@@ -103,10 +107,16 @@ void b0RemoteApi::simxSpinOnce()
         if ( (it->second.handle!=_defaultSubscriber)||(!defaultSubscriberAlreadyProcessed) )
         {
             defaultSubscriberAlreadyProcessed|=(it->second.handle==_defaultSubscriber);
-            while (it->second.handle->poll(0))
+            while (b0_subscriber_poll(it->second.handle,0))
             {
                 packedData.clear();
-                it->second.handle->readRaw(packedData);
+                size_t s=0;
+                char* data=(char*)b0_subscriber_read(it->second.handle,&s);
+                if (data!=nullptr)
+                {
+                    packedData.assign(data,data+s);
+                    b0_buffer_delete(data);
+                }
                 if (!it->second.dropMessages)
                     _handleReceivedMessage(packedData);
             }
@@ -145,7 +155,7 @@ void b0RemoteApi::_handleReceivedMessage(const std::string packedData)
 
 long b0RemoteApi::simxGetTimeInMs()
 {
-    return((long)_node->hardwareTimeUSec()/1000);
+    return((long)b0_node_hardware_time_usec(_node)/1000);
 }
 
 void b0RemoteApi::simxSleep(int durationInMs)
@@ -166,9 +176,9 @@ const char* b0RemoteApi::simxCreatePublisher(bool dropMessages)
 {
     std::string topic=_channelName+"Sub"+std::to_string(_nextDedicatedPublisherHandle++)+_clientId;
     _allTopics.push_back(topic);
-    b0::Publisher* pub=new b0::Publisher(_node,topic,false,true);
+    b0_publisher* pub=b0_publisher_new_ex(_node,topic.c_str(),false,true);
     //    pub->setConflate(true);
-    pub->init();
+    b0_publisher_init(pub);
     _allDedicatedPublishers[topic]=pub;
     std::tuple<std::string,bool> args(topic,dropMessages);
     std::stringstream packedArgs;
@@ -200,9 +210,9 @@ const char* b0RemoteApi::simxCreateSubscriber(CB_FUNC cb,int publishInterval,boo
 {
     std::string topic=_channelName+"Pub"+std::to_string(_nextDedicatedSubscriberHandle++)+_clientId;
     _allTopics.push_back(topic);
-    b0::Subscriber* sub=new b0::Subscriber(_node,topic,false,true);
-    sub->setConflate(dropMessages);
-    sub->init();
+    b0_subscriber* sub=b0_subscriber_new_ex(_node,topic.c_str(),nullptr,false,true);
+    b0_subscriber_set_option(sub,B0_SOCK_OPT_CONFLATE,dropMessages);
+    b0_subscriber_init(sub);
     SHandleAndCb dat;
     dat.handle=sub;
     dat.cb=cb;
@@ -237,7 +247,13 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
         packedMsg+=packedHeader.str();
         packedMsg+=packedArgs;
         std::string rep;
-        _serviceClient->call(packedMsg,rep);
+        size_t s=0;
+        char* data=(char*)b0_service_client_call(_serviceClient,packedMsg.c_str(),packedMsg.size(),&s);
+        if (data!=nullptr)
+        {
+            rep.assign(data,data+s);
+            b0_buffer_delete(data);
+        }
         msgpack::unpack(_tmpUnpackedMsg,rep.data(),rep.size());
         msgpack::object obj(_tmpUnpackedMsg.get());
         if ( (obj.type==msgpack::type::ARRAY)&&(obj.via.array.ptr[0].type==msgpack::type::BOOLEAN) )
@@ -258,7 +274,7 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
         packedMsg+=char(-110); // array of 2
         packedMsg+=packedHeader.str();
         packedMsg+=packedArgs;
-        _defaultPublisher->publish(packedMsg);
+        b0_publisher_publish(_defaultPublisher,packedMsg.c_str(),packedMsg.size());
         return(nullptr);
     }
     else
@@ -282,17 +298,23 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
             packedMsg+=packedHeader.str();
             packedMsg+=packedArgs;
             if (_setupSubscribersAsynchronously)
-                _defaultPublisher->publish(packedMsg);
+                b0_publisher_publish(_defaultPublisher,packedMsg.c_str(),packedMsg.size());
             else
             {
                 std::string rep;
-                _serviceClient->call(packedMsg,rep);
+                size_t s=0;
+                char* data=(char*)b0_service_client_call(_serviceClient,packedMsg.c_str(),packedMsg.size(),&s);
+                if (data!=nullptr)
+                {
+                    rep.assign(data,data+s);
+                    b0_buffer_delete(data);
+                }
             }
             return(nullptr);
         }
         else
         {
-            std::map<std::string,b0::Publisher*>::iterator it=_allDedicatedPublishers.find(topic);
+            std::map<std::string,b0_publisher*>::iterator it=_allDedicatedPublishers.find(topic);
             if (it!=_allDedicatedPublishers.end())
             {
                 std::stringstream packedHeader;
@@ -302,7 +324,7 @@ std::vector<msgpack::object>* b0RemoteApi::_handleFunction(const char* funcName,
                 packedMsg+=char(-110); // array of 2
                 packedMsg+=packedHeader.str();
                 packedMsg+=packedArgs;
-                it->second->publish(packedMsg);
+                b0_publisher_publish(it->second,packedMsg.c_str(),packedMsg.size());
                 return(nullptr);
             }
         }
@@ -568,6 +590,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
     msgpack::pack(packedArgs,args);
     return(_handleFunction("CallScriptFunction",packedArgs.str(),topic));
 }
+
 
 
 std::vector<msgpack::object>* b0RemoteApi::simxGetObjectHandle(

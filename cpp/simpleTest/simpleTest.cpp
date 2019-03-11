@@ -7,11 +7,7 @@
 //
 // The client side (i.e. "simpleTest") depends on:
 //
-// b0 (shared library), which depends on:
-// boost_chrono (shared library)
-// boost_system (shared library)
-// boost_thread (shared library)
-// libzmq (shared library)
+// b0 (shared library), which depends on several other libraries (libzmq and several boost libraries)
 
  
 #include "b0RemoteApi.h"

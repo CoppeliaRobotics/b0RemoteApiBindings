@@ -9,15 +9,16 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <map>
-#include <b0/node.h>
-#include <b0/publisher.h>
-#include <b0/subscriber.h>
-#include <b0/service_client.h>
 #include "msgpack.hpp"
-
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
+extern "C" {
+    #include <c.h>
+}
 #ifndef _WIN32
     #define __cdecl
 #endif
@@ -26,7 +27,7 @@ typedef boost::function<void(std::vector<msgpack::object>*)> CB_FUNC;
 
 struct SHandleAndCb
 {
-    b0::Subscriber* handle;
+    b0_subscriber* handle;
     bool dropMessages;
     CB_FUNC cb;
 };
@@ -80,13 +81,13 @@ protected:
     msgpack::unpacked _tmpUnpackedMsg;
     std::vector<msgpack::object> _tmpMsgPackObjects;
     std::string _channelName;
-    b0::Node* _node;
+    b0_node* _node;
     std::string _clientId;
-    b0::ServiceClient* _serviceClient;
-    b0::Publisher* _defaultPublisher;
-    b0::Subscriber* _defaultSubscriber;
+    b0_service_client* _serviceClient;
+    b0_publisher* _defaultPublisher;
+    b0_subscriber* _defaultSubscriber;
     std::map<std::string,SHandleAndCb> _allSubscribers;
-    std::map<std::string,b0::Publisher*> _allDedicatedPublishers;
+    std::map<std::string,b0_publisher*> _allDedicatedPublishers;
 
 public:
 
@@ -96,6 +97,7 @@ public:
     void simxGetSimulationStepStarted(const char* topic);
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,const char* topic);
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,const char* topic);
+
 
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
