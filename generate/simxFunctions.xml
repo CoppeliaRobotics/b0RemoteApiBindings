@@ -426,7 +426,7 @@
     </command>
     
     <command name="simxSetObjectPosition" type="generic" generateCode="true">
-        <description>Sets the position of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the position of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/simResetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -457,7 +457,7 @@
     </command>
     
     <command name="simxSetObjectOrientation" type="generic" generateCode="true">
-        <description>Sets the orientation (in Euler angles) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the orientation (in Euler angles) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/simResetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -488,7 +488,7 @@
     </command>
     
     <command name="simxSetObjectQuaternion" type="generic" generateCode="true">
-        <description>Sets the quaternion orientation of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the quaternion orientation of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/simResetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -519,7 +519,7 @@
     </command>
     
     <command name="simxSetObjectPose" type="generic" generateCode="true">
-        <description>Sets the pose (position + quaternion) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the pose (position + quaternion) of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/simResetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -549,7 +549,7 @@
     </command>
     
     <command name="simxSetObjectMatrix" type="generic" generateCode="true">
-        <description>Sets the transformation matrix of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/sim.resetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
+        <description>Sets the transformation matrix of an object. Dynamically simulated objects will implicitely be reset before the command is applied (i.e. similar to calling [L[regularApi/simResetDynamicObject.htm,sim.resetDynamicObject]] just before)</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>The handle of the object</description>
@@ -1054,7 +1054,7 @@
         <check-also>
             <item name="[L[regularApi/simSetVisionSensorCharImage.htm,sim.setVisionSensorCharImage]] (regular API)"/>
             <item name="[L[#simxGetVisionSensorImage]]"/>
-            <item name="[L[#simxSetVisionSensorDepthBuffer]]"/>
+            <item name="[L[#simxGetVisionSensorDepthBuffer]]"/>
         </check-also>
     </command>
 
@@ -2040,7 +2040,7 @@
                 <description>Whether the function was successfully called on the server side</description>
             </param>
             <param name="item2" type="string">
-                <description>The [L[result of the dialog,apiConstants.htm#genericDialogReturnValues]], as a string</description>
+                <description>The [L[apiConstants.htm#genericDialogReturnValues,result of the dialog]], as a string</description>
             </param>
         </return>
         <check-also>
