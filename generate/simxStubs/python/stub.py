@@ -13,7 +13,7 @@ import string
 import time
 
 class RemoteApiClient:
-    def __init__(self,nodeName='b0RemoteApi_pythonClient',channelName='b0RemoteApi',inactivityToleranceInSec=60,setupSubscribersAsynchronously=False):
+    def __init__(self,nodeName='b0RemoteApi_pythonClient',channelName='b0RemoteApi',inactivityToleranceInSec=60,setupSubscribersAsynchronously=False,timeout=3):
         self._channelName=channelName
         self._serviceCallTopic=channelName+'SerX'
         self._defaultPublisherTopic=channelName+'SubX'
@@ -25,7 +25,7 @@ class RemoteApiClient:
         self._node=b0.Node(nodeName)
         self._clientId=''.join(random.choice(string.ascii_uppercase+string.ascii_lowercase+string.digits) for _ in range(10))
         self._serviceClient=b0.ServiceClient(self._node,self._serviceCallTopic)
-        self._serviceClient.set_option(3,1000) #read timeout of 1000ms
+        self._serviceClient.set_option(3,timeout*1000) #read timeout
         self._defaultPublisher=b0.Publisher(self._node,self._defaultPublisherTopic)
         self._defaultSubscriber=b0.Subscriber(self._node,self._defaultSubscriberTopic,None) # we will poll the socket
         print('\n  Running B0 Remote API client with channel name ['+channelName+']')
@@ -43,6 +43,9 @@ class RemoteApiClient:
         return self
     
     def __exit__(self,*err):
+        print('*************************************************************************************')
+        print('** Leaving... if this is unexpected, you might have to adjust the timeout argument **')
+        print('*************************************************************************************')
         self._pongReceived=False
         self._handleFunction('Ping',[0],self.simxDefaultSubscriber(self._pingCallback))
         while not self._pongReceived:

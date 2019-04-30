@@ -5,7 +5,7 @@
 
 #include "b0RemoteApi.h"
 
-b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inactivityToleranceInSec,bool setupSubscribersAsynchronously)
+b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inactivityToleranceInSec,bool setupSubscribersAsynchronously,int timeout)
 {
     _channelName=channelName;
     _serviceCallTopic=_channelName+"SerX";
@@ -30,7 +30,7 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
         _clientId+=alp[p];
     }
     _serviceClient=b0_service_client_new(_node,_serviceCallTopic.c_str());
-    b0_service_client_set_option(_serviceClient,B0_SOCK_OPT_READTIMEOUT,1000);
+    b0_service_client_set_option(_serviceClient,B0_SOCK_OPT_READTIMEOUT,timeout*1000);
     _defaultPublisher=b0_publisher_new(_node,_defaultPublisherTopic.c_str());
     _defaultSubscriber=b0_subscriber_new(_node,_defaultSubscriberTopic.c_str(),nullptr); // we will poll the socket
     std::cout << "\n  Running B0 Remote API client with channel name [" << channelName << "]" << std::endl;
@@ -50,6 +50,9 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
 
 b0RemoteApi::~b0RemoteApi()
 {
+    std::cout << "*************************************************************************************\n";
+    std::cout << "** Leaving... if this is unexpected, you might have to adjust the timeout argument **\n";
+    std::cout << "*************************************************************************************\n";
     _pongReceived=false;
     std::tuple<int> args1(0);
     std::stringstream packedArgs1;

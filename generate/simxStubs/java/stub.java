@@ -223,26 +223,31 @@ public class b0RemoteApi
     
     public b0RemoteApi() throws IOException
     {
-        _b0RemoteApi("b0RemoteApi_c++Client","b0RemoteApi",60,false);
+        _b0RemoteApi("b0RemoteApi_c++Client","b0RemoteApi",60,false,3);
     }
     public b0RemoteApi(final String nodeName) throws IOException
     {
-        _b0RemoteApi(nodeName,"b0RemoteApi",60,false);
+        _b0RemoteApi(nodeName,"b0RemoteApi",60,false,3);
     }
     public b0RemoteApi(final String nodeName,final String channelName) throws IOException
     {
-        _b0RemoteApi(nodeName,channelName,60,false);
+        _b0RemoteApi(nodeName,channelName,60,false,3);
     }
     public b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec) throws IOException
     {
-        _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,false);
+        _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,false,3);
     }
     public b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously) throws IOException
     {
-        _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously);
+        _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,3);
     }
 
-    private void _b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously) throws IOException
+    public b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously,timeout) throws IOException
+    {
+        _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,timeout);
+    }
+    
+    private void _b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously,int timeout) throws IOException
     {
         _channelName=channelName;
         _serviceCallTopic=_channelName.concat("SerX");
@@ -262,7 +267,7 @@ public class b0RemoteApi
             _clientId=_clientId.concat(String.valueOf(c));
         }
         _serviceClient=b0ServiceClientNewEx(_node,_serviceCallTopic,1,1);
-        b0ServiceClientSetOption(_serviceClient,B0_SOCK_OPT_READTIMEOUT,1000);
+        b0ServiceClientSetOption(_serviceClient,B0_SOCK_OPT_READTIMEOUT,timeout*1000);
         _defaultPublisher=b0PublisherNewEx(_node,_defaultPublisherTopic,1,1);
         _defaultSubscriber=b0SubscriberNewEx(_node,_defaultSubscriberTopic,1,1);
         System.out.println("");
@@ -287,6 +292,9 @@ public class b0RemoteApi
     
     public void delete() throws IOException
     {
+        System.out.println('*************************************************************************************')
+        System.out.println('** Leaving... if this is unexpected, you might have to adjust the timeout argument **')
+        System.out.println('*************************************************************************************')
         _pongReceived=false;
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1).packInt(0);

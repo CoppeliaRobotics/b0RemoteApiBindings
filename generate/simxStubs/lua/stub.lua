@@ -129,13 +129,14 @@ function _isArray(t)
 end
 
 
-function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously)
+function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,timeout)
     local self={}
     
     if nodeName==nil then nodeName='b0RemoteApi_luaClient' end
     if channelName==nil then channelName='b0RemoteApi' end
     if inactivityToleranceInSec==nil then inactivityToleranceInSec=60 end
     if setupSubscribersAsynchronously==nil then setupSubscribersAsynchronously=false end
+    if timeout==nil then timeout=3 end
     
     local _channelName=channelName
     local _serviceCallTopic=channelName..'SerX'
@@ -153,7 +154,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         _clientId=_clientId..string.sub('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',r,r)
     end
     local _serviceClient=b0.service_client_new_ex(_node,_serviceCallTopic,1,1)
-    b0.service_client_set_option(_serviceClient,b0.SOCK_OPT_READTIMEOUT,1000)
+    b0.service_client_set_option(_serviceClient,b0.SOCK_OPT_READTIMEOUT,timeout*1000)
     local _defaultPublisher=b0.publisher_new_ex(_node,_defaultPublisherTopic,1,1)
     local _defaultSubscriber=b0.subscriber_new_ex(_node,_defaultSubscriberTopic,1,1) -- we will poll the socket
     local _allSubscribers={}
@@ -166,6 +167,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     end
         
     function self.delete()
+        print('*************************************************************************************')
+        print('** Leaving... if this is unexpected, you might have to adjust the timeout argument **')
+        print('*************************************************************************************')
         _pongReceived=false
         _handleFunction('Ping',{0},self.simxDefaultSubscriber(_pingCallback))
         while not _pongReceived do

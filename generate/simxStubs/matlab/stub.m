@@ -28,11 +28,15 @@ classdef b0RemoteApi < handle
         allDedicatedPublishers;
         nodeName;
         inactivityToleranceInSec;
+        timeout;
         setupSubscribersAsynchronously;
     end
     
     methods
         function cleanUp(obj)
+            disp('*************************************************************************************');
+            disp('** Leaving... if this is unexpected, you might have to adjust the timeout argument **');
+            disp('*************************************************************************************');
             obj.pongReceived=false;
             obj.handleFunction('Ping',{0},obj.simxDefaultSubscriber(@obj.pingCallback));
             while not(obj.pongReceived)
@@ -60,13 +64,14 @@ classdef b0RemoteApi < handle
             obj.pongReceived=true;
         end
         
-        function obj = b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,hfile)
+        function obj = b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,timeout,hfile)
             addpath('./msgpack-matlab/');
             obj.libName = 'b0';
             obj.nodeName='b0RemoteApi_matlabClient';
             obj.channelName='b0RemoteApi';
             obj.inactivityToleranceInSec=60;
             obj.setupSubscribersAsynchronously=false;
+            obj.timeout=3
             if nargin>=1
                 obj.nodeName=nodeName;
             end
@@ -79,6 +84,9 @@ classdef b0RemoteApi < handle
             if nargin>=4
                 obj.setupSubscribersAsynchronously=setupSubscribersAsynchronously;
             end
+            if nargin>=5
+                obj.timeout=timeout;
+            end
             obj.serviceCallTopic=strcat(obj.channelName,'SerX');
             obj.defaultPublisherTopic=strcat(obj.channelName,'SubX');
             obj.defaultSubscriberTopic=strcat(obj.channelName,'PubX');
@@ -86,7 +94,7 @@ classdef b0RemoteApi < handle
             obj.nextDedicatedPublisherHandle=500;
             obj.nextDedicatedSubscriberHandle=1000;
             if ~libisloaded(obj.libName)
-                if nargin>=5
+                if nargin>=6
                     obj.hFile = hfile;
                     loadlibrary(obj.libName,obj.hFile);
                 else
@@ -107,7 +115,7 @@ classdef b0RemoteApi < handle
 
             tmp = libpointer('int8Ptr',[uint8(obj.serviceCallTopic) 0]);
             obj.serviceClient = calllib(obj.libName,'b0_service_client_new_ex',obj.node,tmp,1,1);
-            calllib(obj.libName,'b0_service_client_set_option',obj.serviceClient,3,1000);
+            calllib(obj.libName,'b0_service_client_set_option',obj.serviceClient,3,obj.timeout*1000);
 
             tmp = libpointer('int8Ptr',[uint8(obj.defaultPublisherTopic) 0]);
             obj.defaultPublisher = calllib(obj.libName,'b0_publisher_new_ex',obj.node,tmp,1,1);

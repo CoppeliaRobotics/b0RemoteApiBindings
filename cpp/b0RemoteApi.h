@@ -33,7 +33,7 @@ struct SHandleAndCb
 class b0RemoteApi
 {
 public:
-    b0RemoteApi(const char* nodeName="b0RemoteApi_c++Client",const char* channelName="b0RemoteApi",int inactivityToleranceInSec=60,bool setupSubscribersAsynchronously=false);
+    b0RemoteApi(const char* nodeName="b0RemoteApi_c++Client",const char* channelName="b0RemoteApi",int inactivityToleranceInSec=60,bool setupSubscribersAsynchronously=false,int timeout=3);
     virtual ~b0RemoteApi();
 
     const char* simxServiceCall();
