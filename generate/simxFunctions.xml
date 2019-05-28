@@ -595,7 +595,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simClearFloatSignal.htm,sim.clearFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simClearDoubleSignal.htm,sim.clearDoubleSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxClearIntegerSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
@@ -667,7 +667,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetFloatSignal.htm,sim.setFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simSetDoubleSignal.htm,sim.setDoubleSignal]] (regular API)"/>
             <item name="[L[#simxGetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxSetIntSignal]]"/>
@@ -748,7 +748,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetFloatSignal.htm,sim.getFloatSignal]] (regular API)"/>
+            <item name="[L[regularApi/simGetDoubleSignal.htm,sim.getDoubleSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxGetIntSignal]]"/>
