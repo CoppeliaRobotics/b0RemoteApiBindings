@@ -239,7 +239,7 @@ public class b0RemoteApi
         _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,3);
     }
 
-    public b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously,timeout) throws IOException
+    public b0RemoteApi(final String nodeName,final String channelName,int inactivityToleranceInSec,boolean setupSubscribersAsynchronously,int timeout) throws IOException
     {
         _b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscribersAsynchronously,timeout);
     }
@@ -289,9 +289,9 @@ public class b0RemoteApi
     
     public void delete() throws IOException
     {
-        System.out.println('*************************************************************************************')
-        System.out.println('** Leaving... if this is unexpected, you might have to adjust the timeout argument **')
-        System.out.println('*************************************************************************************')
+        System.out.println("*************************************************************************************");
+        System.out.println("** Leaving... if this is unexpected, you might have to adjust the timeout argument **");
+        System.out.println("*************************************************************************************");
         _pongReceived=false;
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1).packInt(0);
@@ -545,6 +545,40 @@ public class b0RemoteApi
             channel=_defaultPublisherTopic;
         _handleFunction("createPublisher",args,channel);
         return topic;
+    }
+    
+    public void simxRemoveSubscriber(final String topic) throws IOException
+    {
+        if (_allSubscribers.containsKey(topic))
+        {
+            SHandleAndCb val=_allSubscribers.get(topic);
+            MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+            args.packArrayHeader(1).packString(topic);
+            String channel=_serviceCallTopic;
+            if (_setupSubscribersAsynchronously)
+                channel=_defaultPublisherTopic;
+            if (val.handle==_defaultSubscriber)
+                _handleFunction("stopDefaultPublisher",args,channel);
+            else
+            {
+                b0SubscriberDelete(val.handle);
+                _handleFunction("stopPublisher",args,channel);
+            }
+            _allSubscribers.remove(topic);
+        }
+    }
+    
+    public void simxRemovePublisher(final String topic) throws IOException
+    {
+        if (_allDedicatedPublishers.containsKey(topic))
+        {
+            SHandle val=_allDedicatedPublishers.get(topic);
+            b0PublisherDelete(val.handle);            
+            MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+            args.packArrayHeader(1).packString(topic);
+            _handleFunction("stopSubscriber",args,_serviceCallTopic);
+            _allDedicatedPublishers.remove(topic);
+        }
     }
     
     public String simxServiceCall()

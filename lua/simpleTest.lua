@@ -44,7 +44,7 @@ client.simxSynchronous(true)
     
 --dedicatedSub=client.simxCreateSubscriber(imageCallback,1,true)
 --client.simxGetVisionSensorImage(visionSensorHandle[2],false,dedicatedSub)
-dedicatedPub=client.simxCreatePublisher()
+--dedicatedPub=client.simxCreatePublisher()
 client.simxGetVisionSensorImage(visionSensorHandle[2],false,client.simxDefaultSubscriber(imageCallback))
 
 client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted))

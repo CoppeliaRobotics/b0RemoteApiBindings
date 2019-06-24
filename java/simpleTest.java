@@ -75,7 +75,6 @@ public class simpleTest
         msg=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall());
         passiveVisionSensorHandle=client.readInt(msg,1);
         client.simxSynchronous(true);
-        
         client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxDefaultSubscriber(simpleTest::imageCallback));
 //        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxCreateSubscriber(simpleTest::imageCallback,1,true));
         client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simpleTest::simulationStepStarted));

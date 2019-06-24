@@ -212,6 +212,32 @@ classdef b0RemoteApi < handle
             obj.handleFunction('createPublisher',{topic,publishInterval},channel);
         end
   
+        function simxRemoveSubscriber(obj,topic)
+            if isKey(obj.allSubscribers,topic)
+                value=obj.allSubscribers(topic);
+                channel=obj.serviceCallTopic;
+                if obj.setupSubscribersAsynchronously
+                    channel=obj.defaultPublisherTopic;
+                end
+                if value('handle')==obj.defaultSubscriber
+                    obj.handleFunction('stopDefaultPublisher',{topic},channel);
+                else
+                    calllib(obj.libName,'b0_subscriber_delete',value('handle'));
+                    obj.handleFunction('stopPublisher',{topic},channel);
+                end
+                remove(obj.allSubscribers,topic)
+            end
+        end
+        
+        function simxRemovePublisher(obj,topic)
+            if isKey(obj.allDedicatedPublishers,topic)
+                value=obj.allDedicatedPublishers(topic);
+                calllib(obj.libName,'b0_publisher_delete',value);
+                obj.handleFunction('stopSubscriber',{topic},obj.serviceCallTopic);
+                remove(obj.allDedicatedPublishers,topic)
+            end
+        end
+        
         function topic = simxServiceCall(obj)
             topic = obj.serviceCallTopic;
         end

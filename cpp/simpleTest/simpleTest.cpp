@@ -72,8 +72,8 @@ int main(int argc,char* argv[])
         }
         client.simxSpinOnce();
     }
-    client.simxStopSimulation(client.simxDefaultPublisher());
 
+    client.simxStopSimulation(client.simxDefaultPublisher());
     std::cout << "Ended!" << std::endl;
     return(0);
 }

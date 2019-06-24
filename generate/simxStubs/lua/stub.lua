@@ -274,6 +274,32 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return topic
     end
   
+    function self.simxRemoveSubscriber(topic)
+        val=_allSubscribers[topic]
+        if val then
+            local channel=_serviceCallTopic
+            if _setupSubscribersAsynchronously then
+                channel=_defaultPublisherTopic
+            end
+            if val.handle==_defaultSubscriber then
+                _handleFunction('stopDefaultPublisher',{topic},channel)
+            else
+                b0.subscriber_delete(val.handle)
+                _handleFunction('stopPublisher',{topic},channel)
+            end
+            _allSubscribers[topic]=nil
+        end
+    end
+    
+    function self.simxRemovePublisher(topic)
+        val=_allDedicatedPublishers[topic]
+        if val then
+            b0.publisher_delete(val)
+            _handleFunction('stopSubscriber',{topic},_serviceCallTopic)
+            _allDedicatedPublishers[topic]=nil
+        end
+    end
+    
     function self.simxServiceCall()
         return _serviceCallTopic
     end

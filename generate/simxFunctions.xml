@@ -58,6 +58,7 @@
             <item name="[L[#simxDefaultPublisher]]"/>
             <item name="[L[#simxCreatePublisher]]"/>
             <item name="[L[#simxCreateSubscriber]]"/>
+            <item name="[L[#simxRemoveSubscriber]]"/>
         </check-also>
     </command>
     
@@ -76,6 +77,32 @@
         <check-also>
             <item name="[L[#simxServiceCall]]"/>
             <item name="[L[#simxDefaultPublisher]]"/>
+            <item name="[L[#simxDefaultSubscriber]]"/>
+            <item name="[L[#simxCreateSubscriber]]"/>
+            <item name="[L[#simxRemovePublisher]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxRemovePublisher">
+        <description>Removes or disables a custom publisher</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The topic of the publisher</description>
+            </param>
+        </params>
+        <check-also>
+            <item name="[L[#simxCreatePublisher]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxRemoveSubscriber">
+        <description>Removes or disables a subscriber</description>
+        <params>
+            <param name="topic" type="string">
+                <description>The topic of the subscriber</description>
+            </param>
+        </params>
+        <check-also>
             <item name="[L[#simxDefaultSubscriber]]"/>
             <item name="[L[#simxCreateSubscriber]]"/>
         </check-also>
@@ -104,6 +131,7 @@
             <item name="[L[#simxDefaultPublisher]]"/>
             <item name="[L[#simxDefaultSubscriber]]"/>
             <item name="[L[#simxCreatePublisher]]"/>
+            <item name="[L[#simxRemoveSubscriber]]"/>
         </check-also>
     </command>
     

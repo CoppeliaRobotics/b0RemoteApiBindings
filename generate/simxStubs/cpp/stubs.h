@@ -44,6 +44,8 @@ public:
     const char* simxDefaultSubscriber(CB_FUNC cb,int publishInterval=1);
     const char* simxCreatePublisher(bool dropMessages=false);
     const char* simxCreateSubscriber(CB_FUNC cb,int publishInterval=1,bool dropMessages=false);
+    void simxRemoveSubscriber(const char* topic);
+    void simxRemovePublisher(const char* topic);
 
     long simxGetTimeInMs();
     void simxSleep(int durationInMs);

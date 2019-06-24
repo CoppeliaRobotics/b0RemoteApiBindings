@@ -234,6 +234,60 @@ const char* b0RemoteApi::simxCreateSubscriber(CB_FUNC cb,int publishInterval,boo
     return(_allTopics[_allTopics.size()-1].c_str());
 }
 
+void b0RemoteApi::simxRemoveSubscriber(const char* topic)
+{
+    for (size_t i=0;i<_allTopics.size();i++)
+    {
+        if (_allTopics[i].compare(topic)==0)
+        {
+            _allTopics.erase(_allTopics.begin()+i);
+            break;
+        }
+    }
+    std::map<std::string,SHandleAndCb>::iterator it=_allSubscribers.find(topic);
+    if (it!=_allSubscribers.end())
+    {
+        std::tuple<std::string> args(topic);
+        std::stringstream packedArgs;
+        msgpack::pack(packedArgs,args);
+        std::string channel=_serviceCallTopic;
+        if (_setupSubscribersAsynchronously)
+            channel=_defaultPublisherTopic;
+        if (it->second.handle==_defaultSubscriber)
+            _handleFunction("stopDefaultPublisher",packedArgs.str(),channel.c_str());
+        else
+        {
+            b0_subscriber_cleanup(it->second.handle);
+            b0_subscriber_delete(it->second.handle);
+            _handleFunction("stopPublisher",packedArgs.str(),channel.c_str());
+        }
+        _allSubscribers.erase(it);
+    }
+}
+
+void b0RemoteApi::simxRemovePublisher(const char* topic)
+{
+    std::map<std::string,b0_publisher*>::iterator it=_allDedicatedPublishers.find(topic);
+    if (it!=_allDedicatedPublishers.end())
+    {
+        for (size_t i=0;i<_allTopics.size();i++)
+        {
+            if (_allTopics[i].compare(topic)==0)
+            {
+                _allTopics.erase(_allTopics.begin()+i);
+                break;
+            }
+        }
+        b0_publisher_cleanup(it->second);
+        b0_publisher_delete(it->second);
+        std::tuple<std::string> args(topic);
+        std::stringstream packedArgs;
+        msgpack::pack(packedArgs,args);
+        _handleFunction("stopSubscriber",packedArgs.str(),_serviceCallTopic.c_str());
+        _allDedicatedPublishers.erase(it);
+    }
+}
+
 const char* b0RemoteApi::simxServiceCall()
 {
     return(_serviceCallTopic.c_str());

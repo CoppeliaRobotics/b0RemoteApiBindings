@@ -143,6 +143,26 @@ class RemoteApiClient:
         self._handleFunction('createPublisher',[topic,publishInterval],channel)
         return topic
   
+    def simxRemoveSubscriber(self,topic):
+        if topic in self._allSubscribers:
+            value=self._allSubscribers[topic]
+            channel=self._serviceCallTopic
+            if self._setupSubscribersAsynchronously:
+                channel=self._defaultPublisherTopic
+            if value['handle']==self._defaultSubscriber:
+                self._handleFunction('stopDefaultPublisher',[topic],channel)
+            else:
+                value['handle'].cleanup()
+                self._handleFunction('stopPublisher',[topic],channel)
+            del self._allSubscribers[topic]
+
+    def simxRemovePublisher(self,topic):
+        if topic in self._allDedicatedPublishers:
+            value=self._allDedicatedPublishers[topic]
+            value.cleanup()
+            self._handleFunction('stopSubscriber',[topic],self._serviceCallTopic)
+            del self._allDedicatedPublishers[topic]
+        
     def simxServiceCall(self):
         return self._serviceCallTopic
         
@@ -200,6 +220,7 @@ class RemoteApiClient:
         reqArgs = [funcAtObjName,scriptType,packedArg]
         funcName = 'CallScriptFunction'
         return self._handleFunction(funcName,reqArgs,topic)
+
         
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
