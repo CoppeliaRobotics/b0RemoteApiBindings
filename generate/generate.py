@@ -9,7 +9,7 @@ import subprocess
 from parse import parse
 import model
 
-parser = argparse.ArgumentParser(description='Generate various things for V-REP plugin.')
+parser = argparse.ArgumentParser(description='Generate various things for CoppeliaSim plugin.')
 parser.add_argument('output_dir', type=str, default=None, help='the output directory')
 parser.add_argument('--xml-file', type=str, default='callbacks.xml', help='the XML file with the callback definitions')
 parser.add_argument("--verbose", help='print commands being executed', action='store_true')

@@ -35,7 +35,7 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
     _defaultSubscriber=b0_subscriber_new(_node,_defaultSubscriberTopic.c_str(),nullptr); // we will poll the socket
     std::cout << "\n  Running B0 Remote API client with channel name [" << channelName << "]" << std::endl;
     std::cout << "  make sure that: 1) the B0 resolver is running" << std::endl;
-    std::cout << "                  2) V-REP is running the B0 Remote API server with the same channel name" << std::endl;
+    std::cout << "                  2) CoppeliaSim is running the B0 Remote API server with the same channel name" << std::endl;
     std::cout << "  Initializing...\n" << std::endl;
     b0_node_init(_node);
 

@@ -1,4 +1,4 @@
-# Make sure to have V-REP running, with followig scene loaded:
+# Make sure to have CoppeliaSim running, with followig scene loaded:
 #
 # scenes/B0-basedRemoteApiDemo.ttt
 #

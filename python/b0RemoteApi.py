@@ -27,7 +27,7 @@ class RemoteApiClient:
         self._defaultSubscriber=b0.Subscriber(self._node,self._defaultSubscriberTopic,None) # we will poll the socket
         print('\n  Running B0 Remote API client with channel name ['+channelName+']')
         print('  make sure that: 1) the B0 resolver is running')
-        print('                  2) V-REP is running the B0 Remote API server with the same channel name')
+        print('                  2) CoppeliaSim is running the B0 Remote API server with the same channel name')
         print('  Initializing...\n')
         self._node.init()
         self._handleFunction('inactivityTolerance',[inactivityToleranceInSec],self._serviceCallTopic)

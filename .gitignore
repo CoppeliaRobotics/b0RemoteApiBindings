@@ -25,6 +25,5 @@ b0RemoteApi-functionList.html
 build-*
 .DS_Store
 bubbleRobClient_b0RemoteApi
-libb0Lua.*
 *.obj
 *.exe

@@ -380,7 +380,7 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     
     print('\n  Running B0 Remote API client with channel name ['..channelName..']')
     print('  make sure that: 1) the B0 resolver is running')
-    print('                  2) V-REP is running the B0 Remote API server with the same channel name')
+    print('                  2) CoppeliaSim is running the B0 Remote API server with the same channel name')
     print('  Initializing...\n')
     b0.node_init(_node)
     

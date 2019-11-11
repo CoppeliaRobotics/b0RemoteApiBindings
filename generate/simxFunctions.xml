@@ -45,7 +45,7 @@
                 <description>The callback function for the subscriber</description>
             </param>
             <param name="publishInterval" type="int" default="1">
-                <description>The rate (in terms of simulation loops) at which the server (i.e. V-REP) should publish the message</description>
+                <description>The rate (in terms of simulation loops) at which the server (i.e. CoppeliaSim) should publish the message</description>
             </param>
         </params>
         <return>
@@ -115,7 +115,7 @@
                 <description>The callback function for the subscriber</description>
             </param>
             <param name="publishInterval" type="int" default="1">
-                <description>The rate (in terms of simulation loops) at which the server (i.e. V-REP) should publish the message</description>
+                <description>The rate (in terms of simulation loops) at which the server (i.e. CoppeliaSim) should publish the message</description>
             </param>
             <param name="dropMessages" type="bool" default="false">
                 <description>Whether some messages will be dropped if a queue is forming. In that case, the freshest message will be retained</description>
@@ -174,7 +174,7 @@
     </command>
     
     <command name="simxSynchronous">
-        <description>Enables/disables the V-REP synchronous mode during simulation. In synchonous mode, each simulation step will require an external trigger signal in order to be run</description>
+        <description>Enables/disables the CoppeliaSim synchronous mode during simulation. In synchonous mode, each simulation step will require an external trigger signal in order to be run</description>
         <params>
             <param name="enable" type="bool">
                 <description>The enable state of the synchonous mode</description>
@@ -188,7 +188,7 @@
     </command>
     
     <command name="simxSynchronousTrigger">
-        <description>Triggers next simulation step, if the V-REP synchronous mode was previously enabled</description>
+        <description>Triggers next simulation step, if the CoppeliaSim synchronous mode was previously enabled</description>
         <check-also>
             <item name="[L[#simxSynchronous]]"/>
             <item name="[L[#simxGetSimulationStepDone]]"/>
@@ -221,7 +221,7 @@
     </command>
     
     <command name="simxCallScriptFunction" type="generic">
-        <description>Calls a script function inside of V-REP (i.e. server side)</description>
+        <description>Calls a script function inside of CoppeliaSim (i.e. server side)</description>
         <params>
             <param name="funcAtObjName" type="string">
                 <description>A string representing the function name and script name, e.g. myFunctionName@theScriptName. When the script is not associated with an object, then just specify the function name</description>
@@ -1622,7 +1622,7 @@
                 <description>The default auxiliary value packet. See [L[regularApi/simReadVisionSensor.htm,here] for details</description>
             </param>
             <param name="item4" type="float[]">
-                <description>Additional auxiliary value packet (e.g. from a filter component)</description>
+                <description>Additional auxiliary value packet (e.g. from an image processing component)</description>
             </param>
             <param name="item5" type="float[]">
                 <description>Etc.</description>

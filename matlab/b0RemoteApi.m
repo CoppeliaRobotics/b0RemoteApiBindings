@@ -124,7 +124,7 @@ classdef b0RemoteApi < handle
             disp(char(10));
             disp(strcat('  Running B0 Remote API client with channel name [',obj.channelName,']'));
             disp('  make sure that: 1) the B0 resolver is running');
-            disp('                  2) V-REP is running the B0 Remote API server with the same channel name');
+            disp('                  2) CoppeliaSim is running the B0 Remote API server with the same channel name');
             disp('  Initializing...');
             disp(char(10));
             try
