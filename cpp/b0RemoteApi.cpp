@@ -2117,6 +2117,19 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetJointForce(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetJointForce",packedArgs.str(),topic));
 }
+std::vector<msgpack::object>* b0RemoteApi::simxGetJointMaxForce(
+    int jointHandle,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        jointHandle
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetJointMaxForce",packedArgs.str(),topic));
+}
 std::vector<msgpack::object>* b0RemoteApi::simxSetJointForce(
     int jointHandle,
     float forceOrTorque,
@@ -2132,6 +2145,22 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetJointForce(
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
     return(_handleFunction("SetJointForce",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetJointMaxForce(
+    int jointHandle,
+    float forceOrTorque,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        float
+    > args(
+        jointHandle,
+        forceOrTorque
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetJointMaxForce",packedArgs.str(),topic));
 }
 std::vector<msgpack::object>* b0RemoteApi::simxGetJointPosition(
     int jointHandle,

@@ -11,8 +11,8 @@ lua51.dll
 lua.exe
 b0.dll
 libzmq.dll
-libzmq-mt-4_3_1.dll
-zlib1.dll
+libzmq-mt-4_3_2.dll
+lz4.dll
 boost_*.dll
 *.class
 *.pyc

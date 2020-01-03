@@ -426,9 +426,15 @@ class RemoteApiClient:
     def simxGetJointForce(self,jointHandle,topic):
         reqArgs = [jointHandle]
         return self._handleFunction('GetJointForce',reqArgs,topic)
+    def simxGetJointMaxForce(self,jointHandle,topic):
+        reqArgs = [jointHandle]
+        return self._handleFunction('GetJointMaxForce',reqArgs,topic)
     def simxSetJointForce(self,jointHandle,forceOrTorque,topic):
         reqArgs = [jointHandle,forceOrTorque]
         return self._handleFunction('SetJointForce',reqArgs,topic)
+    def simxSetJointMaxForce(self,jointHandle,forceOrTorque,topic):
+        reqArgs = [jointHandle,forceOrTorque]
+        return self._handleFunction('SetJointMaxForce',reqArgs,topic)
     def simxGetJointPosition(self,jointHandle,topic):
         reqArgs = [jointHandle]
         return self._handleFunction('GetJointPosition',reqArgs,topic)

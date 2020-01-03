@@ -667,9 +667,17 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {jointHandle}
         return _handleFunction("GetJointForce",reqArgs,topic)
     end
+    function self.simxGetJointMaxForce(jointHandle,topic)
+        local reqArgs = {jointHandle}
+        return _handleFunction("GetJointMaxForce",reqArgs,topic)
+    end
     function self.simxSetJointForce(jointHandle,forceOrTorque,topic)
         local reqArgs = {jointHandle,forceOrTorque}
         return _handleFunction("SetJointForce",reqArgs,topic)
+    end
+    function self.simxSetJointMaxForce(jointHandle,forceOrTorque,topic)
+        local reqArgs = {jointHandle,forceOrTorque}
+        return _handleFunction("SetJointMaxForce",reqArgs,topic)
     end
     function self.simxGetJointPosition(jointHandle,topic)
         local reqArgs = {jointHandle}

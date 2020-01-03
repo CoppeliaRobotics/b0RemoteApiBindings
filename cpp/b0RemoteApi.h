@@ -459,7 +459,14 @@ public:
     std::vector<msgpack::object>* simxGetJointForce(
         int jointHandle,
         const char* topic);
+    std::vector<msgpack::object>* simxGetJointMaxForce(
+        int jointHandle,
+        const char* topic);
     std::vector<msgpack::object>* simxSetJointForce(
+        int jointHandle,
+        float forceOrTorque,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetJointMaxForce(
         int jointHandle,
         float forceOrTorque,
         const char* topic);

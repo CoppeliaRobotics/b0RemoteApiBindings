@@ -664,9 +664,17 @@ classdef b0RemoteApi < handle
             args = {jointHandle};
             ret = obj.handleFunction('GetJointForce',args,topic);
         end
+        function ret = simxGetJointMaxForce(obj,jointHandle,topic)
+            args = {jointHandle};
+            ret = obj.handleFunction('GetJointMaxForce',args,topic);
+        end
         function ret = simxSetJointForce(obj,jointHandle,forceOrTorque,topic)
             args = {jointHandle,forceOrTorque};
             ret = obj.handleFunction('SetJointForce',args,topic);
+        end
+        function ret = simxSetJointMaxForce(obj,jointHandle,forceOrTorque,topic)
+            args = {jointHandle,forceOrTorque};
+            ret = obj.handleFunction('SetJointMaxForce',args,topic);
         end
         function ret = simxGetJointPosition(obj,jointHandle,topic)
             args = {jointHandle};

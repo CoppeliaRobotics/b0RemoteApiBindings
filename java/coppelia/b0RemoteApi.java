@@ -1749,6 +1749,15 @@ public class b0RemoteApi
         args.packInt(jointHandle);
         return _handleFunction("GetJointForce",args,topic);
     }
+    public MessageUnpacker simxGetJointMaxForce(
+        int jointHandle,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(jointHandle);
+        return _handleFunction("GetJointMaxForce",args,topic);
+    }
     public MessageUnpacker simxSetJointForce(
         int jointHandle,
         float forceOrTorque,
@@ -1759,6 +1768,17 @@ public class b0RemoteApi
         args.packInt(jointHandle);
         args.packFloat(forceOrTorque);
         return _handleFunction("SetJointForce",args,topic);
+    }
+    public MessageUnpacker simxSetJointMaxForce(
+        int jointHandle,
+        float forceOrTorque,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(jointHandle);
+        args.packFloat(forceOrTorque);
+        return _handleFunction("SetJointMaxForce",args,topic);
     }
     public MessageUnpacker simxGetJointPosition(
         int jointHandle,

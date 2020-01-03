@@ -2200,11 +2200,59 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simGetJointForce.htm,sim.getJointForce]] (regular API)"/>
-            <item name="[L[#simxSetJointForce]]"/>
+            <item name="[L[#simxSetJointMaxForce]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxGetJointMaxForce" type="generic" generateCode="true">
+        <description>Retrieves the maximum force or torque that a joint can exert</description>
+        <params>
+            <param name="jointHandle" type="int">
+                <description>The handle of the joint</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+            <param name="item2" type="float">
+                <description>The maximum force or torque that the joint can exert</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simGetJointMaxForce.htm,sim.getJointMaxForce]] (regular API)"/>
+            <item name="[L[#simxSetJointMaxForce]]"/>
         </check-also>
     </command>
     
     <command name="simxSetJointForce" type="generic" generateCode="true">
+        <description>DEPRECATED. Use [L[#simxSetJointMaxForce]] instead</description>
+        <params>
+            <param name="jointHandle" type="int">
+                <description>The handle of the joint</description>
+            </param>
+            <param name="forceOrTorque" type="float">
+                <description>The maximum force or torque that the joint can exert</description>
+            </param>
+            <param name="topic" type="string">
+                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
+            </param>
+        </params>
+        <return>
+            <param name="item1" type="bool">
+                <description>Whether the function was successfully called on the server side</description>
+            </param>
+        </return>
+        <check-also>
+            <item name="[L[regularApi/simSetJointMaxForce.htm,sim.setJointMaxForce]] (regular API)"/>
+            <item name="[L[#simxGetJointMaxForce]]"/>
+        </check-also>
+    </command>
+    
+    <command name="simxSetJointMaxForce" type="generic" generateCode="true">
         <description>Sets the maximum force or torque that a joint can exert</description>
         <params>
             <param name="jointHandle" type="int">
@@ -2223,8 +2271,8 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetJointForce.htm,sim.setJointForce]] (regular API)"/>
-            <item name="[L[#simxGetJointForce]]"/>
+            <item name="[L[regularApi/simSetJointMaxForce.htm,sim.setJointMaxForce]] (regular API)"/>
+            <item name="[L[#simxGetJointMaxForce]]"/>
         </check-also>
     </command>
     
