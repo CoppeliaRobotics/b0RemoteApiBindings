@@ -3,7 +3,7 @@ include(config.pri)
 QT -= core
 QT -= gui
 
-TARGET = simpleTest
+TARGET = synchronousImageTransmission
 TEMPLATE = app
 
 DEFINES -= UNICODE
@@ -57,7 +57,7 @@ HEADERS += \
     ../b0RemoteApi.h \
 
 SOURCES += \
-    simpleTest.cpp \
+    synchronousImageTransmission.cpp \
     ../b0RemoteApi.cpp \
 
 unix:!symbian {

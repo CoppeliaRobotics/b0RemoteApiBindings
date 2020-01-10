@@ -1,11 +1,11 @@
 // Make sure to have CoppeliaSim running, with followig scene loaded:
 //
-// scenes/B0-basedRemoteApiDemo.ttt
+// scenes/synchronousImageTransmissionViaRemoteApi.ttt
 //
 // Do not launch simulation, and make sure that the B0 resolver
-// is running. Then run "simpleTest"
+// is running. Then run this program
 //
-// The client side (i.e. "simpleTest") depends on:
+// The client side (i.e. this program) depends on:
 //
 // coppelia/b0RemoteApi (package), which depends on:
 // org/msgpack (package)
@@ -24,8 +24,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Map;
 
-public class simpleTest
+public class synchronousImageTransmission
 {
+    public static boolean runInSynchronousMode=true;
     public static boolean doNextStep=true;
     public static int visionSensorHandle;
     public static int passiveVisionSensorHandle;
@@ -64,6 +65,23 @@ public class simpleTest
         }
         catch(IOException e) { throw new UncheckedIOException(e); }
     }
+    
+    public static void stepSimulation()
+    {
+        try
+        {
+            if (runInSynchronousMode)
+            {
+                while (!doNextStep)
+                    client.simxSpinOnce();
+                doNextStep=false;
+                client.simxSynchronousTrigger();
+            }
+            else
+                client.simxSpinOnce();
+        }
+        catch(IOException e) { throw new UncheckedIOException(e); }
+    }
         
     public static void main(String[] args) throws IOException
     {
@@ -74,23 +92,20 @@ public class simpleTest
         visionSensorHandle=client.readInt(msg,1);
         msg=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall());
         passiveVisionSensorHandle=client.readInt(msg,1);
-        client.simxSynchronous(true);
-        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxDefaultSubscriber(simpleTest::imageCallback));
-//        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxCreateSubscriber(simpleTest::imageCallback,1,true));
-        client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simpleTest::simulationStepStarted));
-        client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simpleTest::simulationStepDone));
+        
+        if (runInSynchronousMode)
+            client.simxSynchronous(true);
+        
+        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxDefaultSubscriber(synchronousImageTransmission::imageCallback));
+//        client.simxGetVisionSensorImage(visionSensorHandle,false,client.simxCreateSubscriber(synchronousImageTransmission::imageCallback,1,true));
+        client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(synchronousImageTransmission::simulationStepStarted));
+        client.simxGetSimulationStepDone(client.simxDefaultSubscriber(synchronousImageTransmission::simulationStepDone));
         client.simxStartSimulation(client.simxDefaultPublisher());
         
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis()<startTime+5000)
-        {
-            if (doNextStep)
-            {
-                doNextStep=false;
-                client.simxSynchronousTrigger();
-            }
-            client.simxSpinOnce();
-        }
+            stepSimulation();
+        
         client.simxStopSimulation(client.simxDefaultPublisher());
         
         client.delete();

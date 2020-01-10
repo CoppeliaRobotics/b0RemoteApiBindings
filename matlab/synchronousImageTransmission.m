@@ -1,11 +1,11 @@
 % Make sure to have CoppeliaSim running, with followig scene loaded:
 %
-% scenes/B0-basedRemoteApiDemo.ttt
+% scenes/synchronousImageTransmissionViaRemoteApi.ttt
 %
 % Do not launch simulation, and make sure that the B0 resolver
-% is running. Then run "simpleTest"
+% is running. Then run this script
 %
-% The client side (i.e. "simpleTest") depends on:
+% The client side (i.e. this script) depends on:
 %
 % b0RemoteApi (Matlab script), which depends on:
 % msgpack-matlab (Matlab scripts)
@@ -16,8 +16,9 @@
 % boost_thread (shared library)
 % libzmq (shared library)
 
-function simpleTest()
+function synchronousImageTransmission()
     doNextStep=true;
+    runInSynchronousMode=true;
     
     function simulationStepStarted_CB(data)
         data=data{2};
@@ -38,13 +39,28 @@ function simpleTest()
         res=client.simxSetVisionSensorImage(passiveVisionSensorHandle{2},false,img,client.simxDefaultPublisher());
     end
     
+    function stepSimulation()
+        if runInSynchronousMode
+            while doNextStep==false
+                client.simxSpinOnce();
+            end
+            doNextStep=false;
+            client.simxSynchronousTrigger();
+        else
+            client.simxSpinOnce();
+        end
+    end
+    
     disp('Program started');
     try
         client=b0RemoteApi('b0RemoteApi_matlabClient','b0RemoteApi');
         client.simxAddStatusbarMessage('Hello world!',client.simxDefaultPublisher());
         visionSensorHandle=client.simxGetObjectHandle('VisionSensor',client.simxServiceCall());
         passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall());
-        client.simxSynchronous(true);
+        
+        if runInSynchronousMode
+            client.simxSynchronous(true);
+        end
         
         client.simxGetVisionSensorImage(visionSensorHandle{2},false,client.simxDefaultSubscriber(@image_CB));
         
@@ -54,11 +70,7 @@ function simpleTest()
         client.simxStartSimulation(client.simxServiceCall());
         tic;
         while toc<5
-            if doNextStep
-                doNextStep=false;
-                client.simxSynchronousTrigger();
-            end
-            client.simxSpinOnce();
+            stepSimulation();
         end
         client.simxStopSimulation(client.simxDefaultPublisher());
         client.delete();

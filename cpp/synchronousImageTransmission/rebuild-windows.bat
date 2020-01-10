@@ -9,12 +9,12 @@ set COMPILERSTRING=%COMPILER_INCLUDES% %COMPILER_DEFINES% %COMPILER_FLAGS%
 
 REM  b0.lib is normally located in the same folder as coppeliaSim.exe
 set LINKER_LIBS="..\..\..\bluezero\build\release\b0.lib" 
-set LINKERSTRING=/OUT:"simpleTest.exe" %LINKER_LIBS%
+set LINKERSTRING=/OUT:"synchronousImageTransmission.exe" %LINKER_LIBS%
 
 if not defined DevEnvDir (
     call %VCVARSALL_STRING%
 )
 
-cl simpleTest.cpp %COMPILERSTRING%
+cl synchronousImageTransmission.cpp %COMPILERSTRING%
 cl ..\b0RemoteApi.cpp %COMPILERSTRING%
-link simpleTest.obj b0RemoteApi.obj %LINKERSTRING%
+link synchronousImageTransmission.obj b0RemoteApi.obj %LINKERSTRING%

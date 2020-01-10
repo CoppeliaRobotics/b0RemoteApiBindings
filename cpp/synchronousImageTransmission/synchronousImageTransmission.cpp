@@ -1,11 +1,11 @@
 // Make sure to have CoppeliaSim running, with followig scene loaded:
 //
-// scenes/B0-basedRemoteApiDemo.ttt
+// scenes/synchronousImageTransmissionViaRemoteApi.ttt
 //
 // Do not launch simulation, and make sure that the B0 resolver
-// is running. Then run "simpleTest"
+// is running. Then run this program
 //
-// The client side (i.e. "simpleTest") depends on:
+// The client side (i.e. this program) depends on:
 //
 // b0 (shared library), which depends on several other libraries (libzmq and several boost libraries)
 
@@ -13,6 +13,7 @@
 #include "b0RemoteApi.h"
 
 bool doNextStep=true;
+bool runInSynchronousMode=true;
 int sens1,sens2;
 b0RemoteApi* cl=NULL;
 
@@ -44,6 +45,19 @@ void image_CB(std::vector<msgpack::object>* msg)
     cl->simxSetVisionSensorImage(sens2,false,img.c_str(),img.size(),cl->simxDefaultPublisher());
 }
 
+void stepSimulation()
+{
+    if (runInSynchronousMode)
+    {
+        while (!doNextStep)
+            cl->simxSpinOnce();
+        doNextStep=false;
+        cl->simxSynchronousTrigger();
+    }
+    else
+        cl->simxSpinOnce();
+}
+
 int main(int argc,char* argv[])
 {
     b0RemoteApi client("b0RemoteApi_c++Client","b0RemoteApi");
@@ -55,7 +69,9 @@ int main(int argc,char* argv[])
     reply=client.simxGetObjectHandle("PassiveVisionSensor",client.simxServiceCall());
     sens2=b0RemoteApi::readInt(reply,1);
 
-    client.simxSynchronous(true);
+    if (runInSynchronousMode)
+        client.simxSynchronous(true);
+
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted_CB));
     client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simulationStepDone_CB));
     client.simxGetVisionSensorImage(sens1,false,client.simxDefaultSubscriber(image_CB));
@@ -63,15 +79,8 @@ int main(int argc,char* argv[])
     client.simxStartSimulation(client.simxDefaultPublisher());
 
     unsigned int st=client.simxGetTimeInMs();
-    while (client.simxGetTimeInMs()<st+3000)
-    {
-        if (doNextStep)
-        {
-            doNextStep=false;
-            client.simxSynchronousTrigger();
-        }
-        client.simxSpinOnce();
-    }
+    while (client.simxGetTimeInMs()<st+5000)
+        stepSimulation();
 
     client.simxStopSimulation(client.simxDefaultPublisher());
     std::cout << "Ended!" << std::endl;

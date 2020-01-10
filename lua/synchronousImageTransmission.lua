@@ -1,11 +1,11 @@
 -- Make sure to have CoppeliaSim running, with followig scene loaded:
 --
--- scenes/B0-basedRemoteApiDemo.ttt
+-- scenes/synchronousImageTransmissionViaRemoteApi.ttt
 --
 -- Do not launch simulation, and make sure that the B0 resolver
--- is running. Then run "simpleTest"
+-- is running. Then run this script
 --
--- The client side (i.e. "simpleTest") depends on:
+-- The client side (i.e. this script) depends on:
 --
 -- b0RemoteApi (Lua script), which depends on:
 -- messagePack (Lua script)
@@ -20,6 +20,7 @@ require 'b0RemoteApi'
 
 local client=b0RemoteApi('b0RemoteApi_luaClient','b0RemoteApi')
 local doNextStep=true
+local runInSynchronousMode=true
 
 function simulationStepStarted(msg)
     local simTime=msg[2].simulationTime
@@ -36,11 +37,26 @@ function imageCallback(msg)
     print('Received image.',msg[2])
     client.simxSetVisionSensorImage(passiveVisionSensorHandle[2],false,msg[3],client.simxDefaultPublisher())
 end
+
+function stepSimulation()
+    if runInSynchronousMode then
+        while not doNextStep do
+            client.simxSpinOnce()
+        end
+        doNextStep=false
+        client.simxSynchronousTrigger()
+    else
+        client.simxSpinOnce()
+    end
+end
     
 client.simxAddStatusbarMessage('Hello world!',client.simxDefaultPublisher())
 visionSensorHandle=client.simxGetObjectHandle('VisionSensor',client.simxServiceCall())
 passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall())
-client.simxSynchronous(true)
+
+if runInSynchronousMode then
+    client.simxSynchronous(true)
+end
     
 --dedicatedSub=client.simxCreateSubscriber(imageCallback,1,true)
 --client.simxGetVisionSensorImage(visionSensorHandle[2],false,dedicatedSub)
@@ -53,11 +69,8 @@ client.simxStartSimulation(client.simxDefaultPublisher())
 
 startTime=client.simxGetTimeInMs()
 while client.simxGetTimeInMs()<startTime+5000 do 
-    if doNextStep then
-        doNextStep=false
-        client.simxSynchronousTrigger()
-    end
-    client.simxSpinOnce()
+    stepSimulation()
 end
+
 client.simxStopSimulation(client.simxDefaultPublisher())
 client.delete()
