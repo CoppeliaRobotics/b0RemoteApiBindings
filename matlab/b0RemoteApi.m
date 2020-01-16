@@ -303,6 +303,8 @@ classdef b0RemoteApi < handle
                     retData.setdatatype('uint8Ptr',1,retSize);
                     returnedData = retData.value;
                     ret = parsemsgpack(returnedData);
+                    % Following line new on 16.01.2020:
+                    calllib(obj.libName,'b0_buffer_delete',retData);
                     if length(ret)<2
                         ret=[ret,[]];
                     end
@@ -329,6 +331,10 @@ classdef b0RemoteApi < handle
                             retData = libpointer('uint8PtrPtr');
                             retSize = libpointer('uint64Ptr',uint64(0));
                             [retData servClient packedData retSize]= calllib(obj.libName,'b0_service_client_call',obj.serviceClient,packedData,length(packedData),retSize);
+                            % Following 3 new on 16.01.2020:
+                            if retSize > 0
+                                calllib(obj.libName,'b0_buffer_delete',retData);
+                            end
                         end
                         ret=[];
                     else 

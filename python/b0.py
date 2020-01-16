@@ -199,6 +199,7 @@ class Subscriber:
         outbuf = b0_subscriber_read(self._sub, ct.byref(outsz))
         outarr = ct.cast(outbuf, ct.POINTER(ct.c_ubyte * outsz.value))
         rep_bytes = bytearray(outarr.contents)
+        b0_buffer_delete(outbuf) # new on 16.01.2020
         return rep_bytes
         
     def set_option(self,option,optionVal):
@@ -231,6 +232,7 @@ class ServiceClient:
         outbuf = b0_service_client_call(self._cli, buf, sz, ct.byref(outsz))
         outarr = ct.cast(outbuf, ct.POINTER(ct.c_ubyte * outsz.value))
         rep_bytes = bytearray(outarr.contents)
+        b0_buffer_delete(outbuf) # new on 16.01.2020
         return rep_bytes
         
     def set_option(self,option,optionVal):
