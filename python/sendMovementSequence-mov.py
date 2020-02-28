@@ -14,6 +14,8 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
             client.simxSpinOnce()
 
     def executedMovId_callback(msg):
+        if type(msg[1])==bytes:
+            msg[1]=msg[1].decode('ascii') # python2/python3 differences
         client.executedMovId=msg[1]
 
     # Subscribe to stringSignalName string signal:

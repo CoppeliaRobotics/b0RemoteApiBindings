@@ -62,7 +62,7 @@ class RemoteApiClient:
         self._pongReceived=True
         
     def _handleReceivedMessage(self,msg):
-        msg=msgpack.unpackb(msg)
+        msg=msgpack.unpackb(msg,raw=True)
         msg[0]=msg[0].decode('ascii')
         if msg[0] in self._allSubscribers:
             cbMsg=msg[1]
@@ -73,7 +73,7 @@ class RemoteApiClient:
     def _handleFunction(self,funcName,reqArgs,topic):
         if topic==self._serviceCallTopic:
             packedData=msgpack.packb([[funcName,self._clientId,topic,0],reqArgs])
-            rep = msgpack.unpackb(self._serviceClient.call(packedData))
+            rep = msgpack.unpackb(self._serviceClient.call(packedData),raw=True)
             if len(rep)==1:
                 rep.append(None)
             return rep
