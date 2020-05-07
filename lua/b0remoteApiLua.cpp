@@ -12,9 +12,12 @@ int B0_INIT_CALLBACK(lua_State* L)
 {
     int argCnt=lua_gettop(L);
     int retValCnt=0;
-    int arg1=1;
-    const char* arg2="b0Lua";
-    b0_init(&arg1,(char**)&arg2);
+    if (b0_is_initialized()==0)
+    {
+        int arg1=1;
+        const char* arg2="b0Lua";
+        b0_init(&arg1,(char**)&arg2);
+    }
     return(retValCnt);
 }
 

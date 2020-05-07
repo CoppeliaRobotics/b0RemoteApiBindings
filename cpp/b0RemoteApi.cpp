@@ -18,9 +18,12 @@ b0RemoteApi::b0RemoteApi(const char* nodeName,const char* channelName,int inacti
     _nextDedicatedPublisherHandle=500;
     _nextDedicatedSubscriberHandle=1000;
 
-    int arg1=1;
-    const char* arg2="b0C";
-    b0_init(&arg1,(char**)&arg2);
+    if (b0_is_initialized()==0)
+    {
+        int arg1=1;
+        const char* arg2="b0C";
+        b0_init(&arg1,(char**)&arg2);
+    }
     _node=b0_node_new(nodeName);
     srand((unsigned int)b0_node_hardware_time_usec(_node));
     const char* alp="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
