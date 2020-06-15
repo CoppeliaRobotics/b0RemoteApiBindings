@@ -295,7 +295,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simAddStatusbarMessage.htm,sim.addStatusbarMessage]] (regular API)"/>
+            <item name="[L[regularApi/simAddLog.htm,sim.addLog]] (regular API)"/>
         </check-also>
     </command>
     
