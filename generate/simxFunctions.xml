@@ -1308,7 +1308,7 @@
     </command>
     
     <command name="simxGetCollisionHandle" type="generic" generateCode="true">
-        <description>Retrieves the handle of a [L[collisionDetection.htm,collision object]]</description>
+        <description>DEPRECATED. See [L[#simxCheckCollision]] instead.</description>
         <params>
             <param name="nameOfObject" type="string">
                 <description>The name of the collision object. If the name is appended by a "@silentError" suffix, then no error will be output if the collision object does not exist</description>
@@ -1333,7 +1333,7 @@
     </command>
     
     <command name="simxGetDistanceHandle" type="generic" generateCode="true">
-        <description>Retrieves the handle of a [L[distanceCalculation.htm,distance calculation object]]</description>
+        <description>DEPRECATED. See [L[#simxCheckDistance]] instead.</description>
         <params>
             <param name="nameOfObject" type="string">
                 <description>The name of the distance calculation object. If the name is appended by a "@silentError" suffix, then no error will be output if the distance object does not exist</description>
@@ -1358,7 +1358,7 @@
     </command>
     
     <command name="simxReadCollision" type="generic" generateCode="true">
-        <description>Reads the collision state of a [L[collisionDetection.htm,collision object]]</description>
+        <description>DEPRECATED. See [L[#simxCheckCollision]] instead.</description>
         <params>
             <param name="handle" type="int">
                 <description>The handle of the collision object</description>
@@ -1386,7 +1386,7 @@
     </command>
     
     <command name="simxReadDistance" type="generic" generateCode="true">
-        <description>Reads the distance state of a [L[distanceCalculation.htm,distance calculation object]]</description>
+        <description>DEPRECATED. See [L[#simxCheckDistance]] instead.</description>
         <params>
             <param name="handle" type="int">
                 <description>The handle of the distance calculation object</description>
@@ -1436,7 +1436,6 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simCheckCollision.htm,sim.checkCollision]] (regular API)"/>
-            <item name="[L[#simxReadCollision]]"/>
         </check-also>
     </command>
     
@@ -1476,7 +1475,6 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simCheckDistance.htm,sim.checkDistance]] (regular API)"/>
-            <item name="[L[#simxReadDistance]]"/>
         </check-also>
     </command>
     
