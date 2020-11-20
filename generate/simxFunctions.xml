@@ -2156,7 +2156,7 @@
     </command>
     
     <command name="simxGetCollectionHandle" type="generic" generateCode="true">
-        <description>Retrieves the handle of a collection</description>
+        <description>This is a convenience function. Since CoppeliaSim V4.2.0, collections should be dynamically created and do not have a name anymore. This function will first try to retrieve a static collection with the specified name (for backward compatibility's sake). If such a collection does not exist, it will try to return the integer signal with the specified name.</description>
         <params>
             <param name="collectionName" type="string">
                 <description>Name of the collection. If the name is appended by a "@silentError" suffix, then no error will be output if the collection does not exist</description>
