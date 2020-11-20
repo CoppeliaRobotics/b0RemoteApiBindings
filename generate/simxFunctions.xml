@@ -1326,8 +1326,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetCollisionHandle.htm,sim.getCollisionHandle]] (regular API)"/>
-            <item name="[L[#simxReadCollision]]"/>
             <item name="[L[#simxCheckCollision]]"/>
         </check-also>
     </command>
@@ -1351,8 +1349,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetDistanceHandle.htm,sim.getDistanceHandle]] (regular API)"/>
-            <item name="[L[#simxReadDistance]]"/>
             <item name="[L[#simxCheckDistance]]"/>
         </check-also>
     </command>
@@ -2174,7 +2170,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetCollectionHandle.htm,sim.getCollectionHandle]] (regular API)"/>
         </check-also>
     </command>
     
