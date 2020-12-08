@@ -61,13 +61,13 @@ int main(int argc,char* argv[])
     {
         if (simTime-driveBackStartTime<3.0f)
         { // driving backwards while slightly turning:
-            motorSpeeds[0]=-3.1415f*0.5f;
-            motorSpeeds[1]=-3.1415f*0.25f;
+            motorSpeeds[0]=-7.0f*0.5f;
+            motorSpeeds[1]=-7.0f*0.25f;
         }
         else
         { // going forward:
-            motorSpeeds[0]=3.1415f;
-            motorSpeeds[1]=3.1415f;
+            motorSpeeds[0]=7.0f;
+            motorSpeeds[1]=7.0f;
             if (sensorTrigger>0)
                 driveBackStartTime=simTime; // We detected something, and start the backward mode
         }
