@@ -1,6 +1,6 @@
 # Make sure to have CoppeliaSim running, with followig scene loaded:
 #
-# scenes/pControllerViaRemoteApi.ttt
+# scenes/messaging/pControllerViaRemoteApi.ttt
 #
 # Do not launch simulation, and make sure that the B0 resolver
 # is running. Then run this script

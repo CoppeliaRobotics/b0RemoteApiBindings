@@ -288,7 +288,7 @@ class Pinta(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final int[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -303,7 +303,7 @@ class Pinta2(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final int[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -318,7 +318,7 @@ class Pinta3(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final int[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -333,7 +333,7 @@ class Pfloata(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -348,7 +348,7 @@ class Pfloata2(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -363,7 +363,7 @@ class Pfloata3(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -378,7 +378,7 @@ class Pfloata4(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -393,7 +393,7 @@ class Pfloata7(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -408,7 +408,7 @@ class Pfloata12(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final float[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -423,7 +423,7 @@ class Pdoublea(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -438,7 +438,7 @@ class Pdoublea2(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -453,7 +453,7 @@ class Pdoublea3(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -468,7 +468,7 @@ class Pdoublea4(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -483,7 +483,7 @@ class Pdoublea7(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
@@ -498,7 +498,7 @@ class Pdoublea12(Param):
         if os.getenv('remoteApiDocLang')=='java':
             return 'final double[]'
         if os.getenv('remoteApiDocLang')=='lua':
-            return 'table'
+            return 'table[]'
         if os.getenv('remoteApiDocLang')=='matlab':
             return 'array'
         if os.getenv('remoteApiDocLang')=='python':
