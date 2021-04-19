@@ -350,18 +350,20 @@ void lua_registerN(lua_State* L,char const* funcName,lua_CFunction functionCallb
     {
         name.erase(name.begin(),name.begin()+3);
 
-        lua_getfield(L,LUA_GLOBALSINDEX,"b0");
+        lua_rawgeti(L,LUA_REGISTRYINDEX,LUA_RIDX_GLOBALS); // table of globals
+        lua_getfield(L,-1,"b0");
         if (!lua_istable(L,-1))
         { // we first need to create the table
             lua_createtable(L,0,1);
-            lua_setfield(L,LUA_GLOBALSINDEX,"b0");
+            lua_setfield(L,-3,"b0");
             lua_pop(L,1);
-            lua_getfield(L,LUA_GLOBALSINDEX,"b0");
+            lua_getfield(L,-1,"b0");
         }
         lua_pushstring(L,name.c_str());
         lua_pushcfunction(L,functionCallback);
         lua_settable(L,-3);
         lua_pop(L,1);
+        lua_pop(L,1); // pop table of globals
     }
     else
         lua_register(L,funcName,functionCallback);
