@@ -97,6 +97,133 @@ public:
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,int scriptType,const char* packedData,size_t packedDataSize,const char* topic);
     std::vector<msgpack::object>* simxCallScriptFunction(const char* funcAtObjName,const char* scriptType,const char* packedData,size_t packedDataSize,const char* topic);
 
+    //-- DEPRECATED START
+    std::vector<msgpack::object>* simxSetStringParameter(
+        int paramId,
+        const char* paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetStringParameter(
+        const char* paramId,
+        const char* paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetFloatParameter(
+        int paramId,
+        float paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetFloatParameter(
+        const char* paramId,
+        float paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetArrayParameter(
+        int paramId,
+        const float* paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetArrayParameter(
+        const char* paramId,
+        const float* paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetIntParameter(
+        int paramId,
+        int paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetIntParameter(
+        const char* paramId,
+        int paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetBoolParameter(
+        int paramId,
+        bool paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetBoolParameter(
+        const char* paramId,
+        bool paramVal,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetStringParameter(
+        int paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetStringParameter(
+        const char* paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetFloatParameter(
+        int paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetFloatParameter(
+        const char* paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetArrayParameter(
+        int paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetArrayParameter(
+        const char* paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetIntParameter(
+        int paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetIntParameter(
+        const char* paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetBoolParameter(
+        int paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetBoolParameter(
+        const char* paramId,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectFloatParameter(
+        int objectHandle,
+        int parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectFloatParameter(
+        int objectHandle,
+        const char* parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectIntParameter(
+        int objectHandle,
+        int parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectIntParameter(
+        int objectHandle,
+        const char* parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectStringParameter(
+        int objectHandle,
+        int parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetObjectStringParameter(
+        int objectHandle,
+        const char* parameterID,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectFloatParameter(
+        int objectHandle,
+        int parameterID,
+        float parameter,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectFloatParameter(
+        int objectHandle,
+        const char* parameterID,
+        float parameter,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectIntParameter(
+        int objectHandle,
+        int parameterID,
+        int parameter,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectIntParameter(
+        int objectHandle,
+        const char* parameterID,
+        int parameter,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectStringParameter(
+        int objectHandle,
+        int parameterID,
+        const char* parameter,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetObjectStringParameter(
+        int objectHandle,
+        const char* parameterID,
+        const char* parameter,
+        const char* topic);
+    //-- DEPRECATED END
+
 
     std::vector<msgpack::object>* simxGetObjectHandle(
         const char* objectName,
@@ -359,74 +486,74 @@ public:
         const char* topic);
     std::vector<msgpack::object>* simxCloseScene(
         const char* topic);
-    std::vector<msgpack::object>* simxSetStringParameter(
+    std::vector<msgpack::object>* simxSetStringParam(
         int paramId,
         const char* paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetStringParameter(
+    std::vector<msgpack::object>* simxSetStringParam(
         const char* paramId,
         const char* paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetFloatParameter(
+    std::vector<msgpack::object>* simxSetFloatParam(
         int paramId,
         float paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetFloatParameter(
+    std::vector<msgpack::object>* simxSetFloatParam(
         const char* paramId,
         float paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetArrayParameter(
+    std::vector<msgpack::object>* simxSetArrayParam(
         int paramId,
         const float* paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetArrayParameter(
+    std::vector<msgpack::object>* simxSetArrayParam(
         const char* paramId,
         const float* paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetIntParameter(
+    std::vector<msgpack::object>* simxSetInt32Param(
         int paramId,
         int paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetIntParameter(
+    std::vector<msgpack::object>* simxSetInt32Param(
         const char* paramId,
         int paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetBoolParameter(
+    std::vector<msgpack::object>* simxSetBoolParam(
         int paramId,
         bool paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxSetBoolParameter(
+    std::vector<msgpack::object>* simxSetBoolParam(
         const char* paramId,
         bool paramVal,
         const char* topic);
-    std::vector<msgpack::object>* simxGetStringParameter(
+    std::vector<msgpack::object>* simxGetStringParam(
         int paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetStringParameter(
+    std::vector<msgpack::object>* simxGetStringParam(
         const char* paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetFloatParameter(
+    std::vector<msgpack::object>* simxGetFloatParam(
         int paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetFloatParameter(
+    std::vector<msgpack::object>* simxGetFloatParam(
         const char* paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetArrayParameter(
+    std::vector<msgpack::object>* simxGetArrayParam(
         int paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetArrayParameter(
+    std::vector<msgpack::object>* simxGetArrayParam(
         const char* paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetIntParameter(
+    std::vector<msgpack::object>* simxGetInt32Param(
         int paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetIntParameter(
+    std::vector<msgpack::object>* simxGetInt32Param(
         const char* paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetBoolParameter(
+    std::vector<msgpack::object>* simxGetBoolParam(
         int paramId,
         const char* topic);
-    std::vector<msgpack::object>* simxGetBoolParameter(
+    std::vector<msgpack::object>* simxGetBoolParam(
         const char* paramId,
         const char* topic);
     std::vector<msgpack::object>* simxDisplayDialog(
@@ -518,56 +645,56 @@ public:
         int objectHandle,
         bool altName,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectFloatParameter(
+    std::vector<msgpack::object>* simxGetObjectFloatParam(
         int objectHandle,
         int parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectFloatParameter(
+    std::vector<msgpack::object>* simxGetObjectFloatParam(
         int objectHandle,
         const char* parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectIntParameter(
+    std::vector<msgpack::object>* simxGetObjectInt32Param(
         int objectHandle,
         int parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectIntParameter(
+    std::vector<msgpack::object>* simxGetObjectInt32Param(
         int objectHandle,
         const char* parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectStringParameter(
+    std::vector<msgpack::object>* simxGetObjectStringParam(
         int objectHandle,
         int parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectStringParameter(
+    std::vector<msgpack::object>* simxGetObjectStringParam(
         int objectHandle,
         const char* parameterID,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectFloatParameter(
+    std::vector<msgpack::object>* simxSetObjectFloatParam(
         int objectHandle,
         int parameterID,
         float parameter,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectFloatParameter(
+    std::vector<msgpack::object>* simxSetObjectFloatParam(
         int objectHandle,
         const char* parameterID,
         float parameter,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectIntParameter(
+    std::vector<msgpack::object>* simxSetObjectInt32Param(
         int objectHandle,
         int parameterID,
         int parameter,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectIntParameter(
+    std::vector<msgpack::object>* simxSetObjectInt32Param(
         int objectHandle,
         const char* parameterID,
         int parameter,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectStringParameter(
+    std::vector<msgpack::object>* simxSetObjectStringParam(
         int objectHandle,
         int parameterID,
         const char* parameter,
         const char* topic);
-    std::vector<msgpack::object>* simxSetObjectStringParameter(
+    std::vector<msgpack::object>* simxSetObjectStringParam(
         int objectHandle,
         const char* parameterID,
         const char* parameter,

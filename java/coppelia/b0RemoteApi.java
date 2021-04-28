@@ -681,6 +681,356 @@ public class b0RemoteApi
         return _handleFunction("CallScriptFunction",args,topic);
     }
 
+    //-- DEPRECATED START
+    public MessageUnpacker simxSetStringParameter(
+        int paramId,
+        final String paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(paramId);
+        args.packString(paramVal);
+        return _handleFunction("SetStringParam",args,topic);
+    }
+    public MessageUnpacker simxSetStringParameter(
+        final String paramId,
+        final String paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(paramId);
+        args.packString(paramVal);
+        return _handleFunction("SetStringParam",args,topic);
+    }
+    public MessageUnpacker simxSetFloatParameter(
+        int paramId,
+        float paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(paramId);
+        args.packFloat(paramVal);
+        return _handleFunction("SetFloatParam",args,topic);
+    }
+    public MessageUnpacker simxSetFloatParameter(
+        final String paramId,
+        float paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(paramId);
+        args.packFloat(paramVal);
+        return _handleFunction("SetFloatParam",args,topic);
+    }
+    public MessageUnpacker simxSetArrayParameter(
+        int paramId,
+        final float[] paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(paramId);
+        args.packArrayHeader(3);
+        for (int i=0;i<3;i=i+1)
+            args.packFloat(paramVal[i]);
+        return _handleFunction("SetArrayParam",args,topic);
+    }
+    public MessageUnpacker simxSetArrayParameter(
+        final String paramId,
+        final float[] paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(paramId);
+        args.packArrayHeader(3);
+        for (int i=0;i<3;i=i+1)
+            args.packFloat(paramVal[i]);
+        return _handleFunction("SetArrayParam",args,topic);
+    }
+    public MessageUnpacker simxSetIntParameter(
+        int paramId,
+        int paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(paramId);
+        args.packInt(paramVal);
+        return _handleFunction("SetInt32Param",args,topic);
+    }
+    public MessageUnpacker simxSetIntParameter(
+        final String paramId,
+        int paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(paramId);
+        args.packInt(paramVal);
+        return _handleFunction("SetInt32Param",args,topic);
+    }
+    public MessageUnpacker simxSetBoolParameter(
+        int paramId,
+        boolean paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(paramId);
+        args.packBoolean(paramVal);
+        return _handleFunction("SetBoolParam",args,topic);
+    }
+    public MessageUnpacker simxSetBoolParameter(
+        final String paramId,
+        boolean paramVal,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(paramId);
+        args.packBoolean(paramVal);
+        return _handleFunction("SetBoolParam",args,topic);
+    }
+    public MessageUnpacker simxGetStringParameter(
+        int paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(paramId);
+        return _handleFunction("GetStringParam",args,topic);
+    }
+    public MessageUnpacker simxGetStringParameter(
+        final String paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(paramId);
+        return _handleFunction("GetStringParam",args,topic);
+    }
+    public MessageUnpacker simxGetFloatParameter(
+        int paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(paramId);
+        return _handleFunction("GetFloatParam",args,topic);
+    }
+    public MessageUnpacker simxGetFloatParameter(
+        final String paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(paramId);
+        return _handleFunction("GetFloatParam",args,topic);
+    }
+    public MessageUnpacker simxGetArrayParameter(
+        int paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(paramId);
+        return _handleFunction("GetArrayParam",args,topic);
+    }
+    public MessageUnpacker simxGetArrayParameter(
+        final String paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(paramId);
+        return _handleFunction("GetArrayParam",args,topic);
+    }
+    public MessageUnpacker simxGetIntParameter(
+        int paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(paramId);
+        return _handleFunction("GetInt32Param",args,topic);
+    }
+    public MessageUnpacker simxGetIntParameter(
+        final String paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(paramId);
+        return _handleFunction("GetInt32Param",args,topic);
+    }
+    public MessageUnpacker simxGetBoolParameter(
+        int paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(paramId);
+        return _handleFunction("GetBoolParam",args,topic);
+    }
+    public MessageUnpacker simxGetBoolParameter(
+        final String paramId,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(paramId);
+        return _handleFunction("GetBoolParam",args,topic);
+    }
+    public MessageUnpacker simxGetObjectFloatParameter(
+        int objectHandle,
+        int parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        return _handleFunction("GetObjectFloatParam",args,topic);
+    }
+    public MessageUnpacker simxGetObjectFloatParameter(
+        int objectHandle,
+        final String parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        return _handleFunction("GetObjectFloatParam",args,topic);
+    }
+    public MessageUnpacker simxGetObjectIntParameter(
+        int objectHandle,
+        int parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        return _handleFunction("GetObjectInt32Param",args,topic);
+    }
+    public MessageUnpacker simxGetObjectIntParameter(
+        int objectHandle,
+        final String parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        return _handleFunction("GetObjectInt32Param",args,topic);
+    }
+    public MessageUnpacker simxGetObjectStringParameter(
+        int objectHandle,
+        int parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        return _handleFunction("GetObjectStringParam",args,topic);
+    }
+    public MessageUnpacker simxGetObjectStringParameter(
+        int objectHandle,
+        final String parameterID,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        return _handleFunction("GetObjectStringParam",args,topic);
+    }
+    public MessageUnpacker simxSetObjectFloatParameter(
+        int objectHandle,
+        int parameterID,
+        float parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        args.packFloat(parameter);
+        return _handleFunction("SetObjectFloatParam",args,topic);
+    }
+    public MessageUnpacker simxSetObjectFloatParameter(
+        int objectHandle,
+        final String parameterID,
+        float parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        args.packFloat(parameter);
+        return _handleFunction("SetObjectFloatParam",args,topic);
+    }
+    public MessageUnpacker simxSetObjectIntParameter(
+        int objectHandle,
+        int parameterID,
+        int parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        args.packInt(parameter);
+        return _handleFunction("SetObjectInt32Param",args,topic);
+    }
+    public MessageUnpacker simxSetObjectIntParameter(
+        int objectHandle,
+        final String parameterID,
+        int parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        args.packInt(parameter);
+        return _handleFunction("SetObjectInt32Param",args,topic);
+    }
+    public MessageUnpacker simxSetObjectStringParameter(
+        int objectHandle,
+        int parameterID,
+        final String parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packInt(parameterID);
+        args.packString(parameter);
+        return _handleFunction("SetObjectStringParam",args,topic);
+    }
+    public MessageUnpacker simxSetObjectStringParameter(
+        int objectHandle,
+        final String parameterID,
+        final String parameter,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(3);
+        args.packInt(objectHandle);
+        args.packString(parameterID);
+        args.packString(parameter);
+        return _handleFunction("SetObjectStringParam",args,topic);
+    }
+    //-- DEPRECATED END
 
 
     public MessageUnpacker simxGetObjectHandle(
@@ -1461,7 +1811,7 @@ public class b0RemoteApi
 
         return _handleFunction("CloseScene",args,topic);
     }
-    public MessageUnpacker simxSetStringParameter(
+    public MessageUnpacker simxSetStringParam(
         int paramId,
         final String paramVal,
         final String topic) throws IOException
@@ -1470,9 +1820,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(paramId);
         args.packString(paramVal);
-        return _handleFunction("SetStringParameter",args,topic);
+        return _handleFunction("SetStringParam",args,topic);
     }
-    public MessageUnpacker simxSetStringParameter(
+    public MessageUnpacker simxSetStringParam(
         final String paramId,
         final String paramVal,
         final String topic) throws IOException
@@ -1481,9 +1831,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(paramId);
         args.packString(paramVal);
-        return _handleFunction("SetStringParameter",args,topic);
+        return _handleFunction("SetStringParam",args,topic);
     }
-    public MessageUnpacker simxSetFloatParameter(
+    public MessageUnpacker simxSetFloatParam(
         int paramId,
         float paramVal,
         final String topic) throws IOException
@@ -1492,9 +1842,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(paramId);
         args.packFloat(paramVal);
-        return _handleFunction("SetFloatParameter",args,topic);
+        return _handleFunction("SetFloatParam",args,topic);
     }
-    public MessageUnpacker simxSetFloatParameter(
+    public MessageUnpacker simxSetFloatParam(
         final String paramId,
         float paramVal,
         final String topic) throws IOException
@@ -1503,9 +1853,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(paramId);
         args.packFloat(paramVal);
-        return _handleFunction("SetFloatParameter",args,topic);
+        return _handleFunction("SetFloatParam",args,topic);
     }
-    public MessageUnpacker simxSetArrayParameter(
+    public MessageUnpacker simxSetArrayParam(
         int paramId,
         final float[] paramVal,
         final String topic) throws IOException
@@ -1516,9 +1866,9 @@ public class b0RemoteApi
         args.packArrayHeader(3);
         for (int i=0;i<3;i=i+1)
             args.packFloat(paramVal[i]);
-        return _handleFunction("SetArrayParameter",args,topic);
+        return _handleFunction("SetArrayParam",args,topic);
     }
-    public MessageUnpacker simxSetArrayParameter(
+    public MessageUnpacker simxSetArrayParam(
         final String paramId,
         final float[] paramVal,
         final String topic) throws IOException
@@ -1529,9 +1879,9 @@ public class b0RemoteApi
         args.packArrayHeader(3);
         for (int i=0;i<3;i=i+1)
             args.packFloat(paramVal[i]);
-        return _handleFunction("SetArrayParameter",args,topic);
+        return _handleFunction("SetArrayParam",args,topic);
     }
-    public MessageUnpacker simxSetIntParameter(
+    public MessageUnpacker simxSetInt32Param(
         int paramId,
         int paramVal,
         final String topic) throws IOException
@@ -1540,9 +1890,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(paramId);
         args.packInt(paramVal);
-        return _handleFunction("SetIntParameter",args,topic);
+        return _handleFunction("SetInt32Param",args,topic);
     }
-    public MessageUnpacker simxSetIntParameter(
+    public MessageUnpacker simxSetInt32Param(
         final String paramId,
         int paramVal,
         final String topic) throws IOException
@@ -1551,9 +1901,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(paramId);
         args.packInt(paramVal);
-        return _handleFunction("SetIntParameter",args,topic);
+        return _handleFunction("SetInt32Param",args,topic);
     }
-    public MessageUnpacker simxSetBoolParameter(
+    public MessageUnpacker simxSetBoolParam(
         int paramId,
         boolean paramVal,
         final String topic) throws IOException
@@ -1562,9 +1912,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(paramId);
         args.packBoolean(paramVal);
-        return _handleFunction("SetBoolParameter",args,topic);
+        return _handleFunction("SetBoolParam",args,topic);
     }
-    public MessageUnpacker simxSetBoolParameter(
+    public MessageUnpacker simxSetBoolParam(
         final String paramId,
         boolean paramVal,
         final String topic) throws IOException
@@ -1573,97 +1923,97 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packString(paramId);
         args.packBoolean(paramVal);
-        return _handleFunction("SetBoolParameter",args,topic);
+        return _handleFunction("SetBoolParam",args,topic);
     }
-    public MessageUnpacker simxGetStringParameter(
+    public MessageUnpacker simxGetStringParam(
         int paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packInt(paramId);
-        return _handleFunction("GetStringParameter",args,topic);
+        return _handleFunction("GetStringParam",args,topic);
     }
-    public MessageUnpacker simxGetStringParameter(
+    public MessageUnpacker simxGetStringParam(
         final String paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(paramId);
-        return _handleFunction("GetStringParameter",args,topic);
+        return _handleFunction("GetStringParam",args,topic);
     }
-    public MessageUnpacker simxGetFloatParameter(
+    public MessageUnpacker simxGetFloatParam(
         int paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packInt(paramId);
-        return _handleFunction("GetFloatParameter",args,topic);
+        return _handleFunction("GetFloatParam",args,topic);
     }
-    public MessageUnpacker simxGetFloatParameter(
+    public MessageUnpacker simxGetFloatParam(
         final String paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(paramId);
-        return _handleFunction("GetFloatParameter",args,topic);
+        return _handleFunction("GetFloatParam",args,topic);
     }
-    public MessageUnpacker simxGetArrayParameter(
+    public MessageUnpacker simxGetArrayParam(
         int paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packInt(paramId);
-        return _handleFunction("GetArrayParameter",args,topic);
+        return _handleFunction("GetArrayParam",args,topic);
     }
-    public MessageUnpacker simxGetArrayParameter(
+    public MessageUnpacker simxGetArrayParam(
         final String paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(paramId);
-        return _handleFunction("GetArrayParameter",args,topic);
+        return _handleFunction("GetArrayParam",args,topic);
     }
-    public MessageUnpacker simxGetIntParameter(
+    public MessageUnpacker simxGetInt32Param(
         int paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packInt(paramId);
-        return _handleFunction("GetIntParameter",args,topic);
+        return _handleFunction("GetInt32Param",args,topic);
     }
-    public MessageUnpacker simxGetIntParameter(
+    public MessageUnpacker simxGetInt32Param(
         final String paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(paramId);
-        return _handleFunction("GetIntParameter",args,topic);
+        return _handleFunction("GetInt32Param",args,topic);
     }
-    public MessageUnpacker simxGetBoolParameter(
+    public MessageUnpacker simxGetBoolParam(
         int paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packInt(paramId);
-        return _handleFunction("GetBoolParameter",args,topic);
+        return _handleFunction("GetBoolParam",args,topic);
     }
-    public MessageUnpacker simxGetBoolParameter(
+    public MessageUnpacker simxGetBoolParam(
         final String paramId,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
         args.packString(paramId);
-        return _handleFunction("GetBoolParameter",args,topic);
+        return _handleFunction("GetBoolParam",args,topic);
     }
     public MessageUnpacker simxDisplayDialog(
         final String titleText,
@@ -1912,7 +2262,7 @@ public class b0RemoteApi
         args.packBoolean(altName);
         return _handleFunction("GetObjectName",args,topic);
     }
-    public MessageUnpacker simxGetObjectFloatParameter(
+    public MessageUnpacker simxGetObjectFloatParam(
         int objectHandle,
         int parameterID,
         final String topic) throws IOException
@@ -1921,9 +2271,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packInt(parameterID);
-        return _handleFunction("GetObjectFloatParameter",args,topic);
+        return _handleFunction("GetObjectFloatParam",args,topic);
     }
-    public MessageUnpacker simxGetObjectFloatParameter(
+    public MessageUnpacker simxGetObjectFloatParam(
         int objectHandle,
         final String parameterID,
         final String topic) throws IOException
@@ -1932,9 +2282,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packString(parameterID);
-        return _handleFunction("GetObjectFloatParameter",args,topic);
+        return _handleFunction("GetObjectFloatParam",args,topic);
     }
-    public MessageUnpacker simxGetObjectIntParameter(
+    public MessageUnpacker simxGetObjectInt32Param(
         int objectHandle,
         int parameterID,
         final String topic) throws IOException
@@ -1943,9 +2293,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packInt(parameterID);
-        return _handleFunction("GetObjectIntParameter",args,topic);
+        return _handleFunction("GetObjectInt32Param",args,topic);
     }
-    public MessageUnpacker simxGetObjectIntParameter(
+    public MessageUnpacker simxGetObjectInt32Param(
         int objectHandle,
         final String parameterID,
         final String topic) throws IOException
@@ -1954,9 +2304,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packString(parameterID);
-        return _handleFunction("GetObjectIntParameter",args,topic);
+        return _handleFunction("GetObjectInt32Param",args,topic);
     }
-    public MessageUnpacker simxGetObjectStringParameter(
+    public MessageUnpacker simxGetObjectStringParam(
         int objectHandle,
         int parameterID,
         final String topic) throws IOException
@@ -1965,9 +2315,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packInt(parameterID);
-        return _handleFunction("GetObjectStringParameter",args,topic);
+        return _handleFunction("GetObjectStringParam",args,topic);
     }
-    public MessageUnpacker simxGetObjectStringParameter(
+    public MessageUnpacker simxGetObjectStringParam(
         int objectHandle,
         final String parameterID,
         final String topic) throws IOException
@@ -1976,9 +2326,9 @@ public class b0RemoteApi
         args.packArrayHeader(2);
         args.packInt(objectHandle);
         args.packString(parameterID);
-        return _handleFunction("GetObjectStringParameter",args,topic);
+        return _handleFunction("GetObjectStringParam",args,topic);
     }
-    public MessageUnpacker simxSetObjectFloatParameter(
+    public MessageUnpacker simxSetObjectFloatParam(
         int objectHandle,
         int parameterID,
         float parameter,
@@ -1989,9 +2339,9 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packInt(parameterID);
         args.packFloat(parameter);
-        return _handleFunction("SetObjectFloatParameter",args,topic);
+        return _handleFunction("SetObjectFloatParam",args,topic);
     }
-    public MessageUnpacker simxSetObjectFloatParameter(
+    public MessageUnpacker simxSetObjectFloatParam(
         int objectHandle,
         final String parameterID,
         float parameter,
@@ -2002,9 +2352,9 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packString(parameterID);
         args.packFloat(parameter);
-        return _handleFunction("SetObjectFloatParameter",args,topic);
+        return _handleFunction("SetObjectFloatParam",args,topic);
     }
-    public MessageUnpacker simxSetObjectIntParameter(
+    public MessageUnpacker simxSetObjectInt32Param(
         int objectHandle,
         int parameterID,
         int parameter,
@@ -2015,9 +2365,9 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packInt(parameterID);
         args.packInt(parameter);
-        return _handleFunction("SetObjectIntParameter",args,topic);
+        return _handleFunction("SetObjectInt32Param",args,topic);
     }
-    public MessageUnpacker simxSetObjectIntParameter(
+    public MessageUnpacker simxSetObjectInt32Param(
         int objectHandle,
         final String parameterID,
         int parameter,
@@ -2028,9 +2378,9 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packString(parameterID);
         args.packInt(parameter);
-        return _handleFunction("SetObjectIntParameter",args,topic);
+        return _handleFunction("SetObjectInt32Param",args,topic);
     }
-    public MessageUnpacker simxSetObjectStringParameter(
+    public MessageUnpacker simxSetObjectStringParam(
         int objectHandle,
         int parameterID,
         final String parameter,
@@ -2041,9 +2391,9 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packInt(parameterID);
         args.packString(parameter);
-        return _handleFunction("SetObjectStringParameter",args,topic);
+        return _handleFunction("SetObjectStringParam",args,topic);
     }
-    public MessageUnpacker simxSetObjectStringParameter(
+    public MessageUnpacker simxSetObjectStringParam(
         int objectHandle,
         final String parameterID,
         final String parameter,
@@ -2054,7 +2404,7 @@ public class b0RemoteApi
         args.packInt(objectHandle);
         args.packString(parameterID);
         args.packString(parameter);
-        return _handleFunction("SetObjectStringParameter",args,topic);
+        return _handleFunction("SetObjectStringParam",args,topic);
     }
     public MessageUnpacker simxGetSimulationTime(
         final String topic) throws IOException

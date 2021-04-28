@@ -394,6 +394,74 @@ classdef b0RemoteApi < handle
             ret = obj.handleFunction('CallScriptFunction',args,topic);
         end
     
+        %-- DEPRECATED START
+        function ret = simxSetStringParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetStringParam',args,topic);
+        end
+        function ret = simxSetFloatParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetFloatParam',args,topic);
+        end
+        function ret = simxSetArrayParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetArrayParam',args,topic);
+        end
+        function ret = simxSetIntParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetInt32Param',args,topic);
+        end
+        function ret = simxSetBoolParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetBoolParam',args,topic);
+        end
+        function ret = simxGetStringParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetStringParam',args,topic);
+        end
+        function ret = simxGetFloatParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetFloatParam',args,topic);
+        end
+        function ret = simxGetArrayParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetArrayParam',args,topic);
+        end
+        function ret = simxGetIntParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetInt32Param',args,topic);
+        end
+        function ret = simxGetBoolParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetBoolParam',args,topic);
+        end
+        function ret = simxGetObjectFloatParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectFloatParam',args,topic);
+        end
+        function ret = simxGetObjectIntParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectInt32Param',args,topic);
+        end
+        function ret = simxGetObjectStringParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectStringParam',args,topic);
+        end
+        function ret = simxSetObjectFloatParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectFloatParam',args,topic);
+        end
+        function ret = simxSetObjectIntParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectInt32Param',args,topic);
+        end
+        function ret = simxSetObjectStringParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectStringParam',args,topic);
+        end
+        %-- DEPRECATED END
+
+
         function ret = simxGetObjectHandle(obj,objectName,topic)
             args = {objectName};
             ret = obj.handleFunction('GetObjectHandle',args,topic);
@@ -602,45 +670,45 @@ classdef b0RemoteApi < handle
             args = {0};
             ret = obj.handleFunction('CloseScene',args,topic);
         end
-        function ret = simxSetStringParameter(obj,paramId,paramVal,topic)
+        function ret = simxSetStringParam(obj,paramId,paramVal,topic)
             args = {paramId,paramVal};
-            ret = obj.handleFunction('SetStringParameter',args,topic);
+            ret = obj.handleFunction('SetStringParam',args,topic);
         end
-        function ret = simxSetFloatParameter(obj,paramId,paramVal,topic)
+        function ret = simxSetFloatParam(obj,paramId,paramVal,topic)
             args = {paramId,paramVal};
-            ret = obj.handleFunction('SetFloatParameter',args,topic);
+            ret = obj.handleFunction('SetFloatParam',args,topic);
         end
-        function ret = simxSetArrayParameter(obj,paramId,paramVal,topic)
+        function ret = simxSetArrayParam(obj,paramId,paramVal,topic)
             args = {paramId,paramVal};
-            ret = obj.handleFunction('SetArrayParameter',args,topic);
+            ret = obj.handleFunction('SetArrayParam',args,topic);
         end
-        function ret = simxSetIntParameter(obj,paramId,paramVal,topic)
+        function ret = simxSetInt32Param(obj,paramId,paramVal,topic)
             args = {paramId,paramVal};
-            ret = obj.handleFunction('SetIntParameter',args,topic);
+            ret = obj.handleFunction('SetInt32Param',args,topic);
         end
-        function ret = simxSetBoolParameter(obj,paramId,paramVal,topic)
+        function ret = simxSetBoolParam(obj,paramId,paramVal,topic)
             args = {paramId,paramVal};
-            ret = obj.handleFunction('SetBoolParameter',args,topic);
+            ret = obj.handleFunction('SetBoolParam',args,topic);
         end
-        function ret = simxGetStringParameter(obj,paramId,topic)
+        function ret = simxGetStringParam(obj,paramId,topic)
             args = {paramId};
-            ret = obj.handleFunction('GetStringParameter',args,topic);
+            ret = obj.handleFunction('GetStringParam',args,topic);
         end
-        function ret = simxGetFloatParameter(obj,paramId,topic)
+        function ret = simxGetFloatParam(obj,paramId,topic)
             args = {paramId};
-            ret = obj.handleFunction('GetFloatParameter',args,topic);
+            ret = obj.handleFunction('GetFloatParam',args,topic);
         end
-        function ret = simxGetArrayParameter(obj,paramId,topic)
+        function ret = simxGetArrayParam(obj,paramId,topic)
             args = {paramId};
-            ret = obj.handleFunction('GetArrayParameter',args,topic);
+            ret = obj.handleFunction('GetArrayParam',args,topic);
         end
-        function ret = simxGetIntParameter(obj,paramId,topic)
+        function ret = simxGetInt32Param(obj,paramId,topic)
             args = {paramId};
-            ret = obj.handleFunction('GetIntParameter',args,topic);
+            ret = obj.handleFunction('GetInt32Param',args,topic);
         end
-        function ret = simxGetBoolParameter(obj,paramId,topic)
+        function ret = simxGetBoolParam(obj,paramId,topic)
             args = {paramId};
-            ret = obj.handleFunction('GetBoolParameter',args,topic);
+            ret = obj.handleFunction('GetBoolParam',args,topic);
         end
         function ret = simxDisplayDialog(obj,titleText,mainText,dialogType,inputText,topic)
             args = {titleText,mainText,dialogType,inputText};
@@ -726,29 +794,29 @@ classdef b0RemoteApi < handle
             args = {objectHandle,altName};
             ret = obj.handleFunction('GetObjectName',args,topic);
         end
-        function ret = simxGetObjectFloatParameter(obj,objectHandle,parameterID,topic)
+        function ret = simxGetObjectFloatParam(obj,objectHandle,parameterID,topic)
             args = {objectHandle,parameterID};
-            ret = obj.handleFunction('GetObjectFloatParameter',args,topic);
+            ret = obj.handleFunction('GetObjectFloatParam',args,topic);
         end
-        function ret = simxGetObjectIntParameter(obj,objectHandle,parameterID,topic)
+        function ret = simxGetObjectInt32Param(obj,objectHandle,parameterID,topic)
             args = {objectHandle,parameterID};
-            ret = obj.handleFunction('GetObjectIntParameter',args,topic);
+            ret = obj.handleFunction('GetObjectInt32Param',args,topic);
         end
-        function ret = simxGetObjectStringParameter(obj,objectHandle,parameterID,topic)
+        function ret = simxGetObjectStringParam(obj,objectHandle,parameterID,topic)
             args = {objectHandle,parameterID};
-            ret = obj.handleFunction('GetObjectStringParameter',args,topic);
+            ret = obj.handleFunction('GetObjectStringParam',args,topic);
         end
-        function ret = simxSetObjectFloatParameter(obj,objectHandle,parameterID,parameter,topic)
+        function ret = simxSetObjectFloatParam(obj,objectHandle,parameterID,parameter,topic)
             args = {objectHandle,parameterID,parameter};
-            ret = obj.handleFunction('SetObjectFloatParameter',args,topic);
+            ret = obj.handleFunction('SetObjectFloatParam',args,topic);
         end
-        function ret = simxSetObjectIntParameter(obj,objectHandle,parameterID,parameter,topic)
+        function ret = simxSetObjectInt32Param(obj,objectHandle,parameterID,parameter,topic)
             args = {objectHandle,parameterID,parameter};
-            ret = obj.handleFunction('SetObjectIntParameter',args,topic);
+            ret = obj.handleFunction('SetObjectInt32Param',args,topic);
         end
-        function ret = simxSetObjectStringParameter(obj,objectHandle,parameterID,parameter,topic)
+        function ret = simxSetObjectStringParam(obj,objectHandle,parameterID,parameter,topic)
             args = {objectHandle,parameterID,parameter};
-            ret = obj.handleFunction('SetObjectStringParameter',args,topic);
+            ret = obj.handleFunction('SetObjectStringParam',args,topic);
         end
         function ret = simxGetSimulationTime(obj,topic)
             args = {0};

@@ -654,6 +654,507 @@ std::vector<msgpack::object>* b0RemoteApi::simxCallScriptFunction(const char* fu
     return(_handleFunction("CallScriptFunction",packedArgs.str(),topic));
 }
 
+//-- DEPRECATED START
+std::vector<msgpack::object>* b0RemoteApi::simxSetStringParameter(
+    int paramId,
+    const char* paramVal,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetStringParameter(
+    const char* paramId,
+    const char* paramVal,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        std::string
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetFloatParameter(
+    int paramId,
+    float paramVal,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        float
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetFloatParameter(
+    const char* paramId,
+    float paramVal,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        float
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetArrayParameter(
+    int paramId,
+    const float* paramVal,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::vector<float>
+    > args(
+        paramId,
+        std::vector<float>(paramVal,paramVal+3)
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetArrayParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetArrayParameter(
+    const char* paramId,
+    const float* paramVal,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        std::vector<float>
+    > args(
+        paramId,
+        std::vector<float>(paramVal,paramVal+3)
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetArrayParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetIntParameter(
+    int paramId,
+    int paramVal,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetIntParameter(
+    const char* paramId,
+    int paramVal,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        int
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetBoolParameter(
+    int paramId,
+    bool paramVal,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        bool
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetBoolParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetBoolParameter(
+    const char* paramId,
+    bool paramVal,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        bool
+    > args(
+        paramId,
+        paramVal
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetBoolParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetStringParameter(
+    int paramId,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetStringParameter(
+    const char* paramId,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetFloatParameter(
+    int paramId,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetFloatParameter(
+    const char* paramId,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetArrayParameter(
+    int paramId,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetArrayParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetArrayParameter(
+    const char* paramId,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetArrayParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetIntParameter(
+    int paramId,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetIntParameter(
+    const char* paramId,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetBoolParameter(
+    int paramId,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetBoolParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetBoolParameter(
+    const char* paramId,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        paramId
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetBoolParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectFloatParameter(
+    int objectHandle,
+    int parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectFloatParameter(
+    int objectHandle,
+    const char* parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectIntParameter(
+    int objectHandle,
+    int parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectIntParameter(
+    int objectHandle,
+    const char* parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectStringParameter(
+    int objectHandle,
+    int parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectStringParameter(
+    int objectHandle,
+    const char* parameterID,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string
+    > args(
+        objectHandle,
+        parameterID
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectFloatParameter(
+    int objectHandle,
+    int parameterID,
+    float parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int,
+        float
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectFloatParameter(
+    int objectHandle,
+    const char* parameterID,
+    float parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string,
+        float
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectFloatParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectIntParameter(
+    int objectHandle,
+    int parameterID,
+    int parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int,
+        int
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectIntParameter(
+    int objectHandle,
+    const char* parameterID,
+    int parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string,
+        int
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectInt32Param",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectStringParameter(
+    int objectHandle,
+    int parameterID,
+    const char* parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        int,
+        std::string
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectStringParam",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetObjectStringParameter(
+    int objectHandle,
+    const char* parameterID,
+    const char* parameter,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        std::string,
+        std::string
+    > args(
+        objectHandle,
+        parameterID,
+        parameter
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetObjectStringParam",packedArgs.str(),topic));
+}//-- DEPRECATED END
 
 
 #py for cmd in plugin.commands:

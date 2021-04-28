@@ -394,6 +394,74 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return _handleFunction(funcName,reqArgs,topic)
     end
     
+    -- DEPRECATED START
+    function self.simxSetStringParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetStringParam",reqArgs,topic)
+    end
+    function self.simxSetFloatParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetFloatParam",reqArgs,topic)
+    end
+    function self.simxSetArrayParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetArrayParam",reqArgs,topic)
+    end
+    function self.simxSetIntParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetInt32Param",reqArgs,topic)
+    end
+    function self.simxSetBoolParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetBoolParam",reqArgs,topic)
+    end
+    function self.simxGetStringParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetStringParam",reqArgs,topic)
+    end
+    function self.simxGetFloatParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetFloatParam",reqArgs,topic)
+    end
+    function self.simxGetArrayParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetArrayParam",reqArgs,topic)
+    end
+    function self.simxGetIntParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetInt32Param",reqArgs,topic)
+    end
+    function self.simxGetBoolParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetBoolParam",reqArgs,topic)
+    end
+    function self.simxGetObjectFloatParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectFloatParam",reqArgs,topic)
+    end
+    function self.simxGetObjectIntParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectInt32Param",reqArgs,topic)
+    end
+    function self.simxGetObjectStringParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectStringParam",reqArgs,topic)
+    end
+    function self.simxSetObjectFloatParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectFloatParam",reqArgs,topic)
+    end
+    function self.simxSetObjectIntParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectInt32Param",reqArgs,topic)
+    end
+    function self.simxSetObjectStringParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectStringParam",reqArgs,topic)
+    end
+    -- DEPRECATED END
+    
+    
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
 #py theStringToWrite='    function self.'+cmd.name+'('

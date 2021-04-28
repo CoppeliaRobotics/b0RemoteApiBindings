@@ -391,6 +391,74 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         return _handleFunction(funcName,reqArgs,topic)
     end
     
+    -- DEPRECATED START
+    function self.simxSetStringParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetStringParam",reqArgs,topic)
+    end
+    function self.simxSetFloatParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetFloatParam",reqArgs,topic)
+    end
+    function self.simxSetArrayParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetArrayParam",reqArgs,topic)
+    end
+    function self.simxSetIntParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetInt32Param",reqArgs,topic)
+    end
+    function self.simxSetBoolParameter(paramId,paramVal,topic)
+        local reqArgs = {paramId,paramVal}
+        return _handleFunction("SetBoolParam",reqArgs,topic)
+    end
+    function self.simxGetStringParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetStringParam",reqArgs,topic)
+    end
+    function self.simxGetFloatParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetFloatParam",reqArgs,topic)
+    end
+    function self.simxGetArrayParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetArrayParam",reqArgs,topic)
+    end
+    function self.simxGetIntParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetInt32Param",reqArgs,topic)
+    end
+    function self.simxGetBoolParameter(paramId,topic)
+        local reqArgs = {paramId}
+        return _handleFunction("GetBoolParam",reqArgs,topic)
+    end
+    function self.simxGetObjectFloatParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectFloatParam",reqArgs,topic)
+    end
+    function self.simxGetObjectIntParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectInt32Param",reqArgs,topic)
+    end
+    function self.simxGetObjectStringParameter(objectHandle,parameterID,topic)
+        local reqArgs = {objectHandle,parameterID}
+        return _handleFunction("GetObjectStringParam",reqArgs,topic)
+    end
+    function self.simxSetObjectFloatParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectFloatParam",reqArgs,topic)
+    end
+    function self.simxSetObjectIntParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectInt32Param",reqArgs,topic)
+    end
+    function self.simxSetObjectStringParameter(objectHandle,parameterID,parameter,topic)
+        local reqArgs = {objectHandle,parameterID,parameter}
+        return _handleFunction("SetObjectStringParam",reqArgs,topic)
+    end
+    -- DEPRECATED END
+    
+    
     function self.simxGetObjectHandle(objectName,topic)
         local reqArgs = {objectName}
         return _handleFunction("GetObjectHandle",reqArgs,topic)
@@ -599,45 +667,45 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {0}
         return _handleFunction("CloseScene",reqArgs,topic)
     end
-    function self.simxSetStringParameter(paramId,paramVal,topic)
+    function self.simxSetStringParam(paramId,paramVal,topic)
         local reqArgs = {paramId,paramVal}
-        return _handleFunction("SetStringParameter",reqArgs,topic)
+        return _handleFunction("SetStringParam",reqArgs,topic)
     end
-    function self.simxSetFloatParameter(paramId,paramVal,topic)
+    function self.simxSetFloatParam(paramId,paramVal,topic)
         local reqArgs = {paramId,paramVal}
-        return _handleFunction("SetFloatParameter",reqArgs,topic)
+        return _handleFunction("SetFloatParam",reqArgs,topic)
     end
-    function self.simxSetArrayParameter(paramId,paramVal,topic)
+    function self.simxSetArrayParam(paramId,paramVal,topic)
         local reqArgs = {paramId,paramVal}
-        return _handleFunction("SetArrayParameter",reqArgs,topic)
+        return _handleFunction("SetArrayParam",reqArgs,topic)
     end
-    function self.simxSetIntParameter(paramId,paramVal,topic)
+    function self.simxSetInt32Param(paramId,paramVal,topic)
         local reqArgs = {paramId,paramVal}
-        return _handleFunction("SetIntParameter",reqArgs,topic)
+        return _handleFunction("SetInt32Param",reqArgs,topic)
     end
-    function self.simxSetBoolParameter(paramId,paramVal,topic)
+    function self.simxSetBoolParam(paramId,paramVal,topic)
         local reqArgs = {paramId,paramVal}
-        return _handleFunction("SetBoolParameter",reqArgs,topic)
+        return _handleFunction("SetBoolParam",reqArgs,topic)
     end
-    function self.simxGetStringParameter(paramId,topic)
+    function self.simxGetStringParam(paramId,topic)
         local reqArgs = {paramId}
-        return _handleFunction("GetStringParameter",reqArgs,topic)
+        return _handleFunction("GetStringParam",reqArgs,topic)
     end
-    function self.simxGetFloatParameter(paramId,topic)
+    function self.simxGetFloatParam(paramId,topic)
         local reqArgs = {paramId}
-        return _handleFunction("GetFloatParameter",reqArgs,topic)
+        return _handleFunction("GetFloatParam",reqArgs,topic)
     end
-    function self.simxGetArrayParameter(paramId,topic)
+    function self.simxGetArrayParam(paramId,topic)
         local reqArgs = {paramId}
-        return _handleFunction("GetArrayParameter",reqArgs,topic)
+        return _handleFunction("GetArrayParam",reqArgs,topic)
     end
-    function self.simxGetIntParameter(paramId,topic)
+    function self.simxGetInt32Param(paramId,topic)
         local reqArgs = {paramId}
-        return _handleFunction("GetIntParameter",reqArgs,topic)
+        return _handleFunction("GetInt32Param",reqArgs,topic)
     end
-    function self.simxGetBoolParameter(paramId,topic)
+    function self.simxGetBoolParam(paramId,topic)
         local reqArgs = {paramId}
-        return _handleFunction("GetBoolParameter",reqArgs,topic)
+        return _handleFunction("GetBoolParam",reqArgs,topic)
     end
     function self.simxDisplayDialog(titleText,mainText,dialogType,inputText,topic)
         local reqArgs = {titleText,mainText,dialogType,inputText}
@@ -723,29 +791,29 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {objectHandle,altName}
         return _handleFunction("GetObjectName",reqArgs,topic)
     end
-    function self.simxGetObjectFloatParameter(objectHandle,parameterID,topic)
+    function self.simxGetObjectFloatParam(objectHandle,parameterID,topic)
         local reqArgs = {objectHandle,parameterID}
-        return _handleFunction("GetObjectFloatParameter",reqArgs,topic)
+        return _handleFunction("GetObjectFloatParam",reqArgs,topic)
     end
-    function self.simxGetObjectIntParameter(objectHandle,parameterID,topic)
+    function self.simxGetObjectInt32Param(objectHandle,parameterID,topic)
         local reqArgs = {objectHandle,parameterID}
-        return _handleFunction("GetObjectIntParameter",reqArgs,topic)
+        return _handleFunction("GetObjectInt32Param",reqArgs,topic)
     end
-    function self.simxGetObjectStringParameter(objectHandle,parameterID,topic)
+    function self.simxGetObjectStringParam(objectHandle,parameterID,topic)
         local reqArgs = {objectHandle,parameterID}
-        return _handleFunction("GetObjectStringParameter",reqArgs,topic)
+        return _handleFunction("GetObjectStringParam",reqArgs,topic)
     end
-    function self.simxSetObjectFloatParameter(objectHandle,parameterID,parameter,topic)
+    function self.simxSetObjectFloatParam(objectHandle,parameterID,parameter,topic)
         local reqArgs = {objectHandle,parameterID,parameter}
-        return _handleFunction("SetObjectFloatParameter",reqArgs,topic)
+        return _handleFunction("SetObjectFloatParam",reqArgs,topic)
     end
-    function self.simxSetObjectIntParameter(objectHandle,parameterID,parameter,topic)
+    function self.simxSetObjectInt32Param(objectHandle,parameterID,parameter,topic)
         local reqArgs = {objectHandle,parameterID,parameter}
-        return _handleFunction("SetObjectIntParameter",reqArgs,topic)
+        return _handleFunction("SetObjectInt32Param",reqArgs,topic)
     end
-    function self.simxSetObjectStringParameter(objectHandle,parameterID,parameter,topic)
+    function self.simxSetObjectStringParam(objectHandle,parameterID,parameter,topic)
         local reqArgs = {objectHandle,parameterID,parameter}
-        return _handleFunction("SetObjectStringParameter",reqArgs,topic)
+        return _handleFunction("SetObjectStringParam",reqArgs,topic)
     end
     function self.simxGetSimulationTime(topic)
         local reqArgs = {0}

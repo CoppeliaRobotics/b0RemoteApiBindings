@@ -397,6 +397,74 @@ classdef b0RemoteApi < handle
             ret = obj.handleFunction('CallScriptFunction',args,topic);
         end
     
+        %-- DEPRECATED START
+        function ret = simxSetStringParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetStringParam',args,topic);
+        end
+        function ret = simxSetFloatParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetFloatParam',args,topic);
+        end
+        function ret = simxSetArrayParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetArrayParam',args,topic);
+        end
+        function ret = simxSetIntParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetInt32Param',args,topic);
+        end
+        function ret = simxSetBoolParameter(obj,paramId,paramVal,topic)
+            args = {paramId,paramVal};
+            ret = obj.handleFunction('SetBoolParam',args,topic);
+        end
+        function ret = simxGetStringParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetStringParam',args,topic);
+        end
+        function ret = simxGetFloatParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetFloatParam',args,topic);
+        end
+        function ret = simxGetArrayParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetArrayParam',args,topic);
+        end
+        function ret = simxGetIntParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetInt32Param',args,topic);
+        end
+        function ret = simxGetBoolParameter(obj,paramId,topic)
+            args = {paramId};
+            ret = obj.handleFunction('GetBoolParam',args,topic);
+        end
+        function ret = simxGetObjectFloatParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectFloatParam',args,topic);
+        end
+        function ret = simxGetObjectIntParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectInt32Param',args,topic);
+        end
+        function ret = simxGetObjectStringParameter(obj,objectHandle,parameterID,topic)
+            args = {objectHandle,parameterID};
+            ret = obj.handleFunction('GetObjectStringParam',args,topic);
+        end
+        function ret = simxSetObjectFloatParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectFloatParam',args,topic);
+        end
+        function ret = simxSetObjectIntParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectInt32Param',args,topic);
+        end
+        function ret = simxSetObjectStringParameter(obj,objectHandle,parameterID,parameter,topic)
+            args = {objectHandle,parameterID,parameter};
+            ret = obj.handleFunction('SetObjectStringParam',args,topic);
+        end
+        %-- DEPRECATED END
+
+
 #py for cmd in plugin.commands:
 #py if cmd.generic and cmd.generateCode:
 #py theStringToWrite='        function ret = '+cmd.name+'(obj,'

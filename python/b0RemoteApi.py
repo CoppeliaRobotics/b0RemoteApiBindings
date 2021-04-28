@@ -218,6 +218,57 @@ class RemoteApiClient:
         funcName = 'CallScriptFunction'
         return self._handleFunction(funcName,reqArgs,topic)
 
+    #-- DEPRECATED START
+    def simxSetStringParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetStringParam',reqArgs,topic)
+    def simxSetFloatParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetFloatParam',reqArgs,topic)
+    def simxSetArrayParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetArrayParam',reqArgs,topic)
+    def simxSetIntParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetInt32Param',reqArgs,topic)
+    def simxSetBoolParameter(self,paramId,paramVal,topic):
+        reqArgs = [paramId,paramVal]
+        return self._handleFunction('SetBoolParam',reqArgs,topic)
+    def simxGetStringParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetStringParam',reqArgs,topic)
+    def simxGetFloatParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetFloatParam',reqArgs,topic)
+    def simxGetArrayParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetArrayParam',reqArgs,topic)
+    def simxGetIntParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetInt32Param',reqArgs,topic)
+    def simxGetBoolParameter(self,paramId,topic):
+        reqArgs = [paramId]
+        return self._handleFunction('GetBoolParam',reqArgs,topic)
+    def simxGetObjectFloatParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectFloatParam',reqArgs,topic)
+    def simxGetObjectIntParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectInt32Param',reqArgs,topic)
+    def simxGetObjectStringParameter(self,objectHandle,parameterID,topic):
+        reqArgs = [objectHandle,parameterID]
+        return self._handleFunction('GetObjectStringParam',reqArgs,topic)
+    def simxSetObjectFloatParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectFloatParam',reqArgs,topic)
+    def simxSetObjectIntParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectInt32Param',reqArgs,topic)
+    def simxSetObjectStringParameter(self,objectHandle,parameterID,parameter,topic):
+        reqArgs = [objectHandle,parameterID,parameter]
+        return self._handleFunction('SetObjectStringParam',reqArgs,topic)
+    #-- DEPRECATED END
+
         
     def simxGetObjectHandle(self,objectName,topic):
         reqArgs = [objectName]
@@ -375,36 +426,36 @@ class RemoteApiClient:
     def simxCloseScene(self,topic):
         reqArgs = [0]
         return self._handleFunction('CloseScene',reqArgs,topic)
-    def simxSetStringParameter(self,paramId,paramVal,topic):
+    def simxSetStringParam(self,paramId,paramVal,topic):
         reqArgs = [paramId,paramVal]
-        return self._handleFunction('SetStringParameter',reqArgs,topic)
-    def simxSetFloatParameter(self,paramId,paramVal,topic):
+        return self._handleFunction('SetStringParam',reqArgs,topic)
+    def simxSetFloatParam(self,paramId,paramVal,topic):
         reqArgs = [paramId,paramVal]
-        return self._handleFunction('SetFloatParameter',reqArgs,topic)
-    def simxSetArrayParameter(self,paramId,paramVal,topic):
+        return self._handleFunction('SetFloatParam',reqArgs,topic)
+    def simxSetArrayParam(self,paramId,paramVal,topic):
         reqArgs = [paramId,paramVal]
-        return self._handleFunction('SetArrayParameter',reqArgs,topic)
-    def simxSetIntParameter(self,paramId,paramVal,topic):
+        return self._handleFunction('SetArrayParam',reqArgs,topic)
+    def simxSetInt32Param(self,paramId,paramVal,topic):
         reqArgs = [paramId,paramVal]
-        return self._handleFunction('SetIntParameter',reqArgs,topic)
-    def simxSetBoolParameter(self,paramId,paramVal,topic):
+        return self._handleFunction('SetInt32Param',reqArgs,topic)
+    def simxSetBoolParam(self,paramId,paramVal,topic):
         reqArgs = [paramId,paramVal]
-        return self._handleFunction('SetBoolParameter',reqArgs,topic)
-    def simxGetStringParameter(self,paramId,topic):
+        return self._handleFunction('SetBoolParam',reqArgs,topic)
+    def simxGetStringParam(self,paramId,topic):
         reqArgs = [paramId]
-        return self._handleFunction('GetStringParameter',reqArgs,topic)
-    def simxGetFloatParameter(self,paramId,topic):
+        return self._handleFunction('GetStringParam',reqArgs,topic)
+    def simxGetFloatParam(self,paramId,topic):
         reqArgs = [paramId]
-        return self._handleFunction('GetFloatParameter',reqArgs,topic)
-    def simxGetArrayParameter(self,paramId,topic):
+        return self._handleFunction('GetFloatParam',reqArgs,topic)
+    def simxGetArrayParam(self,paramId,topic):
         reqArgs = [paramId]
-        return self._handleFunction('GetArrayParameter',reqArgs,topic)
-    def simxGetIntParameter(self,paramId,topic):
+        return self._handleFunction('GetArrayParam',reqArgs,topic)
+    def simxGetInt32Param(self,paramId,topic):
         reqArgs = [paramId]
-        return self._handleFunction('GetIntParameter',reqArgs,topic)
-    def simxGetBoolParameter(self,paramId,topic):
+        return self._handleFunction('GetInt32Param',reqArgs,topic)
+    def simxGetBoolParam(self,paramId,topic):
         reqArgs = [paramId]
-        return self._handleFunction('GetBoolParameter',reqArgs,topic)
+        return self._handleFunction('GetBoolParam',reqArgs,topic)
     def simxDisplayDialog(self,titleText,mainText,dialogType,inputText,topic):
         reqArgs = [titleText,mainText,dialogType,inputText]
         return self._handleFunction('DisplayDialog',reqArgs,topic)
@@ -468,24 +519,24 @@ class RemoteApiClient:
     def simxGetObjectName(self,objectHandle,altName,topic):
         reqArgs = [objectHandle,altName]
         return self._handleFunction('GetObjectName',reqArgs,topic)
-    def simxGetObjectFloatParameter(self,objectHandle,parameterID,topic):
+    def simxGetObjectFloatParam(self,objectHandle,parameterID,topic):
         reqArgs = [objectHandle,parameterID]
-        return self._handleFunction('GetObjectFloatParameter',reqArgs,topic)
-    def simxGetObjectIntParameter(self,objectHandle,parameterID,topic):
+        return self._handleFunction('GetObjectFloatParam',reqArgs,topic)
+    def simxGetObjectInt32Param(self,objectHandle,parameterID,topic):
         reqArgs = [objectHandle,parameterID]
-        return self._handleFunction('GetObjectIntParameter',reqArgs,topic)
-    def simxGetObjectStringParameter(self,objectHandle,parameterID,topic):
+        return self._handleFunction('GetObjectInt32Param',reqArgs,topic)
+    def simxGetObjectStringParam(self,objectHandle,parameterID,topic):
         reqArgs = [objectHandle,parameterID]
-        return self._handleFunction('GetObjectStringParameter',reqArgs,topic)
-    def simxSetObjectFloatParameter(self,objectHandle,parameterID,parameter,topic):
+        return self._handleFunction('GetObjectStringParam',reqArgs,topic)
+    def simxSetObjectFloatParam(self,objectHandle,parameterID,parameter,topic):
         reqArgs = [objectHandle,parameterID,parameter]
-        return self._handleFunction('SetObjectFloatParameter',reqArgs,topic)
-    def simxSetObjectIntParameter(self,objectHandle,parameterID,parameter,topic):
+        return self._handleFunction('SetObjectFloatParam',reqArgs,topic)
+    def simxSetObjectInt32Param(self,objectHandle,parameterID,parameter,topic):
         reqArgs = [objectHandle,parameterID,parameter]
-        return self._handleFunction('SetObjectIntParameter',reqArgs,topic)
-    def simxSetObjectStringParameter(self,objectHandle,parameterID,parameter,topic):
+        return self._handleFunction('SetObjectInt32Param',reqArgs,topic)
+    def simxSetObjectStringParam(self,objectHandle,parameterID,parameter,topic):
         reqArgs = [objectHandle,parameterID,parameter]
-        return self._handleFunction('SetObjectStringParameter',reqArgs,topic)
+        return self._handleFunction('SetObjectStringParam',reqArgs,topic)
     def simxGetSimulationTime(self,topic):
         reqArgs = [0]
         return self._handleFunction('GetSimulationTime',reqArgs,topic)

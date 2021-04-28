@@ -1730,7 +1730,7 @@
         </check-also>
     </command>
     
-    <command name="simxSetStringParameter" type="generic" generateCode="true">
+    <command name="simxSetStringParam" type="generic" generateCode="true">
         <description>Sets a [L[apiConstants.htm#stringParameters,string parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1749,16 +1749,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetStringParameter.htm,sim.setStringParameter]] (regular API)"/>
-            <item name="[L[#simxGetStringParameter]]"/>
-            <item name="[L[#simxSetBoolParameter]]"/>
-            <item name="[L[#simxSetIntParameter]]"/>
-            <item name="[L[#simxSetFloatParameter]]"/>
-            <item name="[L[#simxSetArrayParameter]]"/>
+            <item name="[L[regularApi/simSetStringParam.htm,sim.setStringParam]] (regular API)"/>
+            <item name="[L[#simxGetStringParam]]"/>
+            <item name="[L[#simxSetBoolParam]]"/>
+            <item name="[L[#simxSetInt32Param]]"/>
+            <item name="[L[#simxSetFloatParam]]"/>
+            <item name="[L[#simxSetArrayParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetFloatParameter" type="generic" generateCode="true">
+    <command name="simxSetFloatParam" type="generic" generateCode="true">
         <description>Sets a [L[apiConstants.htm#floatingParameters,float parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1777,16 +1777,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetFloatParameter.htm,sim.setFloatParameter]] (regular API)"/>
-            <item name="[L[#simxGetFloatParameter]]"/>
-            <item name="[L[#simxSetBoolParameter]]"/>
-            <item name="[L[#simxSetIntParameter]]"/>
-            <item name="[L[#simxSetArrayParameter]]"/>
-            <item name="[L[#simxSetStringParameter]]"/>
+            <item name="[L[regularApi/simSetFloatParam.htm,sim.setFloatParam]] (regular API)"/>
+            <item name="[L[#simxGetFloatParam]]"/>
+            <item name="[L[#simxSetBoolParam]]"/>
+            <item name="[L[#simxSetInt32Param]]"/>
+            <item name="[L[#simxSetArrayParam]]"/>
+            <item name="[L[#simxSetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetArrayParameter" type="generic" generateCode="true">
+    <command name="simxSetArrayParam" type="generic" generateCode="true">
         <description>Sets a [L[apiConstants.htm#arrayParameters,float parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1805,16 +1805,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetArrayParameter.htm,sim.setArrayParameter]] (regular API)"/>
-            <item name="[L[#simxGetArrayParameter]]"/>
-            <item name="[L[#simxSetBoolParameter]]"/>
-            <item name="[L[#simxSetIntParameter]]"/>
-            <item name="[L[#simxSetFloatParameter]]"/>
-            <item name="[L[#simxSetStringParameter]]"/>
+            <item name="[L[regularApi/simSetArrayParam.htm,sim.setArrayParam]] (regular API)"/>
+            <item name="[L[#simxGetArrayParam]]"/>
+            <item name="[L[#simxSetBoolParam]]"/>
+            <item name="[L[#simxSetInt32Param]]"/>
+            <item name="[L[#simxSetFloatParam]]"/>
+            <item name="[L[#simxSetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetIntParameter" type="generic" generateCode="true">
+    <command name="simxSetInt32Param" type="generic" generateCode="true">
         <description>Sets an [L[apiConstants.htm#integerParameters,integer parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1833,16 +1833,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetInt32Parameter.htm,sim.setInt32Parameter]] (regular API)"/>
-            <item name="[L[#simxGetIntParameter]]"/>
-            <item name="[L[#simxSetBoolParameter]]"/>
-            <item name="[L[#simxSetFloatParameter]]"/>
-            <item name="[L[#simxSetArrayParameter]]"/>
-            <item name="[L[#simxSetStringParameter]]"/>
+            <item name="[L[regularApi/simSetInt32Param.htm,sim.setInt32Param]] (regular API)"/>
+            <item name="[L[#simxGetInt32Param]]"/>
+            <item name="[L[#simxSetBoolParam]]"/>
+            <item name="[L[#simxSetFloatParam]]"/>
+            <item name="[L[#simxSetArrayParam]]"/>
+            <item name="[L[#simxSetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetBoolParameter" type="generic" generateCode="true">
+    <command name="simxSetBoolParam" type="generic" generateCode="true">
         <description>Sets a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1861,16 +1861,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetBoolParameter.htm,sim.setBoolParameter]] (regular API)"/>
-            <item name="[L[#simxGetBoolParameter]]"/>
-            <item name="[L[#simxSetIntParameter]]"/>
-            <item name="[L[#simxSetFloatParameter]]"/>
-            <item name="[L[#simxSetArrayParameter]]"/>
-            <item name="[L[#simxSetStringParameter]]"/>
+            <item name="[L[regularApi/simSetBoolParam.htm,sim.setBoolParam]] (regular API)"/>
+            <item name="[L[#simxGetBoolParam]]"/>
+            <item name="[L[#simxSetInt32Param]]"/>
+            <item name="[L[#simxSetFloatParam]]"/>
+            <item name="[L[#simxSetArrayParam]]"/>
+            <item name="[L[#simxSetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetStringParameter" type="generic" generateCode="true">
+    <command name="simxGetStringParam" type="generic" generateCode="true">
         <description>Retrieves a [L[apiConstants.htm#stringParameters,string parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1889,16 +1889,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetStringParameter.htm,sim.getStringParameter]] (regular API)"/>
-            <item name="[L[#simxSetStringParameter]]"/>
-            <item name="[L[#simxGetBoolParameter]]"/>
-            <item name="[L[#simxGetIntParameter]]"/>
-            <item name="[L[#simxGetFloatParameter]]"/>
-            <item name="[L[#simxGetArrayParameter]]"/>
+            <item name="[L[regularApi/simGetStringParam.htm,sim.getStringParam]] (regular API)"/>
+            <item name="[L[#simxSetStringParam]]"/>
+            <item name="[L[#simxGetBoolParam]]"/>
+            <item name="[L[#simxGetInt32Param]]"/>
+            <item name="[L[#simxGetFloatParam]]"/>
+            <item name="[L[#simxGetArrayParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetFloatParameter" type="generic" generateCode="true">
+    <command name="simxGetFloatParam" type="generic" generateCode="true">
         <description>Retrieves a [L[apiConstants.htm#floatingParameters,float parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1917,16 +1917,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetFloatParameter.htm,sim.getFloatParameter]] (regular API)"/>
-            <item name="[L[#simxSetFloatParameter]]"/>
-            <item name="[L[#simxGetBoolParameter]]"/>
-            <item name="[L[#simxGetIntParameter]]"/>
-            <item name="[L[#simxGetArrayParameter]]"/>
-            <item name="[L[#simxGetStringParameter]]"/>
+            <item name="[L[regularApi/simGetFloatParam.htm,sim.getFloatParam]] (regular API)"/>
+            <item name="[L[#simxSetFloatParam]]"/>
+            <item name="[L[#simxGetBoolParam]]"/>
+            <item name="[L[#simxGetInt32Param]]"/>
+            <item name="[L[#simxGetArrayParam]]"/>
+            <item name="[L[#simxGetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetArrayParameter" type="generic" generateCode="true">
+    <command name="simxGetArrayParam" type="generic" generateCode="true">
         <description>Retrieves a [L[apiConstants.htm#arrayParameters,array parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1945,16 +1945,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetArrayParameter.htm,sim.getArrayParameter]] (regular API)"/>
-            <item name="[L[#simxSetArrayParameter]]"/>
-            <item name="[L[#simxGetBoolParameter]]"/>
-            <item name="[L[#simxGetIntParameter]]"/>
-            <item name="[L[#simxGetFloatParameter]]"/>
-            <item name="[L[#simxGetStringParameter]]"/>
+            <item name="[L[regularApi/simGetArrayParam.htm,sim.getArrayParam]] (regular API)"/>
+            <item name="[L[#simxSetArrayParam]]"/>
+            <item name="[L[#simxGetBoolParam]]"/>
+            <item name="[L[#simxGetInt32Param]]"/>
+            <item name="[L[#simxGetFloatParam]]"/>
+            <item name="[L[#simxGetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetIntParameter" type="generic" generateCode="true">
+    <command name="simxGetInt32Param" type="generic" generateCode="true">
         <description>Retrieves an [L[apiConstants.htm#integerParameters,integer parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -1973,16 +1973,16 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetInt32Parameter.htm,sim.getInt32Parameter]] (regular API)"/>
-            <item name="[L[#simxSetIntParameter]]"/>
-            <item name="[L[#simxGetBoolParameter]]"/>
-            <item name="[L[#simxGetFloatParameter]]"/>
-            <item name="[L[#simxGetArrayParameter]]"/>
-            <item name="[L[#simxGetStringParameter]]"/>
+            <item name="[L[regularApi/simGetInt32Param.htm,sim.getInt32Param]] (regular API)"/>
+            <item name="[L[#simxSetInt32Param]]"/>
+            <item name="[L[#simxGetBoolParam]]"/>
+            <item name="[L[#simxGetFloatParam]]"/>
+            <item name="[L[#simxGetArrayParam]]"/>
+            <item name="[L[#simxGetStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetBoolParameter" type="generic" generateCode="true">
+    <command name="simxGetBoolParam" type="generic" generateCode="true">
         <description>Retrieves a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
@@ -2001,12 +2001,12 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetBoolParameter.htm,sim.getBoolParameter]] (regular API)"/>
-            <item name="[L[#simxSetBoolParameter]]"/>
-            <item name="[L[#simxGetIntParameter]]"/>
-            <item name="[L[#simxGetFloatParameter]]"/>
-            <item name="[L[#simxGetArrayParameter]]"/>
-            <item name="[L[#simxGetStringParameter]]"/>
+            <item name="[L[regularApi/simGetBoolParam.htm,sim.getBoolParam]] (regular API)"/>
+            <item name="[L[#simxSetBoolParam]]"/>
+            <item name="[L[#simxGetInt32Param]]"/>
+            <item name="[L[#simxGetFloatParam]]"/>
+            <item name="[L[#simxGetArrayParam]]"/>
+            <item name="[L[#simxGetStringParam]]"/>
         </check-also>
     </command>
     
@@ -2555,7 +2555,7 @@
         </check-also>
     </command>
     
-    <command name="simxGetObjectFloatParameter" type="generic" generateCode="true">
+    <command name="simxGetObjectFloatParam" type="generic" generateCode="true">
         <description>Retrieves a floating point parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2577,14 +2577,14 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectFloatParameter.htm,sim.getObjectFloatParameter]] (regular API)"/>
-            <item name="[L[#simxSetObjectFloatParameter]]"/>
-            <item name="[L[#simxGetObjectIntParameter]]"/>
-            <item name="[L[#simxGetObjectStringParameter]]"/>
+            <item name="[L[regularApi/simGetObjectFloatParam.htm,sim.getObjectFloatParam]] (regular API)"/>
+            <item name="[L[#simxSetObjectFloatParam]]"/>
+            <item name="[L[#simxGetObjectInt32Param]]"/>
+            <item name="[L[#simxGetObjectStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetObjectIntParameter" type="generic" generateCode="true">
+    <command name="simxGetObjectInt32Param" type="generic" generateCode="true">
         <description>Retrieves an integer parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2606,14 +2606,14 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectInt32Parameter.htm,sim.getObjectInt32Parameter]] (regular API)"/>
-            <item name="[L[#simxSetObjectIntParameter]]"/>
-            <item name="[L[#simxGetObjectFloatParameter]]"/>
-            <item name="[L[#simxGetObjectStringParameter]]"/>
+            <item name="[L[regularApi/simGetObjectInt32Param.htm,sim.getObjectInt32Param]] (regular API)"/>
+            <item name="[L[#simxSetObjectInt32Param]]"/>
+            <item name="[L[#simxGetObjectFloatParam]]"/>
+            <item name="[L[#simxGetObjectStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetObjectStringParameter" type="generic" generateCode="true">
+    <command name="simxGetObjectStringParam" type="generic" generateCode="true">
         <description>Retrieves a string parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2635,14 +2635,14 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectStringParameter.htm,sim.getObjectStringParameter]] (regular API)"/>
-            <item name="[L[#simxSetObjectStringParameter]]"/>
-            <item name="[L[#simxGetObjectIntParameter]]"/>
-            <item name="[L[#simxGetObjectFloatParameter]]"/>
+            <item name="[L[regularApi/simGetObjectStringParam.htm,sim.getObjectStringParam]] (regular API)"/>
+            <item name="[L[#simxSetObjectStringParam]]"/>
+            <item name="[L[#simxGetObjectInt32Param]]"/>
+            <item name="[L[#simxGetObjectFloatParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetObjectFloatParameter" type="generic" generateCode="true">
+    <command name="simxSetObjectFloatParam" type="generic" generateCode="true">
         <description>Sets a floating point parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2667,14 +2667,14 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectFloatParameter.htm,sim.setObjectFloatParameter]] (regular API)"/>
-            <item name="[L[#simxGetObjectFloatParameter]]"/>
-            <item name="[L[#simxSetObjectIntParameter]]"/>
-            <item name="[L[#simxSetObjectStringParameter]]"/>
+            <item name="[L[regularApi/simSetObjectFloatParam.htm,sim.setObjectFloatParam]] (regular API)"/>
+            <item name="[L[#simxGetObjectFloatParam]]"/>
+            <item name="[L[#simxSetObjectInt32Param]]"/>
+            <item name="[L[#simxSetObjectStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetObjectIntParameter" type="generic" generateCode="true">
+    <command name="simxSetObjectInt32Param" type="generic" generateCode="true">
         <description>Sets an integer parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2699,14 +2699,14 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectInt32Parameter.htm,sim.setObjectInt32Parameter]] (regular API)"/>
-            <item name="[L[#simxGetObjectIntParameter]]"/>
-            <item name="[L[#simxSetObjectFloatParameter]]"/>
-            <item name="[L[#simxSetObjectStringParameter]]"/>
+            <item name="[L[regularApi/simSetObjectInt32Param.htm,sim.setObjectInt32Param]] (regular API)"/>
+            <item name="[L[#simxGetObjectInt32Param]]"/>
+            <item name="[L[#simxSetObjectFloatParam]]"/>
+            <item name="[L[#simxSetObjectStringParam]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetObjectStringParameter" type="generic" generateCode="true">
+    <command name="simxSetObjectStringParam" type="generic" generateCode="true">
         <description>Sets a string parameter of an object</description>
         <params>
             <param name="objectHandle" type="int">
@@ -2731,10 +2731,10 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetObjectStringParameter.htm,sim.setObjectStringParameter]] (regular API)"/>
-            <item name="[L[#simxGetObjectStringParameter]]"/>
-            <item name="[L[#simxSetObjectIntParameter]]"/>
-            <item name="[L[#simxSetObjectFloatParameter]]"/>
+            <item name="[L[regularApi/simSetObjectStringParam.htm,sim.setObjectStringParam]] (regular API)"/>
+            <item name="[L[#simxGetObjectStringParam]]"/>
+            <item name="[L[#simxSetObjectInt32Param]]"/>
+            <item name="[L[#simxSetObjectFloatParam]]"/>
         </check-also>
     </command>
     
