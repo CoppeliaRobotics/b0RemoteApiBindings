@@ -456,6 +456,18 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {objectHandle,parameterID,parameter}
         return _handleFunction("SetObjectStringParam",reqArgs,topic)
     end
+    function self.simxClearIntegerSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("ClearInt32Signal",reqArgs,topic)
+    end
+    function self.simxSetIntSignal(sigName,sigValue,topic)
+        local reqArgs = {sigName,sigValue}
+        return _handleFunction("SetInt32Signal",reqArgs,topic)
+    end
+    function self.simxGetIntSignal(sigName,topic)
+        local reqArgs = {sigName}
+        return _handleFunction("GetInt32Signal",reqArgs,topic)
+    end
     -- DEPRECATED END
     
     
@@ -511,9 +523,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("ClearFloatSignal",reqArgs,topic)
     end
-    function self.simxClearIntegerSignal(sigName,topic)
+    function self.simxClearInt32Signal(sigName,topic)
         local reqArgs = {sigName}
-        return _handleFunction("ClearIntegerSignal",reqArgs,topic)
+        return _handleFunction("ClearInt32Signal",reqArgs,topic)
     end
     function self.simxClearStringSignal(sigName,topic)
         local reqArgs = {sigName}
@@ -523,9 +535,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName,sigValue}
         return _handleFunction("SetFloatSignal",reqArgs,topic)
     end
-    function self.simxSetIntSignal(sigName,sigValue,topic)
+    function self.simxSetInt32Signal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
-        return _handleFunction("SetIntSignal",reqArgs,topic)
+        return _handleFunction("SetInt32Signal",reqArgs,topic)
     end
     function self.simxSetStringSignal(sigName,sigValue,topic)
         local reqArgs = {sigName,sigValue}
@@ -535,9 +547,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("GetFloatSignal",reqArgs,topic)
     end
-    function self.simxGetIntSignal(sigName,topic)
+    function self.simxGetInt32Signal(sigName,topic)
         local reqArgs = {sigName}
-        return _handleFunction("GetIntSignal",reqArgs,topic)
+        return _handleFunction("GetInt32Signal",reqArgs,topic)
     end
     function self.simxGetStringSignal(sigName,topic)
         local reqArgs = {sigName}

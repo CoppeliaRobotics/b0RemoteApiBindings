@@ -462,6 +462,18 @@ classdef b0RemoteApi < handle
             args = {objectHandle,parameterID,parameter};
             ret = obj.handleFunction('SetObjectStringParam',args,topic);
         end
+        function ret = simxClearInt32Signal(obj,sigName,topic)
+            args = {sigName};
+            ret = obj.handleFunction('ClearInt32Signal',args,topic);
+        end
+        function ret = simxSetIntSignal(obj,sigName,sigValue,topic)
+            args = {sigName,sigValue};
+            ret = obj.handleFunction('SetInt32Signal',args,topic);
+        end
+        function ret = simxGetIntSignal(obj,sigName,topic)
+            args = {sigName};
+            ret = obj.handleFunction('GetInt32Signal',args,topic);
+        end
         %-- DEPRECATED END
 
 

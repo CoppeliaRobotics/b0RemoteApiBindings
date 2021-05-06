@@ -1033,6 +1033,35 @@ public class b0RemoteApi
         args.packString(parameter);
         return _handleFunction("SetObjectStringParam",args,topic);
     }
+    public MessageUnpacker simxClearIntegerSignal(
+        final String sigName,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(sigName);
+        return _handleFunction("ClearInt32Signal",args,topic);
+    }
+    public MessageUnpacker simxSetIntSignal(
+        final String sigName,
+        int sigValue,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packString(sigName);
+        args.packInt(sigValue);
+        return _handleFunction("SetInt32Signal",args,topic);
+    }
+    public MessageUnpacker simxGetIntSignal(
+        final String sigName,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packString(sigName);
+        return _handleFunction("GetInt32Signal",args,topic);
+    }
     //-- DEPRECATED END
 
 

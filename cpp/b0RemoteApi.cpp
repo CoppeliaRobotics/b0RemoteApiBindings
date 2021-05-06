@@ -1151,7 +1151,51 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetObjectStringParameter(
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
     return(_handleFunction("SetObjectStringParam",packedArgs.str(),topic));
-}//-- DEPRECATED END
+}
+std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(
+    const char* sigName,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        sigName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ClearInt32Signal",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetIntSignal(
+    const char* sigName,
+    int sigValue,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        int
+    > args(
+        sigName,
+        sigValue
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetInt32Signal",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
+    const char* sigName,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        sigName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetInt32Signal",packedArgs.str(),topic));
+}
+
+//-- DEPRECATED END
 
 
 std::vector<msgpack::object>* b0RemoteApi::simxGetObjectHandle(
@@ -1543,7 +1587,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxClearFloatSignal(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("ClearFloatSignal",packedArgs.str(),topic));
 }
-std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(
+std::vector<msgpack::object>* b0RemoteApi::simxClearInt32Signal(
     const char* sigName,
     const char* topic)
 {
@@ -1554,7 +1598,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(
     );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
-    return(_handleFunction("ClearIntegerSignal",packedArgs.str(),topic));
+    return(_handleFunction("ClearInt32Signal",packedArgs.str(),topic));
 }
 std::vector<msgpack::object>* b0RemoteApi::simxClearStringSignal(
     const char* sigName,
@@ -1585,7 +1629,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetFloatSignal(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("SetFloatSignal",packedArgs.str(),topic));
 }
-std::vector<msgpack::object>* b0RemoteApi::simxSetIntSignal(
+std::vector<msgpack::object>* b0RemoteApi::simxSetInt32Signal(
     const char* sigName,
     int sigValue,
     const char* topic)
@@ -1599,7 +1643,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetIntSignal(
     );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
-    return(_handleFunction("SetIntSignal",packedArgs.str(),topic));
+    return(_handleFunction("SetInt32Signal",packedArgs.str(),topic));
 }
 std::vector<msgpack::object>* b0RemoteApi::simxSetStringSignal(
     const char* sigName,
@@ -1630,7 +1674,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetFloatSignal(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetFloatSignal",packedArgs.str(),topic));
 }
-std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
+std::vector<msgpack::object>* b0RemoteApi::simxGetInt32Signal(
     const char* sigName,
     const char* topic)
 {
@@ -1641,7 +1685,7 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
     );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetIntSignal",packedArgs.str(),topic));
+    return(_handleFunction("GetInt32Signal",packedArgs.str(),topic));
 }
 std::vector<msgpack::object>* b0RemoteApi::simxGetStringSignal(
     const char* sigName,

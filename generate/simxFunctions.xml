@@ -625,12 +625,12 @@
         <check-also>
             <item name="[L[regularApi/simClearDoubleSignal.htm,sim.clearDoubleSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
-            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxClearInt32Signal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
         </check-also>
     </command>
     
-    <command name="simxClearIntegerSignal" type="generic" generateCode="true">
+    <command name="simxClearInt32Signal" type="generic" generateCode="true">
         <description>Clears an int [L[meansOfCommunication.htm#signals,signal]] (removes it)</description>
         <params>
             <param name="sigName" type="string">
@@ -646,8 +646,8 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simClearIntegerSignal.htm,sim.clearIntegerSignal]] (regular API)"/>
-            <item name="[L[#simxSetIntSignal]]"/>
+            <item name="[L[regularApi/simClearInt32Signal.htm,sim.clearInt32Signal]] (regular API)"/>
+            <item name="[L[#simxSetInt32Signal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
         </check-also>
@@ -671,7 +671,7 @@
         <check-also>
             <item name="[L[regularApi/simClearStringSignal.htm,sim.clearStringSignal]] (regular API)"/>
             <item name="[L[#simxSetStringSignal]]"/>
-            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[#simxClearInt32Signal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
         </check-also>
     </command>
@@ -698,12 +698,12 @@
             <item name="[L[regularApi/simSetDoubleSignal.htm,sim.setDoubleSignal]] (regular API)"/>
             <item name="[L[#simxGetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
-            <item name="[L[#simxSetIntSignal]]"/>
+            <item name="[L[#simxSetInt32Signal]]"/>
             <item name="[L[#simxSetStringSignal]]"/>
         </check-also>
     </command>
     
-    <command name="simxSetIntSignal" type="generic" generateCode="true">
+    <command name="simxSetInt32Signal" type="generic" generateCode="true">
         <description>Sets an int [L[meansOfCommunication.htm#signals,signal]]</description>
         <params>
             <param name="sigName" type="string">
@@ -722,9 +722,9 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simSetIntegerSignal.htm,sim.setIntegerSignal]] (regular API)"/>
-            <item name="[L[#simxGetIntSignal]]"/>
-            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[regularApi/simSetInt32Signal.htm,sim.setInt32Signal]] (regular API)"/>
+            <item name="[L[#simxGetInt32Signal]]"/>
+            <item name="[L[#simxClearInt32Signal]]"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxSetStringSignal]]"/>
         </check-also>
@@ -752,7 +752,7 @@
             <item name="[L[regularApi/simSetStringSignal.htm,sim.setStringSignal]] (regular API)"/>
             <item name="[L[#simxGetStringSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
-            <item name="[L[#simxSetIntSignal]]"/>
+            <item name="[L[#simxSetInt32Signal]]"/>
             <item name="[L[#simxSetFloatSignal]]"/>
         </check-also>
     </command>
@@ -779,12 +779,12 @@
             <item name="[L[regularApi/simGetDoubleSignal.htm,sim.getDoubleSignal]] (regular API)"/>
             <item name="[L[#simxSetFloatSignal]]"/>
             <item name="[L[#simxClearFloatSignal]]"/>
-            <item name="[L[#simxGetIntSignal]]"/>
+            <item name="[L[#simxGetInt32Signal]]"/>
             <item name="[L[#simxGetStringSignal]]"/>
         </check-also>
     </command>
     
-    <command name="simxGetIntSignal" type="generic" generateCode="true">
+    <command name="simxGetInt32Signal" type="generic" generateCode="true">
         <description>Retrieves an int [L[meansOfCommunication.htm#signals,signal]]</description>
         <params>
             <param name="sigName" type="string">
@@ -803,9 +803,9 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetIntegerSignal.htm,sim.getIntegerSignal]] (regular API)"/>
-            <item name="[L[#simxSetIntSignal]]"/>
-            <item name="[L[#simxClearIntegerSignal]]"/>
+            <item name="[L[regularApi/simGetInt32Signal.htm,sim.getInt32Signal]] (regular API)"/>
+            <item name="[L[#simxSetInt32Signal]]"/>
+            <item name="[L[#simxClearInt32Signal]]"/>
             <item name="[L[#simxGetFloatSignal]]"/>
             <item name="[L[#simxGetStringSignal]]"/>
         </check-also>
@@ -833,7 +833,7 @@
             <item name="[L[regularApi/simGetStringSignal.htm,sim.getStringSignal]] (regular API)"/>
             <item name="[L[#simxSetStringSignal]]"/>
             <item name="[L[#simxClearStringSignal]]"/>
-            <item name="[L[#simxGetIntSignal]]"/>
+            <item name="[L[#simxGetInt32Signal]]"/>
             <item name="[L[#simxGetFloatSignal]]"/>
         </check-also>
     </command>

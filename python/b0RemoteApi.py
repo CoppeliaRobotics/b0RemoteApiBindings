@@ -267,6 +267,15 @@ class RemoteApiClient:
     def simxSetObjectStringParameter(self,objectHandle,parameterID,parameter,topic):
         reqArgs = [objectHandle,parameterID,parameter]
         return self._handleFunction('SetObjectStringParam',reqArgs,topic)
+    def simxClearIntegerSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('ClearInt32Signal',reqArgs,topic)
+    def simxSetIntSignal(self,sigName,sigValue,topic):
+        reqArgs = [sigName,sigValue]
+        return self._handleFunction('SetInt32Signal',reqArgs,topic)
+    def simxGetIntSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('GetInt32Signal',reqArgs,topic)
     #-- DEPRECATED END
 
         
@@ -309,27 +318,27 @@ class RemoteApiClient:
     def simxClearFloatSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('ClearFloatSignal',reqArgs,topic)
-    def simxClearIntegerSignal(self,sigName,topic):
+    def simxClearInt32Signal(self,sigName,topic):
         reqArgs = [sigName]
-        return self._handleFunction('ClearIntegerSignal',reqArgs,topic)
+        return self._handleFunction('ClearInt32Signal',reqArgs,topic)
     def simxClearStringSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('ClearStringSignal',reqArgs,topic)
     def simxSetFloatSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetFloatSignal',reqArgs,topic)
-    def simxSetIntSignal(self,sigName,sigValue,topic):
+    def simxSetInt32Signal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
-        return self._handleFunction('SetIntSignal',reqArgs,topic)
+        return self._handleFunction('SetInt32Signal',reqArgs,topic)
     def simxSetStringSignal(self,sigName,sigValue,topic):
         reqArgs = [sigName,sigValue]
         return self._handleFunction('SetStringSignal',reqArgs,topic)
     def simxGetFloatSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetFloatSignal',reqArgs,topic)
-    def simxGetIntSignal(self,sigName,topic):
+    def simxGetInt32Signal(self,sigName,topic):
         reqArgs = [sigName]
-        return self._handleFunction('GetIntSignal',reqArgs,topic)
+        return self._handleFunction('GetInt32Signal',reqArgs,topic)
     def simxGetStringSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetStringSignal',reqArgs,topic)

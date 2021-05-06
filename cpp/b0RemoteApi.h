@@ -222,6 +222,16 @@ public:
         const char* parameterID,
         const char* parameter,
         const char* topic);
+    std::vector<msgpack::object>* simxClearIntegerSignal(
+        const char* sigName,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetIntSignal(
+        const char* sigName,
+        int sigValue,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetIntSignal(
+        const char* sigName,
+        const char* topic);
     //-- DEPRECATED END
 
 
@@ -324,7 +334,7 @@ public:
     std::vector<msgpack::object>* simxClearFloatSignal(
         const char* sigName,
         const char* topic);
-    std::vector<msgpack::object>* simxClearIntegerSignal(
+    std::vector<msgpack::object>* simxClearInt32Signal(
         const char* sigName,
         const char* topic);
     std::vector<msgpack::object>* simxClearStringSignal(
@@ -334,7 +344,7 @@ public:
         const char* sigName,
         float sigValue,
         const char* topic);
-    std::vector<msgpack::object>* simxSetIntSignal(
+    std::vector<msgpack::object>* simxSetInt32Signal(
         const char* sigName,
         int sigValue,
         const char* topic);
@@ -345,7 +355,7 @@ public:
     std::vector<msgpack::object>* simxGetFloatSignal(
         const char* sigName,
         const char* topic);
-    std::vector<msgpack::object>* simxGetIntSignal(
+    std::vector<msgpack::object>* simxGetInt32Signal(
         const char* sigName,
         const char* topic);
     std::vector<msgpack::object>* simxGetStringSignal(

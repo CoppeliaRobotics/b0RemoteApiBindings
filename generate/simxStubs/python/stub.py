@@ -270,6 +270,15 @@ class RemoteApiClient:
     def simxSetObjectStringParameter(self,objectHandle,parameterID,parameter,topic):
         reqArgs = [objectHandle,parameterID,parameter]
         return self._handleFunction('SetObjectStringParam',reqArgs,topic)
+    def simxClearIntegerSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('ClearInt32Signal',reqArgs,topic)
+    def simxSetIntSignal(self,sigName,sigValue,topic):
+        reqArgs = [sigName,sigValue]
+        return self._handleFunction('SetInt32Signal',reqArgs,topic)
+    def simxGetIntSignal(self,sigName,topic):
+        reqArgs = [sigName]
+        return self._handleFunction('GetInt32Signal',reqArgs,topic)
     #-- DEPRECATED END
 
         

@@ -225,6 +225,16 @@ public:
         const char* parameterID,
         const char* parameter,
         const char* topic);
+    std::vector<msgpack::object>* simxClearIntegerSignal(
+        const char* sigName,
+        const char* topic);
+    std::vector<msgpack::object>* simxSetIntSignal(
+        const char* sigName,
+        int sigValue,
+        const char* topic);
+    std::vector<msgpack::object>* simxGetIntSignal(
+        const char* sigName,
+        const char* topic);
     //-- DEPRECATED END
 
 

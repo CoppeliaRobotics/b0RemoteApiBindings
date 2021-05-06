@@ -459,6 +459,18 @@ classdef b0RemoteApi < handle
             args = {objectHandle,parameterID,parameter};
             ret = obj.handleFunction('SetObjectStringParam',args,topic);
         end
+        function ret = simxClearInt32Signal(obj,sigName,topic)
+            args = {sigName};
+            ret = obj.handleFunction('ClearInt32Signal',args,topic);
+        end
+        function ret = simxSetIntSignal(obj,sigName,sigValue,topic)
+            args = {sigName,sigValue};
+            ret = obj.handleFunction('SetInt32Signal',args,topic);
+        end
+        function ret = simxGetIntSignal(obj,sigName,topic)
+            args = {sigName};
+            ret = obj.handleFunction('GetInt32Signal',args,topic);
+        end
         %-- DEPRECATED END
 
 
@@ -514,9 +526,9 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('ClearFloatSignal',args,topic);
         end
-        function ret = simxClearIntegerSignal(obj,sigName,topic)
+        function ret = simxClearInt32Signal(obj,sigName,topic)
             args = {sigName};
-            ret = obj.handleFunction('ClearIntegerSignal',args,topic);
+            ret = obj.handleFunction('ClearInt32Signal',args,topic);
         end
         function ret = simxClearStringSignal(obj,sigName,topic)
             args = {sigName};
@@ -526,9 +538,9 @@ classdef b0RemoteApi < handle
             args = {sigName,sigValue};
             ret = obj.handleFunction('SetFloatSignal',args,topic);
         end
-        function ret = simxSetIntSignal(obj,sigName,sigValue,topic)
+        function ret = simxSetInt32Signal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
-            ret = obj.handleFunction('SetIntSignal',args,topic);
+            ret = obj.handleFunction('SetInt32Signal',args,topic);
         end
         function ret = simxSetStringSignal(obj,sigName,sigValue,topic)
             args = {sigName,sigValue};
@@ -538,9 +550,9 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('GetFloatSignal',args,topic);
         end
-        function ret = simxGetIntSignal(obj,sigName,topic)
+        function ret = simxGetInt32Signal(obj,sigName,topic)
             args = {sigName};
-            ret = obj.handleFunction('GetIntSignal',args,topic);
+            ret = obj.handleFunction('GetInt32Signal',args,topic);
         end
         function ret = simxGetStringSignal(obj,sigName,topic)
             args = {sigName};

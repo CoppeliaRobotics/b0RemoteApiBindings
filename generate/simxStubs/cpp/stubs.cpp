@@ -1154,7 +1154,51 @@ std::vector<msgpack::object>* b0RemoteApi::simxSetObjectStringParameter(
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
     return(_handleFunction("SetObjectStringParam",packedArgs.str(),topic));
-}//-- DEPRECATED END
+}
+std::vector<msgpack::object>* b0RemoteApi::simxClearIntegerSignal(
+    const char* sigName,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        sigName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("ClearInt32Signal",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxSetIntSignal(
+    const char* sigName,
+    int sigValue,
+    const char* topic)
+{
+    std::tuple<
+        std::string,
+        int
+    > args(
+        sigName,
+        sigValue
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("SetInt32Signal",packedArgs.str(),topic));
+}
+std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
+    const char* sigName,
+    const char* topic)
+{
+    std::tuple<
+        std::string
+    > args(
+        sigName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetInt32Signal",packedArgs.str(),topic));
+}
+
+//-- DEPRECATED END
 
 
 #py for cmd in plugin.commands:
