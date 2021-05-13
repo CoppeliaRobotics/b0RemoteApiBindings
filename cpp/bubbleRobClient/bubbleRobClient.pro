@@ -11,7 +11,7 @@ CONFIG   += console
 CONFIG   -= app_bundle
 
 INCLUDEPATH += $$BOOST_INCLUDEPATH
-INCLUDEPATH += $$B0_INCLUDEPATH/b0/bindings
+INCLUDEPATH += $$B0_INCLUDEPATH
 INCLUDEPATH += ..
 INCLUDEPATH += ../msgpack-c/include
 

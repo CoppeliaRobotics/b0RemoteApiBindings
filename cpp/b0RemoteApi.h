@@ -14,7 +14,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 extern "C" {
-    #include <c.h>
+    #include <b0/bindings/c.h>
 }
 #ifndef _WIN32
     #define __cdecl
