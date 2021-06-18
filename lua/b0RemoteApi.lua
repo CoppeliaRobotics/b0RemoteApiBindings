@@ -468,11 +468,15 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("GetInt32Signal",reqArgs,topic)
     end
+    function self.simxGetObjectName(objectHandle,altName,topic)
+        local reqArgs = {objectHandle,altName}
+        return _handleFunction("GetObjectName",reqArgs,topic)
+    end
     -- DEPRECATED END
     
     
-    function self.simxGetObjectHandle(objectName,topic)
-        local reqArgs = {objectName}
+    function self.simxGetObjectHandle(objectPath,topic)
+        local reqArgs = {objectPath}
         return _handleFunction("GetObjectHandle",reqArgs,topic)
     end
     function self.simxAddStatusbarMessage(msg,topic)
@@ -799,9 +803,9 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {treeBaseHandle,objectType,options}
         return _handleFunction("GetObjectsInTree",reqArgs,topic)
     end
-    function self.simxGetObjectName(objectHandle,altName,topic)
-        local reqArgs = {objectHandle,altName}
-        return _handleFunction("GetObjectName",reqArgs,topic)
+    function self.simxGetObjectAlias(objectHandle,options,topic)
+        local reqArgs = {objectHandle,options}
+        return _handleFunction("GetObjectAlias",reqArgs,topic)
     end
     function self.simxGetObjectFloatParam(objectHandle,parameterID,topic)
         local reqArgs = {objectHandle,parameterID}

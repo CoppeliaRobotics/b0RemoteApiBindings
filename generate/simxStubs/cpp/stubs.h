@@ -235,6 +235,10 @@ public:
     std::vector<msgpack::object>* simxGetIntSignal(
         const char* sigName,
         const char* topic);
+    std::vector<msgpack::object>* simxGetObjectName(
+        int objectHandle,
+        bool altName,
+        const char* topic);
     //-- DEPRECATED END
 
 

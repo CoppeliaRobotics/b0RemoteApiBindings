@@ -232,11 +232,15 @@ public:
     std::vector<msgpack::object>* simxGetIntSignal(
         const char* sigName,
         const char* topic);
+    std::vector<msgpack::object>* simxGetObjectName(
+        int objectHandle,
+        bool altName,
+        const char* topic);
     //-- DEPRECATED END
 
 
     std::vector<msgpack::object>* simxGetObjectHandle(
-        const char* objectName,
+        const char* objectPath,
         const char* topic);
     std::vector<msgpack::object>* simxAddStatusbarMessage(
         const char* msg,
@@ -651,9 +655,9 @@ public:
         const char* objectType,
         int options,
         const char* topic);
-    std::vector<msgpack::object>* simxGetObjectName(
+    std::vector<msgpack::object>* simxGetObjectAlias(
         int objectHandle,
-        bool altName,
+        int options,
         const char* topic);
     std::vector<msgpack::object>* simxGetObjectFloatParam(
         int objectHandle,

@@ -1059,16 +1059,27 @@ public class b0RemoteApi
         args.packString(sigName);
         return _handleFunction("GetInt32Signal",args,topic);
     }
+    public MessageUnpacker simxGetObjectName(
+        int objectHandle,
+        boolean altName,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packBoolean(altName);
+        return _handleFunction("GetObjectName",args,topic);
+    }
     //-- DEPRECATED END
 
 
     public MessageUnpacker simxGetObjectHandle(
-        final String objectName,
+        final String objectPath,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(1);
-        args.packString(objectName);
+        args.packString(objectPath);
         return _handleFunction("GetObjectHandle",args,topic);
     }
     public MessageUnpacker simxAddStatusbarMessage(
@@ -2280,16 +2291,16 @@ public class b0RemoteApi
         args.packInt(options);
         return _handleFunction("GetObjectsInTree",args,topic);
     }
-    public MessageUnpacker simxGetObjectName(
+    public MessageUnpacker simxGetObjectAlias(
         int objectHandle,
-        boolean altName,
+        int options,
         final String topic) throws IOException
     {
         MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
         args.packArrayHeader(2);
         args.packInt(objectHandle);
-        args.packBoolean(altName);
-        return _handleFunction("GetObjectName",args,topic);
+        args.packInt(options);
+        return _handleFunction("GetObjectAlias",args,topic);
     }
     public MessageUnpacker simxGetObjectFloatParam(
         int objectHandle,

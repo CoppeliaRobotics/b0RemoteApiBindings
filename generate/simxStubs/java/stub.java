@@ -1062,6 +1062,17 @@ public class b0RemoteApi
         args.packString(sigName);
         return _handleFunction("GetInt32Signal",args,topic);
     }
+    public MessageUnpacker simxGetObjectName(
+        int objectHandle,
+        boolean altName,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(2);
+        args.packInt(objectHandle);
+        args.packBoolean(altName);
+        return _handleFunction("GetObjectName",args,topic);
+    }
     //-- DEPRECATED END
 
 

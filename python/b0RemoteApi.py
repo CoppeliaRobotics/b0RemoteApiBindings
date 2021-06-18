@@ -276,11 +276,14 @@ class RemoteApiClient:
     def simxGetIntSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetInt32Signal',reqArgs,topic)
+    def simxGetObjectName(self,objectHandle,altName,topic):
+        reqArgs = [objectHandle,altName]
+        return self._handleFunction('GetObjectName',reqArgs,topic)
     #-- DEPRECATED END
 
         
-    def simxGetObjectHandle(self,objectName,topic):
-        reqArgs = [objectName]
+    def simxGetObjectHandle(self,objectPath,topic):
+        reqArgs = [objectPath]
         return self._handleFunction('GetObjectHandle',reqArgs,topic)
     def simxAddStatusbarMessage(self,msg,topic):
         reqArgs = [msg]
@@ -525,9 +528,9 @@ class RemoteApiClient:
     def simxGetObjectsInTree(self,treeBaseHandle,objectType,options,topic):
         reqArgs = [treeBaseHandle,objectType,options]
         return self._handleFunction('GetObjectsInTree',reqArgs,topic)
-    def simxGetObjectName(self,objectHandle,altName,topic):
-        reqArgs = [objectHandle,altName]
-        return self._handleFunction('GetObjectName',reqArgs,topic)
+    def simxGetObjectAlias(self,objectHandle,options,topic):
+        reqArgs = [objectHandle,options]
+        return self._handleFunction('GetObjectAlias',reqArgs,topic)
     def simxGetObjectFloatParam(self,objectHandle,parameterID,topic):
         reqArgs = [objectHandle,parameterID]
         return self._handleFunction('GetObjectFloatParam',reqArgs,topic)

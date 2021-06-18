@@ -471,11 +471,15 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('GetInt32Signal',args,topic);
         end
+        function ret = simxGetObjectName(obj,objectHandle,altName,topic)
+            args = {objectHandle,altName};
+            ret = obj.handleFunction('GetObjectName',args,topic);
+        end
         %-- DEPRECATED END
 
 
-        function ret = simxGetObjectHandle(obj,objectName,topic)
-            args = {objectName};
+        function ret = simxGetObjectHandle(obj,objectPath,topic)
+            args = {objectPath};
             ret = obj.handleFunction('GetObjectHandle',args,topic);
         end
         function ret = simxAddStatusbarMessage(obj,msg,topic)
@@ -802,9 +806,9 @@ classdef b0RemoteApi < handle
             args = {treeBaseHandle,objectType,options};
             ret = obj.handleFunction('GetObjectsInTree',args,topic);
         end
-        function ret = simxGetObjectName(obj,objectHandle,altName,topic)
-            args = {objectHandle,altName};
-            ret = obj.handleFunction('GetObjectName',args,topic);
+        function ret = simxGetObjectAlias(obj,objectHandle,options,topic)
+            args = {objectHandle,options};
+            ret = obj.handleFunction('GetObjectAlias',args,topic);
         end
         function ret = simxGetObjectFloatParam(obj,objectHandle,parameterID,topic)
             args = {objectHandle,parameterID};

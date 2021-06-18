@@ -258,8 +258,8 @@
     <command name="simxGetObjectHandle" type="generic" generateCode="true">
         <description>Retrieves the handle of an object</description>
         <params>
-            <param name="objectName" type="string">
-                <description>Name of object. If the name is appended by a [I["@alt"]] suffix, then the object handle based on the object's alternative name will be retrieved. If the name is appended by a [I["@silentError"]] suffix, then no error will be output if the object does not exist</description>
+            <param name="objectPath" type="string">
+                <description>Path and alias of object.</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -2529,14 +2529,14 @@
         </check-also>
     </command>
     
-    <command name="simxGetObjectName" type="generic" generateCode="true">
-        <description>Retrieves the name or alternative name of an object</description>
+    <command name="simxGetObjectAlias" type="generic" generateCode="true">
+        <description>Retrieves the path/alias of an object</description>
         <params>
             <param name="objectHandle" type="int">
                 <description>Handle of the object</description>
             </param>
-            <param name="altName" type="bool">
-                <description>Value indicating whether the regular or alternative name should be retrieved</description>
+            <param name="options" type="int">
+                <description>Value indicating how the return value is formatted. Check the regular API equivalent for details</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -2547,11 +2547,11 @@
                 <description>Whether the function was successfully called on the server side</description>
             </param>
             <param name="item2" type="string">
-                <description>The name or alternative name of the object</description>
+                <description>The path/alias of the object</description>
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetObjectName.htm,sim.getObjectName]] (regular API)"/>
+            <item name="[L[regularApi/simGetObjectAlias.htm,sim.getObjectAlias]] (regular API)"/>
         </check-also>
     </command>
     

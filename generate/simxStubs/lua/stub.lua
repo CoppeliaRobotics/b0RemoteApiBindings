@@ -471,6 +471,10 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {sigName}
         return _handleFunction("GetInt32Signal",reqArgs,topic)
     end
+    function self.simxGetObjectName(objectHandle,altName,topic)
+        local reqArgs = {objectHandle,altName}
+        return _handleFunction("GetObjectName",reqArgs,topic)
+    end
     -- DEPRECATED END
     
     

@@ -279,6 +279,9 @@ class RemoteApiClient:
     def simxGetIntSignal(self,sigName,topic):
         reqArgs = [sigName]
         return self._handleFunction('GetInt32Signal',reqArgs,topic)
+    def simxGetObjectName(self,objectHandle,altName,topic):
+        reqArgs = [objectHandle,altName]
+        return self._handleFunction('GetObjectName',reqArgs,topic)
     #-- DEPRECATED END
 
         

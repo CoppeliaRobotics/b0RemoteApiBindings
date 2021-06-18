@@ -474,6 +474,10 @@ classdef b0RemoteApi < handle
             args = {sigName};
             ret = obj.handleFunction('GetInt32Signal',args,topic);
         end
+        function ret = simxGetObjectName(obj,objectHandle,altName,topic)
+            args = {objectHandle,altName};
+            ret = obj.handleFunction('GetObjectName',args,topic);
+        end
         %-- DEPRECATED END
 
 

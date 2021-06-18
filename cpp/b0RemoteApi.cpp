@@ -1194,18 +1194,34 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetInt32Signal",packedArgs.str(),topic));
 }
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectName(
+    int objectHandle,
+    bool altName,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        bool
+    > args(
+        objectHandle,
+        altName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectName",packedArgs.str(),topic));
+}
 
 //-- DEPRECATED END
 
 
 std::vector<msgpack::object>* b0RemoteApi::simxGetObjectHandle(
-    const char* objectName,
+    const char* objectPath,
     const char* topic)
 {
     std::tuple<
         std::string
     > args(
-        objectName
+        objectPath
     );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
@@ -2886,21 +2902,21 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetObjectsInTree(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetObjectsInTree",packedArgs.str(),topic));
 }
-std::vector<msgpack::object>* b0RemoteApi::simxGetObjectName(
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectAlias(
     int objectHandle,
-    bool altName,
+    int options,
     const char* topic)
 {
     std::tuple<
         int,
-        bool
+        int
     > args(
         objectHandle,
-        altName
+        options
     );
     std::stringstream packedArgs;
     msgpack::pack(packedArgs,args);
-    return(_handleFunction("GetObjectName",packedArgs.str(),topic));
+    return(_handleFunction("GetObjectAlias",packedArgs.str(),topic));
 }
 std::vector<msgpack::object>* b0RemoteApi::simxGetObjectFloatParam(
     int objectHandle,

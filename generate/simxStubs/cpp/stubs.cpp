@@ -1197,6 +1197,22 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetIntSignal(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetInt32Signal",packedArgs.str(),topic));
 }
+std::vector<msgpack::object>* b0RemoteApi::simxGetObjectName(
+    int objectHandle,
+    bool altName,
+    const char* topic)
+{
+    std::tuple<
+        int,
+        bool
+    > args(
+        objectHandle,
+        altName
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("GetObjectName",packedArgs.str(),topic));
+}
 
 //-- DEPRECATED END
 
