@@ -40,8 +40,8 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
             client.simxSpinOnce()
     
     client.simxAddStatusbarMessage('Hello world!',client.simxDefaultPublisher())
-    visionSensorHandle=client.simxGetObjectHandle('VisionSensor',client.simxServiceCall())
-    passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall())
+    visionSensorHandle=client.simxGetObjectHandle('/VisionSensor',client.simxServiceCall())
+    passiveVisionSensorHandle=client.simxGetObjectHandle('/PassiveVisionSensor',client.simxServiceCall())
 
     if client.runInSynchronousMode:
         client.simxSynchronous(True)

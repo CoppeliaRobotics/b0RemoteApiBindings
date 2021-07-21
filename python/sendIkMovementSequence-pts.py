@@ -17,7 +17,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     client.executedMovId='notReady'
 
     targetArm='/LBR4p'
-    stringSignalName='LBR4p_executedMovId'
+    stringSignalName=targetArm+'_executedMovId'
     
     def waitForMovementExecuted(id):
         while client.executedMovId!=id:

@@ -17,8 +17,8 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     client.executedMovId1='notReady'
     client.executedMovId2='notReady'
 
-    targetArm1='blueArm'
-    targetArm2='redArm'
+    targetArm1='/blueArm'
+    targetArm2='/redArm'
 
     stringSignalName1=targetArm1+'_executedMovId'
     stringSignalName2=targetArm2+'_executedMovId'

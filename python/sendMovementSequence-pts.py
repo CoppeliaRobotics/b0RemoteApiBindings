@@ -16,8 +16,8 @@ import math
 with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as client:    
     client.executedMovId='notReady'
 
-    targetArm='blueArm'
-    #targetArm='redArm'
+    targetArm='/blueArm'
+    #targetArm='/redArm'
 
     stringSignalName=targetArm+'_executedMovId'
     

@@ -61,7 +61,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
         
         return velocity
     
-    jointHandle=client.simxGetObjectHandle('joint',client.simxServiceCall())
+    jointHandle=client.simxGetObjectHandle('/joint',client.simxServiceCall())
     client.simxSetJointTargetVelocity(jointHandle[1],360*math.pi/180,client.simxServiceCall())
     client.simxGetJointPosition(jointHandle[1],client.simxDefaultSubscriber(jointAngleCallback))
     client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted));
