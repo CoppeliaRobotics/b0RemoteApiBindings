@@ -223,8 +223,8 @@
     <command name="simxCallScriptFunction" type="generic">
         <description>Calls a script function inside of CoppeliaSim (i.e. server side)</description>
         <params>
-            <param name="funcAtScriptPath" type="string">
-                <description>A string representing the function name and script path, e.g. myFunctionName@/path/to/script. When the script is not associated with an object, then just specify the function name</description>
+            <param name="funcAtScriptName" type="string">
+                <description>A string representing the function name. If scriptType is sim.scripttype_childscript or sim.scripttype_customizationscript, then append a '@' followed by the path to the scene object the script is attached to, e.g. func@/path/to/object. If scriptType is sim.scripttype_addonscript, then append a '@' followed by the name of the add-on, e.g. func@Isometric scaling.</description>
             </param>
             <param name="scriptType" type="int_eval">
                 <description>The [L[apiConstants.htm#scriptTypes,type of the script]] (specified as number or string). E.g. [I["sim.scripttype_mainscript"]] is a valid string argument that will be evaluated on the server side. See also [L[#simxEvaluateToInt]]</description>
