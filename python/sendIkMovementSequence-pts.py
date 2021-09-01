@@ -56,10 +56,10 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
 
     # Send the movement sequence:
     movementData={"id":"movSeq1","type":"pts","times":times,"x":x,"y":y,"z":z,"qx":qx,"qy":qy,"qz":qz,"qw":qw}
-    client.simxCallScriptFunction('movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
 
     # Execute movement sequence:
-    client.simxCallScriptFunction('executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq1',client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq1',client.simxDefaultPublisher())
     
     # Wait until above movement sequence finished executing:
     waitForMovementExecuted('movSeq1') 

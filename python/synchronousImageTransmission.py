@@ -1,4 +1,4 @@
-# Make sure to have CoppeliaSim running, with followig scene loaded:
+# Make sure to have CoppeliaSim running, with following scene loaded:
 #
 # scenes/messaging/synchronousImageTransmissionViaRemoteApi.ttt
 #
@@ -19,11 +19,10 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
 
     def simulationStepStarted(msg):
         simTime=msg[1][b'simulationTime'];
-        print('Simulation step started. Simulation time: ',simTime)
+        print(f'Simulation step started. Simulation time: {simTime:.2f} [s] (CoppeliaSim running synchronously to client, i.e. in stepped mode)')
         
     def simulationStepDone(msg):
         simTime=msg[1][b'simulationTime'];
-        print('Simulation step done. Simulation time: ',simTime);
         client.doNextStep=True
         
     def imageCallback(msg):

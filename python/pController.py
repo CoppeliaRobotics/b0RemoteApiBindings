@@ -20,11 +20,7 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
     client.targetAngle=0
     client.maxForce=100
 
-    def simulationStepStarted(msg):
-        simTime=msg[1][b'simulationTime'];
-        
     def simulationStepDone(msg):
-        simTime=msg[1][b'simulationTime'];
         client.doNextStep=True
         
     def jointAngleCallback(msg):
@@ -61,16 +57,16 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as cl
         
         return velocity
     
-    jointHandle=client.simxGetObjectHandle('/joint',client.simxServiceCall())
+    jointHandle=client.simxGetObjectHandle('/Cuboid[0]/joint',client.simxServiceCall())
+    jointAngle=client.simxGetJointPosition(jointHandle[1],client.simxServiceCall())
+    client.jointAngle=jointAngle[1]
     client.simxSetJointTargetVelocity(jointHandle[1],360*math.pi/180,client.simxServiceCall())
     client.simxGetJointPosition(jointHandle[1],client.simxDefaultSubscriber(jointAngleCallback))
-    client.simxGetSimulationStepStarted(client.simxDefaultSubscriber(simulationStepStarted));
     client.simxGetSimulationStepDone(client.simxDefaultSubscriber(simulationStepDone));
     
     client.simxSynchronous(True)
     
     client.simxStartSimulation(client.simxDefaultPublisher())
-    
     moveToAngle(jointHandle[1],45*math.pi/180)
     moveToAngle(jointHandle[1],90*math.pi/180)
     moveToAngle(jointHandle[1],-89*math.pi/180) #no -90, to avoid passing below

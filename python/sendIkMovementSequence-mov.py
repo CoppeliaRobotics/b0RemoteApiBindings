@@ -41,16 +41,16 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     waitForMovementExecuted('ready') 
 
     # Get initial pose:
-    r=client.simxCallScriptFunction('getPoseAndConfig@'+targetArm,'sim.scripttype_childscript',[],client.simxServiceCall())
+    r=client.simxCallScriptFunction('remoteApi_getPoseAndConfig@'+targetArm,'sim.scripttype_childscript',[],client.simxServiceCall())
     initialPose=r[1]
     
     # Send first movement sequence:
     targetPose=[0,0,0.85,0,0,0,1]
     movementData={"id":"movSeq1","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
-    client.simxCallScriptFunction('movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
 
     # Execute first movement sequence:
-    client.simxCallScriptFunction('executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq1',client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq1',client.simxDefaultPublisher())
     
     # Wait until above movement sequence finished executing:
     waitForMovementExecuted('movSeq1')
@@ -58,13 +58,13 @@ with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi',60) as
     # Send second and third movement sequence, where third one should execute immediately after the second one:
     targetPose=[0,0,0.85,-0.7071068883, -6.252754758e-08, -8.940695295e-08, -0.7071067691]
     movementData={"id":"movSeq2","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
-    client.simxCallScriptFunction('movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
     movementData={"id":"movSeq3","type":"mov","targetPose":initialPose,"maxVel":maxVel,"maxAccel":maxAccel}
-    client.simxCallScriptFunction('movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_movementDataFunction@'+targetArm,'sim.scripttype_childscript',movementData,client.simxDefaultPublisher())
 
     # Execute second and third movement sequences:
-    client.simxCallScriptFunction('executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq2',client.simxDefaultPublisher())
-    client.simxCallScriptFunction('executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq3',client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq2',client.simxDefaultPublisher())
+    client.simxCallScriptFunction('remoteApi_executeMovement@'+targetArm,'sim.scripttype_childscript','movSeq3',client.simxDefaultPublisher())
     
     # Wait until above 2 movement sequences finished executing:
     waitForMovementExecuted('movSeq3')
