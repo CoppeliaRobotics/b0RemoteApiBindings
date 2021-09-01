@@ -174,7 +174,7 @@
     </command>
     
     <command name="simxSynchronous">
-        <description>Enables/disables the CoppeliaSim synchronous mode during simulation. In synchonous mode, each simulation step will require an external trigger signal in order to be run</description>
+        <description>Enables/disables the CoppeliaSim stepping mode. In stepping mode, each simulation step will require an external trigger signal in order to be run</description>
         <params>
             <param name="enable" type="bool">
                 <description>The enable state of the synchonous mode</description>
@@ -188,7 +188,7 @@
     </command>
     
     <command name="simxSynchronousTrigger">
-        <description>Triggers next simulation step, if the CoppeliaSim synchronous mode was previously enabled</description>
+        <description>Triggers next simulation step, if the CoppeliaSim stepping mode was previously enabled</description>
         <check-also>
             <item name="[L[#simxSynchronous]]"/>
             <item name="[L[#simxGetSimulationStepDone]]"/>
