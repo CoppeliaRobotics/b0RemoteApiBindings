@@ -2038,7 +2038,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simDisplayDialog.htm,sim.displayDialog]] (regular API)"/>
             <item name="[L[#simxGetDialogResult]]"/>
             <item name="[L[#simxGetDialogInput]]"/>
             <item name="[L[#simxEndDialog]]"/>
@@ -2064,7 +2063,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetDialogResult.htm,sim.getDialogResult]] (regular API)"/>
             <item name="[L[#simxDisplayDialog]]"/>
             <item name="[L[#simxGetDialogInput]]"/>
             <item name="[L[#simxEndDialog]]"/>
@@ -2090,7 +2088,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simGetDialogInput.htm,sim.getDialogInput]] (regular API)"/>
             <item name="[L[#simxDisplayDialog]]"/>
             <item name="[L[#simxGetDialogResult]]"/>
             <item name="[L[#simxEndDialog]]"/>
@@ -2113,7 +2110,6 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simEndDialog.htm,sim.endDialog]] (regular API)"/>
             <item name="[L[#simxDisplayDialog]]"/>
             <item name="[L[#simxGetDialogInput]]"/>
             <item name="[L[#simxGetDialogResult]]"/>
