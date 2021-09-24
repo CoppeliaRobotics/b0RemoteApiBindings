@@ -2958,8 +2958,7 @@
             </param>
         </return>
         <check-also>
-            <item name="[L[regularApi/simRemoveObjectFromSelection.htm,sim.removeObjectFromSelection]] (regular API)"/>
-            <item name="[L[regularApi/simAddObjectToSelection.htm,sim.addObjectToSelection]] (regular API)"/>
+            <item name="[L[regularApi/simSetObjectSelection.htm,sim.setObjectSelection]] (regular API)"/>
             <item name="[L[#simxGetObjectSelection]]"/>
         </check-also>
     </command>
