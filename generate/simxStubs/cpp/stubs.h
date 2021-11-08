@@ -239,6 +239,9 @@ public:
         int objectHandle,
         bool altName,
         const char* topic);
+    std::vector<msgpack::object>* simxBreakForceSensor(
+        int handle,
+        const char* topic);
     //-- DEPRECATED END
 
 

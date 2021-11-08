@@ -478,6 +478,10 @@ classdef b0RemoteApi < handle
             args = {objectHandle,altName};
             ret = obj.handleFunction('GetObjectName',args,topic);
         end
+        function ret = simxBreakForceSensor(obj,handle,topic)
+            args = {handle};
+            ret = obj.handleFunction('BreakForceSensor',args,topic);
+        end
         %-- DEPRECATED END
 
 

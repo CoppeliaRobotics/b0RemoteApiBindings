@@ -472,6 +472,10 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
         local reqArgs = {objectHandle,altName}
         return _handleFunction("GetObjectName",reqArgs,topic)
     end
+    function self.simxBreakForceSensor(handle,topic)
+        local reqArgs = {handle}
+        return _handleFunction("BreakForceSensor",reqArgs,topic)
+    end
     -- DEPRECATED END
     
     
@@ -658,10 +662,6 @@ function b0RemoteApi(nodeName,channelName,inactivityToleranceInSec,setupSubscrib
     function self.simxReadForceSensor(handle,topic)
         local reqArgs = {handle}
         return _handleFunction("ReadForceSensor",reqArgs,topic)
-    end
-    function self.simxBreakForceSensor(handle,topic)
-        local reqArgs = {handle}
-        return _handleFunction("BreakForceSensor",reqArgs,topic)
     end
     function self.simxReadVisionSensor(handle,topic)
         local reqArgs = {handle}

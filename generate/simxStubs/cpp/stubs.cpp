@@ -1213,6 +1213,19 @@ std::vector<msgpack::object>* b0RemoteApi::simxGetObjectName(
     msgpack::pack(packedArgs,args);
     return(_handleFunction("GetObjectName",packedArgs.str(),topic));
 }
+std::vector<msgpack::object>* b0RemoteApi::simxBreakForceSensor(
+    int handle,
+    const char* topic)
+{
+    std::tuple<
+        int
+    > args(
+        handle
+    );
+    std::stringstream packedArgs;
+    msgpack::pack(packedArgs,args);
+    return(_handleFunction("BreakForceSensor",packedArgs.str(),topic));
+}
 
 //-- DEPRECATED END
 

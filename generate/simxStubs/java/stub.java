@@ -1073,6 +1073,15 @@ public class b0RemoteApi
         args.packBoolean(altName);
         return _handleFunction("GetObjectName",args,topic);
     }
+    public MessageUnpacker simxBreakForceSensor(
+        int handle,
+        final String topic) throws IOException
+    {
+        MessageBufferPacker args=MessagePack.newDefaultBufferPacker();
+        args.packArrayHeader(1);
+        args.packInt(handle);
+        return _handleFunction("BreakForceSensor",args,topic);
+    }
     //-- DEPRECATED END
 
 

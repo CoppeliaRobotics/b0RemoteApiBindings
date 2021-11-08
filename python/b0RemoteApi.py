@@ -279,6 +279,9 @@ class RemoteApiClient:
     def simxGetObjectName(self,objectHandle,altName,topic):
         reqArgs = [objectHandle,altName]
         return self._handleFunction('GetObjectName',reqArgs,topic)
+    def simxBreakForceSensor(self,handle,topic):
+        reqArgs = [handle]
+        return self._handleFunction('BreakForceSensor',reqArgs,topic)
     #-- DEPRECATED END
 
         
@@ -420,9 +423,6 @@ class RemoteApiClient:
     def simxReadForceSensor(self,handle,topic):
         reqArgs = [handle]
         return self._handleFunction('ReadForceSensor',reqArgs,topic)
-    def simxBreakForceSensor(self,handle,topic):
-        reqArgs = [handle]
-        return self._handleFunction('BreakForceSensor',reqArgs,topic)
     def simxReadVisionSensor(self,handle,topic):
         reqArgs = [handle]
         return self._handleFunction('ReadVisionSensor',reqArgs,topic)

@@ -1567,29 +1567,6 @@
         </return>
         <check-also>
             <item name="[L[regularApi/simReadForceSensor.htm,sim.readForceSensor]] (regular API)"/>
-            <item name="[L[#simxBreakForceSensor]]"/>
-        </check-also>
-    </command>
-    
-    
-    <command name="simxBreakForceSensor" type="generic" generateCode="true">
-        <description>Allows breaking a force sensor during simulation. A broken force sensor will lose its positional and orientational constraints</description>
-        <params>
-            <param name="handle" type="int">
-                <description>The handle of the force sensor</description>
-            </param>
-            <param name="topic" type="string">
-                <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
-            </param>
-        </params>
-        <return>
-            <param name="item1" type="bool">
-                <description>Whether the function was successfully called on the server side</description>
-            </param>
-        </return>
-        <check-also>
-            <item name="[L[regularApi/simBreakForceSensor.htm,sim.breakForceSensor]] (regular API)"/>
-            <item name="[L[#simxReadForceSensor]]"/>
         </check-also>
     </command>
     

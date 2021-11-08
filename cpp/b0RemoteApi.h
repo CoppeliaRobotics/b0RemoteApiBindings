@@ -14,7 +14,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 extern "C" {
-    #include <b0/bindings/c.h>
+    #include <c.h>
 }
 #ifndef _WIN32
     #define __cdecl
@@ -235,6 +235,9 @@ public:
     std::vector<msgpack::object>* simxGetObjectName(
         int objectHandle,
         bool altName,
+        const char* topic);
+    std::vector<msgpack::object>* simxBreakForceSensor(
+        int handle,
         const char* topic);
     //-- DEPRECATED END
 
@@ -474,9 +477,6 @@ public:
         const char* entity,
         const char* topic);
     std::vector<msgpack::object>* simxReadForceSensor(
-        int handle,
-        const char* topic);
-    std::vector<msgpack::object>* simxBreakForceSensor(
         int handle,
         const char* topic);
     std::vector<msgpack::object>* simxReadVisionSensor(
