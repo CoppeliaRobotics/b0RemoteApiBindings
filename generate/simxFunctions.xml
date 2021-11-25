@@ -1604,13 +1604,13 @@
     </command>
     
     <command name="simxCheckVisionSensor" type="generic" generateCode="true">
-        <description>Computes the detection state of a vision sensor, for a specific [L[renderableObjects.htm,renderable]] [L[entities.htm,entity]]</description>
+        <description>Computes the detection state of a vision sensor, for a specific [L[entities.htm,entity]]</description>
         <params>
             <param name="handle" type="int">
                 <description>The handle of the vision sensor</description>
             </param>
             <param name="entity" type="int_eval">
-                <description>The handle of the entity to detect. Can also be the [I["sim.handle_all"]] string, to check all renderable entities. See also [L[#simxEvaluateToInt]]</description>
+                <description>The handle of the entity to detect. Can also be the [I["sim.handle_all"]] string, to check all objects. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
@@ -1823,7 +1823,7 @@
         <description>Sets a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_proximity_sensor_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_dynamics_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="paramVal" type="bool">
                 <description>The value of the parameter</description>
@@ -1963,7 +1963,7 @@
         <description>Retrieves a [L[apiConstants.htm#booleanParameters,boolean parameter]]</description>
         <params>
             <param name="paramId" type="int_eval">
-                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_proximity_sensor_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
+                <description>The parameter identifier. Can also be a string value, e.g. [I["sim.boolparam_dynamics_handling_enabled"]]. See also [L[#simxEvaluateToInt]]</description>
             </param>
             <param name="topic" type="string">
                 <description>The [L[#topics,topic or communication channel]] to use for executing the function call</description>
